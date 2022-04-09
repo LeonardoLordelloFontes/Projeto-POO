@@ -1,4 +1,4 @@
 package com.grupoxx.smartdevice;
 
-public class SmartDeviceCamera {
+public class SmartDeviceCamera extends SmartDevice {
 }

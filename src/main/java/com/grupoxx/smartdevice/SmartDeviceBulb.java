@@ -1,4 +1,4 @@
 package com.grupoxx.smartdevice;
 
-public class SmartDeviceBulb {
+public class SmartDeviceBulb extends SmartDevice {
 }

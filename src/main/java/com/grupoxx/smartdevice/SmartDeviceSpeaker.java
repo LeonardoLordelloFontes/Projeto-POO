@@ -1,4 +1,4 @@
 package com.grupoxx.smartdevice;
 
-public class SmartDeviceSpeaker {
+public class SmartDeviceSpeaker extends SmartDevice {
 }
