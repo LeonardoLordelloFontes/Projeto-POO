@@ -156,12 +156,12 @@ public abstract class SmartDevice {
     public void smart_device_switch(int acessDay){
 
         if(this.state == State.ON && acessDay > this.day) {
-            this.setDay(acessDay);
             this.setState(State.OFF);
 
         }
 
         else {
+            this.setDay(acessDay);
             this.setState(State.ON);
 
         }
