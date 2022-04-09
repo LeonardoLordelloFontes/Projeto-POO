@@ -6,7 +6,7 @@ public abstract class SmartDevice {
         ON,
         OFF,
     }
-// Ola
+
     private State state;
     private double instalation_price;
     private String factory_code;
