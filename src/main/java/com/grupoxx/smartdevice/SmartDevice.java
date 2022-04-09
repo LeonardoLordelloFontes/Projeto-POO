@@ -6,63 +6,64 @@ public abstract class SmartDevice {
         ON,
         OFF,
     }
-// Ola
+
     private State state;
-    private double instalation_price;
-    private String factory_code;
-    private double energetic_cost;
+    private double instalationPrice;
+    private String factoryCode;
+    private double energeticCost;
+    private int day;
 
     public SmartDevice(){
 
         this.state = State.OFF;
-        this.instalation_price = 0;
-        this.factory_code = "1234";
-        this.energetic_cost = 0;
+        this.instalationPrice = 0;
+        this.factoryCode = "1234";
+        this.energeticCost = 0;
 
     }
 
     public SmartDevice(State state){
 
         this.state = state;
-        this.instalation_price = 0;
-        this.factory_code = "1234";
-        this.energetic_cost = 0;
+        this.instalationPrice = 0;
+        this.factoryCode = "1234";
+        this.energeticCost = 0;
 
     }
 
     public SmartDevice(State state, double instalation_price){
 
         this.state = state;
-        this.instalation_price = instalation_price;
-        this.factory_code = "1234";
-        this.energetic_cost = 0;
+        this.instalationPrice = instalation_price;
+        this.factoryCode = "1234";
+        this.energeticCost = 0;
 
     }
 
     public SmartDevice(State state, double instalation_price, String factory_code){
 
         this.state = state;
-        this.instalation_price = instalation_price;
-        this.factory_code = factory_code;
-        this.energetic_cost = 0;
+        this.instalationPrice = instalation_price;
+        this.factoryCode = factory_code;
+        this.energeticCost = 0;
 
     }
 
     public SmartDevice(State state, double instalation_price, String factory_code, double energetic_cost){
 
         this.state = state;
-        this.instalation_price = instalation_price;
-        this.factory_code = factory_code;
-        this.energetic_cost = energetic_cost;
+        this.instalationPrice = instalation_price;
+        this.factoryCode = factory_code;
+        this.energeticCost = energetic_cost;
 
     }
 
     public SmartDevice(SmartDevice sd){
 
         this.state = sd.getState();
-        this.instalation_price = sd.getInstalation_price();
-        this.factory_code = sd.getFactory_code();
-        this.energetic_cost = sd.getEnergetic_cost();
+        this.instalationPrice = sd.getInstalationPrice();
+        this.factoryCode = sd.getFactoryCode();
+        this.energeticCost = sd.getEnergeticCost();
 
     }
 
@@ -76,34 +77,34 @@ public abstract class SmartDevice {
         this.state = state;
     }
 
-    public double getInstalation_price() {
+    public double getInstalationPrice() {
 
-        return this.instalation_price;
+        return this.instalationPrice;
     }
 
-    public void setInstalation_price(double instalation_price) {
+    public void setInstalationPrice(double instalationPrice) {
 
-        this.instalation_price = instalation_price;
+        this.instalationPrice = instalationPrice;
     }
 
-    public String getFactory_code() {
+    public String getFactoryCode() {
 
-        return this.factory_code;
+        return this.factoryCode;
     }
 
-    public void setFactory_code(String factory_code) {
+    public void setFactoryCode(String factoryCode) {
 
-        this.factory_code = factory_code;
+        this.factoryCode = factoryCode;
     }
 
-    public double getEnergetic_cost() {
+    public double getEnergeticCost() {
 
-        return this.energetic_cost;
+        return this.energeticCost;
     }
 
-    public void setEnergetic_cost(double energetic_cost) {
+    public void setEnergeticCost(double energeticCost) {
 
-        this.energetic_cost = energetic_cost;
+        this.energeticCost = energeticCost;
     }
 
     public boolean equals(Object o) {
@@ -113,16 +114,16 @@ public abstract class SmartDevice {
 
         SmartDevice sd = (SmartDevice) o;
 
-        return this.factory_code == sd.getFactory_code();
+        return this.factoryCode == sd.getFactoryCode();
     }
 
     public String toString(){
 
         StringBuffer sb = new StringBuffer("O seu dispositivo inteligente cujo número de fabrica é ");
 
-        sb.append(this.factory_code).append(" teve um custo de instalação de ").append(this.instalation_price)
+        sb.append(this.factoryCode).append(" teve um custo de instalação de ").append(this.instalationPrice)
                 .append(" encontra-se ").append( this.state == State.ON ? "ligado":"desligado")
-                .append(" e tem um custo dirario fixo de ").append(this.energetic_cost);
+                .append(" e tem um custo dirario fixo de ").append(this.energeticCost);
 
         return sb.toString();
     }
