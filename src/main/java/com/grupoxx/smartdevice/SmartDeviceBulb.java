@@ -11,55 +11,61 @@ public class SmartDeviceBulb extends SmartDevice {
     private Tone tone;
     private double dimension;
 
-    SmartDeviceBulb() {
+    public SmartDeviceBulb() {
         super();
         this.tone = Tone.Neutral;
         this.dimension = 2;
     }
 
-    SmartDeviceBulb(Tone tone) {
+    public SmartDeviceBulb(String factoryCode) {
+        super(factoryCode);
+        this.tone = Tone.Neutral;
+        this.dimension = 2;
+    }
+
+    public SmartDeviceBulb(Tone tone) {
         super();
         this.tone = tone;
         this.dimension = 2;
     }
 
-    SmartDeviceBulb(Tone tone, double dimension) {
+    public SmartDeviceBulb(Tone tone, double dimension) {
         super();
         this.tone = tone;
         this.dimension = dimension;
     }
 
-    SmartDeviceBulb(Tone tone, double dimension, State state) {
+    public SmartDeviceBulb(Tone tone, double dimension, State state) {
         super(state);
         this.tone = tone;
         this.dimension = dimension;
     }
 
-    SmartDeviceBulb(Tone tone, double dimension, State state, double instalation_price) {
+    public SmartDeviceBulb(Tone tone, double dimension, State state, double instalation_price) {
         super(state, instalation_price);
         this.tone = tone;
         this.dimension = dimension;
     }
 
-    SmartDeviceBulb(Tone tone, double dimension, State state, double instalation_price, String factory_code) {
+    public SmartDeviceBulb(Tone tone, double dimension, State state, double instalation_price, String factory_code) {
         super(state, instalation_price, factory_code);
         this.tone = tone;
         this.dimension = dimension;
     }
 
-    SmartDeviceBulb(Tone tone, double dimension, State state, double instalation_price, String factory_code, double energetic_cost) {
+    public SmartDeviceBulb(Tone tone, double dimension, State state, double instalation_price, String factory_code, double energetic_cost) {
         super(state, instalation_price, factory_code, energetic_cost);
         this.tone = tone;
         this.dimension = dimension;
     }
 
-    SmartDeviceBulb(SmartDeviceBulb sb) {
+    public SmartDeviceBulb(SmartDeviceBulb sb) {
         super(sb);
         this.tone = sb.getTone();
         this.dimension = sb.dimension;
     }
 
-    SmartDeviceBulb(SmartDevice sd, Tone tone, double dimension) {
+    public SmartDeviceBulb(SmartDevice sd, Tone tone, double dimension) {
         super(sd);
         this.tone = tone;
         this.dimension = dimension;

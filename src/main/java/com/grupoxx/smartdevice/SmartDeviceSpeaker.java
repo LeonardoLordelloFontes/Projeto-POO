@@ -6,35 +6,35 @@ public class SmartDeviceSpeaker extends SmartDevice{
     private int volume;
     private String radio;
 
-    SmartDeviceSpeaker(){
+    public SmartDeviceSpeaker(){
         super();
         this.brand = "Sony";
         this.volume = 0;
         this.radio = "Nada";
     }
 
-    SmartDeviceSpeaker(String brand){
-        super();
-        this.brand = brand;
+    public SmartDeviceSpeaker(String factoryCode) {
+        super(factoryCode);
+        this.brand = "Sony";
         this.volume = 0;
         this.radio = "Nada";
     }
 
-    SmartDeviceSpeaker(String brand, int volume){
+    public SmartDeviceSpeaker(String brand, int volume){
         super();
         this.brand = brand;
         this.volume = volume;
         this.radio = "Nada";
     }
 
-    SmartDeviceSpeaker(String brand, int volume, String radio){
+    public SmartDeviceSpeaker(String brand, int volume, String radio){
         super();
         this.brand = brand;
         this.volume = volume;
         this.radio = radio;
     }
 
-    SmartDeviceSpeaker(SmartDeviceSpeaker ss){
+    public SmartDeviceSpeaker(SmartDeviceSpeaker ss){
         super(ss);
         this.brand = ss.getBrand();
         this.volume = ss.getVolume();

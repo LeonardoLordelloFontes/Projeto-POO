@@ -5,25 +5,31 @@ public class SmartDeviceCamera extends SmartDevice{
     private int fileSize;
     private int resolution;
 
-    SmartDeviceCamera(){
+    public SmartDeviceCamera(){
         super();
         this.fileSize = 0;
         this.resolution = 0;
     }
 
-    SmartDeviceCamera(int fileSize){
+    public SmartDeviceCamera(String factoryCode){
+        super(factoryCode);
+        this.fileSize = 0;
+        this.resolution = 0;
+    }
+
+    public SmartDeviceCamera(int fileSize){
         super();
         this.fileSize = fileSize;
         this.resolution = 0;
     }
 
-    SmartDeviceCamera (int fileSize, int resulosion){
+    public SmartDeviceCamera (int fileSize, int resulosion){
         super();
         this.fileSize = fileSize;
         this.resolution = resulosion;
     }
 
-    SmartDeviceCamera(SmartDeviceCamera sc){
+    public SmartDeviceCamera(SmartDeviceCamera sc){
         super(sc);
         this.resolution = sc.getResolution();
         this.fileSize = sc.getFileSize();
