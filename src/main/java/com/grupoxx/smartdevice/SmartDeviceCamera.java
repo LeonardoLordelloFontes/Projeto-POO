@@ -2,57 +2,57 @@ package com.grupoxx.smartdevice;
 
 public class SmartDeviceCamera extends SmartDevice{
 
-    private double fileSize;
-    private double resulosion;
+    private int fileSize;
+    private int resolution;
 
     SmartDeviceCamera(){
         super();
         this.fileSize = 0;
-        this.resulosion = 0;
+        this.resolution = 0;
     }
 
-    SmartDeviceCamera(double fileSize){
+    SmartDeviceCamera(int fileSize){
         super();
         this.fileSize = fileSize;
-        this.resulosion = 0;
+        this.resolution = 0;
     }
 
-    SmartDeviceCamera (double fileSize, double resulosion){
+    SmartDeviceCamera (int fileSize, int resulosion){
         super();
         this.fileSize = fileSize;
-        this.resulosion = resulosion;
+        this.resolution = resulosion;
     }
 
     SmartDeviceCamera(SmartDeviceCamera sc){
         super(sc);
-        this.resulosion = sc.getResulosion();
+        this.resolution = sc.getResolution();
         this.fileSize = sc.getFileSize();
     }
 
-    public double getResulosion() {
+    public int getResolution() {
 
-        return this.resulosion;
+        return this.resolution;
     }
 
-    public void setResulosion(double resulosion) {
+    public void setResolution(int resolution) {
 
-        this.resulosion = resulosion;
+        this.resolution = resolution;
     }
 
-    public double getFileSize() {
+    public int getFileSize() {
 
         return this.fileSize;
     }
 
-    public void setFileSize(double fileSize) {
+    public void setFileSize(int fileSize) {
 
         this.fileSize = fileSize;
     }
 
     @Override
-    public double daily_energetic_cost() {
+    public double dailyEnergeticCost() {
 
-        return this.resulosion * this.fileSize;
+        return this.resolution * this.fileSize;
     }
 
     public boolean equals(Object o) {
@@ -62,7 +62,7 @@ public class SmartDeviceCamera extends SmartDevice{
 
         SmartDeviceCamera sc = (SmartDeviceCamera) o;
 
-        return super.equals(sc) && this.resulosion == sc.getResulosion();
+        return super.equals(sc) && this.resolution == sc.getResolution();
     }
 
     public String toString() {
@@ -70,7 +70,7 @@ public class SmartDeviceCamera extends SmartDevice{
 
         sb.append("\n O seu dispositivo é um SmartCamara.")
                 .append("\n O tamanho do ficheiro em que guardam os eventos registados é igual a ").append(this.fileSize).append(".")
-                .append("\n A sua resuloção é igual a ").append(this.resulosion).append(".");
+                .append("\n A sua resuloção é igual a ").append(this.resolution).append(".");
 
         return sb.toString();
     }
