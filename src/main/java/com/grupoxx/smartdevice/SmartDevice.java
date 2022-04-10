@@ -138,7 +138,7 @@ public abstract class SmartDevice {
 
         SmartDevice sd = (SmartDevice) o;
 
-        return this.factoryCode == sd.getFactoryCode();
+        return this.factoryCode.equals(sd.getFactoryCode());
     }
 
     public String toString(){

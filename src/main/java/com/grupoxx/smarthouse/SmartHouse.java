@@ -8,7 +8,7 @@ public class SmartHouse {
     private Owner owner;
     private String address;
     private Map<String, SmartDevice> devices;
-    private Map<String, List<String>> rooms;
+    private Map<String, List<String> > rooms;
 
     public SmartHouse() {
         this.owner = new Owner();
