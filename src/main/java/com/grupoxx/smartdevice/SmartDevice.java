@@ -1,5 +1,7 @@
 package com.grupoxx.smartdevice;
 
+import java.util.List;
+
 public abstract class SmartDevice {
 
     public enum State {
@@ -11,7 +13,7 @@ public abstract class SmartDevice {
     private double instalationPrice;
     private String factoryCode;
     private double energeticCost;
-    private int day;
+    private int day; // o dia em que o usuario alterou pela ultima vez o seu estado
 
     public SmartDevice(){
 
@@ -19,7 +21,7 @@ public abstract class SmartDevice {
         this.instalationPrice = 0;
         this.factoryCode = "1234";
         this.energeticCost = 0;
-
+        this.day = -1;
     }
 
     public SmartDevice(State state){
@@ -28,6 +30,7 @@ public abstract class SmartDevice {
         this.instalationPrice = 0;
         this.factoryCode = "1234";
         this.energeticCost = 0;
+        this.day = state == State.ON? 0:-1;
 
     }
 
@@ -37,7 +40,7 @@ public abstract class SmartDevice {
         this.instalationPrice = instalation_price;
         this.factoryCode = "1234";
         this.energeticCost = 0;
-
+        this.day = state == State.ON? 0:-1;
     }
 
     public SmartDevice(State state, double instalation_price, String factory_code){
@@ -46,6 +49,7 @@ public abstract class SmartDevice {
         this.instalationPrice = instalation_price;
         this.factoryCode = factory_code;
         this.energeticCost = 0;
+        this.day = state == State.ON? 0:-1;
 
     }
 
@@ -55,6 +59,17 @@ public abstract class SmartDevice {
         this.instalationPrice = instalation_price;
         this.factoryCode = factory_code;
         this.energeticCost = energetic_cost;
+        this.day = state == State.ON? 0:-1;
+
+    }
+
+    public SmartDevice(State state, double instalation_price, String factory_code, double energetic_cost, int day){
+
+        this.state = state;
+        this.instalationPrice = instalation_price;
+        this.factoryCode = factory_code;
+        this.energeticCost = energetic_cost;
+        this.day = state == State.ON? day:-1;
 
     }
 
@@ -64,6 +79,7 @@ public abstract class SmartDevice {
         this.instalationPrice = sd.getInstalationPrice();
         this.factoryCode = sd.getFactoryCode();
         this.energeticCost = sd.getEnergeticCost();
+        this.day = state == State.ON? sd.getDay():-1;
 
     }
 
@@ -107,6 +123,14 @@ public abstract class SmartDevice {
         this.energeticCost = energeticCost;
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
     public boolean equals(Object o) {
 
         if (this == o) return (true);
@@ -119,24 +143,29 @@ public abstract class SmartDevice {
 
     public String toString(){
 
-        StringBuffer sb = new StringBuffer("O seu dispositivo inteligente cujo número de fabrica é ");
+        StringBuilder sb = new StringBuilder("O seu dispositivo inteligente cujo número de fabrica é ");
 
-        sb.append(this.factoryCode).append(" teve um custo de instalação de ").append(this.instalationPrice)
-                .append(" encontra-se ").append( this.state == State.ON ? "ligado":"desligado")
-                .append(" e tem um custo dirario fixo de ").append(this.energeticCost);
+        sb.append(this.factoryCode).append(".")
+                .append("\n Teve um custo de instalação de ").append(this.instalationPrice).append(" euros.")
+                .append("\n Neste momento encontra-se ").append( this.state == State.ON ? "ligado.":"desligado.")
+                .append("\n Tem um custo dirario fixo de ").append(this.energeticCost).append("KW por hora.");
 
         return sb.toString();
     }
 
-    public void smart_device_switch(SmartDevice sd){
+    public void smart_device_switch(int acessDay){
 
-        if(sd.getState() == State.ON) sd.setState(State.OFF);
-
-        else {
-            sd.setState(State.ON);
+        if(this.state == State.ON && acessDay > this.day) {
+            this.setState(State.OFF);
 
         }
-    }
+
+        else {
+            this.setDay(acessDay);
+            this.setState(State.ON);
+
+        }
+    }// o acessDay é o dia em que o usuario quer mudar o estado dos aparelhos se for pelo menos um dia a cima do ultimo dia em que lhe foi alterado o estado ele permite a alteração.
 
     public abstract SmartDevice clone();
 

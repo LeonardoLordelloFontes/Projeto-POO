@@ -112,6 +112,10 @@ public class SmartHouse {
         return "";
     }
 
+    public Map<String, List<String>> getRooms() {
+        return rooms;
+    }
+
     @Override
     public SmartHouse clone() {
         return new SmartHouse(this);
