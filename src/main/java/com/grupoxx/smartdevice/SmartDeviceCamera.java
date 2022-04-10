@@ -50,7 +50,7 @@ public class SmartDeviceCamera extends SmartDevice{
     }
 
     @Override
-    public double dailyEnergeticCost() {
+    public double EnergeticConsumptionPerDay() {
 
         return this.resolution * this.fileSize;
     }

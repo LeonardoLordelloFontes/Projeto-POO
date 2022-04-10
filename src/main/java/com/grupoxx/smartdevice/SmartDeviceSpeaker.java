@@ -66,7 +66,7 @@ public class SmartDeviceSpeaker extends SmartDevice{
     }
 
     @Override
-    public double dailyEnergeticCost() {
+    public double EnergeticConsumptionPerDay() {
 
         return this.getEnergyConsumption() + (this.volume * 2);
     }

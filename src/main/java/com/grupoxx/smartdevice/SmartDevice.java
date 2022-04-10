@@ -1,10 +1,8 @@
 package com.grupoxx.smartdevice;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.SECONDS;
 
 public abstract class SmartDevice {
 
@@ -175,11 +173,11 @@ public abstract class SmartDevice {
 
     public abstract SmartDevice clone();
 
-    public abstract double dailyEnergeticCost();
+    public abstract double EnergeticConsumptionPerDay();
 
-    public double perSecondEnergeticCost(){
+    public double EnergeticConsumptionPerSecond(){
 
-        return this.dailyEnergeticCost()/86400 ;
+        return this.EnergeticConsumptionPerDay()/86400 ;
 
-    };
+    }
 }
