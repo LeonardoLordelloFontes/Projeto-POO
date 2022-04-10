@@ -19,12 +19,12 @@ class EnergySupplierTest {
 
     }
     @Test
-    public void TotalCostWellDone()
+    public void totalCostWellDone()
     {
 
     }
     @Test
-    public void RightNumbofDisp()
+    public void rightEnergySupplierInfo()
     {
 
     }
