@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class EnergySupplierTest {
     @BeforeEach
     public void setUp()
@@ -19,12 +20,12 @@ class EnergySupplierTest {
 
     }
     @Test
-    public void TotalCostWellDone()
+    public void totalCostWellDone()
     {
 
     }
     @Test
-    public void RightNumbofDisp()
+    public void rightEnergySupplierInfo()
     {
 
     }
