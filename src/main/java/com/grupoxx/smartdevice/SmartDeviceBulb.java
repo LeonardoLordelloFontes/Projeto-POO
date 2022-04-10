@@ -82,13 +82,16 @@ public class SmartDeviceBulb extends SmartDevice {
     }
 
     @Override
-    public double daily_energetic_cost() {
-
+    public double dailyEnergeticCost() {
         double val = 25;
-        if (this.tone == Tone.Warm) val = 50;
-        if (this.tone == Tone.Cold) val = 10;
 
-        return this.getEnergeticCost() + val;
+        switch (this.tone){
+            case Cold: val = 10;
+            case Warm: val = 50;
+
+        }
+
+        return this.getEnergyConsumption() + val;
     }
 
     public boolean equals(Object o) {

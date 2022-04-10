@@ -65,10 +65,14 @@ public class SmartDeviceSpeaker extends SmartDevice{
         this.radio = radio;
     }
 
-    @Override
-    public double daily_energetic_cost() {
+    public double f(int volume){
+        return volume * 2;
+    }
 
-        return this.getEnergeticCost() + (this.volume * 2);
+    @Override
+    public double dailyEnergeticCost() {
+
+        return this.getEnergyConsumption() + f(this.volume);
     }
 
     public boolean equals(Object o) {
