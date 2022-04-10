@@ -83,6 +83,7 @@ public class SmartDeviceBulb extends SmartDevice {
 
     @Override
     public double dailyEnergeticCost() {
+
         double val = -1;
 
         switch (this.tone){
