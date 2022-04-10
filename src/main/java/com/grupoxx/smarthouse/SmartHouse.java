@@ -48,7 +48,7 @@ public class SmartHouse {
     public void addRoom(String room) {
         rooms.put(room, new ArrayList<>());
     }
-    //Não podes aceder ao estado diretamente tens que usar get e set...
+
     public void setSmartDeviceOn(String smartDevice) {
         smartDevices.get(smartDevice).setState(SmartDevice.State.ON);
     }
@@ -121,30 +121,4 @@ public class SmartHouse {
     public SmartHouse clone() {
         return new SmartHouse(this);
     }
-
-
-
-
-
-     }
-
-    /*
-
-    *public double custoCasa(){
-         double custo = 0;
-         for (List<String> ls : this.rooms.values()) {
-             for (String s : ls){
-                 SmartDevice sd = this.devices.get(s);
-                 if (sd.getState() == SmartDevice.State.ON){
-                     custo += sd.EnergeticConsumptionPerDay();
-                 }
-         }
-         return custo;
-    *
-    *
-    *
-    *
-    * */
-
-
 }
