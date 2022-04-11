@@ -121,4 +121,18 @@ public class SmartHouse {
     public SmartHouse clone() {
         return new SmartHouse(this);
     }
+
+    public double ElectricityMeter() {
+        double cost = 0;
+        for (List<String> ls : this.rooms.values()) {
+            for (String s : ls) {
+                SmartDevice sd = this.smartDevices.get(s);
+                if (sd.getState() == SmartDevice.State.ON) {
+                    cost += sd.EnergeticConsumptionPerDay();
+                }
+            }
+        }
+        return cost;
+    }
+
 }

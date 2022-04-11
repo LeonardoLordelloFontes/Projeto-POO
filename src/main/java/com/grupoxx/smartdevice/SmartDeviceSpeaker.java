@@ -5,12 +5,14 @@ public class SmartDeviceSpeaker extends SmartDevice{
     private String brand;
     private int volume;
     private String radio;
+    private int volumeMax;
 
     public SmartDeviceSpeaker(){
         super();
         this.brand = "Sony";
         this.volume = 0;
         this.radio = "Nada";
+        this.volumeMax = 10;
     }
 
     public SmartDeviceSpeaker(String factoryCode) {
@@ -18,6 +20,7 @@ public class SmartDeviceSpeaker extends SmartDevice{
         this.brand = "Sony";
         this.volume = 0;
         this.radio = "Nada";
+        this.volumeMax = 10;
     }
 
     public SmartDeviceSpeaker(String brand, int volume){
@@ -25,6 +28,7 @@ public class SmartDeviceSpeaker extends SmartDevice{
         this.brand = brand;
         this.volume = volume;
         this.radio = "Nada";
+        this.volumeMax = 10;
     }
 
     public SmartDeviceSpeaker(String brand, int volume, String radio){
@@ -32,8 +36,16 @@ public class SmartDeviceSpeaker extends SmartDevice{
         this.brand = brand;
         this.volume = volume;
         this.radio = radio;
+        this.volumeMax = 10;
     }
 
+    public SmartDeviceSpeaker(String brand, int volume,int volumeMax,String radio){
+        super();
+        this.brand = brand;
+        this.volume = volume;
+        this.radio = radio;
+        this.volumeMax = volumeMax;
+    }
     public SmartDeviceSpeaker(SmartDeviceSpeaker ss){
         super(ss);
         this.brand = ss.getBrand();
