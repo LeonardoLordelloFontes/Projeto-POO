@@ -33,7 +33,7 @@ public class SmartHouse {
     }
 
     public SmartHouse(SmartHouse smartHouse) {
-        this.owner = smartHouse.getOwner();
+        this.owner = smartHouse.getOwner().clone();
         this.address = smartHouse.getAddress();
         this.smartDevices = smartHouse.getSmartDevices();
         this.rooms = smartHouse.getRooms();
