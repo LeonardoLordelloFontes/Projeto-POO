@@ -9,11 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.grupoxx.menu.Menu.MenuInicial;
+
 public class Main {
     public static void main(String[] args) {
         Map<String, SmartHouse> smartHouses = new HashMap<>(); // House Address -> SmartHouse
         Map<SmartDevice, String> smartDevices = new HashMap<>(); // SmartDevice -> House Address
         Map<EnergySupplier, List<String>> energySuppliers = new HashMap<>(); // EnergySupplier -> House Address
+        int resultado = MenuInicial();
+
     }
 }
 
