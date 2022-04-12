@@ -54,7 +54,7 @@ public class EnergySupplier {
         ScriptEngine engine = factory.getEngineByName("nashorn");
         double resultado = (double) engine.eval(totalcost);
         return resultado;
-    }
+    }// Quero muitos exclarecimentos em realação a isto acho muitissimo confuso.
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Energy Supplier: ");
