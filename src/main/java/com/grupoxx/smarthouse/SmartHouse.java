@@ -1,14 +1,18 @@
 package com.grupoxx.smarthouse;
 
+import com.grupoxx.EnergySupplier.EnergySupplier;
 import com.grupoxx.smartdevice.SmartDevice;
 
+import javax.script.ScriptException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SmartHouse {
     private Owner owner;
     private String address;
     private Map<String, SmartDevice> smartDevices;
     private Map<String, List<String>> rooms;
+    private EnergySupplier supplier;
 
     public SmartHouse() {
         this.owner = new Owner();
@@ -74,15 +78,25 @@ public class SmartHouse {
     }
 
     public void setSmartDevices(Map<String, SmartDevice> smartDevices) {
-        this.smartDevices = smartDevices;
+
+        this.smartDevices = smartDevices.entrySet().stream().collect(Collectors.toMap(x->x.getKey(),x->x.getValue().clone()));
     }
 
     public void setRooms(Map<String, List<String>> rooms) {
-        this.rooms = rooms;
+        Map<String, List<String> > r = new HashMap<String, List<String>>();
+        List <String> rr = new ArrayList<String>();
+
+        for (String s: rooms.keySet()){
+            rr = this.rooms.get(s).stream().toList();
+            r.put(s,rr);
+        }
+
+        this.rooms = r;
+
     }
 
     public Owner getOwner() {
-        return owner;
+        return owner.clone();
     }
 
     public String getAddress() {
@@ -90,15 +104,33 @@ public class SmartHouse {
     }
 
     public SmartDevice getSmartDevice(String factoryCode) {
-        return smartDevices.get(factoryCode);
+        return this.smartDevices.get(factoryCode);
     }
 
     public Map<String, SmartDevice> getSmartDevices() {
-        return smartDevices;
+
+        Map<String, SmartDevice> sd = new HashMap<String,SmartDevice>();
+
+        sd = this.smartDevices.entrySet().stream().collect(Collectors.toMap( e->e.getKey(),e->e.getValue().clone() ));
+
+        return sd;
     }
 
     public Map<String, List<String>> getRooms() {
-        return rooms;
+
+        Map<String, List<String> > r = new HashMap<String, List<String>>();
+        List <String> rr = new ArrayList<String>();
+
+        for (String s: this.rooms.keySet()){
+            rr = this.rooms.get(s).stream().toList();
+            r.put(s,rr);
+        }
+
+        return r;
+    }
+
+    public EnergySupplier getSupplier(){
+        return this.supplier.clone();
     }
 
     @Override
@@ -134,5 +166,7 @@ public class SmartHouse {
         }
         return cost;
     }
+
+
 
 }

@@ -3,32 +3,19 @@ package com.grupoxx.Estatistica;
 import com.grupoxx.EnergySupplier.EnergySupplier;
 import com.grupoxx.smarthouse.SmartHouse;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import javax.script.ScriptException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Estatistica {
     // será que posso usar map ?
 
     private List<SmartHouse> house;
-    private Set<EnergySupplier> supplier;
-
-    // lista e não set ordenado por causa dos comparadores utilizados.
 
     public  Estatistica (Estatistica e){
 
         this.setHouse(e.getHouse());
 
-    }
-
-    public void setSupplier(Set<EnergySupplier> supplier){
-        this.supplier = supplier.stream().map(EnergySupplier::clone).collect(Collectors.toSet());
-    }
-
-    public Set<EnergySupplier> getSupplier() {
-        return this.supplier.stream().map(EnergySupplier::clone).collect(Collectors.toSet());
     }
 
     public List<SmartHouse> getHouse() {
@@ -47,7 +34,7 @@ public class Estatistica {
 
         Estatistica e = (Estatistica) o;
 
-        return this.house.equals(e.getHouse()) && this.supplier.equals(e.supplier);
+        return this.house.equals(e.getHouse());
 
     }
 
@@ -72,6 +59,30 @@ public class Estatistica {
         return sh;
     }
 
+    public String MakeFatura(int DaysToPay,SmartHouse house) throws ScriptException {
+
+        StringBuilder sb = new StringBuilder();
+        sb
+                .append("Nif : ").append(house.getOwner().getNif())
+                .append("\n Contribuinte: ").append(house.getOwner().getNome())
+                .append("\n Morada: ").append(house.getAddress())
+                .append("\n Fornecedor de eletricidade: ").append(house.getSupplier().getName())
+                .append("\n Quantidade de energia gasta: ").append(house.ElectricityMeter() * DaysToPay)
+                .append("\n Valor a pagar: ").append( house.getSupplier().totalCostCal(house.getSupplier().getTotalcost()));
+
+        return sb.toString();
+    }
+    public Set<String> ListaDeFaturas(String nomeDoFornecedor, int daysToPay) throws ScriptException {
+
+        Set <String> lf = new HashSet<String>();
+
+        for ( SmartHouse sh: this.house){
+            if(sh.getSupplier().getName() == nomeDoFornecedor){
+                lf.add(this.MakeFatura(daysToPay,sh));
+            }
+        }
+        return lf;
+    }
 
 
 }
