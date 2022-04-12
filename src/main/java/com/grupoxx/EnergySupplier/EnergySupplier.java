@@ -16,7 +16,7 @@ public class EnergySupplier {
 
     }
 
-    public EnergySupplier(String name,int numdis, String totalcost) {
+    public EnergySupplier(String name,String totalcost) {
         this.name = name;
         this.totalcost = totalcost;
 
