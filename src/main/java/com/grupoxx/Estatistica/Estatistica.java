@@ -69,9 +69,9 @@ public class Estatistica {
                 .append("Nif : ").append(house.getOwner().getNif())
                 .append("\n Contribuinte: ").append(house.getOwner().getNome())
                 .append("\n Morada: ").append(house.getAddress())
-                .append("\n Fornecedor de eletricidade: ").append(.getName())
-                .append("\n Quantidade de energia gasta: ").append(this.ElectricityMeter() * DaysToPay)
-                .append("\n Valor a pagar: ").append( this.supplier.totalCostCal(formula));
+                .append("\n Fornecedor de eletricidade: ").append(house.getSupplier().getName())
+                .append("\n Quantidade de energia gasta: ").append(house.ElectricityMeter() * DaysToPay)
+                .append("\n Valor a pagar: ").append( house.getSupplier().totalCostCal(house.getSupplier().getTotalcost()));
 
         return sb.toString();
     }
