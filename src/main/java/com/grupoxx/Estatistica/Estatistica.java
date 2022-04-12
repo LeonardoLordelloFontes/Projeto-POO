@@ -4,10 +4,7 @@ import com.grupoxx.EnergySupplier.EnergySupplier;
 import com.grupoxx.smarthouse.SmartHouse;
 
 import javax.script.ScriptException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Estatistica {
@@ -75,4 +72,17 @@ public class Estatistica {
 
         return sb.toString();
     }
+    public Set<String> ListaDeFaturas(String nomeDoFornecedor, int daysToPay) throws ScriptException {
+
+        Set <String> lf = new HashSet<String>();
+
+        for ( SmartHouse sh: this.house){
+            if(sh.getSupplier().getName() == nomeDoFornecedor){
+                lf.add(this.MakeFatura(daysToPay,sh));
+            }
+        }
+        return lf;
+    }
+
+
 }
