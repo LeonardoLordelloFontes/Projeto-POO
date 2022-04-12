@@ -7,69 +7,74 @@ import java.util.*;
 public class SmartHouse {
     private Owner owner;
     private String address;
-    private Map<String, SmartDevice> devices;
+    private Map<String, SmartDevice> smartDevices;
     private Map<String, List<String>> rooms;
 
     public SmartHouse() {
         this.owner = new Owner();
         this.address = "DEFAULT ADDRESS";
-        this.devices = new HashMap<>();
+        this.smartDevices = new HashMap<>();
         this.rooms = new HashMap<>();
     }
 
     public SmartHouse(Owner owner, String address, List<String> rooms) {
-        this.owner = owner;
+        this.owner = owner.clone();
         this.address = address;
-        this.devices = new HashMap<>();
+        this.smartDevices = new HashMap<>();
         this.rooms = new HashMap<>();
-        rooms.forEach(room -> this.rooms.put(room, new ArrayList<>()));
+        rooms.forEach(this::addRoom);
+    }
+
+    public SmartHouse(Owner owner, String address, Map<String, SmartDevice> devices, Map<String, List<String>> rooms) {
+        this.owner = owner.clone();
+        this.address = address;
+        this.smartDevices = devices;
+        this.rooms = rooms;
     }
 
     public SmartHouse(SmartHouse smartHouse) {
-        this.owner = smartHouse.getOwner();
+        this.owner = smartHouse.getOwner().clone();
         this.address = smartHouse.getAddress();
-        this.devices = smartHouse.getDevices();
+        this.smartDevices = smartHouse.getSmartDevices();
         this.rooms = smartHouse.getRooms();
     }
 
-    public void addSmartDeviceToHouse(SmartDevice smartDevice) {
-        devices.put(smartDevice.getFactoryCode(), smartDevice);
+    public void addSmartDevice(SmartDevice smartDevice, String room) {
+        String factoryCode = smartDevice.getFactoryCode();
+        smartDevices.put(factoryCode, smartDevice);
+        rooms.get(room).add(factoryCode);
     }
 
-    public void addSmartDeviceToRoom(String smartDevice, String room) {
-        rooms.get(room).add(smartDevice);
-    }
-
-    public void addRoam(String roam) {
-        rooms.put(roam, new ArrayList<>());
+    public void addRoom(String room) {
+        rooms.put(room, new ArrayList<>());
     }
 
     public void setSmartDeviceOn(String smartDevice) {
-        devices.get(smartDevice).setState(SmartDevice.State.ON);
+        smartDevices.get(smartDevice).setState(SmartDevice.State.ON);
     }
 
     public void setSmartDeviceOff(String smartDevice) {
-        devices.get(smartDevice).setState(SmartDevice.State.OFF);
+        smartDevices.get(smartDevice).setState(SmartDevice.State.OFF);
     }
 
     public void setRoomSmartDevicesOn(String room) {
-        rooms.get(room).forEach(device -> devices.get(device).setState(SmartDevice.State.ON));
+        rooms.get(room).forEach(device -> smartDevices.get(device).setState(SmartDevice.State.ON));
     }
 
     public void setRoomSmartDevicesOff(String room) {
-        rooms.get(room).forEach(device -> devices.get(device).setState(SmartDevice.State.OFF));
+        rooms.get(room).forEach(device -> smartDevices.get(device).setState(SmartDevice.State.OFF));
     }
 
     public void setOwner(Owner owner) {
-        this.owner = owner;
+        this.owner = owner.clone();
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public void setDevices(Map<String, SmartDevice> devices) {
-        this.devices = devices;
+    public void setSmartDevices(Map<String, SmartDevice> smartDevices) {
+        this.smartDevices = smartDevices;
     }
 
     public void setRooms(Map<String, List<String>> rooms) {
@@ -84,12 +89,12 @@ public class SmartHouse {
         return address;
     }
 
-    public SmartDevice getDevice(String smartDevice) {
-        return devices.get(smartDevice);
+    public SmartDevice getSmartDevice(String factoryCode) {
+        return smartDevices.get(factoryCode);
     }
 
-    public Map<String, SmartDevice> getDevices() {
-        return devices;
+    public Map<String, SmartDevice> getSmartDevices() {
+        return smartDevices;
     }
 
     public Map<String, List<String>> getRooms() {
@@ -102,7 +107,7 @@ public class SmartHouse {
         if (o == null || getClass() != o.getClass()) return false;
         SmartHouse smartHouse = (SmartHouse) o;
         return  smartHouse.getOwner().equals(this.owner) && smartHouse.getAddress().equals(this.address) &&
-                smartHouse.getDevices().equals(this.devices) && smartHouse.getRooms().equals(this.rooms);
+                smartHouse.getSmartDevices().equals(this.smartDevices) && smartHouse.getRooms().equals(this.rooms);
     }
 
     @Override
@@ -112,12 +117,22 @@ public class SmartHouse {
         return "";
     }
 
-    public Map<String, List<String>> getRooms() {
-        return rooms;
-    }
-
     @Override
     public SmartHouse clone() {
         return new SmartHouse(this);
     }
+
+    public double ElectricityMeter() {
+        double cost = 0;
+        for (List<String> ls : this.rooms.values()) {
+            for (String s : ls) {
+                SmartDevice sd = this.smartDevices.get(s);
+                if (sd.getState() == SmartDevice.State.ON) {
+                    cost += sd.EnergeticConsumptionPerDay();
+                }
+            }
+        }
+        return cost;
+    }
+
 }

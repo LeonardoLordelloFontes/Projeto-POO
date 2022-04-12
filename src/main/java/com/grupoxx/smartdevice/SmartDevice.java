@@ -1,8 +1,12 @@
 package com.grupoxx.smartdevice;
 
-import java.util.List;
+import java.time.LocalDateTime;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public abstract class SmartDevice {
+
+    /* Estado dos smart device */
 
     public enum State {
         ON,
@@ -10,76 +14,84 @@ public abstract class SmartDevice {
     }
 
     private State state;
-    private double instalationPrice;
+    private double installationCost;
     private String factoryCode;
-    private double energeticCost;
-    private int day; // o dia em que o usuario alterou pela ultima vez o seu estado
+    private double energyConsumption;
+    private LocalDateTime day; // o dia em que o usuario alterou pela ultima vez o seu estado
 
     public SmartDevice(){
 
         this.state = State.OFF;
-        this.instalationPrice = 0;
+        this.installationCost = 0;
         this.factoryCode = "1234";
-        this.energeticCost = 0;
-        this.day = -1;
+        this.energyConsumption = 0;
+        this.day = null;
+    }
+
+    public SmartDevice(String factoryCode) {
+        this.state = State.OFF;
+        this.installationCost = 0;
+        this.factoryCode = factoryCode;
+        this.energyConsumption = 0;
+        this.day = null;
     }
 
     public SmartDevice(State state){
 
         this.state = state;
-        this.instalationPrice = 0;
+        this.installationCost = 0;
         this.factoryCode = "1234";
-        this.energeticCost = 0;
-        this.day = state == State.ON? 0:-1;
+        this.energyConsumption = 0;
+        this.day = null;
 
     }
 
     public SmartDevice(State state, double instalation_price){
 
         this.state = state;
-        this.instalationPrice = instalation_price;
+        this.installationCost = instalation_price;
         this.factoryCode = "1234";
-        this.energeticCost = 0;
-        this.day = state == State.ON? 0:-1;
+        this.energyConsumption = 0;
+        this.day = null;
     }
 
     public SmartDevice(State state, double instalation_price, String factory_code){
 
         this.state = state;
-        this.instalationPrice = instalation_price;
+        this.installationCost = instalation_price;
         this.factoryCode = factory_code;
-        this.energeticCost = 0;
-        this.day = state == State.ON? 0:-1;
+        this.energyConsumption = 0;
+        this.day = null;
 
     }
 
     public SmartDevice(State state, double instalation_price, String factory_code, double energetic_cost){
 
         this.state = state;
-        this.instalationPrice = instalation_price;
+        this.installationCost = instalation_price;
         this.factoryCode = factory_code;
-        this.energeticCost = energetic_cost;
-        this.day = state == State.ON? 0:-1;
+        this.energyConsumption = energetic_cost;
+        this.day = null;
 
     }
 
-    public SmartDevice(State state, double instalation_price, String factory_code, double energetic_cost, int day){
+    public SmartDevice(State state, double instalation_price, String factory_code, double energetic_cost, LocalDateTime day){
 
         this.state = state;
-        this.instalationPrice = instalation_price;
+        this.installationCost = instalation_price;
         this.factoryCode = factory_code;
-        this.energeticCost = energetic_cost;
-        this.day = state == State.ON? day:-1;
+        this.energyConsumption = energetic_cost;
+        this.day = day;
 
     }
 
     public SmartDevice(SmartDevice sd){
 
         this.state = sd.getState();
-        this.instalationPrice = sd.getInstalationPrice();
+        this.installationCost = sd.getInstallationCost();
         this.factoryCode = sd.getFactoryCode();
-        this.energeticCost = sd.getEnergeticCost();
-        this.day = state == State.ON? sd.getDay():-1;
+        this.energyConsumption = sd.getEnergyConsumption();
+        this.day = sd.getDay();
 
     }
 
@@ -93,14 +105,14 @@ public abstract class SmartDevice {
         this.state = state;
     }
 
-    public double getInstalationPrice() {
+    public double getInstallationCost() {
 
-        return this.instalationPrice;
+        return this.installationCost;
     }
 
-    public void setInstalationPrice(double instalationPrice) {
+    public void setInstallationCost(double installationCost) {
 
-        this.instalationPrice = instalationPrice;
+        this.installationCost = installationCost;
     }
 
     public String getFactoryCode() {
@@ -113,21 +125,21 @@ public abstract class SmartDevice {
         this.factoryCode = factoryCode;
     }
 
-    public double getEnergeticCost() {
+    public double getEnergyConsumption() {
 
-        return this.energeticCost;
+        return this.energyConsumption;
     }
 
-    public void setEnergeticCost(double energeticCost) {
+    public void setEnergyConsumption(double energyConsumption) {
 
-        this.energeticCost = energeticCost;
+        this.energyConsumption = energyConsumption;
     }
 
-    public int getDay() {
+    public LocalDateTime getDay() {
         return day;
     }
 
-    public void setDay(int day) {
+    public void setDay(LocalDateTime day) {
         this.day = day;
     }
 
@@ -138,7 +150,7 @@ public abstract class SmartDevice {
 
         SmartDevice sd = (SmartDevice) o;
 
-        return this.factoryCode == sd.getFactoryCode();
+        return this.factoryCode.equals(sd.getFactoryCode());
     }
 
     public String toString(){
@@ -146,18 +158,18 @@ public abstract class SmartDevice {
         StringBuilder sb = new StringBuilder("O seu dispositivo inteligente cujo número de fabrica é ");
 
         sb.append(this.factoryCode).append(".")
-                .append("\n Teve um custo de instalação de ").append(this.instalationPrice).append(" euros.")
+                .append("\n Teve um custo de instalação de ").append(this.installationCost).append(" euros.")
                 .append("\n Neste momento encontra-se ").append( this.state == State.ON ? "ligado.":"desligado.")
-                .append("\n Tem um custo dirario fixo de ").append(this.energeticCost).append("KW por hora.");
+                .append("\n Tem um custo dirario fixo de ").append(this.energyConsumption).append("KW por hora.");
 
         return sb.toString();
     }
 
-    public void smart_device_switch(int acessDay){
+    public void smart_device_switch(LocalDateTime acessDay){
 
-        if(this.state == State.ON && acessDay > this.day) {
+        long daysBetween = DAYS.between(this.day,acessDay);
+        if(this.state == State.ON && Math.abs(daysBetween) >= 1) {
             this.setState(State.OFF);
-
         }
 
         else {
@@ -169,6 +181,11 @@ public abstract class SmartDevice {
 
     public abstract SmartDevice clone();
 
-    public abstract double daily_energetic_cost();
+    public abstract double EnergeticConsumptionPerDay();
 
+    public double EnergeticConsumptionPerSecond(){
+
+        return this.EnergeticConsumptionPerDay()/86400 ;
+
+    }
 }

@@ -5,36 +5,48 @@ public class SmartDeviceSpeaker extends SmartDevice{
     private String brand;
     private int volume;
     private String radio;
+    private int volumeMax;
 
-    SmartDeviceSpeaker(){
+    public SmartDeviceSpeaker(){
         super();
         this.brand = "Sony";
         this.volume = 0;
         this.radio = "Nada";
+        this.volumeMax = 10;
     }
 
-    SmartDeviceSpeaker(String brand){
-        super();
-        this.brand = brand;
+    public SmartDeviceSpeaker(String factoryCode) {
+        super(factoryCode);
+        this.brand = "Sony";
         this.volume = 0;
         this.radio = "Nada";
+        this.volumeMax = 10;
     }
 
-    SmartDeviceSpeaker(String brand, int volume){
+    public SmartDeviceSpeaker(String brand, int volume){
         super();
         this.brand = brand;
         this.volume = volume;
         this.radio = "Nada";
+        this.volumeMax = 10;
     }
 
-    SmartDeviceSpeaker(String brand, int volume, String radio){
+    public SmartDeviceSpeaker(String brand, int volume, String radio){
         super();
         this.brand = brand;
         this.volume = volume;
         this.radio = radio;
+        this.volumeMax = 10;
     }
 
-    SmartDeviceSpeaker(SmartDeviceSpeaker ss){
+    public SmartDeviceSpeaker(String brand, int volume,int volumeMax,String radio){
+        super();
+        this.brand = brand;
+        this.volume = volume;
+        this.radio = radio;
+        this.volumeMax = volumeMax;
+    }
+    public SmartDeviceSpeaker(SmartDeviceSpeaker ss){
         super(ss);
         this.brand = ss.getBrand();
         this.volume = ss.getVolume();
@@ -66,9 +78,9 @@ public class SmartDeviceSpeaker extends SmartDevice{
     }
 
     @Override
-    public double daily_energetic_cost() {
+    public double EnergeticConsumptionPerDay() {
 
-        return this.getEnergeticCost() + (this.volume * 2);
+        return this.getEnergyConsumption() + (this.volume * 2);
     }
 
     public boolean equals(Object o) {

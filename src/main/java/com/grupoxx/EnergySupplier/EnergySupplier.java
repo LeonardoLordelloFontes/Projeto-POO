@@ -55,7 +55,6 @@ public class EnergySupplier {
         double resultado = (double) engine.eval(totalcost);
         return resultado;
     }
-    //TODO
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Energy Supplier: ");

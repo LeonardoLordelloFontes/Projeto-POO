@@ -37,8 +37,8 @@ public class Owner {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Nome: ");
-        sb.append(this.name).append("\n").append("NIF: ").append(this.nif);
+        StringBuilder sb = new StringBuilder("\nNome: ");
+        sb.append(this.name).append("\nNIF: ").append(this.nif);
         return sb.toString();
     }
 
