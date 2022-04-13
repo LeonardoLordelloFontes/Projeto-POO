@@ -4,7 +4,9 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Menu {
+
+
+public abstract class Menu {
 
     public static int MenuInicial() {
         clearWindow();
@@ -15,7 +17,7 @@ public class Menu {
         sb.append("4. Guardar Estado \n");
         sb.append("5. Sair \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
-        System.out.println(sb.toString());
+        System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
@@ -38,7 +40,7 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-    public static int MenuFasedeConfiguração() {
+    public static int MenuFasedeConfiguracao() {
         StringBuilder sb = new StringBuilder("-----------Fase de Configuração-----------\n\n");
         sb.append("1. Configurar fornecedores de energia \n");
         sb.append("2. Configurar casas \n");
