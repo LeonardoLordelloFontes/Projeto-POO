@@ -163,25 +163,33 @@ public abstract class Menu {
         sb.append("Código de Fábrica: \n");
         sb.append("Dimensão(cm): \n");
         sb.append("Custo de Instalação: \n");
+        sb.append("Quantidade de energia diária gasta: \n");
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
     public static String MenuSmartSpeakerAdd() {
         StringBuilder sb = new StringBuilder("-----------Smart Speaker-----------\n\n");
+
         sb.append("Código de Fábrica: \n");
-        sb.append("Canal: \n");
-        sb.append("Volume Máximo: \n");
+        sb.append("Custo de Instalação: \n");
+        sb.append("Quantidade de energia diária gasta: \n");
         sb.append("Marca \n");
+        sb.append("Volume Máximo: \n");
+
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
     public static String MenuSmartCamaraAdd() {
         StringBuilder sb = new StringBuilder("-----------Smart Camara-----------\n\n");
+
         sb.append("Código de Fábrica: \n");
+        sb.append("Custo de Instalação: \n");
+        sb.append("Quantidade de energia diária gasta: \n");
         sb.append("Resolução (pixeis): \n");
         sb.append("Armazenamento (bytes) \n");
+
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -189,10 +197,12 @@ public abstract class Menu {
     public static String MenuSmartBulbUpdate() {
         StringBuilder sb = new StringBuilder("-----------Smart Bulb-----------\n\n");
         sb.append("1. Código de Fábrica: \n");
-        sb.append("2. Dimensão(cm): \n");
+        sb.append("2. Quantidade de energia diária gasta: \n");
         sb.append("3. Custo de instalação: \n\n");
-        sb.append("4. Voltar \n\n");
+        sb.append("4. Dimensão(cm): \n");
+        sb.append("5. Voltar \n\n");
         sb.append("Sua Opção: ");
+
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -200,11 +210,14 @@ public abstract class Menu {
     public static int MenuSmartSpeakerUpdate() {
         StringBuilder sb = new StringBuilder("-----------Smart Speaker-----------\n\n");
         sb.append("1. Código de Fábrica: \n");
-        sb.append("2. Canal: \n");
-        sb.append("3. Volume Máximo: \n");
-        sb.append("4. Marca \n");
-        sb.append("5. Voltar \n\n");
+        sb.append("2. Quantidade de energia diária gasta: \n");
+        sb.append("3. Custo de instalação: \n\n");
+        sb.append("4. Canal: \n");
+        sb.append("5. Volume Máximo: \n");
+        sb.append("6. Marca \n");
+        sb.append("7. Voltar \n\n");
         sb.append("Sua Opção: ");
+
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -212,9 +225,11 @@ public abstract class Menu {
     public static int MenuSmartCamaraUpdate() {
         StringBuilder sb = new StringBuilder("-----------Smart Camara-----------\n\n");
         sb.append("1. Código de Fábrica: \n");
-        sb.append("2. Resolução (pixeis): \n");
-        sb.append("3. Armazenamento (bytes) \n");
-        sb.append("4. Voltar \n\n");
+        sb.append("2. Quantidade de energia diária gasta: \n");
+        sb.append("3. Custo de instalação: \n\n");
+        sb.append("4. Resolução (pixeis): \n");
+        sb.append("5. Armazenamento (bytes) \n");
+        sb.append("6. Voltar \n\n");
         sb.append("Sua Opção: ");
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);

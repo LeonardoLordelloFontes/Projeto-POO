@@ -36,6 +36,14 @@ public abstract class SmartDevice {
         this.day = null;
     }
 
+    public SmartDevice(String factoryCode, double installationCost,double energyConsumption) {
+        this.state = State.OFF;
+        this.installationCost = installationCost;
+        this.factoryCode = factoryCode;
+        this.energyConsumption = energyConsumption;
+        this.day = null;
+    }
+
     public SmartDevice(State state){
 
         this.state = state;
