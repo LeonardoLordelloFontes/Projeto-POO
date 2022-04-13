@@ -12,7 +12,7 @@ public class SmartHouse {
     private String address;
     private Map<String, SmartDevice> smartDevices;
     private Map<String, List<String>> rooms;
-    private EnergySupplier supplier;
+    private String energySupplier;
 
     public SmartHouse() {
         this.owner = new Owner();
@@ -136,8 +136,8 @@ public class SmartHouse {
         return r;
     }
 
-    public EnergySupplier getSupplier(){
-        return this.supplier.clone();
+    public String getSupplier(){
+        return this.energySupplier;
     }
 
     @Override

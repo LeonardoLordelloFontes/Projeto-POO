@@ -23,6 +23,15 @@ public class SmartDeviceSpeaker extends SmartDevice{
         this.volumeMax = 10;
     }
 
+    public SmartDeviceSpeaker(String factoryCode,double instalacionCost, double energyConsumption,String brand ,int volumeMax){
+        super(factoryCode,instalacionCost,energyConsumption);
+        this.brand = brand;
+        this.volume = 0;
+        this.radio = "Nada";
+        this.volumeMax = volumeMax;
+    }
+
+
     public SmartDeviceSpeaker(String brand, int volume){
         super();
         this.brand = brand;

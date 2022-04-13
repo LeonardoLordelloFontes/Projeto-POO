@@ -23,6 +23,13 @@ public class SmartDeviceBulb extends SmartDevice {
         this.dimension = 2;
     }
 
+    public SmartDeviceBulb(String factoryCode, double dimension, double instalacionCost, double energyConsumption){
+        super(factoryCode,instalacionCost,energyConsumption);
+        this.tone = Tone.Neutral;
+        this.dimension = dimension;
+    }
+
+
     public SmartDeviceBulb(Tone tone) {
         super();
         this.tone = tone;

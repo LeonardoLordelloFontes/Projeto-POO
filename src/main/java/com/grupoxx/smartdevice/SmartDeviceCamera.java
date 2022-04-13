@@ -11,6 +11,14 @@ public class SmartDeviceCamera extends SmartDevice{
         this.resolution = 0;
     }
 
+    public SmartDeviceCamera (String factoryCode,double instalacionCost, double energyConsumption,int resulosion,int fileSize){
+        super(factoryCode,instalacionCost,energyConsumption);
+        this.fileSize = fileSize;
+        this.resolution = resulosion;
+
+    }
+
+
     public SmartDeviceCamera(String factoryCode){
         super(factoryCode);
         this.fileSize = 0;

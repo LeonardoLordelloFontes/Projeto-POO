@@ -8,7 +8,7 @@ import java.util.Map;
 public class SmartHouseRepository {
     private Map<String, SmartHouse> smartHouses;
 
-    SmartHouseRepository() {
+    public SmartHouseRepository() {
         this.smartHouses = new HashMap<>();
     }
 

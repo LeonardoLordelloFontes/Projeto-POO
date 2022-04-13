@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Estatistica {
     // será que posso usar map ?
-
+    /*
     private List<SmartHouse> house;
 
     public  Estatistica (Estatistica e){
@@ -83,6 +83,6 @@ public class Estatistica {
         }
         return lf;
     }
-
+*/
 
 }
