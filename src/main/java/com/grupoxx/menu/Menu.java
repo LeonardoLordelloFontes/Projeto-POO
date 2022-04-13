@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Menu {
+
     public static int MenuInicial() {
         clearWindow();
         StringBuilder sb = new StringBuilder("-----------MENU INICIAL-----------\n\n");
