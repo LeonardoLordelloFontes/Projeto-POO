@@ -20,6 +20,13 @@ public class SmartHouse {
         this.smartDevices = new HashMap<>();
         this.rooms = new HashMap<>();
     }
+    public SmartHouse(String address) {
+        this.owner = new Owner();
+        this.address = address;
+        this.smartDevices = new HashMap<>();
+        this.rooms = new HashMap<>();
+    }
+
 
     public SmartHouse(Owner owner, String address, List<String> rooms) {
         this.owner = owner.clone();
