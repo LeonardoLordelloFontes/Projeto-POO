@@ -89,6 +89,10 @@ public class SmartHouse {
         this.smartDevices = smartDevices.entrySet().stream().collect(Collectors.toMap(x->x.getKey(),x->x.getValue().clone()));
     }
 
+    public void setEnergySupplier(String energySupplier) {
+        this.energySupplier = energySupplier;
+    }
+
     public void setRooms(Map<String, List<String>> rooms) {
         Map<String, List<String> > r = new HashMap<String, List<String>>();
         List <String> rr = new ArrayList<String>();

@@ -76,7 +76,7 @@ public abstract class Menu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-    public static int MenuCasa() {
+    public static int menuCasa() {
         StringBuilder sb = new StringBuilder("-----------Casa-----------\n\n");
         sb.append("1. Adicionar \n");
         sb.append("2. Remover \n");
