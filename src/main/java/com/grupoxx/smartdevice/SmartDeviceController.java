@@ -10,8 +10,6 @@ import java.util.Scanner;
 import static com.grupoxx.menu.Menu.*;
 
 public abstract class SmartDeviceController {
-/*
-    public static Map<String,SmartDevice> fabrica = new HashMap<>();
 
     public static void DiviceChoice(){
 
@@ -136,5 +134,5 @@ public abstract class SmartDeviceController {
         }
 
     }
-*/
+
 }

@@ -1,9 +1,5 @@
 package com.grupoxx.menu;
-import java.util.Scanner;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-
+import java.util.*;
 
 
 public abstract class Menu {
@@ -112,13 +108,17 @@ public abstract class Menu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-    public static String MenuAddOwner() {
-        StringBuilder sb = new StringBuilder("   Propriatário   \n\n");
-        sb.append("Nome: ");
-        sb.append("NIF: ");
-        System.out.println(sb.toString());
+    public static String[] MenuAddOwner() {
+        String input[] = new String[2];
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        System.out.println("   Propriatário   \n\n");
+        System.out.print("NIF: ");
+        input[0] = scanner.next();
+        scanner.nextLine();
+        System.out.print("Nome: ");
+        input[1] = scanner.nextLine();
+
+        return input;
     }
     public static int MenuDispositivos() {
         StringBuilder sb = new StringBuilder("-----------Dispositivos-----------\n\n");
@@ -133,22 +133,26 @@ public abstract class Menu {
     }
     public static String[] AdicionarFornecedordeEnergia() {
         String[] input = new String[2];
-        System.out.print("-----------Adicionar um Fornecedor de Energia-----------\n\n");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\nNome");
+        System.out.print("-----------Adicionar um Fornecedor de Energia-----------\n");
+        System.out.print("Nome");
         input[0] = scanner.next();
         scanner.nextLine();
-        System.out.print("\nFórmula: ");
+        System.out.print("Fórmula: ");
         input[1] = scanner.nextLine();
         return input;
     }
-    public static String AtualizarFornecedordeEnergia() {
-        StringBuilder sb = new StringBuilder("-----------Atualizar um Fornecedor de Energia-----------\n\n");
-        sb.append("Nome: \n");
-        sb.append("Fórmula: ");
-        System.out.println(sb.toString());
+    public static String[] AtualizarFornecedordeEnergia() {
+        String[] input = new String[2];
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        System.out.println("-----------Atualizar um Fornecedor de Energia-----------\n");
+        System.out.print("Nome: ");
+        input[0] = scanner.next();
+        scanner.nextLine();
+        System.out.print("Fórmula: ");
+        input[1] = scanner.nextLine();
+
+        return input;
     }
     public static int MenuTipoDispositivo() {
         StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
@@ -161,87 +165,195 @@ public abstract class Menu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-    public static String MenuSmartBulbAdd() {
-        StringBuilder sb = new StringBuilder("-----------Smart Bulb-----------\n\n");
-        sb.append("Código de Fábrica: \n");
-        sb.append("Dimensão(cm): \n");
-        sb.append("Custo de Instalação: \n");
-        sb.append("Quantidade de energia diária gasta: \n");
-        System.out.println(sb.toString());
+    public static String[] MenuSmartBulbAdd() {
+        String input[] = new String[4];
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        System.out.println("-----------Smart Bulb-----------\n\n");
+        System.out.print("Código de Fábrica: ");
+        input[0] = scanner.next();
+        System.out.print("Dimensão(cm): ");
+        input[1] = scanner.next();
+        System.out.print("Custo de Instalação:");
+        input[2] = scanner.next();
+        System.out.print("Quantidade de energia diária gasta:");
+        input[3] = scanner.next();
+        return input;
     }
-    public static String MenuSmartSpeakerAdd() {
-        StringBuilder sb = new StringBuilder("-----------Smart Speaker-----------\n\n");
-
-        sb.append("Código de Fábrica: \n");
-        sb.append("Custo de Instalação: \n");
-        sb.append("Quantidade de energia diária gasta: \n");
-        sb.append("Marca \n");
-        sb.append("Volume Máximo: \n");
-
-        System.out.println(sb.toString());
+    public static String[] MenuSmartSpeakerAdd() {
+        String input[] = new String[5];
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-    public static String MenuSmartCamaraAdd() {
-        StringBuilder sb = new StringBuilder("-----------Smart Camara-----------\n\n");
+        System.out.println("-----------Smart Speaker-----------\n\n");
+        System.out.print("Código de Fábrica: ");
+        input[0] = scanner.next();
+        System.out.print("Custo de Instalação: ");
+        input[1] = scanner.next();
+        System.out.print("Quantidade de energia diária gasta: ");
+        input[2] = scanner.next();
+        System.out.print("Marca: ");
+        input[3] = scanner.next();
+        System.out.print("Volume Máximo: \n");
+        input[4] = scanner.next();
 
-        sb.append("Código de Fábrica: \n");
-        sb.append("Custo de Instalação: \n");
-        sb.append("Quantidade de energia diária gasta: \n");
-        sb.append("Resolução (pixeis): \n");
-        sb.append("Armazenamento (bytes) \n");
+        return input;
+    }
+    public static String[] MenuSmartCamaraAdd() {
+        String input[] = new String[5];
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-----------Smart Camara-----------\n\n");
+        System.out.print("Código de Fábrica: ");
+        input[0] = scanner.next();
+        System.out.print("Custo de Instalação: ");
+        input[1] =scanner.next();
+        System.out.print("Quantidade de energia diária gasta: ");
+        input[2] = scanner.next();
+        System.out.print("Resolução (pixeis): ");
+        input[3] = scanner.next();
+        System.out.print("Armazenamento (bytes): ");
+        input[4] = scanner.next();
 
-        System.out.println(sb.toString());
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        return input;
     }
-    public static String MenuSmartBulbUpdate() {
-        StringBuilder sb = new StringBuilder("-----------Smart Bulb-----------\n\n");
-        sb.append("1. Código de Fábrica: \n");
-        sb.append("2. Quantidade de energia diária gasta: \n");
-        sb.append("3. Custo de instalação: \n\n");
-        sb.append("4. Dimensão(cm): \n");
-        sb.append("5. Voltar \n\n");
-        sb.append("Sua Opção: ");
+    public static String[] MenuSmartBulbUpdate() {
+        String input[] = new String[4];
+        String answer = "N";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-----------Smart Bulb-----------\n\n");
 
-        System.out.println(sb.toString());
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-    public static int MenuSmartSpeakerUpdate() {
-        StringBuilder sb = new StringBuilder("-----------Smart Speaker-----------\n\n");
-        sb.append("1. Código de Fábrica: \n");
-        sb.append("2. Quantidade de energia diária gasta: \n");
-        sb.append("3. Custo de instalação: \n\n");
-        sb.append("4. Canal: \n");
-        sb.append("5. Volume Máximo: \n");
-        sb.append("6. Marca \n");
-        sb.append("7. Voltar \n\n");
-        sb.append("Sua Opção: ");
+        System.out.print("Deseja alterar o codigo de fabrica?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print(" Código de Fábrica: ");
+            input[0] = scanner.next();
+        }
+        System.out.print("Deseja alterar a energia diária gasta?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Quantidade de energia diária gasta : ");
+            input[1] = scanner.next();
+        }
+        System.out.print("Deseja alterar o custo de instalação?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Custo de instalação : ");
+            input[2] = scanner.next();
+        }
 
-        System.out.println(sb.toString());
+        System.out.print("Deseja alterar a Dimensão(cm)?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Dimensão(cm) : ");
+            input[3] = scanner.next();
+        }
+
+        System.out.print("Voltar para o menu anterior?[Y ou N]: :");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+
+        if (answer == "N") return input;
+
+        else return null;
+    }
+    public static String[] MenuSmartSpeakerUpdate() {
+        String input[] = new String[7];
+        String answer = "N";
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        System.out.println("-----------Smart Speaker-----------\n\n");
+
+        System.out.print("Deseja alterar o codigo de fabrica?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print(" Código de Fábrica: ");
+            input[0] = scanner.next();
+        }
+        System.out.print("Deseja alterar a energia diária gasta?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Quantidade de energia diária gasta : ");
+            input[1] = scanner.next();
+        }
+        System.out.print("Deseja alterar o custo de instalação?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Custo de instalação : ");
+            input[2] = scanner.next();
+        }
+        System.out.print("Deseja alterar o Canal?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Canal : ");
+            input[3] = scanner.next();
+        }
+        System.out.print("Deseja alterar o Volume Máximo?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Volume Máximo : ");
+            input[4] = scanner.next();
+        }
+        System.out.print("Deseja alterar o Volume Máximo?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Volume Máximo : ");
+            input[5] = scanner.next();
+        }
+        System.out.print("Deseja alterar a Marca?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Marca : ");
+            input[6] = scanner.next();
+        }
+        System.out.print("Voltar para o menu anterior?[Y ou N]: :");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+
+        if (answer == "N") return input;
+
+        else return null;
     }
-    public static int MenuSmartCamaraUpdate() {
-        StringBuilder sb = new StringBuilder("-----------Smart Camara-----------\n\n");
-        sb.append("1. Código de Fábrica: \n");
-        sb.append("2. Quantidade de energia diária gasta: \n");
-        sb.append("3. Custo de instalação: \n\n");
-        sb.append("4. Resolução (pixeis): \n");
-        sb.append("5. Armazenamento (bytes) \n");
-        sb.append("6. Voltar \n\n");
-        sb.append("Sua Opção: ");
-        System.out.println(sb.toString());
+    public static String[] MenuSmartCamaraUpdate() {
+        String input[] = new String[5];
+        String answer = "N";
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        System.out.println("-----------Smart Speaker-----------\n\n");
+
+        System.out.print("Deseja alterar o codigo de fabrica?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print(" Código de Fábrica: ");
+            input[0] = scanner.next();
+        }
+        System.out.print("Deseja alterar a energia diária gasta?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Quantidade de energia diária gasta : ");
+            input[1] = scanner.next();
+        }
+        System.out.print("Deseja alterar o custo de instalação?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Custo de instalação : ");
+            input[2] = scanner.next();
+        }
+        System.out.print("Deseja alterar a resolução:?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Resolução (pixeis): ");
+            input[3] = scanner.next();
+        }
+        System.out.print("Deseja alterar o armazenamento:?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if (answer == "Y") {
+            System.out.print("Armazenamento (bytes): ");
+            input[4] = scanner.next();
+        }
+
+        System.out.print("Voltar para o menu anterior?[Y ou N]: :");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+
+        if (answer == "N") return input;
+
+        else return null;
+
     }
-    public static int MenuRemoçao() {
-        // Eu não sei como fazer estes em que temos de escolher um numero que vai sendo alterado
-    return 0;
-    }
+
+
 }
 
 
