@@ -16,6 +16,12 @@ public class EnergySupplierController {
         switch (choice) {
             case 1:
                 addEnergySupplierController();
+            case 2:
+                removeEnergySupplierController();
+            case 3:
+                updateEnergySupplierController();
+            case 4:
+                //voltar ao menu fornecedor de energia
         }
     }
 
@@ -25,5 +31,15 @@ public class EnergySupplierController {
 
         this.energySupplierRepository.addEnergySupplier(input[0], input[1]);
         energySupplierController();
+    }
+    public void updateEnergySupplierController() {
+        String[] input = Menu.AtualizarFornecedordeEnergia();
+        if(input.equals(null)) energySupplierController();
+
+        this.energySupplierRepository.updateEnergySupplier(input[0],input[1],input[2],input[3]);
+        energySupplierController();
+    }
+    public void removeEnergySupplierController() {
+        //Todo
     }
 }
