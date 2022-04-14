@@ -1,7 +1,10 @@
 package com.grupoxx.smartdevice;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SmartDeviceRepository {
     private Map<String,SmartDevice> factory = new HashMap<>();
@@ -87,6 +90,10 @@ public class SmartDeviceRepository {
         if(!installationCost.equals("#")) sc.setInstallationCost( Double.parseDouble(installationCost) );
         if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(resolution));
         if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(fileSize));
+    }
+
+    public List<SmartDevice> findAllSmartDevices() {
+        return new ArrayList<>(factory.values());
     }
 
     public Map<String, SmartDevice> getFactory() { return factory;}

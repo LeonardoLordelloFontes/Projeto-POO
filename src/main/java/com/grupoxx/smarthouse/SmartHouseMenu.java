@@ -80,21 +80,6 @@ public class SmartHouseMenu {
         return input;
     }
 
-    // Esta função faz mais sentido dentro do menu do smartDevice
-
-    public static String smartHouseSelectSmartDeviceMenu(SmartHouseRepository smartHouseRepository) {
-        List<SmartDevice> smartDevices = smartDevices.findAll
-        StringBuilder sb = new StringBuilder("-----------Selecionar Dispositivo-----------\n\n");
-        smartDevices.forEach(smartDevice -> sb.append(smartDevice).append("\n"));
-        sb.append("Para cancelar a ação digite *\n");
-        sb.append("Selecione o dispositivo (pelo código do dispositivo): ");
-        System.out.println(sb);
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        scanner.close();
-        return input;
-    }
-
     public static int smartHouseUpdateMenu() {
         StringBuilder sb = new StringBuilder("-----------Atualizar Casa-----------\n\n");
         sb.append("1. Adicionar Divisão \n");

@@ -1,5 +1,7 @@
 package com.grupoxx.smartdevice;
 
+import com.grupoxx.smarthouse.SmartHouseRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -278,80 +280,93 @@ public abstract class SmartDeviceMenu {
         }
         public static String[] MenuSmartCamaraUpdate() {
 
-        String input[] = new String[6];
-        String answer = "N";
+            String input[] = new String[6];
+            String answer = "N";
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("-----------Smart Speaker-----------\n\n");
+
+            System.out.print("Intruduza código de fabrica do dispositivo que pretende alterar ou o simbolo [*] em qualquer local de escrita para voltar ao menu anterior: ");
+            input[0] = scanner.next();
+
+            System.out.print("Deseja alterar o codigo de fabrica?[Y ou N]: ");
+            answer = scanner.next().toUpperCase(Locale.ROOT);
+            if(answer.equals("*")) return null;
+
+            if (answer.equals("Y")) {
+                System.out.print(" Novo Código de Fábrica: ");
+                input[1] = scanner.next();
+                if (input[1].equals("*")) return null;
+            }
+            else {
+                input[1] = "#";
+            }
+
+            System.out.print("Deseja alterar a energia diária gasta?[Y ou N]: ");
+            answer = scanner.next().toUpperCase(Locale.ROOT);
+            if(answer.equals("*")) return null;
+
+            if (answer.equals("Y")) {
+                System.out.print("Nova Quantidade de energia diária gasta : ");
+                input[2] = scanner.next();
+                if (input[2].equals("*")) return null;
+            }
+            else {
+                input[2] = "#";
+            }
+
+            System.out.print("Deseja alterar o custo de instalação?[Y ou N]: ");
+            answer = scanner.next().toUpperCase(Locale.ROOT);
+            if(answer.equals("*")) return null;
+
+            if (answer.equals("Y")) {
+                System.out.print(" Novo Custo de instalação : ");
+                input[3] = scanner.next();
+                if (input[3].equals("*")) return null;
+            }
+            else {
+                input[3] = "#";
+            }
+
+            System.out.print("Deseja alterar a resolução:?[Y ou N]: ");
+            answer = scanner.next().toUpperCase(Locale.ROOT);
+            if(answer.equals("*")) return null;
+
+            if (answer.equals("Y")) {
+                System.out.print(" Nova Resolução (pixeis): ");
+                input[4] = scanner.next();
+                if (input[4].equals("*")) return null;
+            }
+            else {
+                input[4] = "#";
+            }
+
+            System.out.print("Deseja alterar o armazenamento:?[Y ou N]: ");
+            answer = scanner.next().toUpperCase(Locale.ROOT);
+            if(answer.equals("*")) return null;
+
+            if (answer.equals("Y")) {
+                System.out.print(" Novo Armazenamento (bytes): ");
+                input[5] = scanner.next();
+                if (input[5].equals("*")) return null;
+            }
+            else {
+                input[5] = "#";
+            }
+
+            return input;
+
+        }
+
+    public static String smartHouseSelectSmartDeviceMenu(SmartDeviceRepository smartDeviceRepository) {
+        List<SmartDevice> smartDevices = smartDeviceRepository.findAllSmartDevices();
+        StringBuilder sb = new StringBuilder("-----------Selecionar Dispositivo-----------\n\n");
+        smartDevices.forEach(smartDevice -> sb.append(smartDevice).append("\n"));
+        sb.append("Para cancelar a ação digite *\n");
+        sb.append("Selecione o dispositivo (pelo código do dispositivo): ");
+        System.out.println(sb);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("-----------Smart Speaker-----------\n\n");
-
-        System.out.print("Intruduza código de fabrica do dispositivo que pretende alterar ou o simbolo [*] em qualquer local de escrita para voltar ao menu anterior: ");
-        input[0] = scanner.next();
-
-        System.out.print("Deseja alterar o codigo de fabrica?[Y ou N]: ");
-        answer = scanner.next().toUpperCase(Locale.ROOT);
-        if(answer.equals("*")) return null;
-
-        if (answer.equals("Y")) {
-            System.out.print(" Novo Código de Fábrica: ");
-            input[1] = scanner.next();
-            if (input[1].equals("*")) return null;
-        }
-        else {
-            input[1] = "#";
-        }
-
-        System.out.print("Deseja alterar a energia diária gasta?[Y ou N]: ");
-        answer = scanner.next().toUpperCase(Locale.ROOT);
-        if(answer.equals("*")) return null;
-
-        if (answer.equals("Y")) {
-            System.out.print("Nova Quantidade de energia diária gasta : ");
-            input[2] = scanner.next();
-            if (input[2].equals("*")) return null;
-        }
-        else {
-            input[2] = "#";
-        }
-
-        System.out.print("Deseja alterar o custo de instalação?[Y ou N]: ");
-        answer = scanner.next().toUpperCase(Locale.ROOT);
-        if(answer.equals("*")) return null;
-
-        if (answer.equals("Y")) {
-            System.out.print(" Novo Custo de instalação : ");
-            input[3] = scanner.next();
-            if (input[3].equals("*")) return null;
-        }
-        else {
-            input[3] = "#";
-        }
-
-        System.out.print("Deseja alterar a resolução:?[Y ou N]: ");
-        answer = scanner.next().toUpperCase(Locale.ROOT);
-        if(answer.equals("*")) return null;
-
-        if (answer.equals("Y")) {
-            System.out.print(" Nova Resolução (pixeis): ");
-            input[4] = scanner.next();
-            if (input[4].equals("*")) return null;
-        }
-        else {
-            input[4] = "#";
-        }
-
-        System.out.print("Deseja alterar o armazenamento:?[Y ou N]: ");
-        answer = scanner.next().toUpperCase(Locale.ROOT);
-        if(answer.equals("*")) return null;
-
-        if (answer.equals("Y")) {
-            System.out.print(" Novo Armazenamento (bytes): ");
-            input[5] = scanner.next();
-            if (input[5].equals("*")) return null;
-        }
-        else {
-            input[5] = "#";
-        }
-
+        String input = scanner.nextLine();
+        scanner.close();
         return input;
-
-        }
+    }
 }
