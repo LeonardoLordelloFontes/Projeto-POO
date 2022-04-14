@@ -93,6 +93,23 @@ public class SmartDeviceController {
 
         SmartDeviceRemoveChoice();
     }
-    public void SmartDeviceUpdateChoice(){}
+    public void SmartDeviceUpdateChoice(){
+        int updateChoice = MenuTipoDispositivoUpdate();
+        switch (updateChoice){
+
+            case 1: SmartDeviceBulbUpdadeChoice();
+
+            case 2: SmartDeviceSpeakerUpdadeChoice();
+
+            case 3: SmartDeviceCameraUpdadeChoice();
+
+            case 4: SmartDiviceOperationChoice();
+        }
+    }
+
+    public void SmartDeviceBulbUpdadeChoice(){
+       String s[] = MenuSmartBulbUpdate();
+    }
+
 
 }
