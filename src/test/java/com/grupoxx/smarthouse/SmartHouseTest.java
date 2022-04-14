@@ -11,6 +11,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SmartHouseTest {
+    /*
     @Test
     void itShouldAddSmartDevicesAndVerifySize() {
         Owner owner = new Owner();
@@ -68,5 +69,5 @@ class SmartHouseTest {
         assertTrue(rooms.containsKey("Sala") && rooms.get("Sala") != null);
         assertTrue(rooms.containsKey("Casa de Banho") && rooms.get("Casa de Banho") != null);
         assertTrue(rooms.containsKey("Cozinha") && rooms.get("Cozinha") != null);
-    }
+    }*/
 }
