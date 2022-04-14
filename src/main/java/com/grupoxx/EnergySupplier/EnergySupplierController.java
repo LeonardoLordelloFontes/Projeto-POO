@@ -36,7 +36,7 @@ public class EnergySupplierController {
         String[] input = MainMenu.AtualizarFornecedordeEnergia();
         if(input.equals(null)) energySupplierController();
 
-        this.energySupplierRepository.updateEnergySupplier(input[0],input[1],input[2],input[3]);
+        // this.energySupplierRepository.updateEnergySupplier(input[0],input[1],input[2],input[3]);
         energySupplierController();
     }
     public void removeEnergySupplierController() {

@@ -1,15 +1,6 @@
 package com.grupoxx.smarthouse;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
-
-import static java.lang.Integer.parseInt;
-import com.grupoxx.EnergySupplier.EnergySupplier;
-import com.grupoxx.EnergySupplier.EnergySupplierRepository;
-import com.grupoxx.smartdevice.SmartDevice;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class SmartHouseMenu {
@@ -59,20 +50,6 @@ public class SmartHouseMenu {
         rooms.forEach(room -> sb.append(room).append("\n"));
         sb.append("Para cancelar a ação digite *\n");
         sb.append("Selecione a divisão (pelo nome): ");
-        System.out.println(sb);
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        scanner.close();
-        return input;
-    }
-
-    // Esta função faz mais sentido dentro do menu do energySupplier
-    public static String smartHouseSelectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
-        List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
-        StringBuilder sb = new StringBuilder("-----------Selecionar Fornecedor de Energia-----------\n\n");
-        energySuppliers.forEach(energySupplier -> sb.append(energySupplier).append("\n"));
-        sb.append("Para cancelar a ação digite *\n");
-        sb.append("Selecione o fornecedor de energia (pelo nome): ");
         System.out.println(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
