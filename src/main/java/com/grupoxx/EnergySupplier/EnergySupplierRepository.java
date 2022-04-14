@@ -22,6 +22,30 @@ public class EnergySupplierRepository {
        }
    }
 
+    public boolean updateEnergySupplier(String nameOriginal, String newName, String formulaOriginal, String newFormula) {
+        try {
+            energySuppliers.get(0).setName(newName);
+            energySuppliers.get(1).setTotalcost(newFormula);
+            return true;
+        }
+        catch (Exception e) {
+            // Todo, o EnergySupplier Original não existir;
+               return false;
+
+        }
+    }
+    public boolean removeEnergySupplier(String name, String formula) {
+       try  {
+           this.energySuppliers.remove(name);
+           this.energySuppliers.remove(formula);
+           return true;
+       }
+       catch (Exception e) {
+           //Todo
+           return  false;
+       }
+    }
+
     public Map<String, EnergySupplier> getEnergySuppliers() {
         return energySuppliers;
     }
