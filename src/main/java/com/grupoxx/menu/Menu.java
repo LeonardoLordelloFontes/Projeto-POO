@@ -112,7 +112,7 @@ public abstract class Menu {
         String input[] = new String[2];
         Scanner scanner = new Scanner(System.in);
         System.out.println("   Propriatário   \n\n");
-        System.out.print("Se pretende voltar atrás escreva a letra [N] em algum local de escrita no terminal.\n");
+        System.out.print("Se pretende voltar ao menu anterior escreva a letra [N] em algum local de escrita no terminal.\n");
 
         System.out.print("NIF: ");
         input[0] = scanner.next();
@@ -140,7 +140,7 @@ public abstract class Menu {
         String[] input = new String[2];
         Scanner scanner = new Scanner(System.in);
         System.out.print("-----------Adicionar um Fornecedor de Energia-----------\n\n");
-        System.out.print("Se pretende voltar atrás escreva a letra [N] em algum local de escrita no terminal.\n");
+        System.out.print("Se pretende voltar ao menu anterior escreva a letra [N] em algum local de escrita no terminal.\n");
 
         System.out.print("Nome: ");
         input[0] = scanner.next();
@@ -191,11 +191,22 @@ public abstract class Menu {
 
         else return null;
     }
-    public static int MenuTipoDispositivo() {
+    public static int MenuTipoDispositivoOperacoes() {
         StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
-        sb.append("1. Smart Bulb \n");
-        sb.append("2. Smart Speaker\n");
-        sb.append("3. Smart Camara \n");
+        sb.append("1. Adicionar Dispositivo \n");
+        sb.append("2. Remover Dispositivo \n");
+        sb.append("3. Atualizar Dispositivo \n");
+        sb.append("4. Voltar \n\n");
+        sb.append("Sua Opção (Selecionar Número): ");
+        System.out.print(sb.toString());
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+    public static int MenuTipoDispositivoAdd() {
+        StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
+        sb.append("1. Adicionar  SmartBulb \n");
+        sb.append("2. Adicionar  SmartSpeaker\n");
+        sb.append("3. Adicionar  SmartCamera\n");
         sb.append("4. Voltar \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
@@ -206,7 +217,7 @@ public abstract class Menu {
         String input[] = new String[4];
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------Smart Bulb-----------\n\n");
-        System.out.print("Se pretende voltar atrás escreva a letra [N] em algum local de escrita no terminal.\n");
+        System.out.print("Se pretende voltar ao menu anterior escreva a letra [N] em algum local de escrita no terminal.\n");
 
         System.out.print("Código de Fábrica: ");
         input[0] = scanner.next();
@@ -230,7 +241,7 @@ public abstract class Menu {
         String input[] = new String[5];
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------Smart Speaker-----------\n\n");
-        System.out.print("Se pretende voltar atrás escreva a letra [N] em algum local de escrita no terminal.\n");
+        System.out.print("Se pretende voltar para o menu anterior escreva a letra [N] em algum local de escrita no terminal.\n");
 
         System.out.print("Código de Fábrica: ");
         input[0] = scanner.next();
@@ -258,7 +269,7 @@ public abstract class Menu {
         String input[] = new String[5];
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------Smart Camara-----------\n\n");
-        System.out.print("Se pretende voltar atrás escreva a letra [N] em algum local de escrita no terminal.\n");
+        System.out.print("Se pretende voltar para o menu anterior escreva a letra [N] em algum local de escrita no terminal.\n");
 
         System.out.print("Código de Fábrica: ");
         input[0] = scanner.next();
@@ -282,6 +293,20 @@ public abstract class Menu {
 
         return input;
     }
+    public static String MenuTipoDispositivoRemove(){
+        String input = "N";
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("-----------Remover Dispositivos-----------\n\n");
+
+        System.out.print("Intruduza código de fabrica do dispositivo que pretende remover ou a letra [N] para voltar ao menu anterior: ");
+        input = scanner.next();
+
+        if (input.equals("N")) return null;
+
+        return input;
+    }
+
+
     public static int MenuTipoDispositivoUpdate() {
         StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
         sb.append("Qua o tipo de despositivo que pretende alterar?\n");
@@ -301,7 +326,7 @@ public abstract class Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------Smart Bulb-----------\n\n");
 
-        System.out.print("Intruduza código de fabrica do dispositivo que pretende alterar ou a letra [N] para voltar para atrás: ");
+        System.out.print("Intruduza código de fabrica do dispositivo que pretende alterar ou a letra [N] para voltar ao menu anterior: ");
         input[0] = scanner.next();
 
         if(!input[0].equals("N")) {
@@ -355,7 +380,7 @@ public abstract class Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------Smart Speaker-----------\n\n");
 
-        System.out.print("Código de fabrica do dispositivo que pretende alterar ou a letra [N] para voltar para atrás: ");
+        System.out.print("Intruduza o código de fabrica do dispositivo que pretende alterar ou a letra [N] para voltar ao menu anterior: ");
         input[0] = scanner.next();
 
         if(!input[0].equals("N")) {
@@ -434,7 +459,7 @@ public abstract class Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------Smart Speaker-----------\n\n");
 
-        System.out.print("Código de fabrica do dispositivo que pretende alterar ou a letra [N] para voltar para atrás: ");
+        System.out.print(" Intruduza o código de fabrica do dispositivo que pretende alterar ou a letra [N] para o menu anterior: ");
         input[0] = scanner.next();
 
         if(!input[0].equals("N")) {
