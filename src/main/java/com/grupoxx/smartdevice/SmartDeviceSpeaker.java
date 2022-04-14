@@ -86,6 +86,13 @@ public class SmartDeviceSpeaker extends SmartDevice{
         this.radio = radio;
     }
 
+    public int getVolumeMax() {
+        return this.volumeMax;
+    }
+
+    public void setVolumeMax(int volumeMax) {
+        this.volumeMax = volumeMax;
+    }
     @Override
     public double EnergeticConsumptionPerDay() {
 
@@ -117,6 +124,8 @@ public class SmartDeviceSpeaker extends SmartDevice{
     public SmartDevice clone() {
         return new SmartDeviceSpeaker(this);
     }
+
+
 }
 
 

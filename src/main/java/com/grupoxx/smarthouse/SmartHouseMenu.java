@@ -1,5 +1,10 @@
 package com.grupoxx.smarthouse;
 
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
 import com.grupoxx.EnergySupplier.EnergySupplier;
 import com.grupoxx.EnergySupplier.EnergySupplierRepository;
 import com.grupoxx.smartdevice.SmartDevice;

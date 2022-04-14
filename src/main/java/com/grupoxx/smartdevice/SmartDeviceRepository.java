@@ -58,5 +58,36 @@ public class SmartDeviceRepository {
         }
     }
 
+    public void SmartDeviceBulbUpdade(String OldFactorycode, String NewFactorycode, String energyConsumption, String installationCost, String dimension){
+        //Partindo do principio que os input são válidos
+
+        SmartDeviceBulb sb = (SmartDeviceBulb) this.factory.get(OldFactorycode);
+        if(!NewFactorycode.equals("#")) sb.setFactoryCode(NewFactorycode);
+        if(!energyConsumption.equals("#")) sb.setEnergyConsumption( Double.parseDouble(energyConsumption) );
+        if(!installationCost.equals("#")) sb.setInstallationCost( Double.parseDouble(installationCost) );
+        if(!dimension.equals("#")) sb.setDimension(Double.parseDouble (dimension) );
+
+    }
+
+    public void SmartDeviceSpeakerUpdate(String OldFactorycode, String NewFactorycode,String energyConsumption,String installationCost,String brand, String volumeMax){
+
+        SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.factory.get(OldFactorycode);
+        if(!NewFactorycode.equals("#")) ss.setFactoryCode(NewFactorycode);
+        if(!energyConsumption.equals("#")) ss.setEnergyConsumption( Double.parseDouble(energyConsumption) );
+        if(!installationCost.equals("#")) ss.setInstallationCost( Double.parseDouble(installationCost) );
+        if (!brand.equals("#")) ss.setBrand(brand);
+        if (!volumeMax.equals("#")) ss.setVolumeMax(Integer.parseInt(volumeMax));
+    }
+
+    public void SmartDeviceCameraUpdate(String OldFactorycode, String NewFactorycode,String energyConsumption,String installationCost,String resolution ,String fileSize){
+        SmartDeviceCamera sc = (SmartDeviceCamera) this.factory.get(OldFactorycode);
+
+        if(!NewFactorycode.equals("#")) sc.setFactoryCode(NewFactorycode);
+        if(!energyConsumption.equals("#")) sc.setEnergyConsumption( Double.parseDouble(energyConsumption) );
+        if(!installationCost.equals("#")) sc.setInstallationCost( Double.parseDouble(installationCost) );
+        if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(resolution));
+        if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(fileSize));
+    }
+
     public Map<String, SmartDevice> getFactory() { return factory;}
 }
