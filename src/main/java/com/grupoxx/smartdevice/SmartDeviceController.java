@@ -21,34 +21,33 @@ public class SmartDeviceController {
     }
 
     public void DiviceChoice(){
-
+        System.out.println(this.repository.getFactory());
         int choice = Menu.MenuDispositivos();
 
         switch (choice){
 
-            case 1:
-                int deviceChoice = Menu.MenuTipoDispositivo();
-                switch (deviceChoice){
+            case 1: SmartDeviceChoice();
 
-                    case 1: SmartDeviceBulbChoice();
+            case 2: SmartDeviceRemoveChoice();
 
-                    case 2: SmartDeviceSpeakerChoice();
+            case 3: SmartDeviceUpdateChoice();
 
-                    case 3: SmartDeviceCameraChoice();
+            case 4: System.out.println("acabou");
+        }
+    }
 
-                    case 4: DiviceChoice();
-                }
+    public void SmartDeviceChoice(){
 
-            case 2:
+        int deviceChoice = Menu.MenuTipoDispositivo();
+        switch (deviceChoice){
 
-                SmartDeviceRemoveChoice();
+            case 1: SmartDeviceBulbChoice();
 
-            case 3:
+            case 2: SmartDeviceSpeakerChoice();
 
-                SmartDeviceUpdateChoice();
+            case 3: SmartDeviceCameraChoice();
 
-            case 4:
-                System.out.println("acabou");
+            case 4: DiviceChoice();
         }
     }
 
@@ -62,16 +61,13 @@ public class SmartDeviceController {
 
     }
 
-    public static void SmartDeviceCameraChoice(){
+    public void SmartDeviceCameraChoice(){
 
         String[] components = MenuSmartCamaraAdd();
 
     }
 
-    public void SmartDeviceRemoveChoice(){
+    public void SmartDeviceRemoveChoice(){}
 
-        }
-
-    }
-
+    public void SmartDeviceUpdateChoice(){}
 }

@@ -21,6 +21,8 @@ public class EnergySupplierController {
 
     public void addEnergySupplierController() {
         String[] input = Menu.AdicionarFornecedordeEnergia();
+        if ( input.equals(null) ) energySupplierController();
+
         this.energySupplierRepository.addEnergySupplier(input[0], input[1]);
         energySupplierController();
     }
