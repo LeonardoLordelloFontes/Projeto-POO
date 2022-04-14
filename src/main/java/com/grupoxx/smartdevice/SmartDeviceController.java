@@ -1,9 +1,7 @@
 package com.grupoxx.smartdevice;
 
 
-import com.grupoxx.menu.MainMenu;
-
-import static com.grupoxx.menu.MainMenu.*;
+import static com.grupoxx.smartdevice.SmartDeviceMenu.*;
 
 public class SmartDeviceController {
     private SmartDeviceRepository repository;
@@ -16,7 +14,7 @@ public class SmartDeviceController {
 
     public void SmartDiviceOperationChoice(){
         System.out.println(this.repository.getFactory());
-        int choice = MainMenu.MenuTipoDispositivoOperacoes();
+        int choice = MenuTipoDispositivoOperacoes();
 
         switch (choice){
 
@@ -32,7 +30,7 @@ public class SmartDeviceController {
 
     public void SmartDeviceAddChoice(){
 
-        int deviceChoice = MainMenu.MenuTipoDispositivoAdd();
+        int deviceChoice = MenuTipoDispositivoAdd();
         switch (deviceChoice){
 
             case 1: SmartDeviceBulbChoice();
@@ -108,8 +106,52 @@ public class SmartDeviceController {
     }
 
     public void SmartDeviceBulbUpdadeChoice(){
-       String s[] = MenuSmartBulbUpdate();
+
+        String components[] = MenuSmartBulbUpdate();
+        if (components.equals(null)) SmartDeviceUpdateChoice();
+
+        this.repository.SmartDeviceBulbUpdade(
+                components[0],
+                components[1],
+                components[2],
+                components[3],
+                components[4]);
+
+
+        SmartDeviceBulbUpdadeChoice();
     }
 
+    public void SmartDeviceSpeakerUpdadeChoice(){
+        String components[] = MenuSmartSpeakerUpdate();
+        if (components.equals(null)) SmartDeviceUpdateChoice();
 
+        this.repository.SmartDeviceSpeakerUpdate(
+                components[0],
+                components[1],
+                components[2],
+                components[3],
+                components[4],
+                components[5]);
+
+
+        SmartDeviceBulbUpdadeChoice();
+
+    }
+    public void SmartDeviceCameraUpdadeChoice(){
+        String components[] = MenuSmartCamaraUpdate();
+        if (components.equals(null)) SmartDeviceUpdateChoice();
+
+        this.repository.SmartDeviceCameraUpdate(
+                components[0],
+                components[1],
+                components[2],
+                components[3],
+                components[4],
+                components[5]);
+
+
+        SmartDeviceBulbUpdadeChoice();
+
+
+    }
 }

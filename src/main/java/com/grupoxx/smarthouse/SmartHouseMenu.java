@@ -1,4 +1,9 @@
 package com.grupoxx.smarthouse;
 
-public class SmartHouseMenu {
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
+
 }
