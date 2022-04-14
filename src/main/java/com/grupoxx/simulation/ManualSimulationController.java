@@ -2,7 +2,7 @@ package com.grupoxx.simulation;
 
 import com.grupoxx.EnergySupplier.EnergySupplierController;
 import com.grupoxx.EnergySupplier.EnergySupplierRepository;
-import com.grupoxx.menu.Menu;
+import com.grupoxx.menu.MainMenu;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.SmartHouseRepository;
 public class ManualSimulationController {
@@ -18,7 +18,7 @@ public class ManualSimulationController {
     }
 
     public void manualSimulation() {
-        int choice = Menu.menuFasedeConfiguracao();
+        int choice = MainMenu.menuFasedeConfiguracao();
         System.out.println(choice);
         switch(choice) {
             case 1:

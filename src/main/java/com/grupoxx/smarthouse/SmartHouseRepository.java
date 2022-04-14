@@ -1,6 +1,7 @@
 package com.grupoxx.smarthouse;
 
 import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smartdevice.SmartDeviceRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,11 +10,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SmartHouseRepository {
+    /*
     private Map<String, SmartHouse> smartHouses;
 
     public SmartHouseRepository() {
         this.smartHouses = new HashMap<>();
     }
+
+
+
 
     public boolean addSmartHouse(String address) {
         try {
@@ -122,4 +127,6 @@ public class SmartHouseRepository {
             return null;
         }
     }
+
+     */
 }

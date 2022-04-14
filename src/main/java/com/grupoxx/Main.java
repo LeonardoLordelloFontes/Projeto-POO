@@ -1,19 +1,12 @@
 package com.grupoxx;
 
-import com.grupoxx.simulation.AutomaticSimulationController;
-import com.grupoxx.simulation.ManualSimulationController;
+import java.util.Scanner;
 
-import static com.grupoxx.menu.Menu.menuInicial;
+import static com.grupoxx.menu.MainMenu.menuInicial;
 
 public class Main {
     public static void main(String[] args) {
 
-        int resultado = menuInicial();
-        switch (resultado) {
-            case 1:
-                new ManualSimulationController();
-
-        }
     }
 }
 

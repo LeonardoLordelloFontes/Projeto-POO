@@ -3,6 +3,7 @@ package com.grupoxx.EnergySupplier;
 import com.grupoxx.smarthouse.SmartHouse;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EnergySupplierRepository {
@@ -22,18 +23,14 @@ public class EnergySupplierRepository {
        }
    }
 
-    public boolean updateEnergySupplier(String nameOriginal, String newName, String formulaOriginal, String newFormula) {
-        try {
-            energySuppliers.get(0).setName(newName);
-            energySuppliers.get(1).setTotalcost(newFormula);
-            return true;
-        }
-        catch (Exception e) {
-            // Todo, o EnergySupplier Original não existir;
-               return false;
+   public boolean updateEnergySupplierName(String oldName, String newName) {
+        return true;
+   }
 
-        }
-    }
+   public boolean updateEnergySupplierFormula(String name, String newFormula) {
+        return true;
+   }
+
     public boolean removeEnergySupplier(String name, String formula) {
        try  {
            this.energySuppliers.remove(name);
@@ -44,6 +41,10 @@ public class EnergySupplierRepository {
            //Todo
            return  false;
        }
+    }
+
+    public List<EnergySupplier> findAllEnergySuppliers() {
+        return null;
     }
 
     public Map<String, EnergySupplier> getEnergySuppliers() {

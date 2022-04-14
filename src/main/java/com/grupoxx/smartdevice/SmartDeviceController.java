@@ -1,9 +1,9 @@
 package com.grupoxx.smartdevice;
 
 
-import com.grupoxx.menu.Menu;
+import com.grupoxx.menu.MainMenu;
 
-import static com.grupoxx.menu.Menu.*;
+import static com.grupoxx.menu.MainMenu.*;
 
 public class SmartDeviceController {
     private SmartDeviceRepository repository;
@@ -16,7 +16,7 @@ public class SmartDeviceController {
 
     public void SmartDiviceOperationChoice(){
         System.out.println(this.repository.getFactory());
-        int choice = Menu.MenuTipoDispositivoOperacoes();
+        int choice = MainMenu.MenuTipoDispositivoOperacoes();
 
         switch (choice){
 
@@ -32,7 +32,7 @@ public class SmartDeviceController {
 
     public void SmartDeviceAddChoice(){
 
-        int deviceChoice = Menu.MenuTipoDispositivoAdd();
+        int deviceChoice = MainMenu.MenuTipoDispositivoAdd();
         switch (deviceChoice){
 
             case 1: SmartDeviceBulbChoice();

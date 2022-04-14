@@ -1,22 +1,10 @@
 package com.grupoxx.menu;
 import java.util.*;
 
+import static java.lang.Integer.parseInt;
 
-public abstract class Menu {
 
-    public static int menuInicial() {
-        clearWindow();
-        StringBuilder sb = new StringBuilder("-----------MENU INICIAL-----------\n\n");
-        sb.append("1. Simulação Manual \n");
-        sb.append("2. Simulação Automática \n");
-        sb.append("3. Carregar Estado \n");
-        sb.append("4. Guardar Estado \n");
-        sb.append("5. Sair \n\n");
-        sb.append("Sua Opção (Selecionar Número): ");
-        System.out.print(sb.toString());
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
-    }
+public abstract class MainMenu {
 
     public static void clearWindow() {
 
@@ -36,18 +24,16 @@ public abstract class Menu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-    public static int menuFasedeConfiguracao() {
-        StringBuilder sb = new StringBuilder("-----------Fase de Configuração-----------\n\n");
-        sb.append("1. Configurar fornecedores de energia \n");
-        sb.append("2. Configurar casas \n");
-        sb.append("3. Configurar dispositivos \n");
-        sb.append("4. Listar foncedores de energia \n");
-        sb.append("5. Listar casas \n");
-        sb.append("6. Listar dispositivos \n");
-        sb.append("7. Carregar ficheiro com configurações \n");
-        sb.append("8. Salvar configurações atuais para um ficheiro \n");
-        sb.append("9. Próxima etapa \n");
-        sb.append("10. Voltar \n\n");
+    public static int mainMenu() {
+        StringBuilder sb = new StringBuilder("-----------Menu Principal-----------\n\n");
+        sb.append("1. Fornecedores de Energia \n");
+        sb.append("2. Casas \n");
+        sb.append("3. Dispositivos \n");
+        sb.append("4. Iniciar Simulação Manual");
+        sb.append("5. Iniciar Simulação Automática");
+        sb.append("6. Carregar Estado");
+        sb.append("7. Guardar Estado");
+        sb.append("8. Sair \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
@@ -58,14 +44,13 @@ public abstract class Menu {
         sb.append("1. Ligar/Desligar todos os dispositivos de uma casa \n");
         sb.append("2. Ligar/Desligar um dispositivos especifico de uma casa \n");
         sb.append("3. Ligar/Desligar todos os dispositivos de uma divisão de uma casa \n");
-        sb.append("4. Iniciar Simulação \n");
-        sb.append("5. Voltar \n\n");
+        sb.append("4. Voltar \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-    public static int MenuFornecedordeEnergia() {
+    public static int energySupplierMenu() {
         StringBuilder sb = new StringBuilder("-----------Fornecedor de Energia-----------\n\n");
         sb.append("1. Adicionar \n");
         sb.append("2. Remover \n");
@@ -453,7 +438,28 @@ public abstract class Menu {
 
         else return null;
     }
-    public static String[] MenuSmartCamaraUpdate() {
+    public static List<String> MenuSmartCamaraUpdate() {
+        boolean[] options = {false, false, false, false};
+
+        Scanner scanner = new Scanner(System.in);
+
+        StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
+        sb.append("O que deseja alterar?\n");
+        sb.append("1. Smart Bulb \n");
+        sb.append("2. Smart Speaker\n");
+        sb.append("3. Smart Camara \n");
+        sb.append("4. Voltar \n\n");
+        sb.append("Sua Opções (separar por espaços): ");
+
+        while(scanner.hasNext()) {
+            int option = parseInt(scanner.next());
+            options[option - 1] = true;
+        }
+        scanner.close();
+
+        String[] inputs = new String[4];
+
+        /*
         String input[] = new String[6];
         String answer = "N";
         Scanner scanner = new Scanner(System.in);
@@ -520,10 +526,9 @@ public abstract class Menu {
 
         if (answer.equals("N") && !input[0].equals("N") ) return input;
 
-        else return null;
+        else return null;*/
 
     }
-
 
 }
 
