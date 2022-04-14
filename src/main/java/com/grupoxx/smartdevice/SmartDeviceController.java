@@ -2,6 +2,8 @@ package com.grupoxx.smartdevice;
 
 
 import com.grupoxx.menu.Menu;
+import com.grupoxx.smarthouse.SmartHouseController;
+import com.grupoxx.smarthouse.SmartHouseRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +11,16 @@ import java.util.Scanner;
 
 import static com.grupoxx.menu.Menu.*;
 
-public abstract class SmartDeviceController {
+public class SmartDeviceController {
+    private SmartDeviceRepository repository;
 
-    public static void DiviceChoice(){
+    public SmartDeviceController(SmartDeviceRepository repository){
+        this.repository = repository;
+        DiviceChoice();
+
+    }
+
+    public void DiviceChoice(){
 
         int choice = Menu.MenuDispositivos();
 
@@ -35,102 +44,32 @@ public abstract class SmartDeviceController {
                 SmartDeviceRemoveChoice();
 
             case 3:
-                StringBuilder  sb2 = new StringBuilder();
-                sb2.append("Lista de dispositivos criados: ");
-                sb2.append(fabrica);
-                sb2.append("Intruduza o nome do dispositivo a atualizar ");
-                System.out.println(sb2.toString());
 
-                Scanner scanner_1 = new Scanner(System.in);
-
-                SmartDeviceUpdateChoice(scanner_1.next());
+                SmartDeviceUpdateChoice();
 
             case 4:
                 System.out.println("acabou");
         }
     }
 
-    public static void SmartDeviceBulbChoice(){
-        String componentes = MenuSmartBulbAdd().trim();
-
-        String des [] = componentes.split(" ");
-
-        if (des.length != 4) {
-            System.out.println("Erro por favor espace as quatro inputs por um e só um espaço !");
-            SmartDeviceBulbChoice();
-        }
-
-        SmartDeviceBulb sb = new SmartDeviceBulb(
-                des[0], Double.parseDouble(des[1]),
-                Double.parseDouble(des[2]), Double.parseDouble(des[3]) );
-
-        fabrica.put(sb.getFactoryCode(),sb);
+    public void SmartDeviceBulbChoice(){
+        String[] components = MenuSmartBulbAdd();
 
     }
 
-    public static void SmartDeviceSpeakerChoice(){
-        String componentes = MenuSmartSpeakerAdd().trim();
-
-        String des [] = componentes.split(" ");
-
-        if (des.length != 5) {
-            System.out.println("Erro por favor espace os cinco inputs por um e só um espaço !");
-            SmartDeviceSpeakerChoice();
-        }
-
-        SmartDeviceSpeaker ss = new SmartDeviceSpeaker(
-                des[0], Double.parseDouble(des[1]),
-                Double.parseDouble(des[2]), des[3], Integer.parseInt(des[4]) );
-
-        fabrica.put(ss.getFactoryCode(),ss);
+    public void SmartDeviceSpeakerChoice(){
+        String[] components = MenuSmartSpeakerAdd();
 
     }
 
     public static void SmartDeviceCameraChoice(){
-        String componentes = MenuSmartCamaraAdd().trim();
 
-        String des [] = componentes.split(" ");
+        String[] components = MenuSmartCamaraAdd();
 
-        if (des.length != 5) {
-            System.out.println("Erro por favor espace os cinco inputs por um e só um espaço !");
-            SmartDeviceCameraChoice();
-        }
-
-        SmartDeviceCamera sc = new SmartDeviceCamera(
-                des[0], Double.parseDouble(des[1]),
-                Double.parseDouble(des[2]), Integer.parseInt (des[3]), Integer.parseInt(des[4]) );
-
-        fabrica.put(sc.getFactoryCode(),sc);
     }
 
-    public static void SmartDeviceRemoveChoice(){
+    public void SmartDeviceRemoveChoice(){
 
-        StringBuilder  sb = new StringBuilder();
-        sb.append("Lista de dispositivos criados: ");
-        sb.append(fabrica);
-        sb.append("Intruduza o nome do dispositivo a eliminar: ");
-        System.out.println(sb.toString());
-        Scanner scanner = new Scanner(System.in);
-
-        String factoryCode = scanner.next().trim();
-
-        if(fabrica.isEmpty()){
-            System.out.println("Não tem nada para remover...");
-            DiviceChoice();
-        }
-
-        if ( fabrica.containsKey(factoryCode) == false){
-            System.out.println("Apenas pode eliminar dispositivos que já foram criados !!! ");
-            SmartDeviceRemoveChoice();
-        }
-
-        else {
-            fabrica.remove(factoryCode);
-
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append("Lista de dispositivos criados: ");
-            sb2.append(fabrica);
-            System.out.println(sb2.toString());
         }
 
     }
