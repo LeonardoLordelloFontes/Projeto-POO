@@ -24,21 +24,7 @@ public abstract class MainMenu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-    public static int mainMenu() {
-        StringBuilder sb = new StringBuilder("-----------Menu Principal-----------\n\n");
-        sb.append("1. Fornecedores de Energia \n");
-        sb.append("2. Casas \n");
-        sb.append("3. Dispositivos \n");
-        sb.append("4. Iniciar Simulação Manual");
-        sb.append("5. Iniciar Simulação Automática");
-        sb.append("6. Carregar Estado");
-        sb.append("7. Guardar Estado");
-        sb.append("8. Sair \n\n");
-        sb.append("Sua Opção (Selecionar Número): ");
-        System.out.print(sb.toString());
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
-    }
+
     public static int MenuMudançaDeEstado() {
         StringBuilder sb = new StringBuilder("-----------Fase de Mudança de Estado-----------\n\n");
         sb.append("1. Ligar/Desligar todos os dispositivos de uma casa \n");
@@ -92,23 +78,6 @@ public abstract class MainMenu {
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-    }
-    public static String[] MenuAddOwner() {
-        String input[] = new String[2];
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("   Propriatário   \n\n");
-        System.out.print("Se pretende voltar ao menu anterior escreva a letra [N] em algum local de escrita no terminal.\n");
-
-        System.out.print("NIF: ");
-        input[0] = scanner.next();
-        if (input[0].equals("N")) return null;
-
-        scanner.nextLine();
-        System.out.print("Nome: ");
-        input[1] = scanner.nextLine();
-        if (input[1].equals("N")) return null;
-
-        return input;
     }
 
 }

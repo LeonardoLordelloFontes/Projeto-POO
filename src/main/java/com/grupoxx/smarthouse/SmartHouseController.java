@@ -1,16 +1,21 @@
 package com.grupoxx.smarthouse;
 
-import com.grupoxx.menu.MainMenu;
+import com.grupoxx.main.MainController;
+import com.grupoxx.main.MainMenu;
+
+import static com.grupoxx.main.MainMenu.mainMenu;
+import static com.grupoxx.smarthouse.SmartHouseMenu.smartHouseAddMenu;
+import static com.grupoxx.smarthouse.SmartHouseMenu.smartHouseMenu;
 
 public class SmartHouseController {
-    private SmartHouseRepository smartHouseRepository;
-    public SmartHouseController(SmartHouseRepository smartHouseRepository) {
-        this.smartHouseRepository = smartHouseRepository;
+    MainController mainController;
+    public SmartHouseController(MainController mainController) {
+        this.mainController = mainController;
         smartHouseController();
     }
 
     public void smartHouseController() {
-        int choice = MainMenu.menuCasa();
+        int choice = smartHouseMenu();
         switch (choice) {
             case 1:
                 break;
@@ -19,6 +24,9 @@ public class SmartHouseController {
             case 3:
                 break;
             case 4:
+                break;
+            case 5:
+                new MainController(mainController);
                 break;
         }
     }

@@ -3,8 +3,11 @@ package com.grupoxx.smarthouse;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.grupoxx.main.MainMenu.clearScreen;
+
 public class SmartHouseMenu {
     public static int smartHouseMenu() {
+        // clearScreen();
         StringBuilder sb = new StringBuilder("-----------Casa-----------\n\n");
         sb.append("1. Adicionar \n");
         sb.append("2. Remover \n");
@@ -14,12 +17,10 @@ public class SmartHouseMenu {
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        scanner.close();
-        return option;
+        return scanner.nextInt();
     }
 
-    public static String[] smartHouseCreateMenu() {
+    public static String[] smartHouseAddMenu() {
         String[] input = new String[2];
         System.out.print("-----------Criar Casa-----------\n\nEscreva o Endereço (para cancelar a criação digite *): ");
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +28,6 @@ public class SmartHouseMenu {
         scanner.next();
         System.out.print("Deseja adicionar mais informações a casa agora? (S ou N)");
         input[1] = scanner.nextLine();
-        scanner.close();
         return input;
     }
 
@@ -39,9 +39,7 @@ public class SmartHouseMenu {
         sb.append("Selecione a casa (pelo endereço): ");
         System.out.println(sb);
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        scanner.close();
-        return input;
+        return scanner.nextLine();
     }
 
     public static String smartHouseSelectRoomsMenu(SmartHouse smartHouse) {
@@ -53,7 +51,6 @@ public class SmartHouseMenu {
         System.out.println(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        scanner.close();
         return input;
     }
 
@@ -71,7 +68,6 @@ public class SmartHouseMenu {
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
-        scanner.close();
         return option;
     }
     public static String smartHouseAddRoamMenu() {
@@ -80,7 +76,19 @@ public class SmartHouseMenu {
         System.out.println(sb.toString());
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        scanner.close();
+        return input;
+    }
+
+    public static String[] smartHouseUpdateOwnerMenu() {
+        String input[] = new String[2];
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("-----------Adicionar Divisão na Casa-----------\n\nNIF (para cancelar digite *): ");
+        input[0] = scanner.next();
+        if (input[0].equals("*")) return null;
+        scanner.nextLine();
+        System.out.print("Nome (para cancelar digite *): ");
+        input[1] = scanner.nextLine();
+        if (input[1].equals("*")) return null;
         return input;
     }
 }

@@ -3,6 +3,9 @@ package com.grupoxx.EnergySupplier;
 import com.grupoxx.menu.MainMenu;
 
 public class EnergySupplierController {
+    /*
+
+    COLOQUEI COMENTÁRIO PARA PODER INICIAR A MAIN (TEM CENAS EM VERMELHO AQUI)
 
     private EnergySupplierRepository energySupplierRepository;
 
@@ -25,6 +28,7 @@ public class EnergySupplierController {
         }
     }
 
+
     public void addEnergySupplierController() {
         String[] input = MainMenu.AdicionarFornecedordeEnergia();
         if ( input.equals(null) ) energySupplierController();
@@ -41,5 +45,5 @@ public class EnergySupplierController {
     }
     public void removeEnergySupplierController() {
         //Todo
-    }
+    }*/
 }

@@ -6,6 +6,7 @@ import com.grupoxx.menu.MainMenu;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.SmartHouseRepository;
 public class ManualSimulationController {
+    /*
     private SmartHouseRepository smartHouseRepository;
     private SmartDeviceRepository smartDeviceRepository;
     private EnergySupplierRepository energySupplierRepository;
@@ -27,5 +28,5 @@ public class ManualSimulationController {
         }
     }
 
-
+    */
 }
