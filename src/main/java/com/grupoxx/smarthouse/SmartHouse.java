@@ -87,7 +87,8 @@ public class SmartHouse {
     public String toString() {
         // TODO
         StringBuilder sb = new StringBuilder();
-        return "";
+        sb.append(this.address);
+        return sb.toString();
     }
 
     @Override

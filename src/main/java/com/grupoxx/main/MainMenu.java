@@ -18,8 +18,4 @@ public class MainMenu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-
-    public static void clearScreen() {
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    }
 }

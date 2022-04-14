@@ -18,7 +18,7 @@ public class SmartHouseRepository {
     }
 
     public SmartHouse getHouseByAddress(String address) {
-        return smartHouses.get(address);
+        return smartHouses.getOrDefault(address, null);
     }
 
     public boolean addSmartHouse(String address) {

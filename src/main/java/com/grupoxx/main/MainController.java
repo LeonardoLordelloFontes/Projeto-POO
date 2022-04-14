@@ -10,9 +10,9 @@ import java.util.Scanner;
 import static com.grupoxx.main.MainMenu.mainMenu;
 
 public class MainController {
-    SmartDeviceRepository smartDeviceRepository;
-    EnergySupplierRepository energySupplierRepository;
-    SmartHouseRepository smartHouseRepository;
+    private SmartDeviceRepository smartDeviceRepository;
+    private EnergySupplierRepository energySupplierRepository;
+    private SmartHouseRepository smartHouseRepository;
     public MainController() {
         this.smartDeviceRepository = new SmartDeviceRepository();
         this.energySupplierRepository = new EnergySupplierRepository();

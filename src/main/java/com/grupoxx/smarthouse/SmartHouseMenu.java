@@ -3,11 +3,8 @@ package com.grupoxx.smarthouse;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.grupoxx.main.MainMenu.clearScreen;
-
 public class SmartHouseMenu {
     public static int smartHouseMenu() {
-        // clearScreen();
         StringBuilder sb = new StringBuilder("-----------Casa-----------\n\n");
         sb.append("1. Adicionar \n");
         sb.append("2. Remover \n");
@@ -25,8 +22,8 @@ public class SmartHouseMenu {
         System.out.print("-----------Criar Casa-----------\n\nEscreva o Endereço (para cancelar a criação digite *): ");
         Scanner scanner = new Scanner(System.in);
         input[0] = scanner.nextLine();
-        scanner.next();
-        System.out.print("Deseja adicionar mais informações a casa agora? (S ou N)");
+        if (input[0].equals("*")) return null;
+        System.out.print("Deseja adicionar mais informações a casa agora? (S ou N): ");
         input[1] = scanner.nextLine();
         return input;
     }
