@@ -2,6 +2,8 @@ package com.grupoxx.smarthouse;
 
 import com.grupoxx.main.MainController;
 import com.grupoxx.smarthouse.exception.DuplicateHouseAddress;
+import com.grupoxx.smarthouse.exception.NoneHouseAvailable;
+import com.grupoxx.smarthouse.exception.SmartHouseNotFound;
 
 import static com.grupoxx.smarthouse.SmartHouseMenu.*;
 
@@ -42,7 +44,7 @@ public class SmartHouseController {
                 if (input[1].equals("S")) smartHouseUpdateController(input[0]);
                 else smartHouseController();
             } catch (DuplicateHouseAddress e) {
-                System.out.println("Falha na criação da casa, endereço já existe");
+                System.out.println(e.getMessage());
                 smartHouseAddController();
             }
         }
@@ -51,13 +53,19 @@ public class SmartHouseController {
     public void smartHouseRemoveController() {
         SmartHouseRepository smartHouseRepository = mainController.getSmartHouseRepository();
         String address = smartHouseSelectHousesMenu(smartHouseRepository);
-        if (smartHouseRepository.getHouseByAddress(address) == null) {
-            // TODO, não existe o endereço
-        }
+        if (address != null && address.equals("*")) smartHouseController();
         else {
-            smartHouseRepository.removeHouseByAddress(address);
+            try {
+                smartHouseRepository.removeHouseByAddress(address);
+                smartHouseController();
+            } catch (SmartHouseNotFound e) {
+                System.out.println(e.getMessage());
+                smartHouseRemoveController();
+            } catch (NoneHouseAvailable e) {
+                System.out.println(e.getMessage());
+                smartHouseController();
+            }
         }
-        smartHouseController();
     }
 
     public void smartHouseListController() {
