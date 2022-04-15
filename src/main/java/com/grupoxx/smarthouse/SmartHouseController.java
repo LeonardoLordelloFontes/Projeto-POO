@@ -1,10 +1,6 @@
 package com.grupoxx.smarthouse;
 
 import com.grupoxx.main.MainController;
-import com.grupoxx.main.MainMenu;
-import com.grupoxx.simulation.Simulation;
-
-import static com.grupoxx.main.MainMenu.mainMenu;
 import static com.grupoxx.smarthouse.SmartHouseMenu.*;
 
 public class SmartHouseController {
@@ -37,11 +33,11 @@ public class SmartHouseController {
 
     public void smartHouseAddController() {
         String[] input = smartHouseAddMenu();
-        if (input != null) {
+        if (input == null) smartHouseController();
+        else {
             mainController.getSmartHouseRepository().addSmartHouse(input[0]);
-            if (input[1].equals("S")) smartHouseUpdateController();
+            if (input[1].equals("S")) smartHouseUpdateController(input[0]);
         }
-        smartHouseController();
     }
 
     public void smartHouseRemoveController() {
@@ -62,6 +58,45 @@ public class SmartHouseController {
     }
 
     public void smartHouseUpdateController() {
+        String address = smartHouseSelectHousesMenu(mainController.getSmartHouseRepository());
+        smartHouseUpdateController(address);
+    }
 
+    public void smartHouseUpdateController(String address) {
+        if (address == null) smartHouseController();
+        else {
+            int choice = smartHouseUpdateMenu();
+            switch (choice) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    smartHouseUpdateOwnerController(address);
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    smartHouseController();
+                    break;
+            }
+        }
+    }
+
+    public void smartHouseUpdateOwnerController(String address) {
+        String[] input = smartHouseUpdateOwnerMenu();
+        if (input != null) {
+            Owner newOwner = new Owner(input[0], input[1]);
+            mainController.getSmartHouseRepository().updateOwner(address, newOwner);
+        }
+        smartHouseUpdateController(address);
     }
 }

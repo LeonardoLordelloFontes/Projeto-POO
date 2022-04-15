@@ -14,7 +14,7 @@ public class MainMenu {
         sb.append("7. Guardar Estado \n");
         sb.append("8. Sair \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
-        System.out.print(sb.toString());
+        System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }

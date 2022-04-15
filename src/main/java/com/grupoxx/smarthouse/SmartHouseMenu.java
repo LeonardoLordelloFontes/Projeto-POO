@@ -30,11 +30,12 @@ public class SmartHouseMenu {
 
     public static String smartHouseSelectHousesMenu(SmartHouseRepository smartHouseRepository) {
         List<SmartHouse> smartHouses = smartHouseRepository.findAllSmartHouses();
+        if (smartHouses.size() == 0) return null;
         StringBuilder sb = new StringBuilder("-----------Selecionar Casa-----------\n\n");
         smartHouses.forEach(smartHouse -> sb.append(smartHouse).append("\n"));
         sb.append("Para cancelar a ação digite *\n");
         sb.append("Selecione a casa (pelo endereço): ");
-        System.out.println(sb);
+        System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -61,6 +62,7 @@ public class SmartHouseMenu {
         sb.append("6. Atualizar Fornecedor de Energia \n");
         sb.append("7. Atualizar Proprietário \n");
         sb.append("8. Atualizar dispositivo \n");
+        sb.append("9. Voltar \n");
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
