@@ -2,6 +2,9 @@ package com.grupoxx.smarthouse;
 
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
+import com.grupoxx.smarthouse.exception.DuplicateHouseAddress;
+import com.grupoxx.smarthouse.exception.NoneHouseAvailable;
+import com.grupoxx.smarthouse.exception.SmartHouseNotFound;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,10 +24,12 @@ public class SmartHouseRepository {
         return smartHouses.getOrDefault(address, null);
     }
 
-    public boolean addSmartHouse(String address) {
-            SmartHouse smartHouse = new SmartHouse(address);
-            smartHouses.put(address, smartHouse);
-            return true;
+    public void addSmartHouse(String address) throws DuplicateHouseAddress {
+        if (smartHouses.get(address) != null)
+            throw new DuplicateHouseAddress("Falha na criação da casa, endereço já existe");
+
+        SmartHouse smartHouse = new SmartHouse(address);
+        smartHouses.put(address, smartHouse);
     }
 
     public boolean addRoomToHouse(String address, String room) {
@@ -32,9 +37,13 @@ public class SmartHouseRepository {
         return true;
     }
 
-    public boolean removeHouseByAddress(String address) {
-            smartHouses.remove(address);
-            return true;
+    public void removeHouseByAddress(String address) throws SmartHouseNotFound, NoneHouseAvailable {
+        if (address == null)
+            throw new NoneHouseAvailable("Nenhuma casa foi criada ainda para ser removida");
+        if (smartHouses.get(address) == null)
+            throw new SmartHouseNotFound("Casa não encontrada");
+
+        smartHouses.remove(address);
     }
 
     public boolean updateHouseAddress(String oldAddress, String newAddress) {
