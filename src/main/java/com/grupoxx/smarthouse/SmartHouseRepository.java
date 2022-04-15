@@ -2,6 +2,7 @@ package com.grupoxx.smarthouse;
 
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
+import com.grupoxx.smarthouse.exception.DuplicateHouseAddress;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,10 +22,12 @@ public class SmartHouseRepository {
         return smartHouses.getOrDefault(address, null);
     }
 
-    public boolean addSmartHouse(String address) {
-            SmartHouse smartHouse = new SmartHouse(address);
-            smartHouses.put(address, smartHouse);
-            return true;
+    public void addSmartHouse(String address) {
+        if (smartHouses.get(address) != null)
+            throw new DuplicateHouseAddress();
+
+        SmartHouse smartHouse = new SmartHouse(address);
+        smartHouses.put(address, smartHouse);
     }
 
     public boolean addRoomToHouse(String address, String room) {

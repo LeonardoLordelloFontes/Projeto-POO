@@ -1,6 +1,8 @@
 package com.grupoxx.smarthouse;
 
 import com.grupoxx.main.MainController;
+import com.grupoxx.smarthouse.exception.DuplicateHouseAddress;
+
 import static com.grupoxx.smarthouse.SmartHouseMenu.*;
 
 public class SmartHouseController {
@@ -35,8 +37,14 @@ public class SmartHouseController {
         String[] input = smartHouseAddMenu();
         if (input == null) smartHouseController();
         else {
-            mainController.getSmartHouseRepository().addSmartHouse(input[0]);
-            if (input[1].equals("S")) smartHouseUpdateController(input[0]);
+            try {
+                mainController.getSmartHouseRepository().addSmartHouse(input[0]);
+                if (input[1].equals("S")) smartHouseUpdateController(input[0]);
+                else smartHouseController();
+            } catch (DuplicateHouseAddress e) {
+                System.out.println("Falha na criação da casa, endereço já existe");
+                smartHouseAddController();
+            }
         }
     }
 
