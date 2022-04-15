@@ -24,7 +24,11 @@ public class SmartDeviceController {
 
             case 3: SmartDeviceUpdateChoice();
 
-            case 4: System.out.println("acabou");
+            case 4: SmartDeviceStateChoice();
+
+            case 5: SmartDevicePropertiesChoice();
+
+            case 6: System.out.println("acabou");
         }
     }
 
@@ -154,4 +158,192 @@ public class SmartDeviceController {
 
 
     }
+
+    public void SmartDeviceStateChoice(){
+        int stateChoice = MenuSmartDeviceState();
+
+        switch (stateChoice){
+
+            case 1: SmartDeviceBulbStateChoice();
+
+            case 2: SmartDeviceSpeakerStateChoice();
+
+            case 3: SmartDeviceCameraStateChoice();
+
+            case 4: SmartDiviceAllStateChoice();
+
+            case 5: SmartEspecificDiviceStateChoice();
+
+            case 6: SmartDiviceOperationChoice();
+        }
+    }
+
+    public void SmartDeviceBulbStateChoice(){
+        int d = MenuSmartDeviceOffAndOn();
+
+        switch (d){
+
+            case 1: this.repository.SmartDeviceState("sb",1);
+
+            case 2: this.repository.SmartDeviceState("sb",2);
+
+            case 3: SmartDeviceStateChoice();
+        }
+        SmartDeviceStateChoice();
+    }
+
+    public void SmartDeviceSpeakerStateChoice(){
+        int d = MenuSmartDeviceOffAndOn();
+
+        switch (d){
+
+            case 1: this.repository.SmartDeviceState("ss",1);
+
+            case 2: this.repository.SmartDeviceState("ss",2);
+
+            case 3: SmartDeviceStateChoice();
+        }
+        SmartDeviceStateChoice();
+    }
+
+    public void SmartDeviceCameraStateChoice(){
+        int d = MenuSmartDeviceOffAndOn();
+
+        switch (d){
+
+            case 1: this.repository.SmartDeviceState("sc",1);
+
+            case 2: this.repository.SmartDeviceState("sc",2);
+
+            case 3: SmartDeviceStateChoice();
+        }
+        SmartDeviceStateChoice();
+    }
+
+    public void SmartDiviceAllStateChoice(){
+        int d = MenuSmartDeviceOffAndOn();
+
+        switch (d){
+
+            case 1: this.repository.SmartDeviceState(" ",1);
+
+            case 2: this.repository.SmartDeviceState(" ",2);
+
+            case 3: SmartDeviceStateChoice();
+        }
+        SmartDeviceStateChoice();
+    }
+
+    public void SmartEspecificDiviceStateChoice(){
+        int d = MenuSmartDeviceOffAndOn();
+
+        if (d == 3) SmartDeviceStateChoice();
+
+        String factorycode = SmartDeviceEspecificOffAndOn();
+        if (factorycode.equals(null)) SmartDeviceStateChoice();
+
+        switch (d){
+
+            case 1: this.repository.SmartEpecificDiviceState(factorycode,1);
+
+            case 2: this.repository.SmartEpecificDiviceState(factorycode,2);
+        }
+        SmartEspecificDiviceStateChoice();
+    }
+
+    public void SmartDevicePropertiesChoice() {
+        int choice = MenuSmartDiviceProperties();
+
+        switch (choice) {
+
+            case 1: SmartBulbToneChangeChoice();
+
+            case 2: SmartSpeakerPropertiesChangeChoice();
+
+            case 3: SmartDiviceOperationChoice();
+        }
+    }
+
+    public void SmartBulbToneChangeChoice(){
+        int choice = MenuSmartBulbToneChange();
+
+        switch (choice){
+
+            case 1: SmartBulbToneChangeNeutralChoice();
+
+            case 2: SmartBulbToneChangeWarmChoice();
+
+            case 3: SmartBulbToneChangeColdChoice();
+
+            case 4: SmartBulbToneChangeChoiceEspecific();
+
+            case 5: SmartDevicePropertiesChoice();
+        }
+
+    }
+
+    public void SmartBulbToneChangeNeutralChoice(){
+        this.repository.SmartDeviceTone("N");
+        SmartBulbToneChangeChoice();
+    }
+
+    public void SmartBulbToneChangeWarmChoice(){
+        this.repository.SmartDeviceTone("W");
+        SmartBulbToneChangeChoice();
+    }
+
+    public void SmartBulbToneChangeColdChoice(){
+        this.repository.SmartDeviceTone("C");
+        SmartBulbToneChangeChoice();
+    }
+
+    public void SmartBulbToneChangeChoiceEspecific(){
+       String components[] = MenuSmartBulbEspecificToneChange();
+       if(components.equals(null)) SmartBulbToneChangeChoice();
+
+       this.repository.SmartDeviceEspecificTone(components[0],components[1]);
+
+        SmartBulbToneChangeChoiceEspecific();
+
+    }
+
+
+    public void SmartSpeakerPropertiesChangeChoice() {
+        int choice = MenuSmartSpeakerProperties();
+
+        switch (choice) {
+
+            case 1: SmartSpeakerPropertiesVolumeChangeChoice();
+
+            case 2: SmartSpeakerPropertiesRadioStationChangeChoice();
+
+            case 3: SmartSpeakerPropertiesEspecificChangeChoice();
+
+            case 4: SmartDevicePropertiesChoice();
+        }
+    }
+
+    public void SmartSpeakerPropertiesVolumeChangeChoice(){
+        String volume = MenuSmartSpeakerVolume();
+        if(volume.equals(null)) SmartSpeakerPropertiesChangeChoice();
+        this.repository.SmartDeviceSpeakerProperties(volume,"V");
+    }
+
+    public void SmartSpeakerPropertiesRadioStationChangeChoice(){
+        String radioStation = MenuSmartSpeakerVolume();
+        if(radioStation.equals(null)) SmartSpeakerPropertiesChangeChoice();
+        this.repository.SmartDeviceSpeakerProperties(radioStation,"R");
+    }
+
+
+
+    public void SmartSpeakerPropertiesEspecificChangeChoice(){
+        String components[] = MenuSmartSpeakerPropertiesEspecific();
+        if (components.equals(null)) SmartDeviceUpdateChoice();
+        this.repository.SmartDeviceEspecificSmartSpeakerProperties(components[0],components[1],components[2]);
+
+    }
 }
+
+
+

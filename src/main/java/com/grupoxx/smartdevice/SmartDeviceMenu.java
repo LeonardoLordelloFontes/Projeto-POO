@@ -16,7 +16,9 @@ public abstract class SmartDeviceMenu {
             sb.append("1. Adicionar Dispositivo \n");
             sb.append("2. Remover Dispositivo \n");
             sb.append("3. Atualizar Dispositivo \n");
-            sb.append("4. Voltar \n\n");
+            sb.append("4. Ligar e Desligar Dispositivos\n");
+            sb.append("5. Alterar propriedes variaveis dos Dispositivos\n");
+            sb.append("6. Voltar \n\n");
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
             Scanner scanner = new Scanner(System.in);
@@ -126,8 +128,138 @@ public abstract class SmartDeviceMenu {
             return input;
         }
 
+    public static int MenuSmartDiviceProperties(){
+        StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
+        sb.append("Qua o tipo de despositivo que pretende alterar as suas propriedades?\n");
+        sb.append("1. Smart Bulb \n");
+        sb.append("Cuja propriedade é a tonalidade do Smart Bulb\n");
+        sb.append("2. Smart Speaker\n");
+        sb.append("Cuja propriedade é o volume atual e a estação de rádio do Smart Speaker\n");
+        sb.append("3. Voltar \n\n");
+        sb.append("Sua Opção (Selecionar Número): ");
+        System.out.print(sb.toString());
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();}
 
-        public static int MenuTipoDispositivoUpdate() {
+    public static int MenuSmartSpeakerProperties(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("------------Alterar propriedades em SmartSpeaker----------\n\n");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("1. Pretende alterar a estação de rádio para todos SmartSpeaker \n");
+        sb.append("2. Pretende alterar o volume atual para todos SmartSpeaker \n");
+        sb.append("3. Pretende alterar alguma das propriedades de SmartSpeaker expecificos \n");
+        sb.append("4. Voltar \n\n");
+        sb.append("Sua Opção (Selecionar Número): ");
+        System.out.print(sb.toString());
+
+        return scanner.nextInt();
+    }
+
+    public static  String[] MenuSmartSpeakerPropertiesEspecific(){
+        String input[] = new String[3];
+        String answer = "N";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-----------Smart Speaker Propriedades-----------\n\n");
+        System.out.print("Intruduza código de fabrica do dispositivo que pretende alterar ou o simbolo [*] em qualquer local de escrita para voltar ao menu anterior: ");
+
+        input[0] = scanner.next();
+        if (input[0].equals("*")) return null;
+
+        System.out.print("Deseja alterar o volume atual?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if(answer.equals("*")) return null;
+
+        if (answer.equals("Y")) {
+            System.out.print(" Novo volume atual: ");
+            input[1] = scanner.next();
+            if (input[1].equals("*")) return null;
+        }
+        else {
+            input[1] = "#";
+        }
+
+        System.out.print("Deseja alterar a estação de rádio?[Y ou N]: ");
+        answer = scanner.next().toUpperCase(Locale.ROOT);
+        if(answer.equals("*")) return null;
+
+        if (answer.equals("Y")) {
+            System.out.print("Nova estação de rádio: ");
+            input[2] = scanner.next();
+            if (input[2].equals("*")) return null;
+        }
+        else {
+            input[2] = "#";
+        }
+        return input;
+    }
+
+
+    public static String MenuSmartSpeakerVolume(){
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        System.out.print("-----------Alterar o Volume Atual de Todos os SmartSeaker-----------\n\n");
+
+        System.out.print("Intruduza a novo volume atual de todos os SmartSeaker ou o simbolo[*] para voltar ao menu anterior: ");
+        input = scanner.next();
+        if (input.equals("*")) return null;
+
+        return input;
+    }
+
+    public static String MenuSmartSpeakerRadioStation(){
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        System.out.print("-----------Alterar a Estação de Rádio de Todos os SmartSeaker-----------\n\n");
+
+        System.out.print("Intruduza a nova estação de rádio de todos os SmartSeaker ou o simbolo[*] para voltar ao menu anterior: ");
+        input = scanner.next();
+        if (input.equals("*")) return null;
+
+        return input;
+    }
+
+    public static int MenuSmartBulbToneChange(){
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("------------Alterar Tonalidade em SmartBulb----------\n\n");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("1. Pretende por a tonalidade Neutral para todos SmartBulb \n");
+        sb.append("2. Pretende por a tonalidade  Warm para todos SmartBulb\n");
+        sb.append("3. Pretende por a tonalidade  Cold para todos SmartBulb\n");
+        sb.append("4. Pretende alterar a tonalidade de SmartBulb expecificos \n");
+        sb.append("5. Voltar \n\n");
+        sb.append("Sua Opção (Selecionar Número): ");
+        System.out.print(sb.toString());
+
+        return scanner.nextInt();
+        }
+
+    public static String[] MenuSmartBulbEspecificToneChange(){
+        String input[] = new String[2];
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("-----------Alterar a Tonalidade do SmartBulb -----------\n\n");
+
+        System.out.print("Intruduza código de fabrica do SmartBulb que pretende alterar a Tonalidade ou o simbolo[*] para voltar ao menu anterior: ");
+        input[0] = scanner.next();
+        if (input[0].equals("*")) return null;
+
+        System.out.println("Intruduza a Tonalidade que predende que o seu dispositivo tenha ou o simbolo[*] para voltar ao menu anterior: ");
+
+        StringBuilder sb = new StringBuilder("-----------Tipo de Tonalidades-----------\n\n");
+        sb.append("N. Neutral \n");
+        sb.append("W. Warm \n");
+        sb.append("C. Cold \n");
+        sb.append("Sua Opção (Selecionar Número): ");
+        System.out.print(sb.toString());
+        input[1] = scanner.next();
+        if (input[1].equals("*")) return null;
+
+        return input;
+    }
+
+    public static int MenuTipoDispositivoUpdate() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
             sb.append("Qua o tipo de despositivo que pretende alterar?\n");
             sb.append("1. Smart Bulb \n");
@@ -357,16 +489,64 @@ public abstract class SmartDeviceMenu {
 
         }
 
+        public static int MenuSmartDeviceState(){
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("-----------ligar e Desligar Dispositivos-----------\n\n");
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("1. Pretende ligar ou Desligar todos Smart Bulb \n");
+            sb.append("2. Pretende ligar ou Desligar todos Smart Speaker\n");
+            sb.append("3. Pretende ligar ou Desligar tosos Smart Camara \n");
+            sb.append("4. Pretende ligar ou Desligar todos os dispositivos \n");
+            sb.append("5. Pretende ligar ou Desligar dispositivos expecificos \n");
+            sb.append("6. Voltar \n\n");
+            sb.append("Sua Opção (Selecionar Número): ");
+            System.out.print(sb.toString());
+
+            return scanner.nextInt();
+        }
+
+        public static int MenuSmartDeviceOffAndOn(){
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("-----------ligar ou Desligar-----------\n\n");
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("1. Pretende ligar \n");
+            sb.append("2. Pretende Desligar\n");
+            sb.append("3. Voltar \n\n");
+            sb.append("Sua Opção (Selecionar Número): ");
+            System.out.print(sb.toString());
+
+            return scanner.nextInt();
+        }
+        public static String SmartDeviceEspecificOffAndOn(){
+            String input = "N";
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("-----------Ligar ou Desligar Dispositivos-----------\n\n");
+
+            System.out.print("Intruduza código de fabrica do dispositivo que pretende ligar ou desligar oo simbolo[*] para voltar ao menu anterior: ");
+            input = scanner.next();
+
+            if (input.equals("*")) return null;
+
+            return input;
+    }
+
     public static String smartHouseSelectSmartDeviceMenu(SmartDeviceRepository smartDeviceRepository) {
         List<SmartDevice> smartDevices = smartDeviceRepository.findAllSmartDevices();
         StringBuilder sb = new StringBuilder("-----------Selecionar Dispositivo-----------\n\n");
+
         smartDevices.forEach(smartDevice -> sb.append(smartDevice).append("\n"));
         sb.append("Para cancelar a ação digite *\n");
         sb.append("Selecione o dispositivo (pelo código do dispositivo): ");
         System.out.println(sb);
+
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         scanner.close();
+
         return input;
     }
 }
