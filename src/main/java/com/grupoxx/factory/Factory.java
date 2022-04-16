@@ -15,4 +15,18 @@ public class Factory {
         this.available = new HashMap<>();
         this.address = "FACTORY ADDRESS";
     }
+
+    public SmartDeviceRepository getSmartDeviceRepository() {
+        return this.smartDeviceRepository;
+    }
+
+    public void setSmartDeviceRepository(SmartDeviceRepository smartDeviceRepository) {
+        this.smartDeviceRepository = smartDeviceRepository;
+    }
+
+
+
+
+
+
 }
