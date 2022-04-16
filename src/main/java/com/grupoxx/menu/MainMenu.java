@@ -26,6 +26,8 @@ public abstract class MainMenu {
     }
 
     public static int MenuMudançaDeEstado() {
+        // sugestão apenas 2 opeções uma ligar/desligar de uma divisão ou da casa toda assim podes usar os meus meus de estado
+
         StringBuilder sb = new StringBuilder("-----------Fase de Mudança de Estado-----------\n\n");
         sb.append("1. Ligar/Desligar todos os dispositivos de uma casa \n");
         sb.append("2. Ligar/Desligar um dispositivos especifico de uma casa \n");
@@ -59,11 +61,14 @@ public abstract class MainMenu {
         return scanner.nextInt();
     }
     public static int MenuAtualizarCasa() {
+
+        // sugestão apenas escrever uma opção de dispositivos para assim apenas chameres a o meu menu de dispositivos.
+
         StringBuilder sb = new StringBuilder("-----------Casa-----------\n\n");
         sb.append("1. Adicionar divisão \n");
-        sb.append("2. Adicionar dispositivo \n");
+        sb.append("2. Adicionar dispositivo \n"); // usar menu de adicionar dispositivos
         sb.append("3. Remover divisão\n");
-        sb.append("4. Remover dispositivo \n");
+        sb.append("4. Remover dispositivo \n"); // usar menu de remover dispositivos
         sb.append("5. Endereço \n");
         sb.append("6. Fornecedor de energia \n");
         sb.append("7. Propriatario \n");

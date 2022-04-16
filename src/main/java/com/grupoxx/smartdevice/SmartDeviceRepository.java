@@ -198,9 +198,6 @@ public class SmartDeviceRepository {
     }
 
 
-
-
-
     public List<SmartDevice> findAllSmartDevices() {
         return new ArrayList<>(factory.values());
     }

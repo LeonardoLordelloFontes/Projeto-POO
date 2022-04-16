@@ -9,6 +9,7 @@ import static com.grupoxx.smarthouse.SmartHouseMenu.*;
 
 public class SmartHouseController {
     private MainController mainController;
+
     public SmartHouseController(MainController mainController) {
         this.mainController = mainController;
         smartHouseController();
@@ -21,7 +22,8 @@ public class SmartHouseController {
             case 2 -> smartHouseRemoveController();
             case 3 -> smartHouseUpdateController();
             case 4 -> smartHouseListController();
-            case 5 -> new MainController(mainController);
+
+            case 6 -> new MainController(mainController);
         }
     }
 
