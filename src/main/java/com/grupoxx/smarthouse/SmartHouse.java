@@ -34,11 +34,6 @@ public class SmartHouse {
         this.smartDevices = smartHouse.getSmartDevices();
     }
 
-    public boolean addRoom(String room) {
-        smartDevices.put(room, new SmartDeviceRepository());
-        return true;
-    }
-
     public void setOwner(Owner owner) {
         this.owner = owner.clone();
     }
@@ -67,9 +62,14 @@ public class SmartHouse {
         return new ArrayList<>(smartDevices.keySet());
     }
 
+    /*
     public Map<String, SmartDeviceRepository> getSmartDevices() {
         return smartDevices.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }*/
+
+    public Map<String, SmartDeviceRepository> getSmartDevices() {
+        return smartDevices;
     }
 
     @Override

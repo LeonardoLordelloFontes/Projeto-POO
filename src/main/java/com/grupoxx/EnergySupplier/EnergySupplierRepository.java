@@ -1,5 +1,6 @@
 package com.grupoxx.EnergySupplier;
 
+import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.smarthouse.SmartHouse;
 
 import java.util.HashMap;
@@ -10,6 +11,13 @@ public class EnergySupplierRepository {
     private Map<String, EnergySupplier> energySuppliers;
     public EnergySupplierRepository() {
         this.energySuppliers = new HashMap<>();
+    }
+
+    public EnergySupplier getEnergySupplierByName(String name) throws EnergySupplierNotFound {
+        EnergySupplier energySupplier = energySuppliers.get(name);
+        if (energySupplier == null)
+            throw new EnergySupplierNotFound("O fonecedor de energia " + name + " não foi encontrado");
+        return energySupplier;
     }
 
    public boolean addEnergySupplier(String name, String formula) {

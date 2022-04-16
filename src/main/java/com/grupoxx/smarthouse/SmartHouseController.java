@@ -3,12 +3,12 @@ package com.grupoxx.smarthouse;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smarthouse.exception.DuplicateHouseAddress;
 import com.grupoxx.smarthouse.exception.NoneHouseAvailable;
-import com.grupoxx.smarthouse.exception.SmartHouseNotFound;
+import com.grupoxx.smarthouse.exception.HouseNotFound;
 
 import static com.grupoxx.smarthouse.SmartHouseMenu.*;
 
 public class SmartHouseController {
-    MainController mainController;
+    private MainController mainController;
     public SmartHouseController(MainController mainController) {
         this.mainController = mainController;
         smartHouseController();
@@ -17,21 +17,11 @@ public class SmartHouseController {
     public void smartHouseController() {
         int choice = smartHouseMenu();
         switch (choice) {
-            case 1:
-                smartHouseAddController();
-                break;
-            case 2:
-                smartHouseRemoveController();
-                break;
-            case 3:
-                smartHouseUpdateController();
-                break;
-            case 4:
-                smartHouseListController();
-                break;
-            case 5:
-                new MainController(mainController);
-                break;
+            case 1 -> smartHouseAddController();
+            case 2 -> smartHouseRemoveController();
+            case 3 -> smartHouseUpdateController();
+            case 4 -> smartHouseListController();
+            case 5 -> new MainController(mainController);
         }
     }
 
@@ -54,11 +44,12 @@ public class SmartHouseController {
         SmartHouseRepository smartHouseRepository = mainController.getSmartHouseRepository();
         String address = smartHouseSelectHousesMenu(smartHouseRepository);
         if (address != null && address.equals("*")) smartHouseController();
+        /* pensar melhor se nisto depois */
         else {
             try {
                 smartHouseRepository.removeHouseByAddress(address);
                 smartHouseController();
-            } catch (SmartHouseNotFound e) {
+            } catch (HouseNotFound e) {
                 System.out.println(e.getMessage());
                 smartHouseRemoveController();
             } catch (NoneHouseAvailable e) {
