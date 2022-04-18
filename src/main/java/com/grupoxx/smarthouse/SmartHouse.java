@@ -2,6 +2,7 @@ package com.grupoxx.smarthouse;
 
 import com.grupoxx.EnergySupplier.EnergySupplier;
 import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smartdevice.SmartDeviceRepository;
 
 import javax.script.ScriptException;
 import java.util.*;
@@ -10,70 +11,27 @@ import java.util.stream.Collectors;
 public class SmartHouse {
     private Owner owner;
     private String address;
-    private Map<String, SmartDevice> smartDevices;
-    private Map<String, List<String>> rooms;
     private String energySupplier;
+    private final Map<String, SmartDeviceRepository> smartDevices; // Room -> Repositório de Smart Devices
 
     public SmartHouse() {
         this.owner = new Owner();
         this.address = "DEFAULT ADDRESS";
+        this.energySupplier = null;
         this.smartDevices = new HashMap<>();
-        this.rooms = new HashMap<>();
     }
     public SmartHouse(String address) {
-        this.owner = new Owner();
+        this.owner = null;
         this.address = address;
+        this.energySupplier = null;
         this.smartDevices = new HashMap<>();
-        this.rooms = new HashMap<>();
-    }
-
-
-    public SmartHouse(Owner owner, String address, List<String> rooms) {
-        this.owner = owner.clone();
-        this.address = address;
-        this.smartDevices = new HashMap<>();
-        this.rooms = new HashMap<>();
-        rooms.forEach(this::addRoom);
-    }
-
-    public SmartHouse(Owner owner, String address, Map<String, SmartDevice> devices, Map<String, List<String>> rooms) {
-        this.owner = owner.clone();
-        this.address = address;
-        this.smartDevices = devices;
-        this.rooms = rooms;
     }
 
     public SmartHouse(SmartHouse smartHouse) {
-        this.owner = smartHouse.getOwner().clone();
+        this.owner = smartHouse.getOwner();
         this.address = smartHouse.getAddress();
+        this.energySupplier = smartHouse.getEnergySupplier();
         this.smartDevices = smartHouse.getSmartDevices();
-        this.rooms = smartHouse.getRooms();
-    }
-
-    public void addSmartDevice(SmartDevice smartDevice, String room) {
-        String factoryCode = smartDevice.getFactoryCode();
-        smartDevices.put(factoryCode, smartDevice);
-        rooms.get(room).add(factoryCode);
-    }
-
-    public void addRoom(String room) {
-        rooms.put(room, new ArrayList<>());
-    }
-
-    public void setSmartDeviceOn(String smartDevice) {
-        smartDevices.get(smartDevice).setState(SmartDevice.State.ON);
-    }
-
-    public void setSmartDeviceOff(String smartDevice) {
-        smartDevices.get(smartDevice).setState(SmartDevice.State.OFF);
-    }
-
-    public void setRoomSmartDevicesOn(String room) {
-        rooms.get(room).forEach(device -> smartDevices.get(device).setState(SmartDevice.State.ON));
-    }
-
-    public void setRoomSmartDevicesOff(String room) {
-        rooms.get(room).forEach(device -> smartDevices.get(device).setState(SmartDevice.State.OFF));
     }
 
     public void setOwner(Owner owner) {
@@ -84,26 +42,8 @@ public class SmartHouse {
         this.address = address;
     }
 
-    public void setSmartDevices(Map<String, SmartDevice> smartDevices) {
-
-        this.smartDevices = smartDevices.entrySet().stream().collect(Collectors.toMap(x->x.getKey(),x->x.getValue().clone()));
-    }
-
     public void setEnergySupplier(String energySupplier) {
         this.energySupplier = energySupplier;
-    }
-
-    public void setRooms(Map<String, List<String>> rooms) {
-        Map<String, List<String> > r = new HashMap<String, List<String>>();
-        List <String> rr = new ArrayList<String>();
-
-        for (String s: rooms.keySet()){
-            rr = this.rooms.get(s).stream().toList();
-            r.put(s,rr);
-        }
-
-        this.rooms = r;
-
     }
 
     public Owner getOwner() {
@@ -114,34 +54,12 @@ public class SmartHouse {
         return address;
     }
 
-    public SmartDevice getSmartDevice(String factoryCode) {
-        return this.smartDevices.get(factoryCode);
+    public String getEnergySupplier() {
+        return energySupplier;
     }
 
-    public Map<String, SmartDevice> getSmartDevices() {
-
-        Map<String, SmartDevice> sd = new HashMap<String,SmartDevice>();
-
-        sd = this.smartDevices.entrySet().stream().collect(Collectors.toMap( e->e.getKey(),e->e.getValue().clone() ));
-
-        return sd;
-    }
-
-    public Map<String, List<String>> getRooms() {
-
-        Map<String, List<String> > r = new HashMap<String, List<String>>();
-        List <String> rr = new ArrayList<String>();
-
-        for (String s: this.rooms.keySet()){
-            rr = this.rooms.get(s).stream().toList();
-            r.put(s,rr);
-        }
-
-        return r;
-    }
-
-    public String getSupplier(){
-        return this.energySupplier;
+    public Map<String, SmartDeviceRepository> getSmartDevices() {
+        return smartDevices;
     }
 
     @Override
@@ -149,15 +67,19 @@ public class SmartHouse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SmartHouse smartHouse = (SmartHouse) o;
-        return  smartHouse.getOwner().equals(this.owner) && smartHouse.getAddress().equals(this.address) &&
-                smartHouse.getSmartDevices().equals(this.smartDevices) && smartHouse.getRooms().equals(this.rooms);
+        return  smartHouse.getOwner().equals(this.owner) &&
+                smartHouse.getAddress().equals(this.address) &&
+                smartHouse.getEnergySupplier().equals(this.energySupplier) &&
+                smartHouse.getSmartDevices().equals(this.smartDevices);
     }
 
     @Override
     public String toString() {
         // TODO
         StringBuilder sb = new StringBuilder();
-        return "";
+        sb.append(this.address).append("\n");
+        smartDevices.forEach((key, value) -> sb.append("\t").append(key).append("\n"));
+        return sb.toString();
     }
 
     @Override
@@ -165,6 +87,7 @@ public class SmartHouse {
         return new SmartHouse(this);
     }
 
+    /*
     public double ElectricityMeter() {
         double cost = 0;
         for (List<String> ls : this.rooms.values()) {
@@ -177,7 +100,5 @@ public class SmartHouse {
         }
         return cost;
     }
-
-
-
+    */
 }

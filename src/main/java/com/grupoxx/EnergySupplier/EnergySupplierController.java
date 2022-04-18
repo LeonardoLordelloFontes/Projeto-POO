@@ -1,8 +1,9 @@
 package com.grupoxx.EnergySupplier;
 
-import com.grupoxx.menu.Menu;
-
 public class EnergySupplierController {
+    /*
+
+    COLOQUEI COMENTÁRIO PARA PODER INICIAR A MAIN (TEM CENAS EM VERMELHO AQUI)
 
     private EnergySupplierRepository energySupplierRepository;
 
@@ -12,7 +13,7 @@ public class EnergySupplierController {
     }
     public void energySupplierController() {
         System.out.println(energySupplierRepository.getEnergySuppliers());
-        int choice = Menu.MenuFornecedordeEnergia();
+        int choice = MainMenu.MenuFornecedordeEnergia();
         switch (choice) {
             case 1:
                 addEnergySupplierController();
@@ -25,21 +26,22 @@ public class EnergySupplierController {
         }
     }
 
+
     public void addEnergySupplierController() {
-        String[] input = Menu.AdicionarFornecedordeEnergia();
+        String[] input = MainMenu.AdicionarFornecedordeEnergia();
         if ( input.equals(null) ) energySupplierController();
 
         this.energySupplierRepository.addEnergySupplier(input[0], input[1]);
         energySupplierController();
     }
     public void updateEnergySupplierController() {
-        String[] input = Menu.AtualizarFornecedordeEnergia();
+        String[] input = MainMenu.AtualizarFornecedordeEnergia();
         if(input.equals(null)) energySupplierController();
 
-        this.energySupplierRepository.updateEnergySupplier(input[0],input[1],input[2],input[3]);
+        // this.energySupplierRepository.updateEnergySupplier(input[0],input[1],input[2],input[3]);
         energySupplierController();
     }
     public void removeEnergySupplierController() {
         //Todo
-    }
+    }*/
 }

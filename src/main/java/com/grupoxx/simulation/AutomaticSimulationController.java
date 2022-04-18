@@ -4,9 +4,9 @@ import com.grupoxx.EnergySupplier.EnergySupplierRepository;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.SmartHouseRepository;
 
-import static com.grupoxx.menu.Menu.menuFasedeConfiguracao;
 
 public class AutomaticSimulationController {
+    /*
     private SmartHouseRepository smartHouseRepository;
     private SmartDeviceRepository smartDeviceRepository;
     private EnergySupplierRepository energySupplierRepository;
@@ -31,4 +31,6 @@ public class AutomaticSimulationController {
     public static void automaticSimulation() {
 
     }
+
+     */
 }
