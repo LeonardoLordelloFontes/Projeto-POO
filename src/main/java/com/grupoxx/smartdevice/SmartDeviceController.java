@@ -1,7 +1,5 @@
 package com.grupoxx.smartdevice;
 
-
-
 import com.grupoxx.main.MainController;
 
 import static com.grupoxx.smartdevice.SmartDeviceMenu.*;
