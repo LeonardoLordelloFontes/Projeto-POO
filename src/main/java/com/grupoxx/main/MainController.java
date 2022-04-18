@@ -21,13 +21,6 @@ public class MainController {
         mainController();
     }
 
-    public MainController(MainController mainController) {
-        this.factory = mainController.getFactory();
-        this.energySupplierRepository = mainController.getEnergySupplierRepository();
-        this.smartHouseRepository = mainController.getSmartHouseRepository();
-        mainController();
-    }
-
     public void mainController() {
         int choice = mainMenu();
         switch (choice) {

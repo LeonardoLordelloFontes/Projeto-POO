@@ -32,7 +32,7 @@ public class SmartHouseController {
             case 2 -> removeSmartHouse();
             case 3 -> updateSmartHouse();
             case 4 -> listSmartHouses();
-            case 5 -> new MainController(mainController);
+            case 5 -> this.mainController.mainController();
         }
     }
 
