@@ -474,7 +474,7 @@ public abstract class Menu {
                 input[1] = "#";
             }
 
-            System.out.print("Deseja alterar a energia diária gasta?[Y ou N]: ");
+            System.out.print("Deseja alterar a energia diária gasta?[Y ou N]:  ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
             if (answer.equals("Y")) {
                 System.out.print("Quantidade de energia diária gasta : ");
