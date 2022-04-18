@@ -2,6 +2,7 @@ package com.grupoxx.smarthouse;
 
 import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.main.MainController;
+import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smarthouse.exception.HouseAddressAlreadyExists;
 import com.grupoxx.smarthouse.exception.HouseNotFound;
 import com.grupoxx.smarthouse.exception.RoomAlreadyExists;
@@ -186,14 +187,18 @@ public class SmartHouseController {
         }
     }
 
-    // TODO
+    // precisa de verificação
     private void addDevice(String address, String room) {
         String factoryCode = menu.addDevice(mainController.getFactory());
         if (factoryCode == null) updateSmartDevices(address, room);
         else {
-
+            mainController.getFactory().setDeviceAvailability(factoryCode, false);
+            SmartDevice smartDevice = mainController.getFactory().getSmartDeviceRepository()
+                    .findSmartDeviceByFactoryCode(factoryCode);
+            mainController.getSmartHouseRepository().findSmartDevicesByRoom(address, room)
+                    .addSmartDevice(factoryCode, smartDevice);
+            addDevice(address, room);
         }
-        // TODO
     }
 
 

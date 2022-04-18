@@ -24,6 +24,10 @@ public class Factory {
         this.smartDeviceRepository = smartDeviceRepository;
     }
 
+    public void setDeviceAvailability(String factoryCode, Boolean available) {
+        this.available.put(factoryCode, available);
+    }
+
     public boolean isDeviceAvailable(String factoryCode) {
         return available.get(factoryCode);
     }
