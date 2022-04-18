@@ -21,7 +21,7 @@ public class EnergySupplierController {
             case 3:
                 updateEnergySupplierController();
             case 4:
-                //voltar ao menu fornecedor de energia
+                //todo
         }
     }
 
