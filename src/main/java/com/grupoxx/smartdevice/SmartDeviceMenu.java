@@ -24,6 +24,7 @@ public abstract class SmartDeviceMenu {
             Scanner scanner = new Scanner(System.in);
             return scanner.nextInt();
         }
+
         public static int MenuTipoDispositivoAdd() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
             sb.append("1. Adicionar  SmartBulb \n");
@@ -35,6 +36,7 @@ public abstract class SmartDeviceMenu {
             Scanner scanner = new Scanner(System.in);
             return scanner.nextInt();
         }
+
         public static String[] MenuSmartBulbAdd() {
             String input[] = new String[4];
             Scanner scanner = new Scanner(System.in);
