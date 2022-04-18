@@ -1,95 +1,218 @@
 package com.grupoxx.smarthouse;
 
+import com.grupoxx.factory.Factory;
+import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smartdevice.SmartDeviceRepository;
 import jdk.jshell.Snippet;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class SmartHouseMenu {
 
     /**
+     * Menu principal da classe SmartHouseMenu.
+     * Oferece opções genéricas que serão mais tarde tratadas por menus específicos
      *
-     * @return
+     * @return a opção selecionado pelo usuário, ou -1, caso a opção seja inválida
      */
 
-    public static int smartHouseMenu() {
-        StringBuilder sb = new StringBuilder("-----------Casa-----------\n\n");
-        sb.append("1. Adicionar Casa\n");
-        sb.append("2. Remover Casa\n");
-        sb.append("3. Atualizar dados da casa\n");
-        sb.append("4. Listar Casas \n");
-        sb.append("5. Ligar/Desligar dispositivos \n\n");
-        sb.append("6. Voltar \n\n");
-        sb.append("Sua Opção (Selecionar Número): ");
-        System.out.print(sb.toString());
+    public int smartHouse() {
+        String sb = """
+                -----------Casa-----------
+
+                1. Adicionar Casa
+                2. Remover Casa
+                3. Atualizar dados da casa
+                4. Listar Casas\s
+                5. Voltar\s
+
+                Sua Opção (Selecionar Número):\s""";
+        System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
-        if (option < 1 || option > 6) return -1;
+        if (option < 1 || option > 5) return -1;
         return option;
     }
 
-    public static String[] smartHouseAddMenu() {
-        String[] input = new String[2];
-        System.out.print("-----------Criar Casa-----------\n\nEscreva o Endereço (para cancelar a criação digite *): ");
+    /**
+     * Menu para adicionar uma casa
+     *
+     * @return o endereço da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
+     */
+    public String addSmartHouse() {
+        System.out.print("-----------Criar Casa-----------\n\n");
+        return updateAddress();
+    }
+
+    /**
+     * Menu que oferece ao usuário a possibilidade de adicionar mais informações na criação da casa
+     *
+     * @return a resposta do usuário a pergunta
+     */
+
+    public String addMoreInformationSmartHouse() {
+        System.out.print("Deseja adicionar mais informações a casa agora? (S - Sim, N - Não): ");
         Scanner scanner = new Scanner(System.in);
-        input[0] = scanner.nextLine();
-        if (input[0].equals("*")) return null;
-        System.out.print("Deseja adicionar mais informações a casa agora? (S ou N): ");
-        input[1] = scanner.nextLine();
+        String input = scanner.nextLine().toUpperCase(Locale.ROOT);
+        if (!(input.equals("N") || input.equals("S"))) System.out.println("Opção inválida\n");
         return input;
     }
 
-    public static String smartHouseSelectHousesMenu(SmartHouseRepository smartHouseRepository) {
-        List<SmartHouse> smartHouses = smartHouseRepository.findAllSmartHouses();
-        if (smartHouses.size() == 0) return null;
-        StringBuilder sb = new StringBuilder("-----------Selecionar Casa-----------\n\n");
-        smartHouses.forEach(smartHouse -> sb.append(smartHouse).append("\n"));
-        sb.append("Para cancelar a ação digite *\n");
-        sb.append("Selecione a casa (pelo endereço): ");
-        System.out.print(sb);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+    /**
+     * Menu para remover uma casa
+     *
+     * @param smartHouseRepository o repositório de casas onde queremos remover uma casa
+     * @return o endereço da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
+     */
+    public String removeSmartHouse(SmartHouseRepository smartHouseRepository) {
+        System.out.print("-----------Remover Casa-----------\n\n");
+        return selectSmartHouse(smartHouseRepository);
     }
 
-    public static String smartHouseSelectRoomsMenu(SmartHouse smartHouse) {
-        List<String> rooms = smartHouse.getRooms();
-        StringBuilder sb = new StringBuilder("-----------Selecionar Divisão-----------\n\n");
-        rooms.forEach(room -> sb.append(room).append("\n"));
-        sb.append("Para cancelar a ação digite *\n");
-        sb.append("Selecione a divisão (pelo nome): ");
-        System.out.println(sb);
+    /**
+     * Menu para selecionar uma casa
+     *
+     * @param smartHouseRepository o repositório de casas que neste contexto representa as casas que podemos selecionar
+     * @return o endereço da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
+     */
+
+    public String selectSmartHouse(SmartHouseRepository smartHouseRepository) {
+        List<SmartHouse> smartHouses = smartHouseRepository.findAllSmartHouses();
+        if (smartHouses.size() == 0) {
+            System.out.println("Não há nenhuma casa");
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("-----------Selecionar Casa-----------\n\n");
+        smartHouses.forEach(smartHouse -> sb.append(smartHouse).append("\n\n"));
+        sb.append("Selecione a casa pelo endereço (para cancelar digite *): ");
+        System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    /**
+     * Mostra na tela todas as informações das casas que estão na lista
+     *
+     * @param smartHouses a lista que contém as casas que vamos mostrar na tela
+     */
+
+    public void listSmartHouses(List<SmartHouse> smartHouses) {
+        if (smartHouses.size() == 0) System.out.println("Não há nenhuma casa");
+        StringBuilder sb = new StringBuilder();
+        smartHouses.forEach(smartHouse -> sb.append(smartHouse).append("\n\n"));
+        System.out.print(sb);
+    }
+
+    /**
+     * Menu para remover uma divisão de uma casa
+     *
+     * @param smartHouseRepository o repositório de casas
+     * @param address o endereço da casa que queremos remover uma divisão
+     * @return o nome da divisão da casa inserido pelo usuário, ou null, caso o deseje cancelar a operação
+     */
+
+    public String removeRoom(SmartHouseRepository smartHouseRepository, String address) {
+        List<String> rooms = smartHouseRepository.findAllRoomsFromSmartHouse(address);
+        StringBuilder sb = new StringBuilder("-----------Remover Divisão-----------\n\n");
+        rooms.forEach(room -> sb.append(room).append("\n"));
+        sb.append("\nSelecione a divisão pelo nome (para cancelar digite *): ");
+        System.out.print(sb);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    /**
+     * Menu para adicionar um dispositivo a uma casa
+     *
+     * @param factory A fábrica que produz os dispositivos. Ela sabe quais dispositivos estão disponíveis para serem
+     *                adicionados
+     * @return o código de fábrica inserido pelo usuário, ou null, casa o usuário deseje cancelar a operação
+     *         ou caso não tenha nenhum dispositivo disponível para adicionar
+     */
+
+    public String addDevice(Factory factory) {
+        List<SmartDevice> availableDevices = factory.getSmartDeviceRepository().findAllSmartDevices().stream().
+                filter(device -> factory.isDeviceAvailable(device.getFactoryCode())).toList();
+        if (availableDevices.size() == 0) {
+            System.out.println("Não há nenhum dispositivo disponível para adicionar na casa");
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("-----------Dispositivos-----------\n\n");
+        availableDevices.forEach(device -> sb.append(device).append("\n\n"));
+        sb.append("Selecione o dispositivo pelo código de fábrica (para cancelar digite *): ");
+        System.out.print(sb);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    /**
+     * Menu para remover um dispositivo da casa
+     *
+     * @param smartDeviceRepository um repositório de dispositivos, que no contexto de remoção de um dispositivo
+     *                              de uma casa representa uma divisão da casa
+     * @return o código de fábrica inserido pelo usuário, ou null, casa o usuário deseje cancelar a operação
+     *         ou caso não tenha nenhum dispositivo disponível para remover
+     */
+    public String removeDevice(SmartDeviceRepository smartDeviceRepository) {
+        List<SmartDevice> smartDevices = smartDeviceRepository.findAllSmartDevices();
+        if (smartDevices.size() == 0) {
+            System.out.println("Não há nenhum dispositivo para ser removido");
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("-----------Dispositivos-----------\n\n");
+        smartDevices.forEach(device -> sb.append(device).append("\n\n"));
+        sb.append("Digite o código de fábrica do dispositivo (para cancelar digite *): ");
+        System.out.print(sb);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+        if (input.equals("*")) return null;
         return input;
     }
 
     /**
      * Menu com opções para atualizar dados da casa
+     *
+     * @return a opção selecionado pelo usuário, ou -1, caso a opção seja inválida
      */
 
-    public static int smartHouseUpdateMenu() {
-        StringBuilder sb = new StringBuilder("-----------Atualizar Casa-----------\n\n");
-        sb.append("1. Adicionar Divisão \n");
-        sb.append("2. Adicionar Dispositivo \n");
-        sb.append("3. Remover Divisão \n");
-        sb.append("4. Remover Dispositivo \n");
-        sb.append("5. Atualizar Endereço \n");
-        sb.append("6. Atualizar Fornecedor de Energia \n");
-        sb.append("7. Atualizar Proprietário \n");
-        sb.append("8. Voltar \n");
-        sb.append("Sua Opção (Selecionar Número): ");
-        System.out.print(sb.toString());
+    public int updateSmartHouse() {
+        String sb = """
+                -----------Atualizar Casa-----------
+
+                1. Adicionar Divisão
+                2. Adicionar Dispositivo
+                3. Remover Divisão
+                4. Remover Dispositivo
+                5. Atualizar Endereço
+                6. Atualizar Fornecedor de Energia
+                7. Atualizar Proprietário
+                8. Ligar/Desligar dispositivos
+                9. Voltar
+
+                Sua Opção (Selecionar Número):\s""";
+        System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
-        if (option < 1 || option > 8) return -1;
+        if (option < 1 || option > 9) return -1;
         return option;
     }
 
     /**
      * Menu que pode ser utilizado sempre que precisarmos pedir um endereço de uma casa para o usuário
+     *
      * @return O endereço inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação de escrita
      */
-    public static String smartHouseUpdateAddressMenu() {
+    public String updateAddress() {
         System.out.print("Endereço (para cancelar digite *): ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -99,11 +222,12 @@ public class SmartHouseMenu {
 
     /**
      * Menu que pode ser utilizado sempre que precisarmos pedir os dados de um proprietário, isto é, nome e nif
+     *
      * @return Um array de strings, onde na primeira posição está o nome, e na segunda o nif inserido pelo usuário,
      *         ou null, caso o usuário deseje cancelar a operação de escrita
      */
 
-    public static String[] smartHouseUpdateOwnerMenu() {
+    public String[] updateOwner() {
         String[] input = new String[2];
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nome (para cancelar digite *): ");
@@ -117,12 +241,13 @@ public class SmartHouseMenu {
     }
 
     /**
-     * Menu que pode ser utilizado sempre que precisarmos pedir o nome da divisão de uma casa para o usuário
+     * Menu para adicionar uma divisão a uma casa
+     *
      * @return O nome da divisão da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
      *         de escrita
      */
 
-    public static String smartHouseUpdateRoomMenu() {
+    public String addRoom() {
         System.out.print("Nome da divisão (para cancelar digite *): ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -132,11 +257,12 @@ public class SmartHouseMenu {
 
     /**
      * Menu que pode ser utilizado sempre que precisarmos pedir o nome do fornecedor de energia da casa para o usuário
+     *
      * @return O nome do fornecedor de energia inserido pelo usuário, ou null, caso o usuário deseje cancelar
      *         a operação
      */
 
-    public static String smartHouseUpdateEnergySupplierMenu() {
+    public String updateEnergySupplier() {
         System.out.println("Nome do fornecedor de energia (para cancelar digite *): ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();

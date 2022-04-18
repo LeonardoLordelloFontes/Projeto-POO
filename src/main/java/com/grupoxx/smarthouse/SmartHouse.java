@@ -12,7 +12,7 @@ public class SmartHouse {
     private Owner owner;
     private String address;
     private String energySupplier;
-    private Map<String, SmartDeviceRepository> smartDevices; // Room -> Repositório de Smart Devices
+    private final Map<String, SmartDeviceRepository> smartDevices; // Room -> Repositório de Smart Devices
 
     public SmartHouse() {
         this.owner = new Owner();
@@ -58,16 +58,6 @@ public class SmartHouse {
         return energySupplier;
     }
 
-    public List<String> getRooms() {
-        return new ArrayList<>(smartDevices.keySet());
-    }
-
-    /*
-    public Map<String, SmartDeviceRepository> getSmartDevices() {
-        return smartDevices.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-    }*/
-
     public Map<String, SmartDeviceRepository> getSmartDevices() {
         return smartDevices;
     }
@@ -87,7 +77,8 @@ public class SmartHouse {
     public String toString() {
         // TODO
         StringBuilder sb = new StringBuilder();
-        sb.append(this.address);
+        sb.append(this.address).append("\n");
+        smartDevices.forEach((key, value) -> sb.append("\t").append(key).append("\n"));
         return sb.toString();
     }
 

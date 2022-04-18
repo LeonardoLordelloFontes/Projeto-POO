@@ -1,10 +1,5 @@
 package com.grupoxx.simulation;
 
-import com.grupoxx.EnergySupplier.EnergySupplierController;
-import com.grupoxx.EnergySupplier.EnergySupplierRepository;
-import com.grupoxx.menu.MainMenu;
-import com.grupoxx.smartdevice.SmartDeviceRepository;
-import com.grupoxx.smarthouse.SmartHouseRepository;
 public class ManualSimulationController {
     /*
     private SmartHouseRepository smartHouseRepository;

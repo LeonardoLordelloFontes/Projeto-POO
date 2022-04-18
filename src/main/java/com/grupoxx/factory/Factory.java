@@ -24,7 +24,9 @@ public class Factory {
         this.smartDeviceRepository = smartDeviceRepository;
     }
 
-
+    public boolean isDeviceAvailable(String factoryCode) {
+        return available.get(factoryCode);
+    }
 
 
 

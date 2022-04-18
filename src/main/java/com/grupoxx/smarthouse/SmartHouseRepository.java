@@ -28,7 +28,7 @@ public class SmartHouseRepository {
     private final Map<String, SmartHouse> smartHouses;
 
     /**
-     * Construtor responsável por criar a estrutura de dados responsável pelo armazenamento das casas
+     * Construtor que cria a estrutura de dados responsável pelo armazenamento das casas
      */
 
     public SmartHouseRepository() {
@@ -43,7 +43,7 @@ public class SmartHouseRepository {
      * @throws HouseNotFound caso o endereço da casa passado por argumento não existir
      */
 
-    public SmartHouse getHouseByAddress(String address) throws HouseNotFound {
+    public SmartHouse findHouseByAddress(String address) throws HouseNotFound {
         SmartHouse smartHouse = smartHouses.get(address);
         if (smartHouse == null)
             throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");
@@ -60,7 +60,7 @@ public class SmartHouseRepository {
      * @throws RoomNotFound caso o nome da divisão passado por argumento não existir na casa
      */
 
-    public SmartDeviceRepository getSmartDevicesByRoom(String address, String room) throws HouseNotFound, RoomNotFound {
+    public SmartDeviceRepository findSmartDevicesByRoom(String address, String room) throws HouseNotFound, RoomNotFound {
         if (smartHouses.get(address) == null)
             throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");
         SmartDeviceRepository smartDeviceRepository = smartHouses.get(address).getSmartDevices().get(room);
@@ -108,6 +108,7 @@ public class SmartHouseRepository {
      * @throws HouseNotFound caso o endereço da casa passado por argumento não existir
      * @throws RoomNotFound caso o nome da divisão passado por argumento não existir na casa
      */
+
 
     public void removeRoomFromHouse(String address, String room) throws HouseNotFound, RoomNotFound {
         if (smartHouses.get(address) == null)
@@ -190,5 +191,18 @@ public class SmartHouseRepository {
 
     public List<SmartHouse> findAllSmartHouses() {
         return new ArrayList<>(smartHouses.values());
+    }
+
+    /**
+     * Permite obter as divisões de uma casa
+     *
+     * @param address o endereço da casa
+     * @return a lista das divisões da casa
+     * @throws HouseNotFound caso o endereço da casa passado por argumento não existir
+     */
+    public List<String> findAllRoomsFromSmartHouse(String address) throws HouseNotFound {
+        if (smartHouses.get(address) == null)
+            throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");
+        return new ArrayList<>(smartHouses.get(address).getSmartDevices().keySet());
     }
 }

@@ -1,66 +1,195 @@
 package com.grupoxx.smarthouse;
 
+import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smarthouse.exception.HouseAddressAlreadyExists;
-import com.grupoxx.smarthouse.exception.NoneHouseAvailable;
 import com.grupoxx.smarthouse.exception.HouseNotFound;
+import com.grupoxx.smarthouse.exception.RoomAlreadyExists;
+import com.grupoxx.smarthouse.exception.RoomNotFound;
 
 import static com.grupoxx.smarthouse.SmartHouseMenu.*;
 
 public class SmartHouseController {
-    private MainController mainController;
+    private final MainController mainController;
+    private final SmartHouseMenu menu;
 
     public SmartHouseController(MainController mainController) {
         this.mainController = mainController;
-        smartHouseController();
+        this.menu = new SmartHouseMenu();
+        smartHouse();
     }
 
-    public void smartHouseController() {
-        int choice = smartHouseMenu();
-        switch (choice) {
-            case 1 -> smartHouseAddController();
-            case 2 -> smartHouseRemoveController();
-            case 3 -> smartHouseUpdateController();
-            case 4 -> smartHouseListController();
+    /**
+     * Controlador principal da classe SmartHouseController
+     */
 
-            case 6 -> new MainController(mainController);
+    private void smartHouse() {
+        int choice = menu.smartHouse();
+        switch (choice) {
+            case 1 -> addSmartHouse();
+            case 2 -> removeSmartHouse();
+            case 3 -> updateSmartHouse();
+            case 4 -> listSmartHouses();
+            case 5 -> new MainController(mainController);
         }
     }
 
-    public void smartHouseAddController() {
-        String[] input = smartHouseAddMenu();
-        if (input == null) smartHouseController();
+    /**
+     * Controlador da criação de casas
+     */
+
+    private void addSmartHouse() {
+        String address = menu.addSmartHouse();
+        if (address == null) smartHouse();
         else {
             try {
-                mainController.getSmartHouseRepository().addSmartHouse(input[0]);
-                if (input[1].equals("S")) smartHouseUpdateController(input[0]);
-                else smartHouseController();
+                mainController.getSmartHouseRepository().addSmartHouse(address);
+                addMoreInformationSmartHouse(address);
             } catch (HouseAddressAlreadyExists e) {
                 System.out.println(e.getMessage());
-                smartHouseAddController();
+                smartHouse();
             }
         }
     }
 
-    public void smartHouseRemoveController() {
+    /**
+     * Controlador da opção que permite adicionar mais dados a casa na sua criação
+     * @param address o endereço da casa criada
+     */
+    private void addMoreInformationSmartHouse(String address) {
+        String input = menu.addMoreInformationSmartHouse();
+        switch (input) {
+            case "S" -> updateSmartHouse(address);
+            case "N" -> smartHouse();
+            default -> addMoreInformationSmartHouse(address);
+        }
+    }
+
+    /**
+     * Controlador da remoção de casas
+     */
+
+    private void removeSmartHouse() {
         SmartHouseRepository smartHouseRepository = mainController.getSmartHouseRepository();
-        String address = smartHouseSelectHousesMenu(smartHouseRepository);
-        if (address != null && address.equals("*")) smartHouseController();
-        /* pensar melhor se nisto depois */
+        String address = menu.selectSmartHouse(smartHouseRepository);
+        if (address == null) smartHouse();
         else {
             try {
                 smartHouseRepository.removeHouseByAddress(address);
-                smartHouseController();
+                smartHouse();
             } catch (HouseNotFound e) {
                 System.out.println(e.getMessage());
-                smartHouseRemoveController();
-            } catch (NoneHouseAvailable e) {
-                System.out.println(e.getMessage());
-                smartHouseController();
+                removeSmartHouse();
             }
         }
     }
 
+
+    private void updateSmartHouse() {
+        String address = menu.selectSmartHouse(mainController.getSmartHouseRepository());
+        if (address == null) smartHouse();
+        else {
+           updateSmartHouse(address);
+        }
+    }
+
+    private void updateSmartHouse(String address) {
+        int option = menu.updateSmartHouse();
+        if (option == -1) updateSmartHouse(address);
+        else {
+            switch (option) {
+                case 1 -> addRoom(address);
+                case 3 -> removeRoom(address);
+                case 5 -> updateAddress(address);
+                case 6 -> updateEnergySupplier(address);
+                case 7 -> updateOwner(address);
+                case 9 -> smartHouse();
+            }
+        }
+    }
+
+    /**
+     * Controlador da listagem de casas
+     */
+
+    private void listSmartHouses() {
+        menu.listSmartHouses(mainController.getSmartHouseRepository().findAllSmartHouses());
+        smartHouse();
+    }
+
+    private void addRoom(String address) {
+        String room = menu.addRoom();
+        if (room == null) updateSmartHouse(address);
+        else {
+            try {
+                mainController.getSmartHouseRepository().addRoomToHouse(address, room);
+                addRoom(address);
+            } catch (RoomAlreadyExists e) {
+                System.out.println(e.getMessage());
+                addRoom(address);
+            }
+        }
+    }
+
+    private void removeRoom(String address) {
+        String room = menu.removeRoom(mainController.getSmartHouseRepository(), address);
+        if (room == null) updateSmartHouse(address);
+        else {
+            try {
+                mainController.getSmartHouseRepository().removeRoomFromHouse(address, room);
+                removeRoom(address);
+            } catch (RoomNotFound e) {
+                System.out.println(e.getMessage());
+                removeRoom(address);
+            }
+        }
+    }
+
+    private void addDevice(String address, String room) {
+        String factoryCode = menu.addDevice(mainController.getFactory());
+        // TODO
+    }
+
+    private void updateAddress(String oldAddress) {
+        String newAddress = menu.updateAddress();
+        if (newAddress == null) updateSmartHouse(oldAddress);
+        else {
+            try {
+                mainController.getSmartHouseRepository().updateHouseAddress(oldAddress, newAddress);
+                updateSmartHouse(newAddress);
+            } catch (HouseAddressAlreadyExists e) {
+                System.out.println(e.getMessage());
+                updateSmartHouse(oldAddress);
+            }
+        }
+    }
+
+    private void updateEnergySupplier(String address) {
+        String newEnergySupplier = menu.updateEnergySupplier();
+        if (newEnergySupplier == null) updateSmartHouse(address);
+        else {
+            try {
+                mainController.getSmartHouseRepository().
+                        updateEnergySupplier(mainController.getEnergySupplierRepository(), address, newEnergySupplier);
+                updateSmartHouse(address);
+            } catch (EnergySupplierNotFound e) {
+                System.out.println(e.getMessage());
+                updateSmartHouse(address);
+            }
+        }
+    }
+
+    private void updateOwner(String address) {
+        String[] newOwner = menu.updateOwner();
+        if (newOwner == null) updateSmartHouse(address);
+        else {
+            Owner owner = new Owner(newOwner[0], newOwner[1]);
+            mainController.getSmartHouseRepository().updateOwner(address, owner);
+            updateSmartHouse(address);
+        }
+    }
+
+        /*
     public void smartHouseListController() {
         mainController.getSmartHouseRepository().findAllSmartHouses().forEach(System.out::println);
         smartHouseController();
@@ -108,4 +237,6 @@ public class SmartHouseController {
         }
         smartHouseUpdateController(address);
     }
+
+         */
 }

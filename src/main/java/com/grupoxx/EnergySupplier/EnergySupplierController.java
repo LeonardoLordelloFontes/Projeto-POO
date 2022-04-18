@@ -1,7 +1,5 @@
 package com.grupoxx.EnergySupplier;
 
-import com.grupoxx.menu.MainMenu;
-
 public class EnergySupplierController {
     /*
 

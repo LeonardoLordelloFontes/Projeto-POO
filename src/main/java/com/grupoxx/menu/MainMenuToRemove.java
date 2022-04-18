@@ -4,7 +4,7 @@ import java.util.*;
 import static java.lang.Integer.parseInt;
 
 
-public abstract class MainMenu {
+public abstract class MainMenuToRemove {
 
     public static void clearWindow() {
 

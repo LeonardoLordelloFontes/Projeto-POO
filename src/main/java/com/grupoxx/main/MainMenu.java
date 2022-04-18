@@ -4,16 +4,19 @@ import java.util.Scanner;
 
 public class MainMenu {
     public static int mainMenu() {
-        StringBuilder sb = new StringBuilder("-----------Menu Principal-----------\n\n");
-        sb.append("1. Fornecedores de Energia \n");
-        sb.append("2. Casas \n");//
-        sb.append("3. Dispositivos \n");
-        sb.append("4. Iniciar Simulação Manual \n");
-        sb.append("5. Iniciar Simulação Automática \n");
-        sb.append("6. Carregar Estado \n");
-        sb.append("7. Guardar Estado \n");
-        sb.append("8. Sair \n\n");
-        sb.append("Sua Opção (Selecionar Número): ");
+        String sb = """
+                -----------Menu Principal-----------
+
+                1. Fornecedores de Energia
+                2. Casas
+                3. Dispositivos
+                4. Iniciar Simulação Manual
+                5. Iniciar Simulação Automática
+                6. Carregar Estado
+                7. Guardar Estado
+                8. Sair
+
+                Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
