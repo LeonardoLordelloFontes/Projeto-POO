@@ -152,6 +152,10 @@ public class SmartHouseMenu {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
         if (input.equals("*")) return null;
+        if (!factory.isDeviceAvailable(input)) {
+            System.out.println("Dispositivo inserido não está disponível para adicionar a uma casa");
+            return null;
+        }
         return input;
     }
 
@@ -190,20 +194,54 @@ public class SmartHouseMenu {
                 -----------Atualizar Casa-----------
 
                 1. Adicionar Divisão
-                2. Adicionar Dispositivo
-                3. Remover Divisão
-                4. Remover Dispositivo
-                5. Atualizar Endereço
-                6. Atualizar Fornecedor de Energia
-                7. Atualizar Proprietário
-                8. Ligar/Desligar dispositivos
-                9. Voltar
+                2. Remover Divisão
+                3. Dispositivos (criar, remover, ligar/desligar)
+                4. Atualizar Endereço
+                5. Atualizar Fornecedor de Energia
+                6. Atualizar Proprietário
+                7. Voltar
 
                 Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
-        if (option < 1 || option > 9) return -1;
+        if (option < 1 || option > 7) return -1;
+        return option;
+    }
+
+    public String selectRoom(SmartHouseRepository smartHouseRepository, String address) {
+        List<String> rooms = smartHouseRepository.findAllRoomsFromSmartHouse(address);
+        if (rooms.size() == 0) {
+            System.out.println("A casa precisa ter divisões para gerenciar dispositivos");
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("-----------Selecionar Divisão-----------\n\n");
+        rooms.forEach(room -> sb.append(room).append("\n"));
+        sb.append("Selecione a divisão da casa pelo nome (para cancelar digite *): ");
+        System.out.print(sb);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    public int updateSmartDevices() {
+        String sb = """
+                -----------Dispostivos-----------
+                
+                1. Adicionar dispositivo
+                2. Remover dispositivo
+                3. Ligar todos os dispositivos desta divisão
+                4. Desligar todos os dispositivos desta divisão
+                5. Ligar um dispositivo desta divisão
+                6. Desligar um dispositivo desta divisão
+                7. Voltar
+                
+                Sua opção (Selecionar Número):\s""";
+        System.out.print(sb);
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+        if (option < 1 || option > 7) return -1;
         return option;
     }
 

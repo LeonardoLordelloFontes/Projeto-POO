@@ -1,5 +1,7 @@
 package com.grupoxx.smartdevice;
 
+import com.grupoxx.smarthouse.SmartHouse;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +11,18 @@ import java.util.stream.Collectors;
 public class SmartDeviceRepository {
     private Map<String,SmartDevice> factory = new HashMap<>();
 
-
     public SmartDeviceRepository() {
-
         this.factory = new HashMap<>();
+    }
+
+    public SmartDevice findSmartDeviceByFactoryCode(String factoryCode) {
+        // TODO, tratamento de exceções
+        return factory.get(factoryCode);
+    }
+
+    public void addSmartDevice(String factoryCode, SmartDevice smartDevice) {
+        // TODO, tratamento de exceções
+        factory.put(factoryCode, smartDevice.clone());
     }
 
     public boolean SmartDeviceBulbAdd(String factorycode, double dimension, double installationCost, double energyConsumption){

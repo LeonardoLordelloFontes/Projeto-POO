@@ -200,6 +200,7 @@ public class SmartHouseRepository {
      * @return a lista das divisões da casa
      * @throws HouseNotFound caso o endereço da casa passado por argumento não existir
      */
+
     public List<String> findAllRoomsFromSmartHouse(String address) throws HouseNotFound {
         if (smartHouses.get(address) == null)
             throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");

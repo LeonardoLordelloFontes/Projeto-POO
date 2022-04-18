@@ -84,6 +84,9 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     * Controlador da seleção da casa que vai ser atualizada
+     */
 
     private void updateSmartHouse() {
         String address = menu.selectSmartHouse(mainController.getSmartHouseRepository());
@@ -93,17 +96,24 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     * Controlador da atualização dos dados de uma casa
+     *
+     * @param address o endereço da casa que desejamos atualizar os dados
+     */
+
     private void updateSmartHouse(String address) {
         int option = menu.updateSmartHouse();
         if (option == -1) updateSmartHouse(address);
         else {
             switch (option) {
                 case 1 -> addRoom(address);
-                case 3 -> removeRoom(address);
-                case 5 -> updateAddress(address);
-                case 6 -> updateEnergySupplier(address);
-                case 7 -> updateOwner(address);
-                case 9 -> smartHouse();
+                case 2 -> removeRoom(address);
+                case 3 -> updateSmartDevices(address);
+                case 4 -> updateAddress(address);
+                case 5 -> updateEnergySupplier(address);
+                case 6 -> updateOwner(address);
+                case 7 -> smartHouse();
             }
         }
     }
@@ -116,6 +126,12 @@ public class SmartHouseController {
         menu.listSmartHouses(mainController.getSmartHouseRepository().findAllSmartHouses());
         smartHouse();
     }
+
+    /**
+     * Controlador da criação de divisões de uma casa
+     *
+     * @param address o endereço da casa que desejamos adicionar divisões
+     */
 
     private void addRoom(String address) {
         String room = menu.addRoom();
@@ -131,6 +147,11 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     *
+     * @param address
+     */
+
     private void removeRoom(String address) {
         String room = menu.removeRoom(mainController.getSmartHouseRepository(), address);
         if (room == null) updateSmartHouse(address);
@@ -145,8 +166,40 @@ public class SmartHouseController {
         }
     }
 
+    private void updateSmartDevices(String address) {
+        String room = menu.selectRoom(mainController.getSmartHouseRepository(), address);
+        if (room == null) updateSmartHouse(address);
+        else {
+            updateSmartDevices(address, room);
+        }
+    }
+
+    private void updateSmartDevices(String address, String room) {
+        int option = menu.updateSmartDevices();
+        if (option == -1) updateSmartDevices(address, room);
+        else {
+            switch (option) {
+                case 1 -> addDevice(address, room);
+                case 2 -> removeDevice(address, room);
+                case 7 -> updateSmartHouse(address);
+            }
+        }
+    }
+
+    // TODO
     private void addDevice(String address, String room) {
         String factoryCode = menu.addDevice(mainController.getFactory());
+        if (factoryCode == null) updateSmartDevices(address, room);
+        else {
+
+        }
+        // TODO
+    }
+
+
+    // TODO
+
+    private void removeDevice(String address, String room) {
         // TODO
     }
 
@@ -188,55 +241,4 @@ public class SmartHouseController {
             updateSmartHouse(address);
         }
     }
-
-        /*
-    public void smartHouseListController() {
-        mainController.getSmartHouseRepository().findAllSmartHouses().forEach(System.out::println);
-        smartHouseController();
-    }
-
-    public void smartHouseUpdateController() {
-        String address = smartHouseSelectHousesMenu(mainController.getSmartHouseRepository());
-        smartHouseUpdateController(address);
-    }
-
-    public void smartHouseUpdateController(String address) {
-        if (address == null) smartHouseController();
-        else {
-            int choice = smartHouseUpdateMenu();
-            switch (choice) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    smartHouseUpdateOwnerController(address);
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    smartHouseController();
-                    break;
-            }
-        }
-    }
-
-    public void smartHouseUpdateOwnerController(String address) {
-        String[] input = smartHouseUpdateOwnerMenu();
-        if (input != null) {
-            Owner newOwner = new Owner(input[0], input[1]);
-            mainController.getSmartHouseRepository().updateOwner(address, newOwner);
-        }
-        smartHouseUpdateController(address);
-    }
-
-         */
 }
