@@ -24,6 +24,10 @@ public class Factory {
         this.smartDeviceRepository = smartDeviceRepository;
     }
 
+    public void deleteDevice(String factorycode){
+        this.available.remove(factorycode);
+    }
+
     public void setDeviceAvailability(String factoryCode, Boolean available) {
         this.available.put(factoryCode, available);
     }

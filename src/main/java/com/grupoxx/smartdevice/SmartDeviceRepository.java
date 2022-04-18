@@ -9,6 +9,11 @@ public class SmartDeviceRepository {
 
     private Map<String,SmartDevice> factory = new HashMap<>();
 
+    public SmartDevice getDevice(String factoryCode){
+        return this.factory.get(factoryCode).clone();
+    }
+
+
     public SmartDeviceRepository() {
         this.factory = new HashMap<>();
     }
@@ -23,7 +28,7 @@ public class SmartDeviceRepository {
         factory.put(factoryCode, smartDevice.clone());
     }
 
-    public boolean SmartDeviceBulbAdd(String factorycode, double dimension, double installationCost, double energyConsumption){
+    public boolean SmartDeviceBulbAdd(String factorycode,  double installationCost, double energyConsumption, double dimension ){
 
         try {
             SmartDeviceBulb sb = new SmartDeviceBulb(factorycode, dimension, installationCost, energyConsumption);
@@ -69,31 +74,43 @@ public class SmartDeviceRepository {
         }
     }
 
-    public void SmartDeviceBulbUpdade(String OldFactorycode, String NewFactorycode, String energyConsumption, String installationCost, String dimension){
+    public void SmartDeviceBulbUpdade(String oldFactorycode, String newFactorycode, String energyConsumption, String installationCost, String dimension){
         //Partindo do principio que os input são válidos
 
-        SmartDeviceBulb sb = (SmartDeviceBulb) this.factory.get(OldFactorycode);
-        if(!NewFactorycode.equals("#")) sb.setFactoryCode(NewFactorycode);
+        SmartDeviceBulb sb = (SmartDeviceBulb) this.factory.get(oldFactorycode);
+        if(!newFactorycode.equals("#")){
+            sb.setFactoryCode(newFactorycode);
+            this.factory.put(newFactorycode,sb);
+            this.factory.remove(oldFactorycode);
+        }
         if(!energyConsumption.equals("#")) sb.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals("#")) sb.setInstallationCost( Double.parseDouble(installationCost) );
         if(!dimension.equals("#")) sb.setDimension(Double.parseDouble (dimension) );
 
     }
 
-    public void SmartDeviceSpeakerUpdate(String OldFactorycode, String NewFactorycode,String energyConsumption,String installationCost,String brand, String volumeMax){
+    public void SmartDeviceSpeakerUpdate(String oldFactorycode, String newFactorycode,String energyConsumption,String installationCost,String brand, String volumeMax){
 
-        SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.factory.get(OldFactorycode);
-        if(!NewFactorycode.equals("#")) ss.setFactoryCode(NewFactorycode);
+        SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.factory.get(oldFactorycode);
+        if(!newFactorycode.equals("#")){
+            ss.setFactoryCode(newFactorycode);
+            this.factory.put(newFactorycode,ss);
+            this.factory.remove(oldFactorycode);
+        }
         if(!energyConsumption.equals("#")) ss.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals("#")) ss.setInstallationCost( Double.parseDouble(installationCost) );
         if (!brand.equals("#")) ss.setBrand(brand);
         if (!volumeMax.equals("#")) ss.setVolumeMax(Integer.parseInt(volumeMax));
     }
 
-    public void SmartDeviceCameraUpdate(String OldFactorycode, String NewFactorycode,String energyConsumption,String installationCost,String resolution ,String fileSize){
-        SmartDeviceCamera sc = (SmartDeviceCamera) this.factory.get(OldFactorycode);
+    public void SmartDeviceCameraUpdate(String oldFactorycode, String newFactorycode,String energyConsumption,String installationCost,String resolution ,String fileSize){
+        SmartDeviceCamera sc = (SmartDeviceCamera) this.factory.get(oldFactorycode);
 
-        if(!NewFactorycode.equals("#")) sc.setFactoryCode(NewFactorycode);
+        if(!newFactorycode.equals("#")){
+            sc.setFactoryCode(newFactorycode);
+            this.factory.put(newFactorycode,sc);
+            this.factory.remove(oldFactorycode);
+        }
         if(!energyConsumption.equals("#")) sc.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals("#")) sc.setInstallationCost( Double.parseDouble(installationCost) );
         if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(resolution));
