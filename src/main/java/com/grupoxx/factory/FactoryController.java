@@ -55,68 +55,74 @@ public class FactoryController {
     private void SmartDeviceBulbChoice(){
         String[] components = menu.MenuSmartBulbAdd();
         if (components == null) SmartDeviceAddChoice();
-        this.repository.SmartDeviceBulbAdd(
-                        components[0],
-                        Double.parseDouble(components[1]),
-                        Double.parseDouble(components[2]),
-                        Double.parseDouble(components[3]));
+        else {
+            this.repository.SmartDeviceBulbAdd(
+                    components[0],
+                    Double.parseDouble(components[1]),
+                    Double.parseDouble(components[2]),
+                    Double.parseDouble(components[3]));
 
-        this.mainController.getFactory().setDeviceAvailability(components[0],true);
-        SmartDeviceBulbChoice();
-
+            this.mainController.getFactory().setDeviceAvailability(components[0], true);
+            SmartDeviceBulbChoice();
+        }
     }
 
-    private void SmartDeviceSpeakerChoice(){
+    private void SmartDeviceSpeakerChoice() {
         String[] components = menu.MenuSmartSpeakerAdd();
-        if ( components == null ) SmartDeviceAddChoice();
-        this.repository.SmartDeviceSpeakerAdd(
-                        components[0],
-                        Double.parseDouble(components[1]),
-                        Double.parseDouble(components[2]),
-                        components[3],
-                        Integer.parseInt(components[4]));
+        if (components == null) SmartDeviceAddChoice();
+        else {
+            this.repository.SmartDeviceSpeakerAdd(
+                    components[0],
+                    Double.parseDouble(components[1]),
+                    Double.parseDouble(components[2]),
+                    components[3],
+                    Integer.parseInt(components[4]));
 
-        this.mainController.getFactory().setDeviceAvailability(components[0],true);
-        SmartDeviceSpeakerChoice();
+
+            this.mainController.getFactory().setDeviceAvailability(components[0], true);
+            SmartDeviceSpeakerChoice();
+        }
     }
-
     private void SmartDeviceCameraChoice(){
 
         String[] components = menu.MenuSmartCamaraAdd();
         if ( components == null ) SmartDeviceAddChoice();
 
-        this.repository.SmartDeviceCameraAdd(
-                        components[0],
-                        Double.parseDouble(components[1]),
-                        Double.parseDouble(components[2]),
-                        Integer.parseInt(components[3]),
-                        Integer.parseInt(components[4]));
+        else {
+            this.repository.SmartDeviceCameraAdd(
+                    components[0],
+                    Double.parseDouble(components[1]),
+                    Double.parseDouble(components[2]),
+                    Integer.parseInt(components[3]),
+                    Integer.parseInt(components[4]));
 
-        this.mainController.getFactory().setDeviceAvailability(components[0],true);
-        SmartDeviceCameraChoice();
-
+            this.mainController.getFactory().setDeviceAvailability(components[0], true);
+            SmartDeviceCameraChoice();
+        }
     }
 
-    private void SmartDeviceRemoveChoice(){
+    private void SmartDeviceRemoveChoice() {
         System.out.println(this.repository.getFactory());
 
         String component = menu.MenuTipoDispositivoRemove();
         if (component == null) SmartDiviceOperationChoice();
 
-        this.repository.SmartDeviceRemove(component);
+        else {
+            this.repository.SmartDeviceRemove(component);
 
-        this.mainController.getFactory().deleteDevice(component);
+            this.mainController.getFactory().deleteDevice(component);
 
-        SmartDeviceRemoveChoice();
+            SmartDeviceRemoveChoice();
+        }
     }
-
     private void SmartDeviceUpdateChoice(){
         System.out.println(this.repository.getFactory());
 
         String [] components = menu.MenuDiviceUpdate();
         if (components == null) SmartDiviceOperationChoice();
 
-        SmartDevice sd = this.repository.getDevice(components[0]);
+        else {
+            SmartDevice sd = this.repository.getDevice(components[0]);
 
             if (sd instanceof SmartDeviceBulb) SmartDeviceBulbUpdateChoice(components);
 
@@ -125,28 +131,32 @@ public class FactoryController {
             if (sd instanceof SmartDeviceCamera) SmartDeviceCameraUpdateChoice(components);
 
         }
+    }
 
-    private void SmartDeviceBulbUpdateChoice(String[] components){
+    private void SmartDeviceBulbUpdateChoice(String[] components) {
 
         String component = menu.MenuSmartBulbUpdate();
         if (component == null) SmartDeviceUpdateChoice();
 
-        this.repository.SmartDeviceBulbUpdade(
-                components[0],
-                components[1],
-                components[2],
-                components[3],
-                component);
+        else {
+            this.repository.SmartDeviceBulbUpdade(
+                    components[0],
+                    components[1],
+                    components[2],
+                    components[3],
+                    component);
 
 
-        SmartDeviceUpdateChoice();
+            SmartDeviceUpdateChoice();
+        }
     }
 
     private void SmartDeviceSpeakerUpdateChoice(String [] components){
         String [] components1 = menu.MenuSmartSpeakerUpdate();
         if (components1 == null) SmartDeviceUpdateChoice();
 
-        this.repository.SmartDeviceSpeakerUpdate(
+        else{
+            this.repository.SmartDeviceSpeakerUpdate(
                 components[0],
                 components[1],
                 components[2],
@@ -157,23 +167,24 @@ public class FactoryController {
 
         SmartDeviceUpdateChoice();
 
+        }
     }
+
     private void SmartDeviceCameraUpdateChoice(String [] components){
         String [] components1 = menu.MenuSmartCamaraUpdate();
         if (components1 == null) SmartDeviceUpdateChoice();
 
-        this.repository.SmartDeviceCameraUpdate(
-                components[0],
-                components[1],
-                components[2],
-                components[3],
-                components1[4],
-                components1[5]);
+        else {
+            this.repository.SmartDeviceCameraUpdate(
+                    components[0],
+                    components[1],
+                    components[2],
+                    components[3],
+                    components1[4],
+                    components1[5]);
+            SmartDeviceUpdateChoice();
 
-
-        SmartDeviceUpdateChoice();
-
-
+        }
     }
 
     private void SmartDeviceStateChoice(){
