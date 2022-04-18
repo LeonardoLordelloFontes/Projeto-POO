@@ -4,11 +4,9 @@ import com.grupoxx.factory.Factory;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import jdk.jshell.Snippet;
+import org.junit.platform.commons.util.StringUtils;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SmartHouseMenu {
@@ -33,9 +31,17 @@ public class SmartHouseMenu {
                 Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        if (option < 1 || option > 5) return -1;
-        return option;
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 5) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+            return -1;
+        }
     }
 
     /**

@@ -1,14 +1,15 @@
-package com.grupoxx.smartdevice;
+package com.grupoxx.factory;
 
 import com.grupoxx.main.MainController;
+import com.grupoxx.smartdevice.SmartDeviceRepository;
 
-import static com.grupoxx.smartdevice.SmartDeviceMenu.*;
+import static com.grupoxx.factory.FactoryMenu.*;
 
-public class SmartDeviceController {
+public class FactoryController {
     private SmartDeviceRepository repository;
     private MainController mainController;
 
-    public SmartDeviceController(MainController mainController){
+    public FactoryController(MainController mainController){
         this.repository = mainController.getFactory().getSmartDeviceRepository();
         SmartDiviceOperationChoice();
 
