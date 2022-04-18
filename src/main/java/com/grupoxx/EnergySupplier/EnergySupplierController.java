@@ -22,7 +22,7 @@ public class EnergySupplierController {
             case 3:
                 updateEnergySupplierController();
             case 4:
-                //voltar ao menu fornecedor de energia
+                //todo
         }
     }
 
@@ -34,14 +34,24 @@ public class EnergySupplierController {
         this.energySupplierRepository.addEnergySupplier(input[0], input[1]);
         energySupplierController();
     }
-    public void updateEnergySupplierController() {
+    public void updateEnergySupplierNameController() {
         String[] input = MainMenu.AtualizarFornecedordeEnergia();
         if(input.equals(null)) energySupplierController();
 
-        // this.energySupplierRepository.updateEnergySupplier(input[0],input[1],input[2],input[3]);
+        // this.energySupplierRepository.updateEnergySupplierName(input[0],input[1]);
+        energySupplierController();
+    }
+    public void updateEnergySupplierFormulaController() {
+        String[] input = MainMenu.AtualizarFornecedordeEnergia();
+        if(input.equals(null)) energySupplierController();
+
+        // this.energySupplierRepository.updateEnergySupplierFormula(input[0],input[1]);
         energySupplierController();
     }
     public void removeEnergySupplierController() {
-        //Todo
+        String[] input = MainMenu.AtualizarFornecedordeEnergia();
+        if(input.equals(null)) energySupplierController();
+
+        this.energySupplierRepository.removeEnergySupplier(input[0],input[1];
     }*/
 }

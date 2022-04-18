@@ -1,14 +1,12 @@
 package com.grupoxx.smartdevice;
 
-import com.grupoxx.smarthouse.SmartHouse;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class SmartDeviceRepository {
+
     private Map<String,SmartDevice> factory = new HashMap<>();
 
     public SmartDeviceRepository() {
@@ -213,4 +211,5 @@ public class SmartDeviceRepository {
     }
 
     public Map<String, SmartDevice> getFactory() { return factory;}
+
 }
