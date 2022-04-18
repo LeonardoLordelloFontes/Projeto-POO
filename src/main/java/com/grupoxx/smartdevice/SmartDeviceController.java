@@ -1,10 +1,6 @@
 package com.grupoxx.smartdevice;
 
 
-import com.grupoxx.menu.Menu;
-
-import static com.grupoxx.menu.Menu.*;
-
 
 import com.grupoxx.main.MainController;
 
