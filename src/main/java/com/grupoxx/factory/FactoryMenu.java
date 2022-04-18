@@ -3,6 +3,7 @@ package com.grupoxx.factory;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ import static java.lang.Integer.parseInt;
 
 public class FactoryMenu {
 
-        public static int MenuTipoDispositivoOperacoes() {
+        public int MenuTipoDispositivoOperacoes() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
             sb.append("1. Adicionar Dispositivo \n");
             sb.append("2. Remover Dispositivo \n");
@@ -22,10 +23,20 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
             Scanner scanner = new Scanner(System.in);
-            return scanner.nextInt();
+            try {
+                int option = scanner.nextInt();
+                if (option < 1 || option > 5) {
+                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                    return -1;
+                }
+                return option;
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
         }
 
-        public static int MenuTipoDispositivoAdd() {
+        public int MenuTipoDispositivoAdd() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
             sb.append("1. Adicionar  SmartBulb \n");
             sb.append("2. Adicionar  SmartSpeaker\n");
@@ -34,10 +45,20 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
             Scanner scanner = new Scanner(System.in);
-            return scanner.nextInt();
+            try {
+                int option = scanner.nextInt();
+                if (option < 1 || option > 5) {
+                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                    return -1;
+                }
+                return option;
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
         }
 
-        public static String[] MenuDiviceAdd(){
+        public String[] MenuDiviceAdd(){
             String[] input = new String[3];
             Scanner scanner = new Scanner(System.in);
 
@@ -57,7 +78,7 @@ public class FactoryMenu {
         }
 
 
-        public static String[] MenuSmartBulbAdd() {
+        public String[] MenuSmartBulbAdd() {
             String[] input = new String[4];
             Scanner scanner = new Scanner(System.in);
             System.out.println("-----------Smart Bulb-----------\n\n");
@@ -74,7 +95,7 @@ public class FactoryMenu {
             return input;
         }
 
-        public static String[] MenuSmartSpeakerAdd() {
+        public  String[] MenuSmartSpeakerAdd() {
             String [] input = new String[5];
             Scanner scanner = new Scanner(System.in);
             System.out.println("-----------Smart Speaker-----------\n\n");
@@ -95,7 +116,7 @@ public class FactoryMenu {
 
             return input;
         }
-        public static String[] MenuSmartCamaraAdd() {
+        public String[] MenuSmartCamaraAdd() {
             String [] input = new String[5];
             Scanner scanner = new Scanner(System.in);
             System.out.println("-----------Smart Camara-----------\n\n");
@@ -116,7 +137,7 @@ public class FactoryMenu {
 
             return input;
         }
-        public static String MenuTipoDispositivoRemove(){
+        public String MenuTipoDispositivoRemove(){
             String input = "*";
             Scanner scanner = new Scanner(System.in);
             System.out.print("-----------Remover Dispositivos-----------\n\n");
@@ -129,7 +150,7 @@ public class FactoryMenu {
             return input;
         }
 
-    public static int MenuSmartDiviceProperties(){
+    public int MenuSmartDiviceProperties(){
         StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
         sb.append("Qua o tipo de despositivo que pretende alterar as suas propriedades?\n");
         sb.append("1. Smart Bulb \n");
@@ -140,9 +161,20 @@ public class FactoryMenu {
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();}
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 5) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+            return -1;
+            }
+        }
 
-    public static int MenuSmartSpeakerProperties(){
+    public int MenuSmartSpeakerProperties(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("------------Alterar propriedades em SmartSpeaker----------\n\n");
 
@@ -154,10 +186,20 @@ public class FactoryMenu {
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
 
-        return scanner.nextInt();
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 5) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+            return -1;
+        }
     }
 
-    public static  String[] MenuSmartSpeakerPropertiesEspecific(){
+    public String[] MenuSmartSpeakerPropertiesEspecific(){
         String input[] = new String[3];
         String answer = "N";
         Scanner scanner = new Scanner(System.in);
@@ -196,7 +238,7 @@ public class FactoryMenu {
     }
 
 
-    public static String MenuSmartSpeakerVolume(){
+    public String MenuSmartSpeakerVolume(){
         Scanner scanner = new Scanner(System.in);
         String input;
         System.out.print("-----------Alterar o Volume Atual de Todos os SmartSeaker-----------\n\n");
@@ -208,7 +250,7 @@ public class FactoryMenu {
         return input;
     }
 
-    public static String MenuSmartSpeakerRadioStation(){
+    public String MenuSmartSpeakerRadioStation(){
         Scanner scanner = new Scanner(System.in);
         String input;
         System.out.print("-----------Alterar a Estação de Rádio de Todos os SmartSeaker-----------\n\n");
@@ -220,7 +262,7 @@ public class FactoryMenu {
         return input;
     }
 
-    public static int MenuSmartBulbToneChange(){
+    public int MenuSmartBulbToneChange(){
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("------------Alterar Tonalidade em SmartBulb----------\n\n");
@@ -233,11 +275,20 @@ public class FactoryMenu {
         sb.append("5. Voltar \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
-
-        return scanner.nextInt();
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 5) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+            return -1;
+            }
         }
 
-    public static String[] MenuSmartBulbEspecificToneChange(){
+    public String[] MenuSmartBulbEspecificToneChange(){
         String input[] = new String[2];
         Scanner scanner = new Scanner(System.in);
         System.out.print("-----------Alterar a Tonalidade do SmartBulb -----------\n\n");
@@ -260,7 +311,7 @@ public class FactoryMenu {
         return input;
     }
 
-    public static String[] MenuDiviceUpdate(){
+    public String[] MenuDiviceUpdate(){
 
         String [] input = new String[4];
         Scanner scanner = new Scanner(System.in);
@@ -310,7 +361,7 @@ public class FactoryMenu {
         return input;
     }
 
-        public static String MenuSmartBulbUpdate() {
+        public String MenuSmartBulbUpdate() {
             String input;
             String answer = "*";
             Scanner scanner = new Scanner(System.in);
@@ -329,7 +380,7 @@ public class FactoryMenu {
 
             return input;
         }
-        public static String[] MenuSmartSpeakerUpdate() {
+        public String[] MenuSmartSpeakerUpdate() {
             String input[] = new String[2];
             String answer = "*";
             Scanner scanner = new Scanner(System.in);
@@ -362,7 +413,7 @@ public class FactoryMenu {
 
             return input;
         }
-        public static String[] MenuSmartCamaraUpdate() {
+        public String[] MenuSmartCamaraUpdate() {
 
             String input[] = new String[6];
             String answer = "N";
@@ -398,7 +449,7 @@ public class FactoryMenu {
 
         }
 
-        public static int MenuSmartDeviceState(){
+        public int MenuSmartDeviceState(){
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("-----------ligar e Desligar Dispositivos-----------\n\n");
@@ -413,10 +464,20 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
 
-            return scanner.nextInt();
+            try {
+                int option = scanner.nextInt();
+                if (option < 1 || option > 5) {
+                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                    return -1;
+                }
+                return option;
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
         }
 
-        public static int MenuSmartDeviceOffAndOn(){
+        public int MenuSmartDeviceOffAndOn(){
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("-----------ligar ou Desligar-----------\n\n");
@@ -428,9 +489,20 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
 
-            return scanner.nextInt();
+            try {
+                int option = scanner.nextInt();
+                if (option < 1 || option > 5) {
+                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                    return -1;
+                }
+                return option;
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
         }
-        public static String SmartDeviceEspecificOffAndOn(){
+
+        public String SmartDeviceEspecificOffAndOn(){
             String input = "N";
             Scanner scanner = new Scanner(System.in);
             System.out.print("-----------Ligar ou Desligar Dispositivos-----------\n\n");

@@ -117,58 +117,30 @@ public class SmartDeviceRepository {
         if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(fileSize));
     }
 
-
-    public void SmartDeviceState(String deviceToTurn, int turn){
+    public void SmartDeviceState(String deviceToTurn, SmartDevice.State turn){
 
         if(deviceToTurn.equals("sb")){
-            if (turn == 1)
                 for(SmartDevice sb: this.factory.values())
-                    if (sb instanceof SmartDeviceBulb) sb.setState(SmartDevice.State.ON);
-
-            else
-                for(SmartDevice sbb: this.factory.values())
-                    if (sbb instanceof SmartDeviceBulb) sbb.setState(SmartDevice.State.OFF);
-
-            }
+                    if (sb instanceof SmartDeviceBulb) sb.setState(turn);}
 
         if(deviceToTurn.equals("ss")){
-            if (turn == 1)
                 for(SmartDevice ss: this.factory.values())
-                    if (ss instanceof SmartDeviceSpeaker) ss.setState(SmartDevice.State.ON);
-
-            else
-                for(SmartDevice sss: this.factory.values())
-                    if (sss instanceof SmartDeviceSpeaker) sss.setState(SmartDevice.State.OFF);
-        }
+                    if (ss instanceof SmartDeviceSpeaker) ss.setState(turn);}
 
         if(deviceToTurn.equals("sc")){
-            if (turn == 1)
                 for(SmartDevice sc: this.factory.values())
-                    if (sc instanceof SmartDeviceCamera) sc.setState(SmartDevice.State.ON);
-
-            else
-                for(SmartDevice scc: this.factory.values())
-                    if (scc instanceof SmartDeviceCamera) scc.setState(SmartDevice.State.OFF);
-        }
+                    if (sc instanceof SmartDeviceCamera) sc.setState(turn);}
 
         else{
-            if (turn == 1)
-                for(SmartDevice sd: this.factory.values())
-                    sd.setState(SmartDevice.State.ON);
-
-            else
-                for(SmartDevice sdd: this.factory.values())
-                    sdd.setState(SmartDevice.State.OFF);}
+            for(SmartDevice sd: this.factory.values())
+                    sd.setState(turn);}
     }
 
-    public void SmartEpecificDiviceState(String factoryCode, int turn){
+    public void SmartEpecificDiviceState(String factoryCode, SmartDevice.State turn){
 
-        if (turn == 1) this.factory.get(factoryCode).setState(SmartDevice.State.ON);
-
-        else this.factory.get(factoryCode).setState(SmartDevice.State.OFF);
+        this.factory.get(factoryCode).setState(turn);
 
     }
-
 
     public void SmartDeviceTone(String tone){
 
