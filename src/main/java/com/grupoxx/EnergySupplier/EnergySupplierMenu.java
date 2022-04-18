@@ -5,7 +5,26 @@ import java.util.Scanner;
 
 public class EnergySupplierMenu {
 
-    public static String smartHouseSelectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
+    public String updateEnergySupplierFormulaMenu() {
+        String sb = """
+                -----------Regras na criação das fórmulas-----------
+                
+                * Ambas os valores das variáveis do ponto 1 e 2 estão definidas no arranque do sistema, deves apenas utiliza-las
+                
+                1 - Deverá ser utilziada a variável ValorBase que é o custo diário do kwh de energia
+                2 - Deverá ser utilizada a variável Imposto que é o factor multiplicativo dos impostos
+                3 - Deverá ser utilizada a variável ConsumoDispositivo que é o gasto energético do dispositivo
+                4 - Opcionalmente podes utilizar a variável numeroDispositivos e eventualmente utilizar algum if-then-else para manipular a formula
+
+                Digite a fórmula seguindo as regras (para cancelar digite *):\s""";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(sb);
+        String input = scanner.nextLine();
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    public String selectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
             System.out.println("Não há fornecedores de energia disponíveis");

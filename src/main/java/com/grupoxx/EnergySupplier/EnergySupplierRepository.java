@@ -2,8 +2,6 @@ package com.grupoxx.EnergySupplier;
 
 import com.grupoxx.EnergySupplier.exception.EnergySupplierAlreadyExists;
 import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
-import com.grupoxx.smarthouse.SmartHouse;
-import com.grupoxx.smarthouse.exception.HouseNotFound;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +37,7 @@ public class EnergySupplierRepository {
    public void updateEnergySupplierFormula(String name, String newFormula) throws EnergySupplierNotFound {
         if (energySuppliers.get(name) == null)
             throw new EnergySupplierNotFound("O Fornecedor de energia " + name + " não existe");
-        energySuppliers.get(name).setTotalcost(newFormula);
+        energySuppliers.get(name).setFormula(newFormula);
     }
 
     public void removeEnergySupplier(String name, String formula) throws EnergySupplierNotFound {

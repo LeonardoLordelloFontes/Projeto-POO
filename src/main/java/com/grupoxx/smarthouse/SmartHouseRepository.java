@@ -206,4 +206,16 @@ public class SmartHouseRepository {
             throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");
         return new ArrayList<>(smartHouses.get(address).getSmartDevices().keySet());
     }
+
+    /**
+     * Permite obter o número de dispositivos de uma casa
+     *
+     * @param address o endereço da casa que desejamos obter o número de dispositivos
+     * @return o número de dispositivos de uma casa
+     */
+
+    public int findNumberOfDevicesSmartHouse(String address) {
+        return smartHouses.get(address).getSmartDevices().values().
+                stream().mapToInt(smartDeviceRepository -> smartDeviceRepository.findAllSmartDevices().size()).sum();
+    }
 }
