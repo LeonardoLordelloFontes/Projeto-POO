@@ -5,12 +5,13 @@ import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.smarthouse.SmartHouse;
 import com.grupoxx.smarthouse.exception.HouseNotFound;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class EnergySupplierRepository {
-    private Map<String, EnergySupplier> energySuppliers;
+    private Map<String, EnergySupplier> energySuppliers; // Nome do energySupplier -> EnergySupplier
     public EnergySupplierRepository() {
         this.energySuppliers = new HashMap<>();
     }
@@ -45,12 +46,10 @@ public class EnergySupplierRepository {
         if (energySuppliers.get(name) == null)
             throw new EnergySupplierNotFound("O Fornecedor de energia " + name + " não existe");
         this.energySuppliers.remove(name);
-        this.energySuppliers.remove(formula);
     }
 
-
     public List<EnergySupplier> findAllEnergySuppliers() {
-        return null;
+        return new ArrayList<>(energySuppliers.values());
     }
 
     public Map<String, EnergySupplier> getEnergySuppliers() {

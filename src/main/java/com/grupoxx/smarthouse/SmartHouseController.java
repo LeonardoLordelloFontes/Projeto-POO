@@ -26,6 +26,7 @@ public class SmartHouseController {
 
     private void smartHouse() {
         int choice = menu.smartHouse();
+        if (choice == -1) smartHouse();
         switch (choice) {
             case 1 -> addSmartHouse();
             case 2 -> removeSmartHouse();

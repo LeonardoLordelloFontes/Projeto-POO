@@ -1,15 +1,15 @@
-package com.grupoxx.smartdevice;
+package com.grupoxx.factory;
 
-import com.grupoxx.smarthouse.SmartHouseRepository;
+import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smartdevice.SmartDeviceRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
-public abstract class SmartDeviceMenu {
+public class FactoryMenu {
 
         public static int MenuTipoDispositivoOperacoes() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
