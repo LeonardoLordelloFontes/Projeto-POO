@@ -25,7 +25,7 @@ public class SmartDeviceRepository {
 
     public void addSmartDevice(String factoryCode, SmartDevice smartDevice) {
         // TODO, tratamento de exceções
-        factory.put(factoryCode, smartDevice.clone());
+        factory.put(factoryCode, smartDevice);
     }
 
     public boolean SmartDeviceBulbAdd(String factorycode,  double installationCost, double energyConsumption, double dimension ){

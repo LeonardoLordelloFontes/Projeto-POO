@@ -37,7 +37,7 @@ public class SmartHouseController {
             case 1 -> addSmartHouseController();
             case 2 -> removeSmartHouseController();
             case 3 -> selectSmartHouseController();
-            case 4 -> listSmartHouses();
+            case 4 -> listSmartHousesController();
             case 5 -> this.mainController.mainController();
         }
     }
@@ -112,9 +112,9 @@ public class SmartHouseController {
     private void updateSmartHouseController(String address) {
         switch (menu.updateSmartHouse()) {
             case -1 -> updateSmartHouseController(address);
-            case 1 -> addRoom(address);
-            case 2 -> removeRoom(address);
-            case 3 -> updateSmartDevices(address);
+            case 1 -> addRoomController(address);
+            case 2 -> removeRoomController(address);
+            case 3 -> selectSmartDeviceController(address);
             case 4 -> updateAddress(address);
             case 5 -> updateEnergySupplier(address);
             case 6 -> updateOwner(address);
@@ -126,7 +126,7 @@ public class SmartHouseController {
      * Controlador da listagem de casas
      */
 
-    private void listSmartHouses() {
+    private void listSmartHousesController() {
         menu.listSmartHouses(smartHouses.findAllSmartHouses());
         smartHouseController();
     }
@@ -137,50 +137,64 @@ public class SmartHouseController {
      * @param address o endereço da casa que desejamos adicionar divisões
      */
 
-    private void addRoom(String address) {
+    private void addRoomController(String address) {
         String room = menu.addRoom();
         if (room == null) updateSmartHouseController(address);
         else {
             try {
                 smartHouses.addRoomToHouse(address, room);
-                addRoom(address);
+                addRoomController(address);
             } catch (RoomAlreadyExists e) {
                 System.out.println(e.getMessage());
-                addRoom(address);
+                addRoomController(address);
             }
         }
     }
 
     /**
+     * Controlador da remoção de divisões de uma casa
      *
-     * @param address
+     * @param address o endereço da casa que desejamos remover divisões
      */
 
-    private void removeRoom(String address) {
+    private void removeRoomController(String address) {
         String room = menu.removeRoom(smartHouses, address);
         if (room == null) updateSmartHouseController(address);
         else {
             try {
                 smartHouses.removeRoomFromHouse(address, room);
-                removeRoom(address);
+                removeRoomController(address);
             } catch (RoomNotFound e) {
                 System.out.println(e.getMessage());
-                removeRoom(address);
+                removeRoomController(address);
             }
         }
     }
 
-    private void updateSmartDevices(String address) {
+    /**
+     * Controlador da seleção da divisão da casa que desejamos atualizar os dispositivos
+     *
+     * @param address o endereço da casa
+     */
+
+    private void selectSmartDeviceController(String address) {
         String room = menu.selectRoom(smartHouses, address);
         if (room == null) updateSmartHouseController(address);
         else {
-            updateSmartDevices(address, room);
+            updateSmartDevicesController(address, room);
         }
     }
 
-    private void updateSmartDevices(String address, String room) {
+    /**
+     * Controlador da atualização de dispositivos de uma divisão de uma casa
+     *
+     * @param address o endereço da casa
+     * @param room a divisão da casa
+     */
+
+    private void updateSmartDevicesController(String address, String room) {
         switch (menu.updateSmartDevices()) {
-            case -1 -> updateSmartDevices(address, room);
+            case -1 -> updateSmartDevicesController(address, room);
             case 1 -> addDevice(address, room);
             case 2 -> removeDevice(address, room);
             case 3 -> connectAllRoomDevices(address, room);
@@ -194,7 +208,7 @@ public class SmartHouseController {
     // precisa de verificação
     private void addDevice(String address, String room) {
         String factoryCode = menu.addDevice(factory);
-        if (factoryCode == null) updateSmartDevices(address, room);
+        if (factoryCode == null) updateSmartDevicesController(address, room);
         else {
             factory.setDeviceAvailability(factoryCode, false);
             SmartDevice smartDevice = factory.getSmartDeviceRepository().findSmartDeviceByFactoryCode(factoryCode);
@@ -205,7 +219,7 @@ public class SmartHouseController {
 
     private void removeDevice(String address, String room) {
         String factoryCode = menu.removeSmartDeviceMenu(smartHouses.findSmartDevicesByRoom(address, room));
-        if (factoryCode == null) updateSmartDevices(address, room);
+        if (factoryCode == null) updateSmartDevicesController(address, room);
         else {
             factory.setDeviceAvailability(factoryCode, true);
             smartHouses.findSmartDevicesByRoom(address, room).SmartDeviceRemove(factoryCode);
@@ -215,13 +229,13 @@ public class SmartHouseController {
     private void connectAllRoomDevices(String address, String room) {
         smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
                 .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.ON));
-        updateSmartDevices(address, room);
+        updateSmartDevicesController(address, room);
     }
 
     private void disconnectAllRoomDevices(String address, String room) {
         smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
                 .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.OFF));
-        updateSmartDevices(address, room);
+        updateSmartDevicesController(address, room);
     }
 
     private void connectDevice(String address, String room) {
