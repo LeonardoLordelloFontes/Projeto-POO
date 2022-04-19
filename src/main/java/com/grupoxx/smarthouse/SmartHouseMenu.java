@@ -1,6 +1,7 @@
 package com.grupoxx.smarthouse;
 
 import com.grupoxx.EnergySupplier.EnergySupplier;
+import com.grupoxx.EnergySupplier.EnergySupplierMenu;
 import com.grupoxx.EnergySupplier.EnergySupplierRepository;
 import com.grupoxx.factory.Factory;
 import com.grupoxx.smartdevice.SmartDevice;
@@ -309,19 +310,13 @@ public class SmartHouseMenu {
      */
 
     public String updateEnergySupplierMenu(EnergySupplierRepository energySupplierRepository, String oldEnergySupplier) {
-        List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
-        energySuppliers.remove(energySupplierRepository.getEnergySupplierByName(oldEnergySupplier));
-        if (energySuppliers.size() == 0) {
-            System.out.println("Não há fornecedores de energia disponíveis para atualizar");
+        EnergySupplierMenu menu = new EnergySupplierMenu();
+        String selectedEnergySupplier = menu.selectEnergySupplierMenu(energySupplierRepository);
+        if (selectedEnergySupplier.equals(oldEnergySupplier)) {
+            System.out.println("Este já o teu fornecedor de energia");
             return null;
         }
-        StringBuilder sb = new StringBuilder("-----------Atualizar Fornecedor de Energia-----------\n\n");
-        energySuppliers.forEach(energySupplier -> sb.append(energySupplier).append("\n"));
-        sb.append("Selecione o fornecedor de energia pelo nome (para cancelar digite *): ");
-        System.out.println(sb);
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if (input.equals("*")) return null;
-        return input;
+        if (selectedEnergySupplier.equals("*")) return null;
+        return selectedEnergySupplier;
     }
 }

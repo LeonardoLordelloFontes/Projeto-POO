@@ -115,9 +115,9 @@ public class SmartHouseController {
             case 1 -> addRoomController(address);
             case 2 -> removeRoomController(address);
             case 3 -> selectSmartDeviceController(address);
-            case 4 -> updateAddress(address);
-            case 5 -> updateEnergySupplier(address);
-            case 6 -> updateOwner(address);
+            case 4 -> updateAddressController(address);
+            case 5 -> updateEnergySupplierController(address);
+            case 6 -> updateOwnerController(address);
             case 7 -> smartHouseController();
         }
     }
@@ -195,29 +195,28 @@ public class SmartHouseController {
     private void updateSmartDevicesController(String address, String room) {
         switch (menu.updateSmartDevices()) {
             case -1 -> updateSmartDevicesController(address, room);
-            case 1 -> addDevice(address, room);
-            case 2 -> removeDevice(address, room);
-            case 3 -> connectAllRoomDevices(address, room);
-            case 4 -> disconnectAllRoomDevices(address, room);
-            case 5 -> connectDevice(address, room);
-            case 6 -> disconnectDevice(address, room);
+            case 1 -> addSmartDeviceController(address, room);
+            case 2 -> removeSmartDeviceController(address, room);
+            case 3 -> connectAllRoomSmartDevicesController(address, room);
+            case 4 -> disconnectAllRoomSmartDevicesController(address, room);
+            case 5 -> connectSmartDeviceController(address, room);
+            case 6 -> disconnectSmartDeviceController(address, room);
             case 7 -> updateSmartHouseController(address);
         }
     }
 
-    // precisa de verificação
-    private void addDevice(String address, String room) {
+    private void addSmartDeviceController(String address, String room) {
         String factoryCode = menu.addDevice(factory);
         if (factoryCode == null) updateSmartDevicesController(address, room);
         else {
             factory.setDeviceAvailability(factoryCode, false);
             SmartDevice smartDevice = factory.getSmartDeviceRepository().findSmartDeviceByFactoryCode(factoryCode);
             smartHouses.findSmartDevicesByRoom(address, room).addSmartDevice(factoryCode, smartDevice);
-            addDevice(address, room);
+            addSmartDeviceController(address, room);
         }
     }
 
-    private void removeDevice(String address, String room) {
+    private void removeSmartDeviceController(String address, String room) {
         String factoryCode = menu.removeSmartDeviceMenu(smartHouses.findSmartDevicesByRoom(address, room));
         if (factoryCode == null) updateSmartDevicesController(address, room);
         else {
@@ -226,31 +225,33 @@ public class SmartHouseController {
         }
     }
 
-    private void connectAllRoomDevices(String address, String room) {
+    private void connectAllRoomSmartDevicesController(String address, String room) {
         smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
                 .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.ON));
         updateSmartDevicesController(address, room);
     }
 
-    private void disconnectAllRoomDevices(String address, String room) {
+    private void disconnectAllRoomSmartDevicesController(String address, String room) {
         smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
                 .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.OFF));
         updateSmartDevicesController(address, room);
     }
 
-    private void connectDevice(String address, String room) {
+    private void connectSmartDeviceController(String address, String room) {
         SmartDeviceRepository smartDevices = smartHouses.findSmartDevicesByRoom(address, room);
         String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
         smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.ON);
+        updateSmartDevicesController(address, room);
     }
 
-    private void disconnectDevice(String address, String room) {
+    private void disconnectSmartDeviceController(String address, String room) {
         SmartDeviceRepository smartDevices = smartHouses.findSmartDevicesByRoom(address, room);
         String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
         smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.OFF);
+        updateSmartDevicesController(address, room);
     }
 
-    private void updateAddress(String oldAddress) {
+    private void updateAddressController(String oldAddress) {
         String newAddress = menu.updateAddress();
         if (newAddress == null) updateSmartHouseController(oldAddress);
         else {
@@ -264,7 +265,7 @@ public class SmartHouseController {
         }
     }
 
-    private void updateEnergySupplier(String address) {
+    private void updateEnergySupplierController(String address) {
         String newEnergySupplier = menu.updateEnergySupplierMenu(energySuppliers, smartHouses.findHouseByAddress(address).getEnergySupplier());
         if (newEnergySupplier == null) updateSmartHouseController(address);
         else {
@@ -278,7 +279,7 @@ public class SmartHouseController {
         }
     }
 
-    private void updateOwner(String address) {
+    private void updateOwnerController(String address) {
         String[] newOwner = menu.updateOwner();
         if (newOwner == null) updateSmartHouseController(address);
         else {
