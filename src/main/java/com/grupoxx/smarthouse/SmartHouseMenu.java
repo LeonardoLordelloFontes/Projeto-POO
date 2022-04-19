@@ -10,12 +10,12 @@ import java.util.*;
 
 public class SmartHouseMenu {
 
-    private int optionsValidation(int min, int max) {
+    private int optionsValidation(int options) {
         Scanner scanner = new Scanner(System.in);
-        String s = "Opção inválida, digite um valor inteiro entre" + String.valueOf(min) + " e " + String.valueOf(max);
+        String s = "Opção inválida, digite um valor inteiro entre 1 e " + String.valueOf(options);
         try {
             int option = scanner.nextInt();
-            if (option < min || option > max) {
+            if (option < 1 || option > options) {
                 System.out.println(s);
                 return -1;
             }
@@ -45,7 +45,7 @@ public class SmartHouseMenu {
 
                 Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);
-        return optionsValidation(1, 5);
+        return optionsValidation(5);
     }
 
     /**
@@ -232,7 +232,7 @@ public class SmartHouseMenu {
 
                 Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);
-        return optionsValidation(1, 7);
+        return optionsValidation(7);
     }
 
     public String selectRoom(SmartHouseRepository smartHouseRepository, String address) {
@@ -265,8 +265,7 @@ public class SmartHouseMenu {
                 
                 Sua opção (Selecionar Número):\s""";
         System.out.print(sb);
-        Scanner scanner = new Scanner(System.in);
-        return optionsValidation(1, 7);
+        return optionsValidation(7);
     }
 
     /**
