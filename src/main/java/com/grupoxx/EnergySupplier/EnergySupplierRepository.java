@@ -2,6 +2,7 @@ package com.grupoxx.EnergySupplier;
 
 import com.grupoxx.EnergySupplier.exception.EnergySupplierAlreadyExists;
 import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
+import com.grupoxx.smarthouse.SmartHouseRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,13 +26,17 @@ public class EnergySupplierRepository {
        if (energySuppliers.get(name) != null)
            throw new EnergySupplierAlreadyExists("O Fonercedor de energia " + name + " já existe");
        EnergySupplier energySupplier = new EnergySupplier(name,formula);
-       energySuppliers.put(name,energySupplier);
+       energySuppliers.put(name, energySupplier);
    }
 
-   public void updateEnergySupplierName(String oldName, String newName) throws EnergySupplierNotFound {
+   public void updateEnergySupplierName(SmartHouseRepository smartHouses, String oldName, String newName) throws EnergySupplierNotFound {
         if (energySuppliers.get(oldName) == null)
             throw new EnergySupplierNotFound("O Fornecedor de energia " + oldName + " não existe");
-        energySuppliers.get(oldName).setName(newName);
+        EnergySupplier energySupplier = getEnergySupplierByName(oldName);
+        energySupplier.setName(newName);
+        energySuppliers.put(newName, energySupplier);
+        energySuppliers.remove(oldName);
+        smartHouses.findSmartHousesByEnergySupplier(oldName).forEach(smartHouse -> smartHouse.setEnergySupplier(newName));
    }
 
    public void updateEnergySupplierFormula(String name, String newFormula) throws EnergySupplierNotFound {
@@ -40,10 +45,11 @@ public class EnergySupplierRepository {
         energySuppliers.get(name).setFormula(newFormula);
     }
 
-    public void removeEnergySupplier(String name, String formula) throws EnergySupplierNotFound {
+    public void removeEnergySupplier(SmartHouseRepository smartHouses, String name) throws EnergySupplierNotFound {
         if (energySuppliers.get(name) == null)
             throw new EnergySupplierNotFound("O Fornecedor de energia " + name + " não existe");
-        this.energySuppliers.remove(name);
+        energySuppliers.remove(name);
+        smartHouses.findSmartHousesByEnergySupplier(name).forEach(smartHouse -> smartHouse.setEnergySupplier(null));
     }
 
     public List<EnergySupplier> findAllEnergySuppliers() {

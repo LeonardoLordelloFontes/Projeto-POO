@@ -194,6 +194,18 @@ public class SmartHouseRepository {
     }
 
     /**
+     * Permite obter as casas que tem um determinado fornecedor de energia
+     *
+     * @param energySupplier o nome do fornecedor de energia
+     * @return a lista das casas com um determinado forncedor de energia
+     */
+
+    public List<SmartHouse> findSmartHousesByEnergySupplier(String energySupplier) {
+        return smartHouses.values().stream()
+                .filter(smartHouse -> smartHouse.getEnergySupplier().equals(energySupplier)).toList();
+    }
+
+    /**
      * Permite obter as divisões de uma casa
      *
      * @param address o endereço da casa

@@ -46,17 +46,24 @@ public class EnergySupplier {
     public String getFormula() {return formula;}
     public void setFormula(String formula) {this.formula = formula;}
 
-    //TODO
-    public double deviceEnergyCostPerDay(String formula, double energyConsumption, int numberOfDevices) throws ScriptException {
-        // tratar de erros com formula Ex: Vazio
+    public double deviceEnergyCostPerDay(String formula, double energyConsumption, int numberOfDevices) {
         ScriptEngineManager factory = new ScriptEngineManager();
         ScriptEngine engine = factory.getEngineByName("nashorn");
-        engine.eval("ValorBase = " + String.valueOf(BASE_COST));
-        engine.eval("Imposto = " + String.valueOf(TAX));
-        engine.eval("ConsumoDispositivo = " + String.valueOf(energyConsumption));
-        engine.eval("numeroDispositivos = " + String.valueOf(numberOfDevices));
-        return (double) engine.eval(formula);
+        try {
+            engine.eval("ValorBase = " + String.valueOf(BASE_COST));
+            engine.eval("Imposto = " + String.valueOf(TAX));
+            engine.eval("ConsumoDispositivo = " + String.valueOf(energyConsumption));
+            engine.eval("numeroDispositivos = " + String.valueOf(numberOfDevices));
+            return (double) engine.eval(formula);
+        } catch (ScriptException e) {
+            return -1;
+        }
     }
+
+    public double deviceEnergyCostPerSecond(String formula, double energyConsumption, int numberOfDevices) {
+        return deviceEnergyCostPerDay(formula, energyConsumption, numberOfDevices)/86400;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Energy Supplier: ");
