@@ -1,13 +1,12 @@
 package com.grupoxx.smarthouse;
 
+import com.grupoxx.EnergySupplier.EnergySupplier;
+import com.grupoxx.EnergySupplier.EnergySupplierRepository;
 import com.grupoxx.factory.Factory;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
-import jdk.jshell.Snippet;
-import org.junit.platform.commons.util.StringUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SmartHouseMenu {
 
@@ -116,6 +115,21 @@ public class SmartHouseMenu {
     }
 
     /**
+     * Menu para adicionar uma divisão a uma casa
+     *
+     * @return O nome da divisão da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
+     *         de escrita
+     */
+
+    public String addRoom() {
+        System.out.print("Nome da divisão (para cancelar digite *): ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    /**
      * Menu para remover uma divisão de uma casa
      *
      * @param smartHouseRepository o repositório de casas
@@ -125,6 +139,10 @@ public class SmartHouseMenu {
 
     public String removeRoom(SmartHouseRepository smartHouseRepository, String address) {
         List<String> rooms = smartHouseRepository.findAllRoomsFromSmartHouse(address);
+        if (rooms.size() == 0) {
+            System.out.println("Não há nenhuma divisão nesta casa");
+            return null;
+        }
         StringBuilder sb = new StringBuilder("-----------Remover Divisão-----------\n\n");
         rooms.forEach(room -> sb.append(room).append("\n"));
         sb.append("\nSelecione a divisão pelo nome (para cancelar digite *): ");
@@ -173,10 +191,10 @@ public class SmartHouseMenu {
      * @return o código de fábrica inserido pelo usuário, ou null, casa o usuário deseje cancelar a operação
      *         ou caso não tenha nenhum dispositivo disponível para remover
      */
-    public String removeDevice(SmartDeviceRepository smartDeviceRepository) {
+    public String removeSmartDeviceMenu(SmartDeviceRepository smartDeviceRepository) {
         List<SmartDevice> smartDevices = smartDeviceRepository.findAllSmartDevices();
         if (smartDevices.size() == 0) {
-            System.out.println("Não há nenhum dispositivo para ser removido");
+            System.out.println("Não há nenhum dispositivo nesta divisão");
             return null;
         }
         StringBuilder sb = new StringBuilder("-----------Dispositivos-----------\n\n");
@@ -210,9 +228,17 @@ public class SmartHouseMenu {
                 Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        if (option < 1 || option > 7) return -1;
-        return option;
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 7) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+            return -1;
+        }
     }
 
     public String selectRoom(SmartHouseRepository smartHouseRepository, String address) {
@@ -246,9 +272,17 @@ public class SmartHouseMenu {
                 Sua opção (Selecionar Número):\s""";
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        if (option < 1 || option > 7) return -1;
-        return option;
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 7) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+            return -1;
+        }
     }
 
     /**
@@ -285,29 +319,23 @@ public class SmartHouseMenu {
     }
 
     /**
-     * Menu para adicionar uma divisão a uma casa
-     *
-     * @return O nome da divisão da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
-     *         de escrita
-     */
-
-    public String addRoom() {
-        System.out.print("Nome da divisão (para cancelar digite *): ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if (input.equals("*")) return null;
-        return input;
-    }
-
-    /**
      * Menu que pode ser utilizado sempre que precisarmos pedir o nome do fornecedor de energia da casa para o usuário
      *
      * @return O nome do fornecedor de energia inserido pelo usuário, ou null, caso o usuário deseje cancelar
      *         a operação
      */
 
-    public String updateEnergySupplier() {
-        System.out.println("Nome do fornecedor de energia (para cancelar digite *): ");
+    public String updateEnergySupplierMenu(EnergySupplierRepository energySupplierRepository, String oldEnergySupplier) {
+        List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
+        energySuppliers.remove(energySupplierRepository.getEnergySupplierByName(oldEnergySupplier));
+        if (energySuppliers.size() == 0) {
+            System.out.println("Não há fornecedores de energia disponíveis para atualizar");
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("-----------Atualizar Fornecedor de Energia-----------\n\n");
+        energySuppliers.forEach(energySupplier -> sb.append(energySupplier).append("\n"));
+        sb.append("Selecione o fornecedor de energia pelo nome (para cancelar digite *): ");
+        System.out.println(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if (input.equals("*")) return null;

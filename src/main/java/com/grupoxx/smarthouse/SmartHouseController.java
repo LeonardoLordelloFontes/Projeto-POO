@@ -1,36 +1,42 @@
 package com.grupoxx.smarthouse;
 
+import com.grupoxx.EnergySupplier.EnergySupplierRepository;
 import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
+import com.grupoxx.factory.Factory;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.exception.HouseAddressAlreadyExists;
 import com.grupoxx.smarthouse.exception.HouseNotFound;
 import com.grupoxx.smarthouse.exception.RoomAlreadyExists;
 import com.grupoxx.smarthouse.exception.RoomNotFound;
 
-import static com.grupoxx.smarthouse.SmartHouseMenu.*;
-
 public class SmartHouseController {
     private final MainController mainController;
     private final SmartHouseMenu menu;
+    private final SmartHouseRepository smartHouses;
+    private final Factory factory;
+    private final EnergySupplierRepository energySuppliers;
 
     public SmartHouseController(MainController mainController) {
         this.mainController = mainController;
         this.menu = new SmartHouseMenu();
-        smartHouse();
+        this.smartHouses = mainController.getSmartHouseRepository();
+        this.factory = mainController.getFactory();
+        this.energySuppliers = mainController.getEnergySupplierRepository();
+        smartHouseController();
     }
 
     /**
      * Controlador principal da classe SmartHouseController
      */
 
-    private void smartHouse() {
-        int choice = menu.smartHouse();
-        if (choice == -1) smartHouse();
-        switch (choice) {
-            case 1 -> addSmartHouse();
-            case 2 -> removeSmartHouse();
-            case 3 -> updateSmartHouse();
+    private void smartHouseController() {
+        switch (menu.smartHouse()) {
+            case -1 -> smartHouseController();
+            case 1 -> addSmartHouseController();
+            case 2 -> removeSmartHouseController();
+            case 3 -> selectSmartHouseController();
             case 4 -> listSmartHouses();
             case 5 -> this.mainController.mainController();
         }
@@ -40,16 +46,16 @@ public class SmartHouseController {
      * Controlador da criação de casas
      */
 
-    private void addSmartHouse() {
+    private void addSmartHouseController() {
         String address = menu.addSmartHouse();
-        if (address == null) smartHouse();
+        if (address == null) smartHouseController();
         else {
             try {
-                mainController.getSmartHouseRepository().addSmartHouse(address);
-                addMoreInformationSmartHouse(address);
+                smartHouses.addSmartHouse(address);
+                addMoreInformationSmartHouseController(address);
             } catch (HouseAddressAlreadyExists e) {
                 System.out.println(e.getMessage());
-                smartHouse();
+                smartHouseController();
             }
         }
     }
@@ -58,12 +64,12 @@ public class SmartHouseController {
      * Controlador da opção que permite adicionar mais dados a casa na sua criação
      * @param address o endereço da casa criada
      */
-    private void addMoreInformationSmartHouse(String address) {
+    private void addMoreInformationSmartHouseController(String address) {
         String input = menu.addMoreInformationSmartHouse();
         switch (input) {
-            case "S" -> updateSmartHouse(address);
-            case "N" -> smartHouse();
-            default -> addMoreInformationSmartHouse(address);
+            case "S" -> updateSmartHouseController(address);
+            case "N" -> smartHouseController();
+            default -> addMoreInformationSmartHouseController(address);
         }
     }
 
@@ -71,17 +77,16 @@ public class SmartHouseController {
      * Controlador da remoção de casas
      */
 
-    private void removeSmartHouse() {
-        SmartHouseRepository smartHouseRepository = mainController.getSmartHouseRepository();
-        String address = menu.selectSmartHouse(smartHouseRepository);
-        if (address == null) smartHouse();
+    private void removeSmartHouseController() {
+        String address = menu.selectSmartHouse(smartHouses);
+        if (address == null) smartHouseController();
         else {
             try {
-                smartHouseRepository.removeHouseByAddress(address);
-                smartHouse();
+                smartHouses.removeHouseByAddress(address);
+                smartHouseController();
             } catch (HouseNotFound e) {
                 System.out.println(e.getMessage());
-                removeSmartHouse();
+                removeSmartHouseController();
             }
         }
     }
@@ -90,11 +95,11 @@ public class SmartHouseController {
      * Controlador da seleção da casa que vai ser atualizada
      */
 
-    private void updateSmartHouse() {
-        String address = menu.selectSmartHouse(mainController.getSmartHouseRepository());
-        if (address == null) smartHouse();
+    private void selectSmartHouseController() {
+        String address = menu.selectSmartHouse(smartHouses);
+        if (address == null) smartHouseController();
         else {
-           updateSmartHouse(address);
+           updateSmartHouseController(address);
         }
     }
 
@@ -104,19 +109,16 @@ public class SmartHouseController {
      * @param address o endereço da casa que desejamos atualizar os dados
      */
 
-    private void updateSmartHouse(String address) {
-        int option = menu.updateSmartHouse();
-        if (option == -1) updateSmartHouse(address);
-        else {
-            switch (option) {
-                case 1 -> addRoom(address);
-                case 2 -> removeRoom(address);
-                case 3 -> updateSmartDevices(address);
-                case 4 -> updateAddress(address);
-                case 5 -> updateEnergySupplier(address);
-                case 6 -> updateOwner(address);
-                case 7 -> smartHouse();
-            }
+    private void updateSmartHouseController(String address) {
+        switch (menu.updateSmartHouse()) {
+            case -1 -> updateSmartHouseController(address);
+            case 1 -> addRoom(address);
+            case 2 -> removeRoom(address);
+            case 3 -> updateSmartDevices(address);
+            case 4 -> updateAddress(address);
+            case 5 -> updateEnergySupplier(address);
+            case 6 -> updateOwner(address);
+            case 7 -> smartHouseController();
         }
     }
 
@@ -125,8 +127,8 @@ public class SmartHouseController {
      */
 
     private void listSmartHouses() {
-        menu.listSmartHouses(mainController.getSmartHouseRepository().findAllSmartHouses());
-        smartHouse();
+        menu.listSmartHouses(smartHouses.findAllSmartHouses());
+        smartHouseController();
     }
 
     /**
@@ -137,10 +139,10 @@ public class SmartHouseController {
 
     private void addRoom(String address) {
         String room = menu.addRoom();
-        if (room == null) updateSmartHouse(address);
+        if (room == null) updateSmartHouseController(address);
         else {
             try {
-                mainController.getSmartHouseRepository().addRoomToHouse(address, room);
+                smartHouses.addRoomToHouse(address, room);
                 addRoom(address);
             } catch (RoomAlreadyExists e) {
                 System.out.println(e.getMessage());
@@ -155,11 +157,11 @@ public class SmartHouseController {
      */
 
     private void removeRoom(String address) {
-        String room = menu.removeRoom(mainController.getSmartHouseRepository(), address);
-        if (room == null) updateSmartHouse(address);
+        String room = menu.removeRoom(smartHouses, address);
+        if (room == null) updateSmartHouseController(address);
         else {
             try {
-                mainController.getSmartHouseRepository().removeRoomFromHouse(address, room);
+                smartHouses.removeRoomFromHouse(address, room);
                 removeRoom(address);
             } catch (RoomNotFound e) {
                 System.out.println(e.getMessage());
@@ -169,82 +171,106 @@ public class SmartHouseController {
     }
 
     private void updateSmartDevices(String address) {
-        String room = menu.selectRoom(mainController.getSmartHouseRepository(), address);
-        if (room == null) updateSmartHouse(address);
+        String room = menu.selectRoom(smartHouses, address);
+        if (room == null) updateSmartHouseController(address);
         else {
             updateSmartDevices(address, room);
         }
     }
 
     private void updateSmartDevices(String address, String room) {
-        int option = menu.updateSmartDevices();
-        if (option == -1) updateSmartDevices(address, room);
-        else {
-            switch (option) {
-                case 1 -> addDevice(address, room);
-                case 2 -> removeDevice(address, room);
-                case 7 -> updateSmartHouse(address);
-            }
+        switch (menu.updateSmartDevices()) {
+            case -1 -> updateSmartDevices(address, room);
+            case 1 -> addDevice(address, room);
+            case 2 -> removeDevice(address, room);
+            case 3 -> connectAllRoomDevices(address, room);
+            case 4 -> disconnectAllRoomDevices(address, room);
+            case 5 -> connectDevice(address, room);
+            case 6 -> disconnectDevice(address, room);
+            case 7 -> updateSmartHouseController(address);
         }
     }
 
     // precisa de verificação
     private void addDevice(String address, String room) {
-        String factoryCode = menu.addDevice(mainController.getFactory());
+        String factoryCode = menu.addDevice(factory);
         if (factoryCode == null) updateSmartDevices(address, room);
         else {
-            mainController.getFactory().setDeviceAvailability(factoryCode, false);
-            SmartDevice smartDevice = mainController.getFactory().getSmartDeviceRepository()
-                    .findSmartDeviceByFactoryCode(factoryCode);
-            mainController.getSmartHouseRepository().findSmartDevicesByRoom(address, room)
-                    .addSmartDevice(factoryCode, smartDevice);
+            factory.setDeviceAvailability(factoryCode, false);
+            SmartDevice smartDevice = factory.getSmartDeviceRepository().findSmartDeviceByFactoryCode(factoryCode);
+            smartHouses.findSmartDevicesByRoom(address, room).addSmartDevice(factoryCode, smartDevice);
             addDevice(address, room);
         }
     }
 
-
-    // TODO
-
     private void removeDevice(String address, String room) {
-        // TODO
+        String factoryCode = menu.removeSmartDeviceMenu(smartHouses.findSmartDevicesByRoom(address, room));
+        if (factoryCode == null) updateSmartDevices(address, room);
+        else {
+            factory.setDeviceAvailability(factoryCode, true);
+            smartHouses.findSmartDevicesByRoom(address, room).SmartDeviceRemove(factoryCode);
+        }
+    }
+
+    private void connectAllRoomDevices(String address, String room) {
+        smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
+                .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.ON));
+        updateSmartDevices(address, room);
+    }
+
+    private void disconnectAllRoomDevices(String address, String room) {
+        smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
+                .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.OFF));
+        updateSmartDevices(address, room);
+    }
+
+    private void connectDevice(String address, String room) {
+        SmartDeviceRepository smartDevices = smartHouses.findSmartDevicesByRoom(address, room);
+        String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
+        smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.ON);
+    }
+
+    private void disconnectDevice(String address, String room) {
+        SmartDeviceRepository smartDevices = smartHouses.findSmartDevicesByRoom(address, room);
+        String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
+        smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.OFF);
     }
 
     private void updateAddress(String oldAddress) {
         String newAddress = menu.updateAddress();
-        if (newAddress == null) updateSmartHouse(oldAddress);
+        if (newAddress == null) updateSmartHouseController(oldAddress);
         else {
             try {
-                mainController.getSmartHouseRepository().updateHouseAddress(oldAddress, newAddress);
-                updateSmartHouse(newAddress);
+                smartHouses.updateHouseAddress(oldAddress, newAddress);
+                updateSmartHouseController(newAddress);
             } catch (HouseAddressAlreadyExists e) {
                 System.out.println(e.getMessage());
-                updateSmartHouse(oldAddress);
+                updateSmartHouseController(oldAddress);
             }
         }
     }
 
     private void updateEnergySupplier(String address) {
-        String newEnergySupplier = menu.updateEnergySupplier();
-        if (newEnergySupplier == null) updateSmartHouse(address);
+        String newEnergySupplier = menu.updateEnergySupplierMenu(energySuppliers, smartHouses.findHouseByAddress(address).getEnergySupplier());
+        if (newEnergySupplier == null) updateSmartHouseController(address);
         else {
             try {
-                mainController.getSmartHouseRepository().
-                        updateEnergySupplier(mainController.getEnergySupplierRepository(), address, newEnergySupplier);
-                updateSmartHouse(address);
+                smartHouses.updateEnergySupplier(energySuppliers, address, newEnergySupplier);
+                updateSmartHouseController(address);
             } catch (EnergySupplierNotFound e) {
                 System.out.println(e.getMessage());
-                updateSmartHouse(address);
+                updateSmartHouseController(address);
             }
         }
     }
 
     private void updateOwner(String address) {
         String[] newOwner = menu.updateOwner();
-        if (newOwner == null) updateSmartHouse(address);
+        if (newOwner == null) updateSmartHouseController(address);
         else {
             Owner owner = new Owner(newOwner[0], newOwner[1]);
-            mainController.getSmartHouseRepository().updateOwner(address, owner);
-            updateSmartHouse(address);
+            smartHouses.updateOwner(address, owner);
+            updateSmartHouseController(address);
         }
     }
 }
