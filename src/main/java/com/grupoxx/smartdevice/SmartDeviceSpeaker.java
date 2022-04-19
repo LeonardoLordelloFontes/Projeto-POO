@@ -94,7 +94,7 @@ public class SmartDeviceSpeaker extends SmartDevice{
         this.volumeMax = volumeMax;
     }
     @Override
-    public double EnergeticConsumptionPerDay() {
+    public double energyConsumptionPerDay() {
 
         return this.getEnergyConsumption() + (this.volume * 2);
     }

@@ -95,7 +95,7 @@ public class SmartDeviceBulb extends SmartDevice {
     }
 
     @Override
-    public double EnergeticConsumptionPerDay() {
+    public double energyConsumptionPerDay() {
 
         double val = -1;
 

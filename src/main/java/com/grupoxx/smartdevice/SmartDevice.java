@@ -189,11 +189,11 @@ public abstract class SmartDevice {
 
     public abstract SmartDevice clone();
 
-    public abstract double EnergeticConsumptionPerDay();
+    public abstract double energyConsumptionPerDay();
 
-    public double EnergeticConsumptionPerSecond(){
+    public double energyConsumptionPerSecond(){
 
-        return this.EnergeticConsumptionPerDay()/86400 ;
+        return this.energyConsumptionPerDay()/86400 ;
 
     }
 }

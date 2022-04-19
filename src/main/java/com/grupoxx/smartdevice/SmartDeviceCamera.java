@@ -64,7 +64,7 @@ public class SmartDeviceCamera extends SmartDevice{
     }
 
     @Override
-    public double EnergeticConsumptionPerDay() {
+    public double energyConsumptionPerDay() {
 
         return this.resolution * this.fileSize;
     }

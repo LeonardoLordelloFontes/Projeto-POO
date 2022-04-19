@@ -1,12 +1,9 @@
 package com.grupoxx.smarthouse;
 
-import com.grupoxx.EnergySupplier.EnergySupplier;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 
-import javax.script.ScriptException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SmartHouse {
     private Owner owner;
@@ -32,6 +29,24 @@ public class SmartHouse {
         this.address = smartHouse.getAddress();
         this.energySupplier = smartHouse.getEnergySupplier();
         this.smartDevices = smartHouse.getSmartDevices();
+    }
+
+    /**
+     * Mede a quantidade de energia gasta num determinado intervalo de tempo
+     *
+     * @param interval intervalo de tempo em segundos
+     * @return a energia consumida no intervalo de tempo passado como argumento
+     */
+
+    public double electricityMeter(long interval) {
+        double sum = 0;
+        for (SmartDeviceRepository smartDeviceRepository: smartDevices.values()) {
+            for (SmartDevice smartDevice : smartDeviceRepository.findAllSmartDevices()) {
+                if (smartDevice.getState().equals(SmartDevice.State.ON))
+                    sum += smartDevice.energyConsumptionPerSecond() * interval;
+            }
+        }
+        return sum;
     }
 
     public void setOwner(Owner owner) {

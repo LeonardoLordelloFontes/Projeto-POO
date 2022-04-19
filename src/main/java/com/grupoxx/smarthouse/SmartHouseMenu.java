@@ -292,11 +292,11 @@ public class SmartHouseMenu {
     public String[] updateOwner() {
         String[] input = new String[2];
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nome (para cancelar digite *): ");
+        System.out.print("Nome do proprietário (para cancelar digite *): ");
         input[0] = scanner.nextLine();
         if (input[0].equals("*")) return null;
         scanner.nextLine();
-        System.out.print("NIF (para cancelar digite *): ");
+        System.out.print("NIF do proprietário (para cancelar digite *): ");
         input[1] = scanner.next();
         if (input[1].equals("*")) return null;
         return input;

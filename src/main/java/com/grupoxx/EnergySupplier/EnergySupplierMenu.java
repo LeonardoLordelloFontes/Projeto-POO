@@ -41,7 +41,7 @@ public class EnergySupplierMenu {
     public String[] updateEnergySupplier() {
         String[] input = new String[2];
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nome (para cancelar digite *): ");
+        System.out.print("Nome do fornecedor (para cancelar digite *): ");
         input[0] = scanner.nextLine();
         if (input[0].equals("*")) return null;
         scanner.nextLine();
