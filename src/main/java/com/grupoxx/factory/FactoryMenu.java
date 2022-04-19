@@ -1,16 +1,49 @@
 package com.grupoxx.factory;
 
-import com.grupoxx.smartdevice.SmartDevice;
-import com.grupoxx.smartdevice.SmartDeviceRepository;
-
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
-
 public class FactoryMenu {
+
+        private final String[] error = {"-1"};
+
+        public String[] getError(){
+
+            return this.error.clone();
+        }
+
+        private static boolean isValidDouble(String strNum) {
+
+            boolean validacion = true;
+            if (strNum == null) validacion  = false;
+            else {
+                try {
+                    double d = Double.parseDouble(strNum);
+                } catch (NumberFormatException nfe) {
+                    validacion = false;
+                }
+                if (validacion && Double.parseDouble(strNum) < 0) validacion = false;
+            }
+            if (!validacion) System.out.println("Opção inválida, digite um valor double não negativo!!");
+            return validacion;
+        }
+
+        private static boolean isValidInteger(String strNum) {
+
+            boolean validacion = true;
+            if (strNum == null) validacion  = false;
+            else {
+                try {
+                    int d = Integer.parseInt(strNum);
+                } catch (NumberFormatException nfe) {
+                    validacion = false;
+                }
+                if (validacion && Integer.parseInt(strNum) < 0) validacion = false;
+            }
+            if (!validacion) System.out.println("Opção inválida, digite um valor double não negativo!!");
+            return validacion;
+        }
 
         public int MenuTipoDispositivoOperacoes() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
@@ -62,6 +95,9 @@ public class FactoryMenu {
             String[] input = new String[3];
             Scanner scanner = new Scanner(System.in);
 
+            System.out.println("-----------Smart Device-----------\n\n");
+            System.out.print("Se pretende voltar ao menu anterior escreva o simbolo [*] em algum local de escrita no terminal.\n");
+
             System.out.print("Código de Fábrica: ");
             input[0] = scanner.next();
             if (input[0].equals("*")) return null;
@@ -69,10 +105,12 @@ public class FactoryMenu {
             System.out.print("Custo de Instalação:");
             input[1] = scanner.next();
             if (input[1].equals("*")) return null;
+            if( !isValidDouble(input[1]) ) return this.error;
 
             System.out.print("Quantidade de energia diária gasta:");
             input[2] = scanner.next();
             if (input[2].equals("*")) return null;
+            if( !isValidDouble(input[2]) ) return this.error;
 
             return input;
         }
@@ -81,28 +119,28 @@ public class FactoryMenu {
         public String[] MenuSmartBulbAdd() {
             String[] input = new String[4];
             Scanner scanner = new Scanner(System.in);
-            System.out.println("-----------Smart Bulb-----------\n\n");
-            System.out.print("Se pretende voltar ao menu anterior escreva o simbolo [*] em algum local de escrita no terminal.\n");
 
             String[] comumInput = MenuDiviceAdd();
             if(comumInput == null) return null;
+            if( comumInput.equals(this.error) ) return this.error;
 
             System.arraycopy(comumInput,0,input,0,3);
 
             System.out.print("Dimensão(cm): ");
             input[3] = scanner.next();
             if (input[3].equals("*")) return null;
+            if( !isValidDouble(input[1]) ) return this.error;
+
             return input;
         }
 
         public  String[] MenuSmartSpeakerAdd() {
             String [] input = new String[5];
             Scanner scanner = new Scanner(System.in);
-            System.out.println("-----------Smart Speaker-----------\n\n");
-            System.out.print("Se pretende voltar para o menu anterior escreva o simbolo [*] em algum local de escrita no terminal.\n");
 
             String[] comumInput = MenuDiviceAdd();
             if(comumInput == null) return null;
+            if( comumInput.equals(this.error) ) return this.error;
 
             System.arraycopy(comumInput,0,input,0,3);
 
@@ -113,27 +151,29 @@ public class FactoryMenu {
             System.out.print("Volume Máximo: \n");
             input[4] = scanner.next();
             if (input[4].equals("*")) return null;
+            if (!isValidInteger(input[4]) ) return this.error;
 
             return input;
         }
         public String[] MenuSmartCamaraAdd() {
             String [] input = new String[5];
             Scanner scanner = new Scanner(System.in);
-            System.out.println("-----------Smart Camara-----------\n\n");
-            System.out.print("Se pretende voltar para o menu anterior escreva o simbolo [*] em algum local de escrita no terminal.\n");
 
             String[] comumInput = MenuDiviceAdd();
             if(comumInput == null) return null;
+            if( comumInput.equals(this.error) ) return this.error;
 
             System.arraycopy(comumInput,0,input,0,3);
 
             System.out.print("Resolução (pixeis): ");
             input[3] = scanner.next();
             if (input[3].equals("*")) return null;
+            if (!isValidInteger(input[3]) ) return this.error;
 
             System.out.print("Armazenamento (bytes): ");
             input[4] = scanner.next();
             if (input[4].equals("*")) return null;
+            if (!isValidInteger(input[4]) ) return this.error;
 
             return input;
         }
@@ -200,7 +240,7 @@ public class FactoryMenu {
     }
 
     public String[] MenuSmartSpeakerPropertiesEspecific(){
-        String input[] = new String[3];
+        String []input = new String[3];
         String answer = "N";
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------Smart Speaker Propriedades-----------\n\n");
@@ -289,7 +329,7 @@ public class FactoryMenu {
         }
 
     public String[] MenuSmartBulbEspecificToneChange(){
-        String input[] = new String[2];
+        String []input = new String[2];
         Scanner scanner = new Scanner(System.in);
         System.out.print("-----------Alterar a Tonalidade do SmartBulb -----------\n\n");
 
@@ -342,6 +382,7 @@ public class FactoryMenu {
             System.out.print(" Nova Quantidade de energia diária estatica : ");
             input[2] = scanner.next();
             if (input[2].equals("*")) return null;
+            if ( !isValidDouble(input[2]) ) return this.error;
         } else {
             input[2] = "#";
         }
@@ -354,6 +395,7 @@ public class FactoryMenu {
             System.out.print(" Novo Custo de instalação : ");
             input[3] = scanner.next();
             if (input[3].equals("*")) return null;
+            if ( !isValidDouble(input[3]) ) return this.error;
         } else {
             input[3] = "#";
         }
@@ -374,6 +416,7 @@ public class FactoryMenu {
                 System.out.print("Nova Dimensão(cm) : ");
                 input = scanner.next();
                 if (input.equals("*")) return null;
+                if ( !isValidDouble(input) ) return "-1";
             } else {
                 input = "#";
             }
@@ -381,7 +424,7 @@ public class FactoryMenu {
             return input;
         }
         public String[] MenuSmartSpeakerUpdate() {
-            String input[] = new String[2];
+            String []input = new String[2];
             String answer = "*";
             Scanner scanner = new Scanner(System.in);
 
@@ -404,18 +447,19 @@ public class FactoryMenu {
 
             if (answer.equals("Y")) {
                 System.out.print(" Novo Volume Máximo : ");
-                input[5] = scanner.next();
-                if (input[5].equals("*")) return null;
+                input[1] = scanner.next();
+                if (input[1].equals("*")) return null;
+                if ( !isValidInteger(input[1]) ) return this.error;
             }
             else {
-                input[5] = "#";
+                input[1] = "#";
             }
 
             return input;
         }
         public String[] MenuSmartCamaraUpdate() {
 
-            String input[] = new String[6];
+            String input[] = new String[2];
             String answer = "N";
             Scanner scanner = new Scanner(System.in);
 
@@ -427,6 +471,7 @@ public class FactoryMenu {
                 System.out.print(" Nova Resolução (pixeis): ");
                 input[0] = scanner.next();
                 if (input[0].equals("*")) return null;
+                if ( !isValidInteger(input[0]) ) return this.error;
             }
             else {
                 input[0] = "#";
@@ -440,6 +485,7 @@ public class FactoryMenu {
                 System.out.print(" Novo Armazenamento (bytes): ");
                 input[1] = scanner.next();
                 if (input[1].equals("*")) return null;
+                if ( !isValidInteger(input[1]) ) return this.error;
             }
             else {
                 input[1] = "#";

@@ -3,8 +3,6 @@ package com.grupoxx.factory;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.*;
 
-import static com.grupoxx.factory.FactoryMenu.*;
-
 public class FactoryController {
     private SmartDeviceRepository repository;
     private MainController mainController;
@@ -70,34 +68,42 @@ public class FactoryController {
     private void SmartDeviceSpeakerChoice() {
         String[] components = menu.MenuSmartSpeakerAdd();
         if (components == null) SmartDeviceAddChoice();
-        else {
-            this.repository.SmartDeviceSpeakerAdd(
-                    components[0],
-                    Double.parseDouble(components[1]),
-                    Double.parseDouble(components[2]),
-                    components[3],
-                    Integer.parseInt(components[4]));
+        else{
+            if( components.equals(this.menu.getError()) ) SmartDeviceSpeakerChoice();
+
+            else {
+                this.repository.SmartDeviceSpeakerAdd(
+                        components[0],
+                        Double.parseDouble(components[1]),
+                        Double.parseDouble(components[2]),
+                        components[3],
+                        Integer.parseInt(components[4]));
 
 
-            this.mainController.getFactory().setDeviceAvailability(components[0], true);
-            SmartDeviceSpeakerChoice();
+                this.mainController.getFactory().setDeviceAvailability(components[0], true);
+                SmartDeviceSpeakerChoice();
+            }
         }
     }
+
     private void SmartDeviceCameraChoice(){
 
         String[] components = menu.MenuSmartCamaraAdd();
         if ( components == null ) SmartDeviceAddChoice();
-
         else {
-            this.repository.SmartDeviceCameraAdd(
-                    components[0],
-                    Double.parseDouble(components[1]),
-                    Double.parseDouble(components[2]),
-                    Integer.parseInt(components[3]),
-                    Integer.parseInt(components[4]));
+            if ( components.equals(this.menu.getError()) ) SmartDeviceCameraChoice();
 
-            this.mainController.getFactory().setDeviceAvailability(components[0], true);
-            SmartDeviceCameraChoice();
+            else{
+                this.repository.SmartDeviceCameraAdd(
+                        components[0],
+                        Double.parseDouble(components[1]),
+                        Double.parseDouble(components[2]),
+                        Integer.parseInt(components[3]),
+                        Integer.parseInt(components[4]));
+
+                this.mainController.getFactory().setDeviceAvailability(components[0], true);
+                SmartDeviceCameraChoice();
+                }
         }
     }
 
@@ -122,14 +128,19 @@ public class FactoryController {
         if (components == null) SmartDiviceOperationChoice();
 
         else {
-            SmartDevice sd = this.repository.getDevice(components[0]);
 
-            if (sd instanceof SmartDeviceBulb) SmartDeviceBulbUpdateChoice(components);
+            if( components.equals(this.menu.getError()) ) SmartDeviceUpdateChoice();
 
-            if (sd instanceof SmartDeviceSpeaker) SmartDeviceSpeakerUpdateChoice(components);
+            else{
+                SmartDevice sd = this.repository.getDevice(components[0]);
 
-            if (sd instanceof SmartDeviceCamera) SmartDeviceCameraUpdateChoice(components);
+                if (sd instanceof SmartDeviceBulb) SmartDeviceBulbUpdateChoice(components);
 
+                if (sd instanceof SmartDeviceSpeaker) SmartDeviceSpeakerUpdateChoice(components);
+
+                if (sd instanceof SmartDeviceCamera) SmartDeviceCameraUpdateChoice(components);
+
+                }
         }
     }
 
@@ -139,15 +150,16 @@ public class FactoryController {
         if (component == null) SmartDeviceUpdateChoice();
 
         else {
-            this.repository.SmartDeviceBulbUpdade(
-                    components[0],
-                    components[1],
-                    components[2],
-                    components[3],
-                    component);
-
-
-            SmartDeviceUpdateChoice();
+            if( component.equals(this.menu.getError()[0])) SmartDeviceBulbUpdateChoice(components);
+            else{
+                this.repository.SmartDeviceBulbUpdade(
+                        components[0],
+                        components[1],
+                        components[2],
+                        components[3],
+                        component);
+                SmartDeviceUpdateChoice();
+                }
         }
     }
 
@@ -156,17 +168,17 @@ public class FactoryController {
         if (components1 == null) SmartDeviceUpdateChoice();
 
         else{
-            this.repository.SmartDeviceSpeakerUpdate(
-                components[0],
-                components[1],
-                components[2],
-                components[3],
-                components1[4],
-                components1[5]);
-
-
-        SmartDeviceUpdateChoice();
-
+            if( components.equals(this.menu.getError()) ) SmartDeviceSpeakerUpdateChoice(components);
+            else{
+                this.repository.SmartDeviceSpeakerUpdate(
+                        components[0],
+                        components[1],
+                        components[2],
+                        components[3],
+                        components1[4],
+                        components1[5]);
+                SmartDeviceUpdateChoice();
+                }
         }
     }
 
@@ -175,15 +187,17 @@ public class FactoryController {
         if (components1 == null) SmartDeviceUpdateChoice();
 
         else {
-            this.repository.SmartDeviceCameraUpdate(
-                    components[0],
-                    components[1],
-                    components[2],
-                    components[3],
-                    components1[4],
-                    components1[5]);
-            SmartDeviceUpdateChoice();
-
+            if( components.equals(this.menu.getError()) ) SmartDeviceCameraUpdateChoice(components);
+            else{
+                this.repository.SmartDeviceCameraUpdate(
+                        components[0],
+                        components[1],
+                        components[2],
+                        components[3],
+                        components1[4],
+                        components1[5]);
+                SmartDeviceUpdateChoice();
+                }
         }
     }
 
@@ -325,21 +339,26 @@ public class FactoryController {
         SmartBulbToneChangeChoice();
     }
 
-    private void SmartBulbToneChangeChoiceEspecific(){
-       String [] components = menu.MenuSmartBulbEspecificToneChange();
-       if(components == null) SmartBulbToneChangeChoice();
+    private void SmartBulbToneChangeChoiceEspecific() {
+        String[] components = menu.MenuSmartBulbEspecificToneChange();
+        if (components == null) SmartBulbToneChangeChoice();
 
-       switch (components[0]){
+        else {
+            switch (components[0]) {
 
-           case "1": components[0] ="N";
-           case "2": components[0] = "W";
-           case "3": components[0] = "C";
-       }
+                case "1":
+                    components[0] = "N";
+                case "2":
+                    components[0] = "W";
+                case "3":
+                    components[0] = "C";
+            }
 
-       this.repository.SmartDeviceEspecificTone(components[0],components[1]);
+            this.repository.SmartDeviceEspecificTone(components[0], components[1]);
 
-        SmartBulbToneChangeChoiceEspecific();
+            SmartBulbToneChangeChoiceEspecific();
 
+        }
     }
 
     private void SmartSpeakerPropertiesChangeChoice() {
@@ -360,13 +379,13 @@ public class FactoryController {
     private void SmartSpeakerPropertiesVolumeChangeChoice(){
         String volume = menu.MenuSmartSpeakerVolume();
         if(volume == null) SmartSpeakerPropertiesChangeChoice();
-        this.repository.SmartDeviceSpeakerProperties(volume,"V");
+        else this.repository.SmartDeviceSpeakerProperties(volume,"V");
     }
 
     private void SmartSpeakerPropertiesRadioStationChangeChoice(){
         String radioStation = menu.MenuSmartSpeakerRadioStation();
         if(radioStation == null) SmartSpeakerPropertiesChangeChoice();
-        this.repository.SmartDeviceSpeakerProperties(radioStation,"R");
+        else this.repository.SmartDeviceSpeakerProperties(radioStation,"R");
     }
 
 
@@ -374,7 +393,7 @@ public class FactoryController {
     private void SmartSpeakerPropertiesEspecificChangeChoice(){
         String [] components = menu.MenuSmartSpeakerPropertiesEspecific();
         if (components == null) SmartDeviceUpdateChoice();
-        this.repository.SmartDeviceEspecificSmartSpeakerProperties(components[0],components[1],components[2]);
+        else this.repository.SmartDeviceEspecificSmartSpeakerProperties(components[0],components[1],components[2]);
 
     }
 }
