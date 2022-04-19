@@ -228,9 +228,17 @@ public class SmartHouseMenu {
                 Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        if (option < 1 || option > 7) return -1;
-        return option;
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 7) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+            return -1;
+        }
     }
 
     public String selectRoom(SmartHouseRepository smartHouseRepository, String address) {
@@ -264,9 +272,17 @@ public class SmartHouseMenu {
                 Sua opção (Selecionar Número):\s""";
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        if (option < 1 || option > 7) return -1;
-        return option;
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > 7) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 7");
+            return -1;
+        }
     }
 
     /**
