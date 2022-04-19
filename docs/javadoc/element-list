@@ -1,7 +1,7 @@
 com.grupoxx
-com.grupoxx.EnergySupplier
-com.grupoxx.EnergySupplier.exception
-com.grupoxx.Estatistica
+com.grupoxx.energysupplier
+com.grupoxx.energysupplier.exception
+com.grupoxx.datastatus
 com.grupoxx.factory
 com.grupoxx.main
 com.grupoxx.menu

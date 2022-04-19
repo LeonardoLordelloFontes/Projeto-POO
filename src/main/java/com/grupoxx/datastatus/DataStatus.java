@@ -1,13 +1,6 @@
-package com.grupoxx.Estatistica;
+package com.grupoxx.datastatus;
 
-import com.grupoxx.EnergySupplier.EnergySupplier;
-import com.grupoxx.smarthouse.SmartHouse;
-
-import javax.script.ScriptException;
-import java.util.*;
-import java.util.stream.Collectors;
-
-public class Estatistica {
+public class DataStatus {
     // será que posso usar map ?
     /*
     private List<SmartHouse> house;

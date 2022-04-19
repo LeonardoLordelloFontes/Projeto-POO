@@ -1,7 +1,7 @@
 package com.grupoxx.smarthouse;
 
-import com.grupoxx.EnergySupplier.EnergySupplierRepository;
-import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
+import com.grupoxx.energysupplier.EnergySupplierRepository;
+import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.factory.Factory;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.SmartDevice;
@@ -78,7 +78,7 @@ public class SmartHouseController {
      */
 
     private void removeSmartHouseController() {
-        String address = menu.selectSmartHouse(smartHouses);
+        String address = menu.removeSmartHouse(smartHouses);
         if (address == null) smartHouseController();
         else {
             try {

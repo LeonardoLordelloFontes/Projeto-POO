@@ -1,4 +1,4 @@
-package com.grupoxx.EnergySupplier;
+package com.grupoxx.energysupplier;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
@@ -61,7 +61,9 @@ public class EnergySupplier {
     }
 
     public double deviceEnergyCostPerSecond(String formula, double energyConsumption, int numberOfDevices) {
-        return deviceEnergyCostPerDay(formula, energyConsumption, numberOfDevices)/86400;
+        double cost = deviceEnergyCostPerDay(formula, energyConsumption, numberOfDevices);
+        if (cost == -1) return -1;
+        return cost/86400;
     }
 
     @Override

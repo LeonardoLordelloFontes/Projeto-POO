@@ -1,12 +1,9 @@
 package com.grupoxx.main;
 
-import com.grupoxx.EnergySupplier.EnergySupplierRepository;
+import com.grupoxx.energysupplier.EnergySupplierRepository;
 import com.grupoxx.factory.Factory;
-import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.SmartHouseController;
 import com.grupoxx.smarthouse.SmartHouseRepository;
-
-import java.util.Scanner;
 
 import static com.grupoxx.main.MainMenu.mainMenu;
 

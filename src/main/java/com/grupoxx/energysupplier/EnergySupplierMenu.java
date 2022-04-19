@@ -1,4 +1,4 @@
-package com.grupoxx.EnergySupplier;
+package com.grupoxx.energysupplier;
 
 import java.util.List;
 import java.util.Scanner;

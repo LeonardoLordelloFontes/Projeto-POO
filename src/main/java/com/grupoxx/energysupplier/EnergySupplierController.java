@@ -1,4 +1,4 @@
-package com.grupoxx.EnergySupplier;
+package com.grupoxx.energysupplier;
 
 public class EnergySupplierController {
 

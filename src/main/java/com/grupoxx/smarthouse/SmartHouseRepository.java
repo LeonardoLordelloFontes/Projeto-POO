@@ -1,6 +1,6 @@
 package com.grupoxx.smarthouse;
-import com.grupoxx.EnergySupplier.EnergySupplierRepository;
-import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
+import com.grupoxx.energysupplier.EnergySupplierRepository;
+import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.exception.*;
 import java.util.ArrayList;

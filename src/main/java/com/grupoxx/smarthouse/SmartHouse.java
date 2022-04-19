@@ -31,24 +31,6 @@ public class SmartHouse {
         this.smartDevices = smartHouse.getSmartDevices();
     }
 
-    /**
-     * Mede a quantidade de energia gasta num determinado intervalo de tempo
-     *
-     * @param interval intervalo de tempo em segundos
-     * @return a energia consumida no intervalo de tempo passado como argumento
-     */
-
-    public double electricityMeter(long interval) {
-        double sum = 0;
-        for (SmartDeviceRepository smartDeviceRepository: smartDevices.values()) {
-            for (SmartDevice smartDevice : smartDeviceRepository.findAllSmartDevices()) {
-                if (smartDevice.getState().equals(SmartDevice.State.ON))
-                    sum += smartDevice.energyConsumptionPerSecond() * interval;
-            }
-        }
-        return sum;
-    }
-
     public void setOwner(Owner owner) {
         this.owner = owner.clone();
     }
@@ -101,19 +83,4 @@ public class SmartHouse {
     public SmartHouse clone() {
         return new SmartHouse(this);
     }
-
-    /*
-    public double ElectricityMeter() {
-        double cost = 0;
-        for (List<String> ls : this.rooms.values()) {
-            for (String s : ls) {
-                SmartDevice sd = this.smartDevices.get(s);
-                if (sd.getState() == SmartDevice.State.ON) {
-                    cost += sd.EnergeticConsumptionPerDay();
-                }
-            }
-        }
-        return cost;
-    }
-    */
 }

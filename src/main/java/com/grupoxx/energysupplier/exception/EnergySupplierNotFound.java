@@ -1,4 +1,4 @@
-package com.grupoxx.EnergySupplier.exception;
+package com.grupoxx.energysupplier.exception;
 
 public class EnergySupplierNotFound extends RuntimeException {
     public EnergySupplierNotFound() {

@@ -1,15 +1,9 @@
 package com.grupoxx.simulation;
 
-import com.grupoxx.EnergySupplier.EnergySupplier;
-import com.grupoxx.EnergySupplier.EnergySupplierRepository;
 import com.grupoxx.main.MainController;
-import com.grupoxx.smartdevice.SmartDevice;
-import com.grupoxx.smarthouse.SmartHouse;
-import com.grupoxx.smarthouse.SmartHouseRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 public class Simulation {
 
@@ -28,6 +22,10 @@ public class Simulation {
 
     public Simulation(Simulation simulation) {
         // TODO
+    }
+
+    private long simulationPeriod() {
+        return ChronoUnit.SECONDS.between(start, end);
     }
 
 

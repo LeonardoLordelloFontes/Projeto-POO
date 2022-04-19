@@ -1,8 +1,7 @@
 package com.grupoxx.smarthouse;
 
-import com.grupoxx.EnergySupplier.EnergySupplier;
-import com.grupoxx.EnergySupplier.EnergySupplierMenu;
-import com.grupoxx.EnergySupplier.EnergySupplierRepository;
+import com.grupoxx.energysupplier.EnergySupplierMenu;
+import com.grupoxx.energysupplier.EnergySupplierRepository;
 import com.grupoxx.factory.Factory;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;

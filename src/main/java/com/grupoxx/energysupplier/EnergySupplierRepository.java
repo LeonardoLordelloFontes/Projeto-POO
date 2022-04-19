@@ -1,7 +1,7 @@
-package com.grupoxx.EnergySupplier;
+package com.grupoxx.energysupplier;
 
-import com.grupoxx.EnergySupplier.exception.EnergySupplierAlreadyExists;
-import com.grupoxx.EnergySupplier.exception.EnergySupplierNotFound;
+import com.grupoxx.energysupplier.exception.EnergySupplierAlreadyExists;
+import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.smarthouse.SmartHouseRepository;
 
 import java.util.ArrayList;
