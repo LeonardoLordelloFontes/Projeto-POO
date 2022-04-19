@@ -31,6 +31,8 @@ public class FactoryController {
             case 5: SmartDevicePropertiesChoice();
 
             case 6: this.mainController.mainController();
+
+            case -1: SmartDiviceOperationChoice();
         }
     }
 
@@ -46,6 +48,8 @@ public class FactoryController {
             case 3: SmartDeviceCameraChoice();
 
             case 4: SmartDiviceOperationChoice();
+
+            case -1: SmartDeviceAddChoice();
         }
 
     }
@@ -217,6 +221,8 @@ public class FactoryController {
             case 5: SmartEspecificDiviceStateChoice();
 
             case 6: SmartDiviceOperationChoice();
+
+            case -1: SmartDeviceStateChoice();
         }
     }
 
@@ -303,6 +309,8 @@ public class FactoryController {
             case 2: SmartSpeakerPropertiesChangeChoice();
 
             case 3: SmartDiviceOperationChoice();
+
+            case -1: SmartDevicePropertiesChoice();
         }
     }
 
@@ -320,6 +328,8 @@ public class FactoryController {
             case 4: SmartBulbToneChangeChoiceEspecific();
 
             case 5: SmartDevicePropertiesChoice();
+
+            case -1: SmartBulbToneChangeChoice();
         }
 
     }
@@ -373,6 +383,8 @@ public class FactoryController {
             case 3: SmartSpeakerPropertiesEspecificChangeChoice();
 
             case 4: SmartDevicePropertiesChoice();
+
+            case -1: SmartSpeakerPropertiesChangeChoice();
         }
     }
 

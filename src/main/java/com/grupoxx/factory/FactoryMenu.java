@@ -13,7 +13,21 @@ public class FactoryMenu {
             return this.error.clone();
         }
 
-        private static boolean isValidDouble(String strNum) {
+        private int isValidOption(int option){
+            try {
+                if (option < 1 || option > 5) {
+                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                    return -1;
+                }
+                return option;
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                return -1;
+            }
+
+        }
+
+        private boolean isValidDouble(String strNum) {
 
             boolean validacion = true;
             if (strNum == null) validacion  = false;
@@ -56,17 +70,8 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
             Scanner scanner = new Scanner(System.in);
-            try {
-                int option = scanner.nextInt();
-                if (option < 1 || option > 5) {
-                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                    return -1;
-                }
-                return option;
-            } catch (InputMismatchException e) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                return -1;
-            }
+            int option = scanner.nextInt();
+            return isValidOption(option);
         }
 
         public int MenuTipoDispositivoAdd() {
@@ -78,17 +83,8 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
             Scanner scanner = new Scanner(System.in);
-            try {
-                int option = scanner.nextInt();
-                if (option < 1 || option > 5) {
-                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                    return -1;
-                }
-                return option;
-            } catch (InputMismatchException e) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                return -1;
-            }
+            int option = scanner.nextInt();
+            return isValidOption(option);
         }
 
         public String[] MenuDiviceAdd(){
@@ -201,17 +197,8 @@ public class FactoryMenu {
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
-        try {
-            int option = scanner.nextInt();
-            if (option < 1 || option > 5) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                return -1;
-            }
-            return option;
-        } catch (InputMismatchException e) {
-            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-            return -1;
-            }
+        int option = scanner.nextInt();
+        return isValidOption(option);
         }
 
     public int MenuSmartSpeakerProperties(){
@@ -225,18 +212,8 @@ public class FactoryMenu {
         sb.append("4. Voltar \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
-
-        try {
-            int option = scanner.nextInt();
-            if (option < 1 || option > 5) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                return -1;
-            }
-            return option;
-        } catch (InputMismatchException e) {
-            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-            return -1;
-        }
+        int option = scanner.nextInt();
+        return isValidOption(option);
     }
 
     public String[] MenuSmartSpeakerPropertiesEspecific(){
@@ -315,17 +292,8 @@ public class FactoryMenu {
         sb.append("5. Voltar \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
-        try {
-            int option = scanner.nextInt();
-            if (option < 1 || option > 5) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                return -1;
-            }
-            return option;
-        } catch (InputMismatchException e) {
-            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-            return -1;
-            }
+        int option = scanner.nextInt();
+        return isValidOption(option);
         }
 
     public String[] MenuSmartBulbEspecificToneChange(){
@@ -509,18 +477,8 @@ public class FactoryMenu {
             sb.append("6. Voltar \n\n");
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
-
-            try {
-                int option = scanner.nextInt();
-                if (option < 1 || option > 5) {
-                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                    return -1;
-                }
-                return option;
-            } catch (InputMismatchException e) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                return -1;
-            }
+            int option = scanner.nextInt();
+            return isValidOption(option);
         }
 
         public int MenuSmartDeviceOffAndOn(){
@@ -534,18 +492,8 @@ public class FactoryMenu {
             sb.append("3. Voltar \n\n");
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
-
-            try {
-                int option = scanner.nextInt();
-                if (option < 1 || option > 5) {
-                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                    return -1;
-                }
-                return option;
-            } catch (InputMismatchException e) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
-                return -1;
-            }
+            int option = scanner.nextInt();
+            return isValidOption(option);
         }
 
         public String SmartDeviceEspecificOffAndOn(){
