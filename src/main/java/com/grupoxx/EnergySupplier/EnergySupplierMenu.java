@@ -23,6 +23,12 @@ public class EnergySupplierMenu {
         if (input.equals("*")) return null;
         return input;
     }
+    public int updateEnergySupplier() {
+        String sb = """
+                -----------Atualizar Fornecedor de Energia-----------
+                
+                """
+    }
 
     public String selectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
