@@ -140,7 +140,7 @@ public class FactoryController {
 
             else{
 
-                SmartDevice sd = this.repository.getDevice(components[0]);
+                SmartDevice sd = this.repository.findSmartDeviceByFactoryCode(components[0]);
 
                 if (sd instanceof SmartDeviceBulb) SmartDeviceBulbUpdateChoice(components);
 

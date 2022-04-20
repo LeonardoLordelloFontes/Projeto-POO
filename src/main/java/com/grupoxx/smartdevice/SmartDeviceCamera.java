@@ -68,7 +68,7 @@ public class SmartDeviceCamera extends SmartDevice implements Serializable {
     @Override
     public double energyConsumptionPerDay() {
 
-        return this.resolution * this.fileSize;
+        return this.getEnergyConsumption() + (this.resolution * this.fileSize);
     }
 
     public boolean equals(Object o) {
