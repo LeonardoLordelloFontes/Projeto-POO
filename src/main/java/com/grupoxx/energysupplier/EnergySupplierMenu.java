@@ -1,11 +1,15 @@
 package com.grupoxx.energysupplier;
 
+import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smartdevice.SmartDeviceRepository;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class EnergySupplierMenu {
 
+public class EnergySupplierMenu {
+private EnergySupplierRepository energySupplierRepository;
     public String updateEnergySupplierFormulaMenu() {
         String sb = """
                 -----------Regras na criação das fórmulas-----------
@@ -35,11 +39,8 @@ public class EnergySupplierMenu {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-    public String[] addEnergySupplier() {
+    public String[] addEnergySupplierMenu() {
         StringBuilder sb = new StringBuilder("-----------Adicionar um Fornecedor de Energia-----------\n\n");
-        return updateEnergySupplier();
-    }
-    public String[] updateEnergySupplier() {
         String[] input = new String[2];
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nome do fornecedor (para cancelar digite *): ");
@@ -51,7 +52,42 @@ public class EnergySupplierMenu {
         if (input[1].equals("*")) return null;
         return input;
     }
-
+    public String[] updateEnergySupplierMenu() {
+        List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
+        if (energySuppliers.size() == 0) {
+            System.out.println("Lista de Fornecedores de Energia vazia");
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("-----------Fornecedor de Energia-----------\n\n");
+        String[] input = new String[3];
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nome do Fornecedor Original (para cancelar digite *): ");
+        input[0] = scanner.nextLine();
+        if (input[0].equals("*")) return null;
+        scanner.nextLine();
+        System.out.print("Nome do Fornecedor Novo (para cancelar digite *): ");
+        input[1] = scanner.next();
+        if (input[1].equals("*")) return null;
+        System.out.print("Formula (para cancelar digite *): ");
+        input[2] = scanner.next();
+        if (input[2].equals("*")) return null;
+        return input;
+    }
+    public String removeEnergySupplierMenu() {
+        List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
+        if (energySuppliers.size() == 0) {
+            System.out.println("Lista de Fornecedores de Energia vazia");
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("-----------Fornecedores de Energia-----------\n\n");
+        energySuppliers.forEach(device -> sb.append(device).append("\n\n"));
+        sb.append("Digite o nome do Fornecedor (para cancelar digite *): ");
+        System.out.print(sb);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+        if (input.equals("*")) return null;
+        return input;
+    }
     public String selectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
