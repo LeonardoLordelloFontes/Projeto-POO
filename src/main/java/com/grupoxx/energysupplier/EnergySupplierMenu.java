@@ -1,85 +1,64 @@
 package com.grupoxx.energysupplier;
 
-import com.grupoxx.smartdevice.SmartDevice;
-import com.grupoxx.smartdevice.SmartDeviceRepository;
+import com.grupoxx.smarthouse.SmartHouse;
 
-import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class EnergySupplierMenu {
-private EnergySupplierRepository energySupplierRepository;
-    public String updateEnergySupplierFormulaMenu() {
-        String sb = """
-                -----------Regras na criação das fórmulas-----------
-                
-                * Ambas os valores das variáveis do ponto 1 e 2 estão definidas no arranque do sistema, deves apenas utiliza-las
-                
-                1 - Deverá ser utilziada a variável ValorBase que é o custo diário do kwh de energia
-                2 - Deverá ser utilizada a variável Imposto que é o factor multiplicativo dos impostos
-                3 - Deverá ser utilizada a variável ConsumoDispositivo que é o gasto energético do dispositivo
-                4 - Opcionalmente podes utilizar a variável numeroDispositivos e eventualmente utilizar algum if-then-else para manipular a formula
 
-                Digite a fórmula seguindo as regras (para cancelar digite *):\s""";
+    private int optionsValidation(int options) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(sb);
-        String input = scanner.nextLine();
-        if (input.equals("*")) return null;
-        return input;
+        String s = "Opção inválida, digite um valor inteiro entre 1 e " + String.valueOf(options);
+        try {
+            int option = scanner.nextInt();
+            if (option < 1 || option > options) {
+                System.out.println(s);
+                return -1;
+            }
+            return option;
+        } catch (InputMismatchException e) {
+            System.out.println(s);
+            return -1;
+        }
     }
-    public int MenuFornecedordeEnergia() {
-        StringBuilder sb = new StringBuilder("-----------Fornecedor de Energia-----------\n\n");
-        sb.append("1. Adicionar \n");
-        sb.append("2. Remover \n");
-        sb.append("3. Atualizar \n");
-        sb.append("4. Voltar \n\n");
-        sb.append("Sua Opção (Selecionar Número): ");
-        System.out.println(sb.toString());
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+
+    public int energySupplierMenu() {
+        System.out.print("""
+                -----------Fornecedor de Energia-----------
+
+                1. Adicionar\s
+                2. Remover\s
+                3. Atualizar\s
+                4. Listar
+                5. Voltar\s
+
+                Sua Opção (Selecionar Número):\s""");
+        return optionsValidation(5);
     }
+
     public String[] addEnergySupplierMenu() {
-        StringBuilder sb = new StringBuilder("-----------Adicionar um Fornecedor de Energia-----------\n\n");
+        System.out.println(("-----------Adicionar um Fornecedor de Energia-----------\n\n"));
         String[] input = new String[2];
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nome do fornecedor (para cancelar digite *): ");
         input[0] = scanner.nextLine();
         if (input[0].equals("*")) return null;
-        scanner.nextLine();
         System.out.print("Formula (para cancelar digite *): ");
-        input[1] = scanner.next();
+        input[1] = scanner.nextLine();
         if (input[1].equals("*")) return null;
         return input;
     }
-    public String[] updateEnergySupplierMenu() {
+
+    public String removeEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
             System.out.println("Lista de Fornecedores de Energia vazia");
             return null;
         }
-        StringBuilder sb = new StringBuilder("-----------Fornecedor de Energia-----------\n\n");
-        String[] input = new String[3];
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Nome do Fornecedor Original (para cancelar digite *): ");
-        input[0] = scanner.nextLine();
-        if (input[0].equals("*")) return null;
-        scanner.nextLine();
-        System.out.print("Nome do Fornecedor Novo (para cancelar digite *): ");
-        input[1] = scanner.next();
-        if (input[1].equals("*")) return null;
-        System.out.print("Formula (para cancelar digite *): ");
-        input[2] = scanner.next();
-        if (input[2].equals("*")) return null;
-        return input;
-    }
-    public String removeEnergySupplierMenu() {
-        List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
-        if (energySuppliers.size() == 0) {
-            System.out.println("Lista de Fornecedores de Energia vazia");
-            return null;
-        }
-        StringBuilder sb = new StringBuilder("-----------Fornecedores de Energia-----------\n\n");
+        StringBuilder sb = new StringBuilder("-----------Remover Fornecedor de Energia-----------\n\n");
         energySuppliers.forEach(device -> sb.append(device).append("\n\n"));
         sb.append("Digite o nome do Fornecedor (para cancelar digite *): ");
         System.out.print(sb);
@@ -88,6 +67,7 @@ private EnergySupplierRepository energySupplierRepository;
         if (input.equals("*")) return null;
         return input;
     }
+
     public String selectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
@@ -97,10 +77,48 @@ private EnergySupplierRepository energySupplierRepository;
         StringBuilder sb = new StringBuilder("-----------Selecionar Fornecedor de Energia-----------\n\n");
         energySuppliers.forEach(energySupplier -> sb.append(energySupplier).append("\n"));
         sb.append("Selecione o fornecedor de energia pelo nome (para cancelar digite *): ");
-        System.out.println(sb);
+        System.out.print(sb);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (energySupplierRepository.getEnergySuppliers().get(input) == null) {
+            System.out.println("Opção inválida, selecione uma opção da lista!");
+            return null;
+        }
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    public int updateEnergySupplierMenu() {
+        System.out.print( """
+                -----------Atualiazar Fornecedor de Energia-----------
+                1. Nome
+                2. Fórmula
+                3. Voltar
+                
+                Sua opção (Selecione um número):\s""");
+        return optionsValidation(3);
+    }
+
+    public String updateEnergySupplierNameMenu() {
+        System.out.print("Insira o novo nome do fornecedor de energia (para cancelar digite *): ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if (input.equals("*")) return null;
         return input;
+    }
+
+    public String updateEnergySupplierFormulaMenu() {
+        System.out.print("Insira a nova fórmula do fornecedor de energia (para cancelar digite *): ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (input.equals("*")) return null;
+        return input;
+    }
+
+    public void listSmartHouses(List<EnergySupplier> energySuppliers) {
+        if (energySuppliers.size() == 0) System.out.println("Não há nenhum fornecedor de energia");
+        StringBuilder sb = new StringBuilder();
+        energySuppliers.forEach(energySupplier -> sb.append(energySupplier).append("\n\n"));
+        System.out.print(sb);
     }
 }

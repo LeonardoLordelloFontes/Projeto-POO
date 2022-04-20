@@ -76,6 +76,8 @@ public class SmartHouse implements Serializable {
         // TODO
         StringBuilder sb = new StringBuilder();
         sb.append(this.address).append("\n");
+        if (this.owner != null)
+            sb.append(this.owner.getNome()).append("\t").append(this.owner.getNif());
         smartDevices.forEach((key, value) -> sb.append("\t").append(key).append("\n"));
         return sb.toString();
     }

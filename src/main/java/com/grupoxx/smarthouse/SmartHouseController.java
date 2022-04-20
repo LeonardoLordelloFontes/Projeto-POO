@@ -285,7 +285,7 @@ public class SmartHouseController {
         String[] newOwner = menu.updateOwner();
         if (newOwner == null) updateSmartHouseController(address);
         else {
-            Owner owner = new Owner(newOwner[0], newOwner[1]);
+            Owner owner = new Owner(newOwner[1], newOwner[0]);
             smartHouses.updateOwner(address, owner);
             updateSmartHouseController(address);
         }

@@ -295,7 +295,6 @@ public class SmartHouseMenu {
         System.out.print("Nome do proprietário (para cancelar digite *): ");
         input[0] = scanner.nextLine();
         if (input[0].equals("*")) return null;
-        scanner.nextLine();
         System.out.print("NIF do proprietário (para cancelar digite *): ");
         input[1] = scanner.next();
         if (input[1].equals("*")) return null;
@@ -312,11 +311,11 @@ public class SmartHouseMenu {
     public String updateEnergySupplierMenu(EnergySupplierRepository energySupplierRepository, String oldEnergySupplier) {
         EnergySupplierMenu menu = new EnergySupplierMenu();
         String selectedEnergySupplier = menu.selectEnergySupplierMenu(energySupplierRepository);
+        if (selectedEnergySupplier == null || selectedEnergySupplier.equals("*")) return null;
         if (selectedEnergySupplier.equals(oldEnergySupplier)) {
             System.out.println("Este já o teu fornecedor de energia");
             return null;
         }
-        if (selectedEnergySupplier.equals("*")) return null;
         return selectedEnergySupplier;
     }
 }
