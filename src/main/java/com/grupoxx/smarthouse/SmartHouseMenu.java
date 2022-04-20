@@ -103,6 +103,10 @@ public class SmartHouseMenu {
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        if (smartHouseRepository.getSmartHouses().get(input) == null) {
+            System.out.println("Opção inválida, selecione uma opção da lista!");
+            return null;
+        }
         if (input.equals("*")) return null;
         return input;
     }
@@ -248,6 +252,10 @@ public class SmartHouseMenu {
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        if (!smartHouseRepository.findAllRoomsFromSmartHouse(address).contains(input)) {
+            System.out.println("Opção inválida, selecione uma opção da lista!");
+            return null;
+        }
         if (input.equals("*")) return null;
         return input;
     }

@@ -242,15 +242,21 @@ public class SmartHouseController {
     private void connectSmartDeviceController(String address, String room) {
         SmartDeviceRepository smartDevices = smartHouses.findSmartDevicesByRoom(address, room);
         String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
-        smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.ON);
-        updateSmartDevicesController(address, room);
+        if (factoryCode == null) updateSmartDevicesController(address, room);
+        else {
+            smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.ON);
+            updateSmartDevicesController(address, room);
+        }
     }
 
     private void disconnectSmartDeviceController(String address, String room) {
         SmartDeviceRepository smartDevices = smartHouses.findSmartDevicesByRoom(address, room);
         String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
-        smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.OFF);
-        updateSmartDevicesController(address, room);
+        if (factoryCode == null) updateSmartDevicesController(address, room);
+        else {
+            smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.OFF);
+            updateSmartDevicesController(address, room);
+        }
     }
 
     private void updateAddressController(String oldAddress) {

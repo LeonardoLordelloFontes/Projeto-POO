@@ -232,4 +232,8 @@ public class SmartHouseRepository implements Serializable {
         return smartHouses.get(address).getSmartDevices().values().
                 stream().mapToInt(smartDeviceRepository -> smartDeviceRepository.findAllSmartDevices().size()).sum();
     }
+
+    public Map<String, SmartHouse> getSmartHouses() {
+        return smartHouses;
+    }
 }
