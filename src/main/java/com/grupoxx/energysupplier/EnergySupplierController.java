@@ -10,44 +10,45 @@ public class EnergySupplierController {
     private MainController mainController;
     private final SmartHouseRepository smartHouseRepository;
 
-    public EnergySupplierController(EnergySupplierMenu menu, EnergySupplierRepository energySupplierRepository, SmartHouseRepository smartHouseRepository) {
-        this.menu = menu;
-        this.energySupplierRepository = energySupplierRepository;
-        this.smartHouseRepository = smartHouseRepository;
+    public EnergySupplierController(MainController mainController) {
+        this.mainController = mainController;
+        this.menu = new EnergySupplierMenu();
+        this.energySupplierRepository = mainController.getEnergySupplierRepository();
+        this.smartHouseRepository = mainController.getSmartHouseRepository();
         energySupplierController();
     }
+
     public void energySupplierController() {
         switch (menu.MenuFornecedordeEnergia()) {
             case 1 ->addEnergySupplierController();
             case 2 ->removeEnergySupplierController();
             case 3 ->updateEnergySupplierController();
             case 4 ->this.mainController.mainController();
-
         }
-
     }
+
     public void addEnergySupplierController() {
         String[] input = menu.addEnergySupplierMenu();
-        if ( input.equals(null) ) energySupplierController();
-
-        this.energySupplierRepository.addEnergySupplier(input[0], input[1]);
-        energySupplierController();
+        if (input == null) energySupplierController();
+        else {
+            this.energySupplierRepository.addEnergySupplier(input[0], input[1]);
+            energySupplierController();
+        }
     }
     public void updateEnergySupplierController() {
         String[] input = menu.updateEnergySupplierMenu();
-        if(input.equals(null)) energySupplierController();
-
-        this.energySupplierRepository.updateEnergySupplierName(smartHouseRepository,input[0],input[1]);
-        this.energySupplierRepository.updateEnergySupplierFormula(input[1],input[2]);
-
-        energySupplierController();
+        if(input == null) energySupplierController();
+        else {
+            this.energySupplierRepository.updateEnergySupplierName(smartHouseRepository,input[0],input[1]);
+            this.energySupplierRepository.updateEnergySupplierFormula(input[1],input[2]);
+            energySupplierController();
+        }
     }
     public void removeEnergySupplierController() {
         String input = menu.removeEnergySupplierMenu();
-        if(input.equals(null)) energySupplierController();
-
-        this.energySupplierRepository.removeEnergySupplier(smartHouseRepository,input);
+        if(input == null) energySupplierController();
+        else {
+            this.energySupplierRepository.removeEnergySupplier(smartHouseRepository,input);
+        }
     }
-
-
 }

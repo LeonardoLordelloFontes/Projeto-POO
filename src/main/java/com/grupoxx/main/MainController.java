@@ -1,7 +1,9 @@
 package com.grupoxx.main;
 
+import com.grupoxx.energysupplier.EnergySupplierController;
 import com.grupoxx.energysupplier.EnergySupplierRepository;
 import com.grupoxx.factory.Factory;
+import com.grupoxx.factory.FactoryController;
 import com.grupoxx.smarthouse.SmartHouse;
 import com.grupoxx.smarthouse.SmartHouseController;
 import com.grupoxx.smarthouse.SmartHouseRepository;
@@ -35,11 +37,13 @@ public class MainController implements Serializable {
         int choice = mainMenu();
         switch (choice) {
             case 1:
+                new EnergySupplierController(this);
                 break;
             case 2:
                 new SmartHouseController(this);
                 break;
             case 3:
+                new FactoryController(this);
                 break;
             case 4:
                 break;

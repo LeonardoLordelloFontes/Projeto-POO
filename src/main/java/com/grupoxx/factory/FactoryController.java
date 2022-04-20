@@ -11,6 +11,7 @@ public class FactoryController {
     private final FactoryMenu menu;
 
     public FactoryController(MainController mainController){
+        this.mainController = mainController;
         this.repository = mainController.getFactory().getSmartDeviceRepository();
         this.menu = new FactoryMenu();
         SmartDiviceOperationChoice();

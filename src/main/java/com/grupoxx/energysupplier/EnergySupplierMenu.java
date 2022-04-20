@@ -28,7 +28,7 @@ private EnergySupplierRepository energySupplierRepository;
         if (input.equals("*")) return null;
         return input;
     }
-    public static int MenuFornecedordeEnergia() {
+    public int MenuFornecedordeEnergia() {
         StringBuilder sb = new StringBuilder("-----------Fornecedor de Energia-----------\n\n");
         sb.append("1. Adicionar \n");
         sb.append("2. Remover \n");
