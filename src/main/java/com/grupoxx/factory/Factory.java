@@ -27,17 +27,17 @@ public class Factory implements Serializable {
     }
 
     public void deleteDevice(String factoryCode)throws DeviceNotFound {
-        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
         this.available.remove(factoryCode);
     }
 
     public void setDeviceAvailability(String factoryCode, Boolean available)throws DeviceNotFound {
-        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
         this.available.put(factoryCode, available);
     }
 
     public boolean isDeviceAvailable(String factoryCode)throws DeviceNotFound {
-        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
 
         return available.get(factoryCode);
     }
