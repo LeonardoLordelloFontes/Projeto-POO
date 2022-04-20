@@ -17,7 +17,7 @@ public class FactoryMenu {
         private int isValidOption(int option, int optionNumber ){
             try {
                 if (option < 1 || option > optionNumber) {
-                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                    System.out.println("Opção inválida, digite um valor inteiro entre 1 e "+optionNumber);
                     return -1;
                 }
                 return option;
@@ -25,7 +25,6 @@ public class FactoryMenu {
                 System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
                 return -1;
             }
-
         }
 
         private boolean isValidDouble(String strNum) {
