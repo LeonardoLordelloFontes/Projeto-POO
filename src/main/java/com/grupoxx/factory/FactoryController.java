@@ -141,7 +141,6 @@ public class FactoryController {
             else{
 
                 SmartDevice sd = this.repository.getDevice(components[0]);
-                if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+components[0]+ "não foi encontrado!!");
 
                 if (sd instanceof SmartDeviceBulb) SmartDeviceBulbUpdateChoice(components);
 

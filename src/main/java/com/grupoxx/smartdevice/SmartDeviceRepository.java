@@ -13,7 +13,11 @@ public class SmartDeviceRepository implements Serializable {
     private Map<String,SmartDevice> factory = new HashMap<>();
 
     public SmartDevice getDevice(String factoryCode){
-        return this.factory.get(factoryCode).clone();
+        SmartDevice sd = this.factory.get(factoryCode).clone();
+
+        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+
+        return sd;
     }
 
     public SmartDeviceRepository() {
