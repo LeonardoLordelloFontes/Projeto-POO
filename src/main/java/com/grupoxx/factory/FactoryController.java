@@ -3,6 +3,8 @@ package com.grupoxx.factory;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.*;
 
+import java.io.Serializable;
+
 public class FactoryController {
     private SmartDeviceRepository repository;
     private MainController mainController;

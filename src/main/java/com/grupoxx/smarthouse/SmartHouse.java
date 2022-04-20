@@ -3,9 +3,10 @@ package com.grupoxx.smarthouse;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class SmartHouse {
+public class SmartHouse implements Serializable {
     private Owner owner;
     private String address;
     private String energySupplier;

@@ -1,6 +1,8 @@
 package com.grupoxx.smartdevice;
 
-public class SmartDeviceSpeaker extends SmartDevice{
+import java.io.Serializable;
+
+public class SmartDeviceSpeaker extends SmartDevice implements Serializable {
 
     private String brand;
     private int volume;

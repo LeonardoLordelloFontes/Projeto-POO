@@ -1,11 +1,12 @@
 package com.grupoxx.smartdevice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SmartDeviceRepository {
+public class SmartDeviceRepository implements Serializable {
 
     private Map<String,SmartDevice> factory = new HashMap<>();
 

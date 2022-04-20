@@ -3,8 +3,9 @@ package com.grupoxx.energysupplier;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
+import java.io.Serializable;
 
-public class EnergySupplier {
+public class EnergySupplier implements Serializable {
     private String name;
     private final static double BASE_COST = 5;
     private final static double TAX = 0.05;

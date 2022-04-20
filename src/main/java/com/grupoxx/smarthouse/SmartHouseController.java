@@ -11,6 +11,8 @@ import com.grupoxx.smarthouse.exception.HouseNotFound;
 import com.grupoxx.smarthouse.exception.RoomAlreadyExists;
 import com.grupoxx.smarthouse.exception.RoomNotFound;
 
+import java.io.Serializable;
+
 public class SmartHouseController {
     private final MainController mainController;
     private final SmartHouseMenu menu;

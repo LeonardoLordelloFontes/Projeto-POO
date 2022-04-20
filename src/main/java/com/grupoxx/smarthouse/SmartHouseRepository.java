@@ -3,6 +3,8 @@ import com.grupoxx.energysupplier.EnergySupplierRepository;
 import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.exception.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.Map;
  * @author Adriano (completar)
  */
 
-public class SmartHouseRepository {
+public class SmartHouseRepository implements Serializable {
 
     /**
      * Estrutura de dados responsável pelo armazenamento das casas

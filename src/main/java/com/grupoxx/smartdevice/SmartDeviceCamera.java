@@ -1,6 +1,8 @@
 package com.grupoxx.smartdevice;
 
-public class SmartDeviceCamera extends SmartDevice{
+import java.io.Serializable;
+
+public class SmartDeviceCamera extends SmartDevice implements Serializable {
 
     private int fileSize;
     private int resolution;

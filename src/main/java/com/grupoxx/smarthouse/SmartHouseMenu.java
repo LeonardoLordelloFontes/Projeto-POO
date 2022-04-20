@@ -6,6 +6,7 @@ import com.grupoxx.factory.Factory;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 
+import java.io.Serializable;
 import java.util.*;
 
 public class SmartHouseMenu {

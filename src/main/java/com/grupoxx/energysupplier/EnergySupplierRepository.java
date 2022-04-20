@@ -4,12 +4,13 @@ import com.grupoxx.energysupplier.exception.EnergySupplierAlreadyExists;
 import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.smarthouse.SmartHouseRepository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EnergySupplierRepository {
+public class EnergySupplierRepository implements Serializable {
     private Map<String, EnergySupplier> energySuppliers; // Nome do energySupplier -> EnergySupplier
     public EnergySupplierRepository() {
         this.energySuppliers = new HashMap<>();

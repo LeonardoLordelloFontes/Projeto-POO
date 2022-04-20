@@ -1,10 +1,11 @@
 package com.grupoxx.smartdevice;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public abstract class SmartDevice {
+public abstract class SmartDevice implements Serializable {
 
     /* Estado dos smart device */
 

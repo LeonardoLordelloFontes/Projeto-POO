@@ -1,6 +1,8 @@
 package com.grupoxx.smartdevice;
 
-public class SmartDeviceBulb extends SmartDevice {
+import java.io.Serializable;
+
+public class SmartDeviceBulb extends SmartDevice implements Serializable {
 
     public enum Tone {
         Neutral,

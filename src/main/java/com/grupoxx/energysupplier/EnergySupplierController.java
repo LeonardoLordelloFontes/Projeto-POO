@@ -1,9 +1,8 @@
 package com.grupoxx.energysupplier;
 
+import java.io.Serializable;
+
 public class EnergySupplierController {
-
-
-
 
     private EnergySupplierRepository energySupplierRepository;
 

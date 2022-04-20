@@ -1,6 +1,8 @@
 package com.grupoxx.smarthouse;
 
-public class Owner {
+import java.io.Serializable;
+
+public class Owner implements Serializable {
     private String nif;
     private String name;
 

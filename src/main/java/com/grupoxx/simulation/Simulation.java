@@ -2,6 +2,7 @@ package com.grupoxx.simulation;
 
 import com.grupoxx.main.MainController;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 

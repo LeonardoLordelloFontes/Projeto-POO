@@ -1,5 +1,6 @@
 package com.grupoxx.energysupplier;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
