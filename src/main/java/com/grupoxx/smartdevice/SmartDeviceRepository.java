@@ -171,4 +171,12 @@ public class SmartDeviceRepository implements Serializable {
 
     public Map<String, SmartDevice> getFactory() { return factory;}
 
+
+    public void listagem(){
+
+        for (SmartDevice sd: this.factory.values()){
+            System.out.print(sd);
+        }
+    }
+
 }

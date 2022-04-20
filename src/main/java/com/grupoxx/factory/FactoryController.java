@@ -18,7 +18,7 @@ public class FactoryController {
     }
 
     private void SmartDiviceOperationChoice(){
-        System.out.println(this.repository.getFactory());
+
         int choice = menu.MenuTipoDispositivoOperacoes();
 
         switch (choice){
@@ -29,7 +29,7 @@ public class FactoryController {
 
             case 3: SmartDeviceUpdateChoice();
 
-            case 4:;
+            case 4: SmartDeviceListagemChoice();
 
             case 5: this.mainController.mainController();
 
@@ -116,7 +116,6 @@ public class FactoryController {
     }
 
     private void SmartDeviceRemoveChoice() {
-        System.out.println(this.repository.getFactory());
 
         String component = menu.MenuTipoDispositivoRemove();
         if (component == null) SmartDiviceOperationChoice();
@@ -213,6 +212,14 @@ public class FactoryController {
                 SmartDeviceUpdateChoice();
                 }
         }
+    }
+
+    private void SmartDeviceListagemChoice(){
+
+        this.repository.listagem();
+
+        SmartDiviceOperationChoice();
+
     }
 
 }
