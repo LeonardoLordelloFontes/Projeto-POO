@@ -1,9 +1,7 @@
 package com.grupoxx.smartdevice;
 
 import com.grupoxx.smartdevice.exception.DeviceAlreadyExist;
-import com.grupoxx.smartdevice.exception.DeviceNotFoud;
-import com.grupoxx.smarthouse.exception.HouseNotFound;
-
+import com.grupoxx.smartdevice.exception.DeviceNotFound;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,14 +16,13 @@ public class SmartDeviceRepository implements Serializable {
         return this.factory.get(factoryCode).clone();
     }
 
-
     public SmartDeviceRepository() {
         this.factory = new HashMap<>();
     }
 
-    public SmartDevice findSmartDeviceByFactoryCode (String factoryCode) throws DeviceNotFoud {
+    public SmartDevice findSmartDeviceByFactoryCode (String factoryCode) throws DeviceNotFound {
         SmartDevice sd = this.factory.get(factoryCode);
-        if(sd == null) throw new DeviceNotFoud("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
         return sd;
     }
 
@@ -66,18 +63,18 @@ public class SmartDeviceRepository implements Serializable {
 
     }
 
-    public void SmartDeviceRemove(String factoryCode) throws DeviceNotFoud{
+    public void SmartDeviceRemove(String factoryCode) throws DeviceNotFound {
         SmartDevice sd = this.factory.get(factoryCode);
-        if(sd == null) throw new DeviceNotFoud("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
 
         this.factory.remove(factoryCode);
     }
 
-    public void SmartDeviceBulbUpdade(String oldFactoryCode, String newFactoryCode, String energyConsumption, String installationCost, String dimension)throws DeviceNotFoud{
+    public void SmartDeviceBulbUpdade(String oldFactoryCode, String newFactoryCode, String energyConsumption, String installationCost, String dimension)throws DeviceNotFound {
         //Partindo do principio que os input são válidos
 
         SmartDeviceBulb sb = (SmartDeviceBulb) this.factory.get(oldFactoryCode);
-        if(sb == null) throw new DeviceNotFoud("O SmartBulb de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
+        if(sb == null) throw new DeviceNotFound("O SmartBulb de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
         if(!newFactoryCode.equals("#")){
             sb.setFactoryCode(newFactoryCode);
@@ -90,10 +87,10 @@ public class SmartDeviceRepository implements Serializable {
 
     }
 
-    public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax)throws DeviceNotFoud{
+    public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax)throws DeviceNotFound {
 
         SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.factory.get(oldFactoryCode);
-        if(ss == null) throw new DeviceNotFoud("O SmartSpeaker de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
+        if(ss == null) throw new DeviceNotFound("O SmartSpeaker de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
         if(!newFactoryCode.equals("#")){
             ss.setFactoryCode(newFactoryCode);
@@ -106,10 +103,10 @@ public class SmartDeviceRepository implements Serializable {
         if (!volumeMax.equals("#")) ss.setVolumeMax(Integer.parseInt(volumeMax));
     }
 
-    public void SmartDeviceCameraUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String resolution ,String fileSize)throws DeviceNotFoud{
+    public void SmartDeviceCameraUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String resolution ,String fileSize)throws DeviceNotFound {
 
         SmartDeviceCamera sc = (SmartDeviceCamera) this.factory.get(oldFactoryCode);
-        if(sc == null) throw new DeviceNotFoud("O SmartCamera de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
+        if(sc == null) throw new DeviceNotFound("O SmartCamera de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
         if(!newFactoryCode.equals("#")){
             sc.setFactoryCode(newFactoryCode);
@@ -141,9 +138,9 @@ public class SmartDeviceRepository implements Serializable {
                     sd.setState(turn);}
     }
 
-    public void SmartEpecificDiviceState(String factoryCode, SmartDevice.State turn) throws DeviceNotFoud{
+    public void SmartEpecificDiviceState(String factoryCode, SmartDevice.State turn) throws DeviceNotFound {
         SmartDevice sd = this.factory.get(factoryCode);
-        if(sd == null) throw new DeviceNotFoud("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
 
         this.factory.get(factoryCode).setState(turn);
 
@@ -165,10 +162,10 @@ public class SmartDeviceRepository implements Serializable {
 
     }
 
-    public void SmartDeviceEspecificTone(String factoryCode,String tone) throws DeviceNotFoud{
+    public void SmartDeviceEspecificTone(String factoryCode,String tone) throws DeviceNotFound {
 
         SmartDevice sb = this.factory.get(factoryCode);
-        if(sb == null) throw new DeviceNotFoud("O SmartBulb de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if(sb == null) throw new DeviceNotFound("O SmartBulb de código de fábrica "+factoryCode+ "não foi encontrado!!");
 
         if( sb instanceof SmartDeviceBulb){
 
@@ -192,12 +189,11 @@ public class SmartDeviceRepository implements Serializable {
             for(SmartDevice ss: this.factory.values())
                 if (ss instanceof SmartDeviceSpeaker) ((SmartDeviceSpeaker) ss).setRadio(propertie);
 
-
     }
 
-    public void SmartDeviceEspecificSmartSpeakerProperties(String factoryCode, String volume, String radioStation) throws DeviceNotFoud{
+    public void SmartDeviceEspecificSmartSpeakerProperties(String factoryCode, String volume, String radioStation) throws DeviceNotFound {
         SmartDevice ss = this.factory.get(factoryCode);
-        if(ss == null) throw new DeviceNotFoud("O SmartSpeaker de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if(ss == null) throw new DeviceNotFound("O SmartSpeaker de código de fábrica "+factoryCode+ "não foi encontrado!!");
 
         if( ss instanceof SmartDeviceSpeaker) {
             if (!volume.equals("#")) ((SmartDeviceSpeaker) ss).setVolume(Integer.parseInt(volume));

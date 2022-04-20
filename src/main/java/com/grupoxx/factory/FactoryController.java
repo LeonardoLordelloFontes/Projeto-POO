@@ -2,19 +2,18 @@ package com.grupoxx.factory;
 
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.*;
-import com.grupoxx.smartdevice.exception.DeviceNotFoud;
+import com.grupoxx.smartdevice.exception.DeviceNotFound;
 
-import java.io.Serializable;
 
 public class FactoryController {
     private SmartDeviceRepository repository;
     private MainController mainController;
     private final FactoryMenu menu;
+
     public FactoryController(MainController mainController){
         this.repository = mainController.getFactory().getSmartDeviceRepository();
         this.menu = new FactoryMenu();
         SmartDiviceOperationChoice();
-
     }
 
     private void SmartDiviceOperationChoice(){
@@ -128,7 +127,7 @@ public class FactoryController {
             SmartDeviceRemoveChoice();
         }
     }
-    private void SmartDeviceUpdateChoice()throws DeviceNotFoud {
+    private void SmartDeviceUpdateChoice()throws DeviceNotFound {
         System.out.println(this.repository.getFactory());
 
         String [] components = menu.MenuDiviceUpdate();
@@ -141,7 +140,7 @@ public class FactoryController {
             else{
 
                 SmartDevice sd = this.repository.getDevice(components[0]);
-                if(sd == null) throw new DeviceNotFoud("O dispositivo de código de fábrica "+components[0]+ "não foi encontrado!!");
+                if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+components[0]+ "não foi encontrado!!");
 
                 if (sd instanceof SmartDeviceBulb) SmartDeviceBulbUpdateChoice(components);
 

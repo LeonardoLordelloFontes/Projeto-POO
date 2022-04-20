@@ -1,8 +1,7 @@
 package com.grupoxx.factory;
 
-import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
-import com.grupoxx.smartdevice.exception.DeviceNotFoud;
+import com.grupoxx.smartdevice.exception.DeviceNotFound;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -27,18 +26,18 @@ public class Factory implements Serializable {
         this.smartDeviceRepository = smartDeviceRepository;
     }
 
-    public void deleteDevice(String factoryCode)throws DeviceNotFoud {
-        if (this.available.get(factoryCode) == null) throw new DeviceNotFoud("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+    public void deleteDevice(String factoryCode)throws DeviceNotFound {
+        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
         this.available.remove(factoryCode);
     }
 
-    public void setDeviceAvailability(String factoryCode, Boolean available)throws DeviceNotFoud {
-        if (this.available.get(factoryCode) == null) throw new DeviceNotFoud("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+    public void setDeviceAvailability(String factoryCode, Boolean available)throws DeviceNotFound {
+        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
         this.available.put(factoryCode, available);
     }
 
-    public boolean isDeviceAvailable(String factoryCode)throws DeviceNotFoud {
-        if (this.available.get(factoryCode) == null) throw new DeviceNotFoud("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+    public boolean isDeviceAvailable(String factoryCode)throws DeviceNotFound {
+        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
 
         return available.get(factoryCode);
     }
