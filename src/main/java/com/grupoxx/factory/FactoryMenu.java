@@ -14,9 +14,9 @@ public class FactoryMenu {
             return this.error.clone();
         }
 
-        private int isValidOption(int option){
+        private int isValidOption(int option, int optionNumber ){
             try {
-                if (option < 1 || option > 5) {
+                if (option < 1 || option > optionNumber) {
                     System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
                     return -1;
                 }
@@ -72,7 +72,7 @@ public class FactoryMenu {
             System.out.print(sb.toString());
             Scanner scanner = new Scanner(System.in);
             int option = scanner.nextInt();
-            return isValidOption(option);
+            return isValidOption(option,6);
         }
 
         public int MenuTipoDispositivoAdd() {
@@ -85,7 +85,7 @@ public class FactoryMenu {
             System.out.print(sb.toString());
             Scanner scanner = new Scanner(System.in);
             int option = scanner.nextInt();
-            return isValidOption(option);
+            return isValidOption(option,4);
         }
 
         public String[] MenuDiviceAdd(){
@@ -199,7 +199,7 @@ public class FactoryMenu {
         System.out.print(sb.toString());
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
-        return isValidOption(option);
+        return isValidOption(option,3);
         }
 
     public int MenuSmartSpeakerProperties(){
@@ -214,7 +214,7 @@ public class FactoryMenu {
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         int option = scanner.nextInt();
-        return isValidOption(option);
+        return isValidOption(option,4);
     }
 
     public String[] MenuSmartSpeakerPropertiesEspecific(){
@@ -294,7 +294,7 @@ public class FactoryMenu {
         sb.append("Sua Opção (Selecionar Número): ");
         System.out.print(sb.toString());
         int option = scanner.nextInt();
-        return isValidOption(option);
+        return isValidOption(option,5);
         }
 
     public String[] MenuSmartBulbEspecificToneChange(){
@@ -479,7 +479,7 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
             int option = scanner.nextInt();
-            return isValidOption(option);
+            return isValidOption(option,6);
         }
 
         public int MenuSmartDeviceOffAndOn(){
@@ -494,7 +494,7 @@ public class FactoryMenu {
             sb.append("Sua Opção (Selecionar Número): ");
             System.out.print(sb.toString());
             int option = scanner.nextInt();
-            return isValidOption(option);
+            return isValidOption(option,3);
         }
 
         public String SmartDeviceEspecificOffAndOn(){
