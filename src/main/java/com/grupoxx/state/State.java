@@ -4,7 +4,7 @@ import com.grupoxx.main.MainController;
 
 import java.io.*;
 
-public class State implements Serializable {
+public class State {
     private MainController mainController;
 
     public State() {
