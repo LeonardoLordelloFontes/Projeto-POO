@@ -74,4 +74,8 @@ public class MainController implements Serializable {
     public SmartHouseRepository getSmartHouseRepository() {
         return smartHouseRepository;
     }
+
+    public List<Invoicer> getInvoicers() {
+        return invoicers;
+    }
 }

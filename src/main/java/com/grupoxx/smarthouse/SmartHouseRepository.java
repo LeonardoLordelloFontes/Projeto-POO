@@ -13,10 +13,6 @@ import java.util.Map;
 /**
  * Classe que permite a manipulação de um grupo de casas.
  * Permite adicionar, remover e obter casas, bem como atualizar dados de uma casa
- *
- * @author Leonardo Lordello Fontes
- * @author Zé (completar)
- * @author Adriano (completar)
  */
 
 public class SmartHouseRepository implements Serializable {
