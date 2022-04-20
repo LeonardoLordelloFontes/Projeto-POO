@@ -124,9 +124,9 @@ public class SmartDeviceBulb extends SmartDevice implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString());
 
-        sb.append("\n O seu dispositivo é um SmartBulb.")
-                .append("\n Neste a sua tonalidade é ").append(this.tone).append(".")
-                .append("\n A sua dimenção é ").append(this.dimension).append(" cm.");
+        sb.append("\n\t TIPO: SmartBulb")
+                .append("\n\t Tonalidade: ").append(this.tone)
+                .append("\n\t A sua dimenção é ").append(this.dimension);
 
         return sb.toString();
     }

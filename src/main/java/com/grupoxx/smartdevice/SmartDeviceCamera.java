@@ -84,9 +84,9 @@ public class SmartDeviceCamera extends SmartDevice implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder(super.toString());
 
-        sb.append("\n O seu dispositivo é um SmartCamara.")
-                .append("\n O tamanho do ficheiro em que guardam os eventos registados é igual a ").append(this.fileSize).append(".")
-                .append("\n A sua resuloção é igual a ").append(this.resolution).append(".");
+        sb.append("\n\t TIPO: SmartCamara.")
+                .append("\n\t Tamanho do Ficheiro: ").append(this.fileSize)
+                .append("\n\t Resolução: ").append(this.resolution);
 
         return sb.toString();
     }

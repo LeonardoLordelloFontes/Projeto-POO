@@ -164,12 +164,12 @@ public abstract class SmartDevice implements Serializable {
 
     public String toString(){
 
-        StringBuilder sb = new StringBuilder("O seu dispositivo inteligente cujo número de fabrica é ");
+        StringBuilder sb = new StringBuilder("Código de Fábrica: ");
 
-        sb.append(this.factoryCode).append(".")
-                .append("\n Teve um custo de instalação de ").append(this.installationCost).append(" euros.")
-                .append("\n Neste momento encontra-se ").append( this.state == State.ON ? "ligado.":"desligado.")
-                .append("\n Tem um custo dirario fixo de ").append(this.energyConsumption).append("KW por hora.");
+        sb.append(this.factoryCode).append("\n")
+                .append("\n\t Custo de Instalação: ").append(this.installationCost)
+                .append("\n\t Estado: ").append( this.state == State.ON ? "Ligado":"Desligado")
+                .append("\n\t Custo de Energia: ").append(this.energyConsumption);
 
         return sb.toString();
     }

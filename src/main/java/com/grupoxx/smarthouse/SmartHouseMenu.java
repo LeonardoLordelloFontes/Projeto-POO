@@ -13,7 +13,7 @@ public class SmartHouseMenu {
 
     private int optionsValidation(int options) {
         Scanner scanner = new Scanner(System.in);
-        String s = "Opção inválida, digite um valor inteiro entre 1 e " + String.valueOf(options);
+        String s = "Opção inválida, digite um valor inteiro entre 1 e " + options;
         try {
             int option = scanner.nextInt();
             if (option < 1 || option > options) {

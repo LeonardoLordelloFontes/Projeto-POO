@@ -33,15 +33,10 @@ public class Factory implements Serializable {
     }
 
     public void setDeviceAvailability(String factoryCode, Boolean available) throws DeviceAlreadyExist {
-        if(this.available.get(factoryCode) != null)
-            throw new DeviceAlreadyExist("O dispositivo de código de fábrica "+factoryCode+"já existe!!");
-
         this.available.put(factoryCode, available);
     }
 
     public boolean isDeviceAvailable(String factoryCode)throws DeviceNotFound {
-        if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
-
         return available.get(factoryCode);
     }
 
