@@ -29,11 +29,9 @@ public class FactoryController {
 
             case 3: SmartDeviceUpdateChoice();
 
-            case 4: SmartDeviceStateChoice();
+            case 4:;
 
-            case 5: SmartDevicePropertiesChoice();
-
-            case 6: this.mainController.mainController();
+            case 5: this.mainController.mainController();
 
             case -1: SmartDiviceOperationChoice();
         }
@@ -61,14 +59,17 @@ public class FactoryController {
         String[] components = menu.MenuSmartBulbAdd();
         if (components == null) SmartDeviceAddChoice();
         else {
-            this.repository.SmartDeviceBulbAdd(
-                    components[0],
-                    Double.parseDouble(components[1]),
-                    Double.parseDouble(components[2]),
-                    Double.parseDouble(components[3]));
+            if( components.equals(this.menu.getError()) ) SmartDeviceSpeakerChoice();
+            else{
+                this.repository.SmartDeviceBulbAdd(
+                        components[0],
+                        Double.parseDouble(components[1]),
+                        Double.parseDouble(components[2]),
+                        Double.parseDouble(components[3]));
 
-            this.mainController.getFactory().setDeviceAvailability(components[0], true);
-            SmartDeviceBulbChoice();
+                this.mainController.getFactory().setDeviceAvailability(components[0], true);
+                SmartDeviceBulbChoice();
+            }
         }
     }
 
@@ -154,18 +155,19 @@ public class FactoryController {
 
     private void SmartDeviceBulbUpdateChoice(String[] components) {
 
-        String component = menu.MenuSmartBulbUpdate();
-        if (component == null) SmartDeviceUpdateChoice();
+        String[] components1 = menu.MenuSmartBulbUpdate();
+        if (components1 == null) SmartDeviceUpdateChoice();
 
         else {
-            if( component.equals(this.menu.getError()[0])) SmartDeviceBulbUpdateChoice(components);
+            if( components1.equals(this.menu.getError())) SmartDeviceBulbUpdateChoice(components);
             else{
                 this.repository.SmartDeviceBulbUpdade(
                         components[0],
                         components[1],
                         components[2],
                         components[3],
-                        component);
+                        components1[0],
+                        components1[1]);
                 SmartDeviceUpdateChoice();
                 }
         }
@@ -177,14 +179,18 @@ public class FactoryController {
 
         else{
             if( components.equals(this.menu.getError()) ) SmartDeviceSpeakerUpdateChoice(components);
+
             else{
                 this.repository.SmartDeviceSpeakerUpdate(
                         components[0],
                         components[1],
                         components[2],
                         components[3],
-                        components1[4],
-                        components1[5]);
+                        components1[0],
+                        components1[1],
+                        components1[2],
+                        components1[3]);
+
                 SmartDeviceUpdateChoice();
                 }
         }
@@ -202,214 +208,11 @@ public class FactoryController {
                         components[1],
                         components[2],
                         components[3],
-                        components1[4],
-                        components1[5]);
+                        components1[0],
+                        components1[1]);
                 SmartDeviceUpdateChoice();
                 }
         }
     }
 
-    private void SmartDeviceStateChoice(){
-        int stateChoice = menu.MenuSmartDeviceState();
-
-        switch (stateChoice){
-
-            case 1: SmartDeviceBulbStateChoice();
-
-            case 2: SmartDeviceSpeakerStateChoice();
-
-            case 3: SmartDeviceCameraStateChoice();
-
-            case 4: SmartDiviceAllStateChoice();
-
-            case 5: SmartEspecificDiviceStateChoice();
-
-            case 6: SmartDiviceOperationChoice();
-
-            case -1: SmartDeviceStateChoice();
-        }
-    }
-
-    private void SmartDeviceBulbStateChoice(){
-        int d = menu.MenuSmartDeviceOffAndOn();
-
-        switch (d){
-
-            case 1: this.repository.SmartDeviceState("sb", SmartDevice.State.ON);
-
-            case 2: this.repository.SmartDeviceState("sb", SmartDevice.State.OFF);
-
-            case 3: SmartDeviceStateChoice();
-        }
-        SmartDeviceStateChoice();
-    }
-
-    private void SmartDeviceSpeakerStateChoice(){
-        int d = menu.MenuSmartDeviceOffAndOn();
-
-        switch (d){
-
-            case 1: this.repository.SmartDeviceState("ss", SmartDevice.State.ON);
-
-            case 2: this.repository.SmartDeviceState("ss", SmartDevice.State.OFF);
-
-            case 3: SmartDeviceStateChoice();
-        }
-        SmartDeviceStateChoice();
-    }
-
-    private void SmartDeviceCameraStateChoice(){
-        int d = menu.MenuSmartDeviceOffAndOn();
-
-        switch (d){
-
-            case 1: this.repository.SmartDeviceState("sc", SmartDevice.State.ON);
-
-            case 2: this.repository.SmartDeviceState("sc", SmartDevice.State.OFF);
-
-            case 3: SmartDeviceStateChoice();
-        }
-        SmartDeviceStateChoice();
-    }
-
-    private void SmartDiviceAllStateChoice(){
-        int d = menu.MenuSmartDeviceOffAndOn();
-
-        switch (d){
-
-            case 1: this.repository.SmartDeviceState(" ",SmartDevice.State.ON);
-
-            case 2: this.repository.SmartDeviceState(" ",SmartDevice.State.OFF);
-
-            case 3: SmartDeviceStateChoice();
-        }
-        SmartDeviceStateChoice();
-    }
-
-    private void SmartEspecificDiviceStateChoice(){
-        int d = menu.MenuSmartDeviceOffAndOn();
-
-        if (d == 3) SmartDeviceStateChoice();
-
-        String factorycode = menu.SmartDeviceEspecificOffAndOn();
-        if (factorycode == null) SmartDeviceStateChoice();
-
-        switch (d){
-
-            case 1: this.repository.SmartEpecificDiviceState(factorycode, SmartDevice.State.ON);
-
-            case 2: this.repository.SmartEpecificDiviceState(factorycode, SmartDevice.State.OFF);
-        }
-        SmartEspecificDiviceStateChoice();
-    }
-
-    private void SmartDevicePropertiesChoice() {
-        int choice = menu.MenuSmartDiviceProperties();
-
-        switch (choice) {
-
-            case 1: SmartBulbToneChangeChoice();
-
-            case 2: SmartSpeakerPropertiesChangeChoice();
-
-            case 3: SmartDiviceOperationChoice();
-
-            case -1: SmartDevicePropertiesChoice();
-        }
-    }
-
-    private void SmartBulbToneChangeChoice(){
-        int choice = menu.MenuSmartBulbToneChange();
-
-        switch (choice){
-
-            case 1: SmartBulbToneChangeNeutralChoice();
-
-            case 2: SmartBulbToneChangeWarmChoice();
-
-            case 3: SmartBulbToneChangeColdChoice();
-
-            case 4: SmartBulbToneChangeChoiceEspecific();
-
-            case 5: SmartDevicePropertiesChoice();
-
-            case -1: SmartBulbToneChangeChoice();
-        }
-
-    }
-
-    private void SmartBulbToneChangeNeutralChoice(){
-        this.repository.SmartDeviceTone("N");
-        SmartBulbToneChangeChoice();
-    }
-
-    private void SmartBulbToneChangeWarmChoice(){
-        this.repository.SmartDeviceTone("W");
-        SmartBulbToneChangeChoice();
-    }
-
-    private void SmartBulbToneChangeColdChoice(){
-        this.repository.SmartDeviceTone("C");
-        SmartBulbToneChangeChoice();
-    }
-
-    private void SmartBulbToneChangeChoiceEspecific() {
-        String[] components = menu.MenuSmartBulbEspecificToneChange();
-        if (components == null) SmartBulbToneChangeChoice();
-
-        else {
-            switch (components[0]) {
-
-                case "1":
-                    components[0] = "N";
-                case "2":
-                    components[0] = "W";
-                case "3":
-                    components[0] = "C";
-            }
-
-            this.repository.SmartDeviceEspecificTone(components[0], components[1]);
-
-            SmartBulbToneChangeChoiceEspecific();
-
-        }
-    }
-
-    private void SmartSpeakerPropertiesChangeChoice() {
-        int choice = menu.MenuSmartSpeakerProperties();
-
-        switch (choice) {
-
-            case 1: SmartSpeakerPropertiesVolumeChangeChoice();
-
-            case 2: SmartSpeakerPropertiesRadioStationChangeChoice();
-
-            case 3: SmartSpeakerPropertiesEspecificChangeChoice();
-
-            case 4: SmartDevicePropertiesChoice();
-
-            case -1: SmartSpeakerPropertiesChangeChoice();
-        }
-    }
-
-    private void SmartSpeakerPropertiesVolumeChangeChoice(){
-        String volume = menu.MenuSmartSpeakerVolume();
-        if(volume == null) SmartSpeakerPropertiesChangeChoice();
-        else this.repository.SmartDeviceSpeakerProperties(volume,"V");
-    }
-
-    private void SmartSpeakerPropertiesRadioStationChangeChoice(){
-        String radioStation = menu.MenuSmartSpeakerRadioStation();
-        if(radioStation == null) SmartSpeakerPropertiesChangeChoice();
-        else this.repository.SmartDeviceSpeakerProperties(radioStation,"R");
-    }
-
-
-
-    private void SmartSpeakerPropertiesEspecificChangeChoice(){
-        String [] components = menu.MenuSmartSpeakerPropertiesEspecific();
-        if (components == null) SmartDeviceUpdateChoice();
-        else this.repository.SmartDeviceEspecificSmartSpeakerProperties(components[0],components[1],components[2]);
-
-    }
 }

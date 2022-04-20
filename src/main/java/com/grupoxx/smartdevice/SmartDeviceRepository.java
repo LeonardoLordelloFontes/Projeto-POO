@@ -66,7 +66,7 @@ public class SmartDeviceRepository implements Serializable {
         this.factory.remove(factoryCode);
     }
 
-    public void SmartDeviceBulbUpdade(String oldFactoryCode, String newFactoryCode, String energyConsumption, String installationCost, String dimension)throws DeviceNotFound {
+    public void SmartDeviceBulbUpdade(String oldFactoryCode, String newFactoryCode, String energyConsumption, String installationCost, String dimension, String tone)throws DeviceNotFound {
         //Partindo do principio que os input são válidos
 
         SmartDeviceBulb sb = (SmartDeviceBulb) this.factory.get(oldFactoryCode);
@@ -80,10 +80,20 @@ public class SmartDeviceRepository implements Serializable {
         if(!energyConsumption.equals("#")) sb.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals("#")) sb.setInstallationCost( Double.parseDouble(installationCost) );
         if(!dimension.equals("#")) sb.setDimension(Double.parseDouble (dimension) );
+        if(!tone.equals("#")){
 
+            switch (tone) {
+                case "1": sb.setTone(SmartDeviceBulb.Tone.Neutral);
+
+                case "2": sb.setTone(SmartDeviceBulb.Tone.Warm);
+
+                case "3": sb.setTone(SmartDeviceBulb.Tone.Cold);
+
+            }
+        }
     }
 
-    public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax)throws DeviceNotFound {
+    public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax, String volume, String radioStation)throws DeviceNotFound {
 
         SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.factory.get(oldFactoryCode);
         if(ss == null) throw new DeviceNotFound("O SmartSpeaker de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
@@ -97,6 +107,9 @@ public class SmartDeviceRepository implements Serializable {
         if(!installationCost.equals("#")) ss.setInstallationCost( Double.parseDouble(installationCost) );
         if (!brand.equals("#")) ss.setBrand(brand);
         if (!volumeMax.equals("#")) ss.setVolumeMax(Integer.parseInt(volumeMax));
+        if (!volume.equals("#")) ss.setVolume(Integer.parseInt(volume));
+        if (!radioStation.equals("#")) ss.setRadio(radioStation);
+
     }
 
     public void SmartDeviceCameraUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String resolution ,String fileSize)throws DeviceNotFound {
@@ -112,7 +125,7 @@ public class SmartDeviceRepository implements Serializable {
         if(!energyConsumption.equals("#")) sc.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals("#")) sc.setInstallationCost( Double.parseDouble(installationCost) );
         if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(resolution));
-        if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(fileSize));
+        if(!resolution.equals("#")) sc.setFileSize(Integer.parseInt(fileSize));
     }
 
     public void SmartDeviceState(String deviceToTurn, SmartDevice.State turn){
@@ -134,13 +147,6 @@ public class SmartDeviceRepository implements Serializable {
                     sd.setState(turn);}
     }
 
-    public void SmartEpecificDiviceState(String factoryCode, SmartDevice.State turn) throws DeviceNotFound {
-        SmartDevice sd = this.factory.get(factoryCode);
-        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
-
-        this.factory.get(factoryCode).setState(turn);
-
-    }
 
     public void SmartDeviceTone(String tone){
 
@@ -155,46 +161,6 @@ public class SmartDeviceRepository implements Serializable {
         if(tone.equals("C") )
             for(SmartDevice sb: this.factory.values())
                 if (sb instanceof SmartDeviceBulb) ((SmartDeviceBulb) sb).setTone(SmartDeviceBulb.Tone.Cold);
-
-    }
-
-    public void SmartDeviceEspecificTone(String factoryCode,String tone) throws DeviceNotFound {
-
-        SmartDevice sb = this.factory.get(factoryCode);
-        if(sb == null) throw new DeviceNotFound("O SmartBulb de código de fábrica "+factoryCode+ "não foi encontrado!!");
-
-        if( sb instanceof SmartDeviceBulb){
-
-            if (tone.equals("N")) ((SmartDeviceBulb) sb).setTone(SmartDeviceBulb.Tone.Neutral);
-
-            if (tone.equals("W")) ((SmartDeviceBulb) sb).setTone(SmartDeviceBulb.Tone.Warm);
-
-            if (tone.equals("C")) ((SmartDeviceBulb) sb).setTone(SmartDeviceBulb.Tone.Cold);
-        }
-    }
-
-    public void SmartDeviceSpeakerProperties(String propertie,String change){
-
-        if( change.equals("V") ){
-            int volume = Integer.parseInt(propertie);
-            for(SmartDevice ss: this.factory.values())
-                if (ss instanceof SmartDeviceSpeaker) ((SmartDeviceSpeaker) ss).setVolume(volume);
-        }
-
-        if (change.equals("R"))
-            for(SmartDevice ss: this.factory.values())
-                if (ss instanceof SmartDeviceSpeaker) ((SmartDeviceSpeaker) ss).setRadio(propertie);
-
-    }
-
-    public void SmartDeviceEspecificSmartSpeakerProperties(String factoryCode, String volume, String radioStation) throws DeviceNotFound {
-        SmartDevice ss = this.factory.get(factoryCode);
-        if(ss == null) throw new DeviceNotFound("O SmartSpeaker de código de fábrica "+factoryCode+ "não foi encontrado!!");
-
-        if( ss instanceof SmartDeviceSpeaker) {
-            if (!volume.equals("#")) ((SmartDeviceSpeaker) ss).setVolume(Integer.parseInt(volume));
-            if (!radioStation.equals("#")) ((SmartDeviceSpeaker) ss).setRadio(radioStation);
-        }
 
     }
 
