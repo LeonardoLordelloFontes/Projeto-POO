@@ -27,6 +27,16 @@ public class Factory implements Serializable {
         this.smartDeviceRepository = smartDeviceRepository;
     }
 
+    public void updateDevice(String OldFactoryCode,String NewFactoryCode)throws DeviceNotFound {
+        if (this.available.get(OldFactoryCode) == null)
+            throw new DeviceNotFound("O dispositivo de código de fábrica " + OldFactoryCode + " não foi encontrado!!");
+
+        if (!NewFactoryCode.equals("#")) {
+            this.available.remove(OldFactoryCode);
+            this.available.put(NewFactoryCode, true);
+        }
+    }
+
     public void deleteDevice(String factoryCode)throws DeviceNotFound {
         if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
         this.available.remove(factoryCode);

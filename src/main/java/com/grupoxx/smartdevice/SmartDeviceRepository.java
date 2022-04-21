@@ -82,16 +82,14 @@ public class SmartDeviceRepository implements Serializable {
         if(!dimension.equals("#")) sb.setDimension(Double.parseDouble (dimension) );
         if(!tone.equals("#")){
 
-            switch (tone) {
-                case "1": sb.setTone(SmartDeviceBulb.Tone.Neutral);
+                if (tone.equals("1")) sb.setTone(SmartDeviceBulb.Tone.Neutral);
 
-                case "2": sb.setTone(SmartDeviceBulb.Tone.Warm);
+                if (tone.equals("2")) sb.setTone(SmartDeviceBulb.Tone.Warm);
 
-                case "3": sb.setTone(SmartDeviceBulb.Tone.Cold);
+                if (tone.equals("3")) sb.setTone(SmartDeviceBulb.Tone.Cold);
 
             }
         }
-    }
 
     public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax, String volume, String radioStation)throws DeviceNotFound {
 
@@ -173,10 +171,11 @@ public class SmartDeviceRepository implements Serializable {
 
     public void listagem() {
 
-        if(this.factory == null) System.out.println("Não dá para listar pois não foram criados dispositivos!!");
+        if(this.factory.isEmpty()) System.out.println("Não foram criados dispositivos!!");
 
-        for (SmartDevice sd: this.factory.values()){
-            System.out.print(sd);
+        else{
+            for (SmartDevice sd: this.factory.values()) System.out.print(sd+"\n");
+            System.out.println("\n\n");
         }
     }
 

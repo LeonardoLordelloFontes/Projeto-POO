@@ -1,6 +1,5 @@
 package com.grupoxx.factory;
 
-import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -94,12 +93,12 @@ public class FactoryMenu {
             input[0] = scanner.next();
             if (input[0].equals("*")) return this.back;
 
-            System.out.print("Custo de Instalação:");
+            System.out.print("Custo de Instalação: ");
             input[1] = scanner.next();
             if (input[1].equals("*")) return this.back;
             if( !isValidDouble(input[1]) ) return this.error;
 
-            System.out.print("Quantidade de energia diária gasta:");
+            System.out.print("Quantidade de energia diária gasta: ");
             input[2] = scanner.next();
             if (input[2].equals("*")) return this.back;
             if( !isValidDouble(input[2]) ) return this.error;
@@ -140,7 +139,7 @@ public class FactoryMenu {
             input[3] = scanner.next();
             if (input[3].equals("*")) return this.back;
 
-            System.out.print("Volume Máximo: \n");
+            System.out.print("Volume Máximo: ");
             input[4] = scanner.next();
             if (input[4].equals("*")) return this.back;
             if (!isValidInteger(input[4]) ) return this.error;
@@ -251,7 +250,7 @@ public class FactoryMenu {
             answer = scanner.next().toUpperCase(Locale.ROOT);
             if (answer.equals("Y")) {
 
-                StringBuilder sb = new StringBuilder("-----------Tipo de Tonalidades-----------\n\n");
+                StringBuilder sb = new StringBuilder("\n-----------Tipo de Tonalidades-----------\n");
                 sb.append("1. Neutral \n");
                 sb.append("2. Warm \n");
                 sb.append("3. Cold \n");
@@ -260,7 +259,7 @@ public class FactoryMenu {
                 input[1] = scanner.next();
 
                 if (input[1].equals("*")) return this.back;
-                if ( !isValidInteger(input[0]) &&  Integer.parseInt(input[0]) < 4 && Integer.parseInt(input[0]) > 0) return this.error;
+                if ( !isValidInteger(input[1]) &&  Integer.parseInt(input[1]) < 4 && Integer.parseInt(input[1]) > 0) return this.error;
             }
 
             return input;

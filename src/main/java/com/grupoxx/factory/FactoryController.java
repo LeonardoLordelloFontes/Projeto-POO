@@ -123,6 +123,7 @@ public class FactoryController {
     }
 
     private void SmartDeviceRemoveChoice() {
+        this.repository.listagem();
 
         String component = menu.MenuTipoDispositivoRemove();
         if (component.equals("*")) SmartDiviceOperationChoice();
@@ -136,7 +137,7 @@ public class FactoryController {
         }
     }
     private void SmartDeviceUpdateChoice()throws DeviceNotFound {
-        System.out.println(this.repository.getFactory());
+        this.repository.listagem();
 
         String [] components = menu.MenuDiviceUpdate();
         switch (components[0]) {
@@ -174,8 +175,11 @@ public class FactoryController {
                         components[3],
                         components1[0],
                         components1[1]);
+
+                this.mainController.getFactory().updateDevice(components[0],components[1]);
                 SmartDeviceUpdateChoice();
-                }
+
+            }
         }
     }
 
@@ -198,6 +202,8 @@ public class FactoryController {
                         components1[2],
                         components1[3]);
 
+                this.mainController.getFactory().updateDevice(components[0],components[1]);
+
                 SmartDeviceUpdateChoice();
                 }
         }
@@ -219,6 +225,9 @@ public class FactoryController {
                         components[3],
                         components1[0],
                         components1[1]);
+
+                this.mainController.getFactory().updateDevice(components[0],components[1]);
+
                 SmartDeviceUpdateChoice();
                 }
         }
