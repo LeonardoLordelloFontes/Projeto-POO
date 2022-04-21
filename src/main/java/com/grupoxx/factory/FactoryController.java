@@ -57,10 +57,14 @@ public class FactoryController {
 
     private void SmartDeviceBulbChoice(){
         String[] components = menu.MenuSmartBulbAdd();
-        if (components == null) SmartDeviceAddChoice();
-        else {
-            if( components.equals(this.menu.getError()) ) SmartDeviceSpeakerChoice();
-            else{
+
+        switch (components[0]){
+
+            case "*" : SmartDeviceAddChoice();
+
+            case "-1": SmartDeviceBulbChoice();
+
+            default:{
                 this.repository.SmartDeviceBulbAdd(
                         components[0],
                         Double.parseDouble(components[1]),
@@ -68,57 +72,60 @@ public class FactoryController {
                         Double.parseDouble(components[3]));
 
                 this.mainController.getFactory().setDeviceAvailability(components[0], true);
-                SmartDeviceBulbChoice();
-            }
+                SmartDeviceBulbChoice();}
         }
     }
 
     private void SmartDeviceSpeakerChoice() {
         String[] components = menu.MenuSmartSpeakerAdd();
-        if (components == null) SmartDeviceAddChoice();
-        else{
-            if( components.equals(this.menu.getError()) ) SmartDeviceSpeakerChoice();
 
-            else {
+        switch (components[0]) {
+
+            case "*": SmartDeviceAddChoice();
+
+            case "-1": SmartDeviceSpeakerChoice();
+
+            default:{
                 this.repository.SmartDeviceSpeakerAdd(
-                        components[0],
-                        Double.parseDouble(components[1]),
-                        Double.parseDouble(components[2]),
-                        components[3],
-                        Integer.parseInt(components[4]));
-
+                    components[0],
+                    Double.parseDouble(components[1]),
+                    Double.parseDouble(components[2]),
+                    components[3],
+                    Integer.parseInt(components[4]));
 
                 this.mainController.getFactory().setDeviceAvailability(components[0], true);
-                SmartDeviceSpeakerChoice();
-            }
+                SmartDeviceSpeakerChoice();}
+
         }
     }
 
     private void SmartDeviceCameraChoice(){
 
         String[] components = menu.MenuSmartCamaraAdd();
-        if ( components == null ) SmartDeviceAddChoice();
-        else {
-            if ( components.equals(this.menu.getError()) ) SmartDeviceCameraChoice();
 
-            else{
+        switch (components[0]) {
+
+            case "*": SmartDeviceAddChoice();
+
+            case "-1": SmartDeviceCameraChoice();
+
+            default:{
                 this.repository.SmartDeviceCameraAdd(
-                        components[0],
-                        Double.parseDouble(components[1]),
-                        Double.parseDouble(components[2]),
-                        Integer.parseInt(components[3]),
-                        Integer.parseInt(components[4]));
+                    components[0],
+                    Double.parseDouble(components[1]),
+                    Double.parseDouble(components[2]),
+                    Integer.parseInt(components[3]),
+                    Integer.parseInt(components[4]));
 
                 this.mainController.getFactory().setDeviceAvailability(components[0], true);
-                SmartDeviceCameraChoice();
-                }
+                SmartDeviceCameraChoice();}
         }
     }
 
     private void SmartDeviceRemoveChoice() {
 
         String component = menu.MenuTipoDispositivoRemove();
-        if (component == null) SmartDiviceOperationChoice();
+        if (component.equals("*")) SmartDiviceOperationChoice();
 
         else {
             this.repository.SmartDeviceRemove(component);
@@ -132,13 +139,13 @@ public class FactoryController {
         System.out.println(this.repository.getFactory());
 
         String [] components = menu.MenuDiviceUpdate();
-        if (components == null) SmartDiviceOperationChoice();
+        switch (components[0]) {
 
-        else {
+            case "*" : SmartDiviceOperationChoice();
 
-            if( components.equals(this.menu.getError()) ) SmartDeviceUpdateChoice();
+            case "-1": SmartDeviceUpdateChoice();
 
-            else{
+            default:{
 
                 SmartDevice sd = this.repository.findSmartDeviceByFactoryCode(components[0]);
 
@@ -146,20 +153,20 @@ public class FactoryController {
 
                 if (sd instanceof SmartDeviceSpeaker) SmartDeviceSpeakerUpdateChoice(components);
 
-                if (sd instanceof SmartDeviceCamera) SmartDeviceCameraUpdateChoice(components);
-
-                }
+                if (sd instanceof SmartDeviceCamera) SmartDeviceCameraUpdateChoice(components); }
         }
     }
 
     private void SmartDeviceBulbUpdateChoice(String[] components) {
 
         String[] components1 = menu.MenuSmartBulbUpdate();
-        if (components1 == null) SmartDeviceUpdateChoice();
+        switch (components[0]) {
 
-        else {
-            if( components1.equals(this.menu.getError())) SmartDeviceBulbUpdateChoice(components);
-            else{
+            case "*" : SmartDeviceUpdateChoice();
+
+            case "-1": SmartDeviceBulbUpdateChoice(components);
+
+            default:{
                 this.repository.SmartDeviceBulbUpdade(
                         components[0],
                         components[1],
@@ -174,12 +181,13 @@ public class FactoryController {
 
     private void SmartDeviceSpeakerUpdateChoice(String [] components){
         String [] components1 = menu.MenuSmartSpeakerUpdate();
-        if (components1 == null) SmartDeviceUpdateChoice();
+        switch (components[0]) {
 
-        else{
-            if( components.equals(this.menu.getError()) ) SmartDeviceSpeakerUpdateChoice(components);
+            case "*" : SmartDeviceUpdateChoice();
 
-            else{
+            case "-1": SmartDeviceSpeakerUpdateChoice(components);
+
+            default:{
                 this.repository.SmartDeviceSpeakerUpdate(
                         components[0],
                         components[1],
@@ -197,11 +205,13 @@ public class FactoryController {
 
     private void SmartDeviceCameraUpdateChoice(String [] components){
         String [] components1 = menu.MenuSmartCamaraUpdate();
-        if (components1 == null) SmartDeviceUpdateChoice();
+        switch (components[0]) {
 
-        else {
-            if( components.equals(this.menu.getError()) ) SmartDeviceCameraUpdateChoice(components);
-            else{
+            case "*" : SmartDeviceUpdateChoice();
+
+            case "-1": SmartDeviceCameraUpdateChoice(components);
+
+            default:{
                 this.repository.SmartDeviceCameraUpdate(
                         components[0],
                         components[1],
