@@ -10,6 +10,11 @@ import java.util.stream.Collectors;
 public class DataStatus {
     // será que posso usar map ?
 
+    private DataStatus(List<Invoicer> fac){
+        this.setFaturas(fac);
+
+    }
+
     private List<Invoicer> faturas = new ArrayList<>();
 
     public List<Invoicer> getFaturas() {
@@ -21,7 +26,7 @@ public class DataStatus {
     }
 
     public void setFaturas(List<Invoicer> faturas) {
-        this.faturas = faturas;
+        this.faturas = faturas.stream().map(Invoicer::clone).collect(Collectors.toList());
     }
 
     public String BiggestSpent(){
