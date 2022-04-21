@@ -5,6 +5,7 @@ import com.grupoxx.energysupplier.EnergySupplierRepository;
 import com.grupoxx.factory.Factory;
 import com.grupoxx.factory.FactoryController;
 import com.grupoxx.simulation.Invoicer;
+import com.grupoxx.simulation.SimulationController;
 import com.grupoxx.smarthouse.SmartHouse;
 import com.grupoxx.smarthouse.SmartHouseController;
 import com.grupoxx.smarthouse.SmartHouseRepository;
@@ -52,8 +53,10 @@ public class MainController implements Serializable {
                 new FactoryController(this);
                 break;
             case 4:
+                new SimulationController(this, true);
                 break;
             case 5:
+                new SimulationController(this, false);
                 break;
             case 6:
                 new StateController(this);
