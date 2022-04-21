@@ -18,7 +18,7 @@ public abstract class SmartDevice implements Serializable {
     private double installationCost;
     private String factoryCode;
     private double energyConsumption;
-    private LocalDateTime day; // o dia em que o usuario alterou pela ultima vez o seu estado
+    private LocalDateTime lastStateChange; // o dia em que o usuario alterou pela ultima vez o seu estado
 
     public SmartDevice(){
 
@@ -26,7 +26,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = 0;
         this.factoryCode = "1234";
         this.energyConsumption = 0;
-        this.day = null;
+        this.lastStateChange = null;
     }
 
     public SmartDevice(String factoryCode) {
@@ -34,7 +34,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = 0;
         this.factoryCode = factoryCode;
         this.energyConsumption = 0;
-        this.day = null;
+        this.lastStateChange = null;
     }
 
     public SmartDevice(String factoryCode, double installationCost,double energyConsumption) {
@@ -42,7 +42,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = installationCost;
         this.factoryCode = factoryCode;
         this.energyConsumption = energyConsumption;
-        this.day = null;
+        this.lastStateChange = null;
     }
 
     public SmartDevice(State state){
@@ -51,7 +51,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = 0;
         this.factoryCode = "1234";
         this.energyConsumption = 0;
-        this.day = null;
+        this.lastStateChange = null;
 
     }
 
@@ -61,7 +61,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = instalation_price;
         this.factoryCode = "1234";
         this.energyConsumption = 0;
-        this.day = null;
+        this.lastStateChange = null;
     }
 
     public SmartDevice(State state, double instalation_price, String factory_code){
@@ -70,7 +70,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = instalation_price;
         this.factoryCode = factory_code;
         this.energyConsumption = 0;
-        this.day = null;
+        this.lastStateChange = null;
 
     }
 
@@ -80,7 +80,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = instalation_price;
         this.factoryCode = factory_code;
         this.energyConsumption = energetic_cost;
-        this.day = null;
+        this.lastStateChange = null;
 
     }
 
@@ -90,7 +90,7 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = instalation_price;
         this.factoryCode = factory_code;
         this.energyConsumption = energetic_cost;
-        this.day = day;
+        this.lastStateChange = day;
 
     }
 
@@ -100,56 +100,48 @@ public abstract class SmartDevice implements Serializable {
         this.installationCost = sd.getInstallationCost();
         this.factoryCode = sd.getFactoryCode();
         this.energyConsumption = sd.getEnergyConsumption();
-        this.day = sd.getDay();
+        this.lastStateChange = sd.getLastStateChange();
 
     }
 
     public State getState() {
-
         return this.state;
     }
 
     public void setState(State state) {
-
         this.state = state;
     }
 
     public double getInstallationCost() {
-
         return this.installationCost;
     }
 
     public void setInstallationCost(double installationCost) {
-
         this.installationCost = installationCost;
     }
 
     public String getFactoryCode() {
-
         return this.factoryCode;
     }
 
     public void setFactoryCode(String factoryCode) {
-
         this.factoryCode = factoryCode;
     }
 
     public double getEnergyConsumption() {
-
         return this.energyConsumption;
     }
 
     public void setEnergyConsumption(double energyConsumption) {
-
         this.energyConsumption = energyConsumption;
     }
 
-    public LocalDateTime getDay() {
-        return day;
+    public LocalDateTime getLastStateChange() {
+        return lastStateChange;
     }
 
-    public void setDay(LocalDateTime day) {
-        this.day = day;
+    public void setLastStateChange(LocalDateTime lastStateChange) {
+        this.lastStateChange = lastStateChange;
     }
 
     public boolean equals(Object o) {
@@ -174,17 +166,13 @@ public abstract class SmartDevice implements Serializable {
         return sb.toString();
     }
 
-    public void smart_device_switch(LocalDateTime acessDay){
-
-        long daysBetween = DAYS.between(this.day,acessDay);
-        if(this.state == State.ON && Math.abs(daysBetween) >= 1) {
-            this.setState(State.OFF);
-        }
-
-        else {
-            this.setDay(acessDay);
-            this.setState(State.ON);
-
+    public void switchConnection(LocalDateTime acessDay, State state) {
+        long daysBetween = 0;
+        if (lastStateChange != null)
+            daysBetween = DAYS.between(this.lastStateChange, acessDay);
+        if(Math.abs(daysBetween) >= 1) {
+            this.setState(state);
+            this.setLastStateChange(acessDay);
         }
     }// o acessDay é o dia em que o usuario quer mudar o estado dos aparelhos se for pelo menos um dia a cima do ultimo dia em que lhe foi alterado o estado ele permite a alteração.
 
