@@ -17,20 +17,22 @@ public class Simulation {
     private MainController mainController;
     private LocalDateTime start;
     private LocalDateTime end;
+    private List<Invoicer> invoicers;
 
     public Simulation () {
     }
 
-    public Simulation(MainController mainController, LocalDateTime start, LocalDateTime end) {
+    public Simulation(MainController mainController, List<Invoicer> invoicers, LocalDateTime start, LocalDateTime end) {
         this.mainController = mainController;
+        this.invoicers = invoicers;
         this.start = start;
         this.end = end;
+        addInvoicers();
     }
 
     public void addInvoicers() {
         SmartHouseRepository houses = mainController.getSmartHouseRepository();
         EnergySupplierRepository energySuppliers = mainController.getEnergySupplierRepository();
-        List<Invoicer> invoicers = mainController.getInvoicers();
         long simulationPeriod = ChronoUnit.SECONDS.between(start, end);
         for (SmartHouse smartHouse : houses.findAllSmartHouses()) {
             double totalCost = 0;

@@ -24,12 +24,10 @@ public class MainController implements Serializable {
     private Factory factory;
     private EnergySupplierRepository energySupplierRepository;
     private SmartHouseRepository smartHouseRepository;
-    private List<Invoicer> invoicers;
     public MainController() {
         this.factory = new Factory();
         this.energySupplierRepository = new EnergySupplierRepository();
         this.smartHouseRepository = new SmartHouseRepository();
-        this.invoicers = new ArrayList<>();
         mainController();
     }
 
@@ -76,9 +74,5 @@ public class MainController implements Serializable {
 
     public SmartHouseRepository getSmartHouseRepository() {
         return smartHouseRepository;
-    }
-
-    public List<Invoicer> getInvoicers() {
-        return invoicers;
     }
 }
