@@ -178,5 +178,4 @@ public class SmartDeviceRepository implements Serializable {
             System.out.println("\n\n");
         }
     }
-
 }

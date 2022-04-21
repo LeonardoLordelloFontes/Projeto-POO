@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EnergySupplierRepository implements Serializable {
-    private Map<String, EnergySupplier> energySuppliers; // Nome do energySupplier -> EnergySupplier
+    private final Map<String, EnergySupplier> energySuppliers; // Nome do energySupplier -> EnergySupplier
     public EnergySupplierRepository() {
         this.energySuppliers = new HashMap<>();
     }

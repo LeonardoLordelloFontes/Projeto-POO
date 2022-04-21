@@ -2,68 +2,46 @@ package com.grupoxx.factory;
 
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.*;
-import com.grupoxx.smartdevice.exception.DeviceNotFound;
 
 
 public class FactoryController {
-    private SmartDeviceRepository repository;
-    private MainController mainController;
+    private final SmartDeviceRepository repository;
+    private final MainController mainController;
     private final FactoryMenu menu;
 
     public FactoryController(MainController mainController){
         this.mainController = mainController;
         this.repository = mainController.getFactory().getSmartDeviceRepository();
         this.menu = new FactoryMenu();
-        SmartDiviceOperationChoice();
+        smartDeviceController();
     }
 
-    private void SmartDiviceOperationChoice(){
-
-        int choice = menu.MenuTipoDispositivoOperacoes();
-
-        switch (choice){
-
-            case 1: SmartDeviceAddChoice();
-
-            case 2: SmartDeviceRemoveChoice();
-
-            case 3: SmartDeviceUpdateChoice();
-
-            case 4: SmartDeviceListagemChoice();
-
+    private void smartDeviceController(){
+        switch (menu.MenuTipoDispositivoOperacoes()) {
+            case 1: addSmartDeviceController();
+            case 2: removeSmartDeviceController();
+            case 3: updateSmartDeviceController();
+            case 4: listSmartDeviceController();
             case 5: this.mainController.mainController();
-
-            case -1: SmartDiviceOperationChoice();
+            case -1: smartDeviceController();
         }
     }
 
-    private void SmartDeviceAddChoice(){
-
-        int deviceChoice = menu.MenuTipoDispositivoAdd();
-        switch (deviceChoice){
-
-            case 1: SmartDeviceBulbChoice();
-
-            case 2: SmartDeviceSpeakerChoice();
-
-            case 3: SmartDeviceCameraChoice();
-
-            case 4: SmartDiviceOperationChoice();
-
-            case -1: SmartDeviceAddChoice();
+    private void addSmartDeviceController() {
+        switch (menu.MenuTipoDispositivoAdd()) {
+            case 1: addSmartBulbController();
+            case 2: addSmartSpeakerController();
+            case 3: addSmartCameraController();
+            case 4: smartDeviceController();
+            case -1: addSmartDeviceController();
         }
-
     }
 
-    private void SmartDeviceBulbChoice(){
+    private void addSmartBulbController() {
         String[] components = menu.MenuSmartBulbAdd();
-
-        switch (components[0]){
-
-            case "*" : SmartDeviceAddChoice();
-
-            case "-1": SmartDeviceBulbChoice();
-
+        switch (components[0]) {
+            case "*" : addSmartDeviceController();
+            case "-1": addSmartBulbController();
             default:{
                 this.repository.SmartDeviceBulbAdd(
                         components[0],
@@ -72,19 +50,15 @@ public class FactoryController {
                         Double.parseDouble(components[3]));
 
                 this.mainController.getFactory().setDeviceAvailability(components[0], true);
-                SmartDeviceBulbChoice();}
+                addSmartBulbController();}
         }
     }
 
-    private void SmartDeviceSpeakerChoice() {
+    private void addSmartSpeakerController() {
         String[] components = menu.MenuSmartSpeakerAdd();
-
         switch (components[0]) {
-
-            case "*": SmartDeviceAddChoice();
-
-            case "-1": SmartDeviceSpeakerChoice();
-
+            case "*": addSmartDeviceController();
+            case "-1": addSmartSpeakerController();
             default:{
                 this.repository.SmartDeviceSpeakerAdd(
                     components[0],
@@ -94,21 +68,16 @@ public class FactoryController {
                     Integer.parseInt(components[4]));
 
                 this.mainController.getFactory().setDeviceAvailability(components[0], true);
-                SmartDeviceSpeakerChoice();}
+                addSmartSpeakerController();}
 
         }
     }
 
-    private void SmartDeviceCameraChoice(){
-
+    private void addSmartCameraController() {
         String[] components = menu.MenuSmartCamaraAdd();
-
         switch (components[0]) {
-
-            case "*": SmartDeviceAddChoice();
-
-            case "-1": SmartDeviceCameraChoice();
-
+            case "*": addSmartDeviceController();
+            case "-1": addSmartCameraController();
             default:{
                 this.repository.SmartDeviceCameraAdd(
                     components[0],
@@ -118,55 +87,39 @@ public class FactoryController {
                     Integer.parseInt(components[4]));
 
                 this.mainController.getFactory().setDeviceAvailability(components[0], true);
-                SmartDeviceCameraChoice();}
+                addSmartCameraController();}
         }
     }
 
-    private void SmartDeviceRemoveChoice() {
+    private void removeSmartDeviceController() {
         this.repository.listagem();
-
         String component = menu.MenuTipoDispositivoRemove();
-        if (component.equals("*")) SmartDiviceOperationChoice();
-
+        if (component.equals("*")) smartDeviceController();
         else {
             this.repository.SmartDeviceRemove(component);
-
             this.mainController.getFactory().deleteDevice(component);
-
-            SmartDeviceRemoveChoice();
+            removeSmartDeviceController();
         }
     }
-    private void SmartDeviceUpdateChoice()throws DeviceNotFound {
+    private void updateSmartDeviceController() {
         this.repository.listagem();
-
         String [] components = menu.MenuDiviceUpdate();
         switch (components[0]) {
-
-            case "*" : SmartDiviceOperationChoice();
-
-            case "-1": SmartDeviceUpdateChoice();
-
+            case "*" : smartDeviceController();
+            case "-1": updateSmartDeviceController();
             default:{
-
                 SmartDevice sd = this.repository.findSmartDeviceByFactoryCode(components[0]);
-
-                if (sd instanceof SmartDeviceBulb) SmartDeviceBulbUpdateChoice(components);
-
-                if (sd instanceof SmartDeviceSpeaker) SmartDeviceSpeakerUpdateChoice(components);
-
-                if (sd instanceof SmartDeviceCamera) SmartDeviceCameraUpdateChoice(components); }
+                if (sd instanceof SmartDeviceBulb) updateSmartBulbController(components);
+                if (sd instanceof SmartDeviceSpeaker) updateSmartSpeakerController(components);
+                if (sd instanceof SmartDeviceCamera) updateSmartCameraController(components); }
         }
     }
 
-    private void SmartDeviceBulbUpdateChoice(String[] components) {
-
+    private void updateSmartBulbController(String[] components) {
         String[] components1 = menu.MenuSmartBulbUpdate();
         switch (components[0]) {
-
-            case "*" : SmartDeviceUpdateChoice();
-
-            case "-1": SmartDeviceBulbUpdateChoice(components);
-
+            case "*" : updateSmartDeviceController();
+            case "-1": updateSmartBulbController(components);
             default:{
                 this.repository.SmartDeviceBulbUpdade(
                         components[0],
@@ -177,20 +130,17 @@ public class FactoryController {
                         components1[1]);
 
                 this.mainController.getFactory().updateDevice(components[0],components[1]);
-                SmartDeviceUpdateChoice();
+                updateSmartDeviceController();
 
             }
         }
     }
 
-    private void SmartDeviceSpeakerUpdateChoice(String [] components){
+    private void updateSmartSpeakerController(String [] components){
         String [] components1 = menu.MenuSmartSpeakerUpdate();
         switch (components[0]) {
-
-            case "*" : SmartDeviceUpdateChoice();
-
-            case "-1": SmartDeviceSpeakerUpdateChoice(components);
-
+            case "*" : updateSmartDeviceController();
+            case "-1": updateSmartSpeakerController(components);
             default:{
                 this.repository.SmartDeviceSpeakerUpdate(
                         components[0],
@@ -203,20 +153,16 @@ public class FactoryController {
                         components1[3]);
 
                 this.mainController.getFactory().updateDevice(components[0],components[1]);
-
-                SmartDeviceUpdateChoice();
-                }
+                updateSmartDeviceController();
+            }
         }
     }
 
-    private void SmartDeviceCameraUpdateChoice(String [] components){
+    private void updateSmartCameraController(String [] components){
         String [] components1 = menu.MenuSmartCamaraUpdate();
         switch (components[0]) {
-
-            case "*" : SmartDeviceUpdateChoice();
-
-            case "-1": SmartDeviceCameraUpdateChoice(components);
-
+            case "*" : updateSmartDeviceController();
+            case "-1": updateSmartCameraController(components);
             default:{
                 this.repository.SmartDeviceCameraUpdate(
                         components[0],
@@ -227,18 +173,13 @@ public class FactoryController {
                         components1[1]);
 
                 this.mainController.getFactory().updateDevice(components[0],components[1]);
-
-                SmartDeviceUpdateChoice();
-                }
+                updateSmartDeviceController();
+            }
         }
     }
 
-    private void SmartDeviceListagemChoice(){
-
+    private void listSmartDeviceController(){
         this.repository.listagem();
-
-        SmartDiviceOperationChoice();
-
+        smartDeviceController();
     }
-
 }
