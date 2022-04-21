@@ -168,14 +168,4 @@ public class SmartDeviceRepository implements Serializable {
     }
 
     public Map<String, SmartDevice> getFactory() { return factory;}
-
-    public void listagem() {
-
-        if(this.factory.isEmpty()) System.out.println("Não foram criados dispositivos!!");
-
-        else{
-            for (SmartDevice sd: this.factory.values()) System.out.print(sd+"\n");
-            System.out.println("\n\n");
-        }
-    }
 }

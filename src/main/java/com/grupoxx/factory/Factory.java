@@ -1,12 +1,15 @@
 package com.grupoxx.factory;
 
+import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smartdevice.exception.DeviceAlreadyExist;
 import com.grupoxx.smartdevice.exception.DeviceNotFound;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Factory implements Serializable {
     SmartDeviceRepository smartDeviceRepository;
@@ -50,5 +53,7 @@ public class Factory implements Serializable {
         return available.get(factoryCode);
     }
 
-
+    public List<SmartDevice> onlyDeviceAvailable (){
+       return this.smartDeviceRepository.findAllSmartDevices().stream().filter(x-> this.available.get(x.getFactoryCode())).collect(Collectors.toList());
+    }
 }

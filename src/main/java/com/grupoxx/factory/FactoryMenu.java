@@ -1,6 +1,9 @@
 package com.grupoxx.factory;
 
+import com.grupoxx.smartdevice.SmartDevice;
+
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -352,6 +355,15 @@ public class FactoryMenu {
 
         }
 
+        public void MenuListagem( List<SmartDevice> listaDosTrue){
 
+            if(listaDosTrue.isEmpty()) System.out.println("Não foram criados dispositivos!!");
+
+            else{
+                for (SmartDevice sd: listaDosTrue) System.out.print("\n"+sd+"\n");
+                System.out.println("\n\n");
+            }
+
+        }
 
 }

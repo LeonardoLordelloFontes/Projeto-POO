@@ -1,6 +1,7 @@
 package com.grupoxx.datastatus;
 
 import com.grupoxx.simulation.Invoicer;
+import com.grupoxx.smarthouse.Owner;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -70,6 +71,19 @@ public class DataStatus {
         return this.getFaturas().stream().filter(x->x.getEnergySupplier().equals(supplier)).collect(Collectors.toList());
 
     }
+
+    public List<String> BiggestSpentList(){
+
+        Comparator <Invoicer> comparator = (f1,f2)-> (int) (f2.getTotalCost() - f1.getTotalCost());
+
+        List<Invoicer> invoicers = this.getFaturas();
+
+        invoicers.sort(comparator);
+
+        return invoicers.stream().map(Invoicer::getHouseAddress).collect(Collectors.toList());
+    }
+
+
 }
 
 
