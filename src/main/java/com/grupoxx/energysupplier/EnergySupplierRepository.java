@@ -16,7 +16,7 @@ public class EnergySupplierRepository implements Serializable {
         this.energySuppliers = new HashMap<>();
     }
 
-    public EnergySupplier getEnergySupplierByName(String name) throws EnergySupplierNotFound {
+    public EnergySupplier findEnergySupplierByName(String name) throws EnergySupplierNotFound {
         EnergySupplier energySupplier = energySuppliers.get(name);
         if (energySupplier == null)
             throw new EnergySupplierNotFound("O fonercedor de energia " + name + " não foi encontrado");
@@ -33,7 +33,7 @@ public class EnergySupplierRepository implements Serializable {
    public void updateEnergySupplierName(SmartHouseRepository smartHouses, String oldName, String newName) throws EnergySupplierNotFound {
         if (energySuppliers.get(oldName) == null)
             throw new EnergySupplierNotFound("O Fornecedor de energia " + oldName + " não existe");
-        EnergySupplier energySupplier = getEnergySupplierByName(oldName);
+        EnergySupplier energySupplier = findEnergySupplierByName(oldName);
         energySupplier.setName(newName);
         energySuppliers.put(newName, energySupplier);
         energySuppliers.remove(oldName);
