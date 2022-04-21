@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class FactoryMenu {
 
-        private  final String[] error = {"-1"};
+        private static final String[] ERROR = {"-1"};
 
-        private final String[] back = {"*"};
+        private static final String[] BACK = {"*"};
 
         private int isValidOption(int option, int optionNumber ){
             try {
@@ -91,17 +91,17 @@ public class FactoryMenu {
 
             System.out.print("Código de Fábrica: ");
             input[0] = scanner.next();
-            if (input[0].equals("*")) return this.back;
+            if (input[0].equals("*")) return this.BACK;
 
             System.out.print("Custo de Instalação: ");
             input[1] = scanner.next();
-            if (input[1].equals("*")) return this.back;
-            if( !isValidDouble(input[1]) ) return this.error;
+            if (input[1].equals("*")) return this.BACK;
+            if( !isValidDouble(input[1]) ) return this.ERROR;
 
             System.out.print("Quantidade de energia diária gasta: ");
             input[2] = scanner.next();
-            if (input[2].equals("*")) return this.back;
-            if( !isValidDouble(input[2]) ) return this.error;
+            if (input[2].equals("*")) return this.BACK;
+            if( !isValidDouble(input[2]) ) return this.ERROR;
 
             return input;
         }
@@ -112,15 +112,15 @@ public class FactoryMenu {
             Scanner scanner = new Scanner(System.in);
 
             String[] comumInput = MenuDiviceAdd();
-            if(comumInput.equals(this.back)) return this.back;
-            if( comumInput.equals(this.error) ) return this.error;
+            if(comumInput.equals(this.BACK)) return this.BACK;
+            if( comumInput.equals(this.ERROR) ) return this.ERROR;
 
             System.arraycopy(comumInput,0,input,0,3);
 
             System.out.print("Dimensão(cm): ");
             input[3] = scanner.next();
-            if (input[3].equals("*")) return this.back;
-            if( !isValidDouble(input[1]) ) return this.error;
+            if (input[3].equals("*")) return this.BACK;
+            if( !isValidDouble(input[1]) ) return this.ERROR;
 
             return input;
         }
@@ -130,19 +130,19 @@ public class FactoryMenu {
             Scanner scanner = new Scanner(System.in);
 
             String[] comumInput = MenuDiviceAdd();
-            if(comumInput.equals(this.back)) return this.back;
-            if( comumInput.equals(this.error) ) return this.error;
+            if(comumInput.equals(this.BACK)) return this.BACK;
+            if( comumInput.equals(this.ERROR) ) return this.ERROR;
 
             System.arraycopy(comumInput,0,input,0,3);
 
             System.out.print("Marca: ");
             input[3] = scanner.next();
-            if (input[3].equals("*")) return this.back;
+            if (input[3].equals("*")) return this.BACK;
 
             System.out.print("Volume Máximo: ");
             input[4] = scanner.next();
-            if (input[4].equals("*")) return this.back;
-            if (!isValidInteger(input[4]) ) return this.error;
+            if (input[4].equals("*")) return this.BACK;
+            if (!isValidInteger(input[4]) ) return this.ERROR;
 
             return input;
         }
@@ -151,20 +151,20 @@ public class FactoryMenu {
             Scanner scanner = new Scanner(System.in);
 
             String[] comumInput = MenuDiviceAdd();
-            if(comumInput.equals(this.back)) return this.back;
-            if( comumInput.equals(this.error) ) return this.error;
+            if(comumInput.equals(this.BACK)) return this.BACK;
+            if( comumInput.equals(this.ERROR) ) return this.ERROR;
 
             System.arraycopy(comumInput,0,input,0,3);
 
             System.out.print("Resolução (pixeis): ");
             input[3] = scanner.next();
-            if (input[3].equals("*")) return this.back;
-            if (!isValidInteger(input[3]) ) return this.error;
+            if (input[3].equals("*")) return this.BACK;
+            if (!isValidInteger(input[3]) ) return this.ERROR;
 
             System.out.print("Armazenamento (bytes): ");
             input[4] = scanner.next();
-            if (input[4].equals("*")) return this.back;
-            if (!isValidInteger(input[4]) ) return this.error;
+            if (input[4].equals("*")) return this.BACK;
+            if (!isValidInteger(input[4]) ) return this.ERROR;
 
             return input;
         }
@@ -177,7 +177,7 @@ public class FactoryMenu {
             System.out.print("Intruduza código de fabrica do dispositivo que pretende remover ou o simbolo[*] para voltar ao menu anterior: ");
             input = scanner.next();
 
-            if (input.equals("*")) return this.back[0];
+            if (input.equals("*")) return this.BACK[0];
 
             return input;
         }
@@ -195,35 +195,35 @@ public class FactoryMenu {
 
         System.out.print("Intruduza código de fabrica do dispositivo que pretende alterar ou o simbolo [*] em qualquer local de escrita para voltar ao menu anterior: ");
         input[0] = scanner.next();
-        if(input[0].equals("*")) return this.back;
+        if(input[0].equals("*")) return this.BACK;
 
         System.out.print("Deseja alterar o codigo de fabrica?[Y ou N]: ");
         answer = scanner.next().toUpperCase(Locale.ROOT);
-        if(answer.equals("*")) return this.back;
+        if(answer.equals("*")) return this.BACK;
         if (answer.equals("Y")) {
             System.out.print(" Novo Código de Fábrica: ");
             input[1] = scanner.next();
-            if(input[1].equals("*")) return this.back;}
+            if(input[1].equals("*")) return this.BACK;}
 
 
         System.out.print("Deseja alterar a energia diária gasta?[Y ou N]: ");
         answer = scanner.next().toUpperCase(Locale.ROOT);
-        if (answer.equals("*")) return this.back;
+        if (answer.equals("*")) return this.BACK;
         if (answer.equals("Y")) {
             System.out.print(" Nova Quantidade de energia diária estatica : ");
             input[2] = scanner.next();
-            if (input[2].equals("*")) return this.back;
-            if ( !isValidDouble(input[2]) ) return this.error;
+            if (input[2].equals("*")) return this.BACK;
+            if ( !isValidDouble(input[2]) ) return this.ERROR;
         }
 
         System.out.print("Deseja alterar o custo de instalação?[Y ou N]: ");
         answer = scanner.next().toUpperCase(Locale.ROOT);
-        if(answer.equals("*")) return this.back;
+        if(answer.equals("*")) return this.BACK;
         if (answer.equals("Y")) {
             System.out.print(" Novo Custo de instalação : ");
             input[3] = scanner.next();
-            if (input[3].equals("*")) return this.back;
-            if ( !isValidDouble(input[3]) ) return this.error;
+            if (input[3].equals("*")) return this.BACK;
+            if ( !isValidDouble(input[3]) ) return this.ERROR;
         }
 
         return input;
@@ -242,8 +242,8 @@ public class FactoryMenu {
             if (answer.equals("Y")) {
                 System.out.print("Nova Dimensão(cm) : ");
                 input[0] = scanner.next();
-                if (input[1].equals("*")) return this.back;
-                if ( !isValidDouble(input[0]) ) return this.error;
+                if (input[1].equals("*")) return this.BACK;
+                if ( !isValidDouble(input[0]) ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar a Tonalidade ?[Y ou N]: ");
@@ -258,8 +258,8 @@ public class FactoryMenu {
                 System.out.print(sb.toString());
                 input[1] = scanner.next();
 
-                if (input[1].equals("*")) return this.back;
-                if ( !isValidInteger(input[1]) &&  Integer.parseInt(input[1]) < 4 && Integer.parseInt(input[1]) > 0) return this.error;
+                if (input[1].equals("*")) return this.BACK;
+                if ( !isValidInteger(input[1]) &&  Integer.parseInt(input[1]) < 4 && Integer.parseInt(input[1]) > 0) return this.ERROR;
             }
 
             return input;
@@ -276,44 +276,44 @@ public class FactoryMenu {
 
             System.out.print("Deseja alterar a Marca?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
-            if(answer.equals("*")) return this.back;
+            if(answer.equals("*")) return this.BACK;
 
             if (answer.equals("Y")) {
                 System.out.print("Nova Marca : ");
                 input[0] = scanner.next();
-                if (input[0].equals("*")) return this.back;
+                if (input[0].equals("*")) return this.BACK;
             }
 
             System.out.print("Deseja alterar o Volume Máximo?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
-            if(answer.equals("*")) return this.back;
+            if(answer.equals("*")) return this.BACK;
 
             if (answer.equals("Y")) {
                 System.out.print(" Novo Volume Máximo : ");
                 input[1] = scanner.next();
-                if (input[1].equals("*")) return this.back;
-                if ( !isValidInteger(input[1]) ) return this.error;
+                if (input[1].equals("*")) return this.BACK;
+                if ( !isValidInteger(input[1]) ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar o volume atual?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
-            if(answer.equals("*")) return this.back;
+            if(answer.equals("*")) return this.BACK;
 
             if (answer.equals("Y")) {
                 System.out.print(" Novo volume atual: ");
                 input[2] = scanner.next();
-                if (input[2].equals("*")) return this.back;
-                if ( !isValidInteger(input[2]) ) return this.error;
+                if (input[2].equals("*")) return this.BACK;
+                if ( !isValidInteger(input[2]) ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar a estação de rádio?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
-            if(answer.equals("*")) return this.back;
+            if(answer.equals("*")) return this.BACK;
 
             if (answer.equals("Y")) {
                 System.out.print("Nova estação de rádio: ");
                 input[3] = scanner.next();
-                if (input[3].equals("*")) return this.back;
+                if (input[3].equals("*")) return this.BACK;
             }
 
             return input;
@@ -330,22 +330,22 @@ public class FactoryMenu {
 
             System.out.print("Deseja alterar a resolução:?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
-            if(answer.equals("*")) return this.back;
+            if(answer.equals("*")) return this.BACK;
             if (answer.equals("Y")) {
                 System.out.print(" Nova Resolução (pixeis): ");
                 input[0] = scanner.next();
-                if (input[0].equals("*")) return this.back;
-                if ( !isValidInteger(input[0]) ) return this.error;
+                if (input[0].equals("*")) return this.BACK;
+                if ( !isValidInteger(input[0]) ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar o armazenamento:?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
-            if(answer.equals("*")) return this.back;
+            if(answer.equals("*")) return this.BACK;
             if (answer.equals("Y")) {
                 System.out.print(" Novo Armazenamento (bytes): ");
                 input[1] = scanner.next();
-                if (input[1].equals("*")) return this.back;
-                if ( !isValidInteger(input[1]) ) return this.error;
+                if (input[1].equals("*")) return this.BACK;
+                if ( !isValidInteger(input[1]) ) return this.ERROR;
             }
 
             return input;

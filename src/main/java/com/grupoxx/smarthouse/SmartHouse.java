@@ -75,10 +75,16 @@ public class SmartHouse implements Serializable {
     public String toString() {
         // TODO
         StringBuilder sb = new StringBuilder();
-        sb.append(this.address).append("\n");
+        sb.append("Endereço: ").append(this.address).append("\n");
         if (this.owner != null)
-            sb.append(this.owner.getNome()).append("\t").append(this.owner.getNif());
-        smartDevices.forEach((key, value) -> sb.append("\t").append(key).append("\n"));
+            sb.append("\t").append("Proprietário: ").append(this.owner.getNome()).append("\t").append("NIF: ").append(this.owner.getNif()).append("\n");
+        if (this.energySupplier != null)
+            sb.append("\t").append("Fornecedor de energia: ").append(energySupplier);
+
+        for (var entry : smartDevices.entrySet()) {
+            sb.append("\t").append(entry.getKey()).append("\n");
+            entry.getValue().findAllSmartDevices().forEach(smartDevice -> sb.append("\t\t").append(smartDevice).append("\n"));
+        }
         return sb.toString();
     }
 

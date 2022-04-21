@@ -5,6 +5,7 @@ import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.factory.Factory;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smartdevice.SmartDeviceBulb;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 import com.grupoxx.smarthouse.exception.HouseAddressAlreadyExists;
 import com.grupoxx.smarthouse.exception.HouseNotFound;
@@ -244,8 +245,22 @@ public class SmartHouseController {
         String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
         if (factoryCode == null) updateSmartDevicesController(address, room);
         else {
-            smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.ON);
-            updateSmartDevicesController(address, room);
+            SmartDevice smartDevice = smartDevices.findSmartDeviceByFactoryCode(factoryCode);
+            smartDevice.setState(SmartDevice.State.ON);
+            if (smartDevice instanceof SmartDeviceBulb) connectSmartBulbController((SmartDeviceBulb) smartDevice, address, room);
+            else updateSmartDevicesController(address, room);
+        }
+    }
+
+    private void connectSmartBulbController(SmartDeviceBulb smartBulb, String address, String room) {
+        switch (menu.selectBulbToneMenu()) {
+            case -1: connectSmartBulbController(smartBulb, address, room);
+            case 1: smartBulb.setTone(SmartDeviceBulb.Tone.Neutral);
+                    updateSmartDevicesController(address, room);
+            case 2: smartBulb.setTone(SmartDeviceBulb.Tone.Warm);
+                    updateSmartDevicesController(address, room);
+            case 3: smartBulb.setTone(SmartDeviceBulb.Tone.Cold);
+                    updateSmartDevicesController(address, room);
         }
     }
 

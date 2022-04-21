@@ -277,6 +277,19 @@ public class SmartHouseMenu {
         return optionsValidation(7);
     }
 
+    public int selectBulbToneMenu() {
+        String sb = """
+                -----------Tonalidade da lampada-----------
+                
+                1. Neutral
+                2. Warm
+                3. Cold
+                
+                Ligar a lâmpada na tonalidade (Selecione o Número):\s""";
+        System.out.print(sb);
+        return optionsValidation(3);
+    }
+
     /**
      * Menu que pode ser utilizado sempre que precisarmos pedir um endereço de uma casa para o usuário
      *
