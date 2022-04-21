@@ -1,81 +1,70 @@
 package com.grupoxx.datastatus;
 
+import com.grupoxx.simulation.Invoicer;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class DataStatus {
     // será que posso usar map ?
-    /*
-    private List<SmartHouse> house;
 
-    public  Estatistica (Estatistica e){
+    private List<Invoicer> faturas = new ArrayList<>();
 
-        this.setHouse(e.getHouse());
+    public List<Invoicer> getFaturas() {
+        List<Invoicer> fac = new ArrayList<>();
+
+        fac = faturas.stream().map(Invoicer::clone).collect(Collectors.toList());
+
+        return fac;
+    }
+
+    public void setFaturas(List<Invoicer> faturas) {
+        this.faturas = faturas;
+    }
+
+    public String BiggestSpent(){
+        Comparator <Invoicer> comparator = (f1,f2)-> (int) (f2.getTotalCost() - f1.getTotalCost());
+
+        List<Invoicer> invoicers = this.getFaturas();
+
+        invoicers.sort(comparator);
+
+        return invoicers.get(0).getHouseAddress();
+    }
+
+    private double MostProfitAux(String energySupplierName){
+
+        return this.faturas.stream().filter(x->x.getEnergySupplier().equals(energySupplierName)).mapToDouble(Invoicer::getTotalCost).sum();
 
     }
 
-    public List<SmartHouse> getHouse() {
+    public String MostProfit() {
+        double maxProfit = 0;
+        String supplier = "";
+        List<String> energySupplierNames = new ArrayList<>();
 
-        return this.house.stream().map(SmartHouse::clone).collect(Collectors.toList());
-    }
+        energySupplierNames = this.faturas.stream().map(Invoicer::getEnergySupplier).collect(Collectors.toList());
 
-    public void setHouse(List<SmartHouse> house){
-        this.house = house.stream().map(SmartHouse::clone).collect(Collectors.toList());
-    }
+        for (String s : energySupplierNames) {
 
-    public boolean equals(Object o) {
+            double Profit = MostProfitAux(s);
 
-        if (this == o) return (true);
-        if (o == null || this.getClass() != o.getClass()) return (false);
-
-        Estatistica e = (Estatistica) o;
-
-        return this.house.equals(e.getHouse());
-
-    }
-
-    public SmartHouse MaiorConsumo(){
-        Comparator <SmartHouse> comparator = (sh1,sh2)-> (int) (sh2.ElectricityMeter() - sh1.ElectricityMeter());
-
-        List<SmartHouse> sh = new ArrayList<SmartHouse>(this.house);
-
-        sh.sort(comparator);
-
-        return sh.get(0);
-    }
-
-    public List<SmartHouse> ListaConsumidores(){
-
-        Comparator <SmartHouse> comparator = (sh1,sh2)-> (int) (sh1.ElectricityMeter() - sh2.ElectricityMeter());
-
-        List<SmartHouse> sh = new ArrayList<SmartHouse>(this.house);
-
-        sh.sort(comparator);
-
-        return sh;
-    }
-
-    public String MakeFatura(int DaysToPay,SmartHouse house) throws ScriptException {
-
-        StringBuilder sb = new StringBuilder();
-        sb
-                .append("Nif : ").append(house.getOwner().getNif())
-                .append("\n Contribuinte: ").append(house.getOwner().getNome())
-                .append("\n Morada: ").append(house.getAddress())
-                .append("\n Fornecedor de eletricidade: ").append(house.getSupplier().getName())
-                .append("\n Quantidade de energia gasta: ").append(house.ElectricityMeter() * DaysToPay)
-                .append("\n Valor a pagar: ").append( house.getSupplier().totalCostCal(house.getSupplier().getTotalcost()));
-
-        return sb.toString();
-    }
-    public Set<String> ListaDeFaturas(String nomeDoFornecedor, int daysToPay) throws ScriptException {
-
-        Set <String> lf = new HashSet<String>();
-
-        for ( SmartHouse sh: this.house){
-            if(sh.getSupplier().getName() == nomeDoFornecedor){
-                lf.add(this.MakeFatura(daysToPay,sh));
+            if (Profit > maxProfit) {
+                maxProfit = Profit;
+                supplier = s;
             }
         }
-        return lf;
-    }
-*/
 
+        return supplier;
+    }
+
+    public List<Invoicer> invoicerSupplier(String supplier){
+
+        return this.getFaturas().stream().filter(x->x.getEnergySupplier().equals(supplier)).collect(Collectors.toList());
+
+    }
 }
+
+
