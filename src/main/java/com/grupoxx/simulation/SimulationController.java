@@ -1,10 +1,16 @@
 package com.grupoxx.simulation;
 
 import com.grupoxx.main.MainController;
+import com.grupoxx.smartdevice.SmartDevice;
+import com.grupoxx.smarthouse.SmartHouse;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class SimulationController {
     private boolean isManualSimulation;
@@ -31,6 +37,56 @@ public class SimulationController {
     }
 
     private void autoSimulationController() {
+        String filePath = menu.autoSimulationMenu();
+        File file = new File(filePath);
+        try {
+            Scanner scanner = new Scanner(file);
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime start = LocalDateTime.parse(scanner.nextLine(), dateTimeFormatter);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(",");
+                LocalDateTime end = LocalDateTime.parse(data[0], dateTimeFormatter);
+                if (data.length == 1) {
+                    new Simulation(mainController, invoicers, start, end);
+                }
+                else if (data[1].startsWith("casa")) {
+                    if (data[2].startsWith("dispositivo")) {
+                        String factoryCode = data[2].substring(11);
+                        if (data[3].equals("setOn")) mainController.getFactory().getSmartDeviceRepository()
+                                .findSmartDeviceByFactoryCode(factoryCode).switchConnection(end, SmartDevice.State.ON);
+                        else if (data[3].equals("setOff")) mainController.getFactory().getSmartDeviceRepository()
+                                .findSmartDeviceByFactoryCode(factoryCode).switchConnection(end, SmartDevice.State.OFF);
+                    } else if (data[2].startsWith("fornecedor")) {
+                        mainController.getSmartHouseRepository().
+                                updateEnergySupplier(mainController.getEnergySupplierRepository(),
+                                        data[1].substring(4),
+                                        data[2].substring(10));
+                    }
+                } else if (data[1].startsWith("fornecedor")) {
+                    mainController.getEnergySupplierRepository()
+                            .updateEnergySupplierFormula(data[1].substring(10), data[2]);
+                }
+                new Simulation(mainController, invoicers, start, end);
+                start = end;
+            }
+            for (SmartHouse house : mainController.getSmartHouseRepository().findAllSmartHouses()) {
+                double totalCost = 0;
+                List<Invoicer> houseInvoicers = invoicers.stream()
+                        .filter(invoicer -> invoicer.getHouseAddress().equals(house.getAddress())).toList();
+                for (Invoicer invoicer : houseInvoicers) {
+                    totalCost += invoicer.getTotalCost();
+                }
+                invoicers.removeIf(invoicer -> invoicer.getHouseAddress().equals(house.getAddress()));
+                Invoicer newInvoicer = new Invoicer(house.getOwner(), house.getEnergySupplier(), totalCost, house.getAddress());
+                invoicers.add(newInvoicer);
+            }
 
+        } catch (FileNotFoundException e) {
+            System.out.print("Arquivo não encontrado! Digite o caminho válido");
+            autoSimulationController();
+        }
     }
+
+
 }

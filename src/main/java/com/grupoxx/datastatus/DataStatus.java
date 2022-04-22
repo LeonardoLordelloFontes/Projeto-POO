@@ -1,7 +1,6 @@
 package com.grupoxx.datastatus;
 
 import com.grupoxx.simulation.Invoicer;
-import com.grupoxx.smarthouse.Owner;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,40 +8,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataStatus {
-    // será que posso usar map ?
-
-    private DataStatus(List<Invoicer> fac){
-        this.setFaturas(fac);
-
+    private List<Invoicer> invoicers;
+    private DataStatus(List<Invoicer> fac) {
+        this.setInvoicers(fac);
     }
 
-    private List<Invoicer> faturas = new ArrayList<>();
-
-    public List<Invoicer> getFaturas() {
-        List<Invoicer> fac = new ArrayList<>();
-
-        fac = faturas.stream().map(Invoicer::clone).collect(Collectors.toList());
-
-        return fac;
+    public List<Invoicer> getInvoicers() {
+        return invoicers.stream().map(Invoicer::clone).collect(Collectors.toList());
     }
 
-    public void setFaturas(List<Invoicer> faturas) {
-        this.faturas = faturas.stream().map(Invoicer::clone).collect(Collectors.toList());
+    public void setInvoicers(List<Invoicer> invoicers) {
+        this.invoicers = invoicers.stream().map(Invoicer::clone).collect(Collectors.toList());
     }
 
     public String BiggestSpent(){
         Comparator <Invoicer> comparator = (f1,f2)-> (int) (f2.getTotalCost() - f1.getTotalCost());
-
-        List<Invoicer> invoicers = this.getFaturas();
-
+        List<Invoicer> invoicers = this.getInvoicers();
         invoicers.sort(comparator);
-
         return invoicers.get(0).getHouseAddress();
     }
 
     private double MostProfitAux(String energySupplierName){
-
-        return this.faturas.stream().filter(x->x.getEnergySupplier().equals(energySupplierName)).mapToDouble(Invoicer::getTotalCost).sum();
+        return this.invoicers.stream().filter(x->x.getEnergySupplier().equals(energySupplierName)).mapToDouble(Invoicer::getTotalCost).sum();
 
     }
 
@@ -51,7 +38,7 @@ public class DataStatus {
         String supplier = "";
         List<String> energySupplierNames = new ArrayList<>();
 
-        energySupplierNames = this.faturas.stream().map(Invoicer::getEnergySupplier).collect(Collectors.toList());
+        energySupplierNames = this.invoicers.stream().map(Invoicer::getEnergySupplier).collect(Collectors.toList());
 
         for (String s : energySupplierNames) {
 
@@ -67,19 +54,14 @@ public class DataStatus {
     }
 
     public List<Invoicer> invoicerSupplier(String supplier){
-
-        return this.getFaturas().stream().filter(x->x.getEnergySupplier().equals(supplier)).collect(Collectors.toList());
+        return this.getInvoicers().stream().filter(x->x.getEnergySupplier().equals(supplier)).collect(Collectors.toList());
 
     }
 
-    public List<String> BiggestSpentList(){
-
+    public List<String> BiggestSpentList() {
         Comparator <Invoicer> comparator = (f1,f2)-> (int) (f2.getTotalCost() - f1.getTotalCost());
-
-        List<Invoicer> invoicers = this.getFaturas();
-
+        List<Invoicer> invoicers = this.getInvoicers();
         invoicers.sort(comparator);
-
         return invoicers.stream().map(Invoicer::getHouseAddress).collect(Collectors.toList());
     }
 

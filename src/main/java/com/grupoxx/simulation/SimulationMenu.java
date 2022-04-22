@@ -29,5 +29,9 @@ public class SimulationMenu {
         }
     }
 
-
+    public String autoSimulationMenu() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o caminho do arquivo de simulação automática: ");
+        return scanner.next();
+    }
 }
