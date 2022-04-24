@@ -1,5 +1,6 @@
 package com.grupoxx.simulation;
 
+import com.grupoxx.datastatus.DataStatusController;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smarthouse.SmartHouse;
@@ -32,7 +33,7 @@ public class SimulationController {
         if (dates == null) manualSimulationController();
         else {
             new Simulation(mainController, invoicers, dates[0], dates[1]);
-            // falta redirecionar para o DataStatusController
+            new DataStatusController(mainController, invoicers);
         }
     }
 
@@ -81,6 +82,7 @@ public class SimulationController {
                 Invoicer newInvoicer = new Invoicer(house.getOwner(), house.getEnergySupplier(), totalCost, house.getAddress());
                 invoicers.add(newInvoicer);
             }
+            new DataStatusController(mainController, invoicers);
 
         } catch (FileNotFoundException e) {
             System.out.print("Arquivo não encontrado! Digite o caminho válido");

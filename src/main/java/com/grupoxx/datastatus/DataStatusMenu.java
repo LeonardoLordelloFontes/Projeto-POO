@@ -18,20 +18,20 @@ public class DataStatusMenu {
             }
             return option;
         } catch (InputMismatchException e) {
-            System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+            System.out.println("Opção inválida, digite um valor inteiro entre 1 e " + optionNumber);
             return -1;
         }
     }
 
     public int MenuEstatistica() {
         StringBuilder sb = new StringBuilder("-----------Estatistica-----------\n\n");
-        sb.append("1.Qual é a casa que mais gastou no periúdo da simulação\n");
-        sb.append("2.Qual o comercializador com maior volume de facturação  \n");
-        sb.append("3.Listar as facturas emitidas por um comercializador  \n");
-        sb.append("4.Dar uma ordenação dos maiores consumidores de energia durante o períıodo de simulação\n");
-        sb.append("5. Voltar \n\n");
+        sb.append("1. Qual é a casa que mais gastou no período da simulação\n");
+        sb.append("2. Qual o comercializador com maior volume de facturação  \n");
+        sb.append("3. Listar as facturas emitidas por um comercializador  \n");
+        sb.append("4. Dar uma ordenação dos maiores consumidores de energia durante o período de simulação\n");
+        sb.append("5. Voltar ao menu inicial \n\n");
         sb.append("Sua Opção (Selecionar Número): ");
-        System.out.print(sb.toString());
+        System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
         return isValidOption(option, 5);
@@ -45,7 +45,7 @@ public class DataStatusMenu {
         System.out.print("Intruduza o nome do comercializador de energia que pretende listar as faturas ou o simbolo[*] para voltar ao menu anterior: ");
         input = scanner.next();
 
-        if (input.equals("*")) return this.BACK;
+        if (input.equals("*")) return BACK;
 
         return input;
     }

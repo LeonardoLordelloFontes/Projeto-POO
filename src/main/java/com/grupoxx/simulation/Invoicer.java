@@ -2,9 +2,7 @@ package com.grupoxx.simulation;
 
 import com.grupoxx.smarthouse.Owner;
 
-import java.io.Serializable;
-
-public class Invoicer implements Serializable {
+public class Invoicer {
     private Owner owner;
     private String energySupplier;
     double totalCost;
@@ -27,7 +25,10 @@ public class Invoicer implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        // TODO
+        sb.append(owner).append("\n");
+        sb.append("Fornecedor de energia: ").append(energySupplier).append("\n");
+        sb.append("Total a pagar: ").append(totalCost).append("\n");
+        sb.append("Endereço da casa: ").append(houseAddress).append("\n");
         return sb.toString();
     }
 
