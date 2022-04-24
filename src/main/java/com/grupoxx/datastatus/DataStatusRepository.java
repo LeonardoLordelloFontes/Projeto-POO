@@ -1,5 +1,6 @@
 package com.grupoxx.datastatus;
 
+import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.simulation.Invoicer;
 
 import java.util.ArrayList;
@@ -7,9 +8,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataStatus {
+public class DataStatusRepository {
     private List<Invoicer> invoicers;
-    private DataStatus(List<Invoicer> fac) {
+    public DataStatusRepository(List<Invoicer> fac) {
         this.setInvoicers(fac);
     }
 
@@ -53,9 +54,16 @@ public class DataStatus {
         return supplier;
     }
 
-    public List<Invoicer> invoicerSupplier(String supplier){
-        return this.getInvoicers().stream().filter(x->x.getEnergySupplier().equals(supplier)).collect(Collectors.toList());
+    public List<Invoicer> invoicerSupplier(String supplier)throws EnergySupplierNotFound {
 
+        List <Invoicer> res = this.getInvoicers()
+                                  .stream()
+                                  .filter(x->x.getEnergySupplier().equals(supplier))
+                                  .collect(Collectors.toList());
+
+        if(res.isEmpty())  throw new EnergySupplierNotFound("O Fornecedor de energia " + supplier+ " não existe");
+
+        return res;
     }
 
     public List<String> BiggestSpentList() {
