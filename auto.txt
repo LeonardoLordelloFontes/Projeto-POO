@@ -1,6 +1,5 @@
 04/08/2008 12:45
-05/08/2008 11:33,casa1,dispositivo123456,setOn
-05/08/2008 11:33,casa2,dispositivo234561,setOff
-08/08/2009 23:22,casa2,fornecedorEDP
-22/11/2010 05:11,fornecedorIRINEU,(ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.9
-14/05/2011 12:00
+05/08/2008 12:45,casa1,dispositivo123456,setOff
+06/08/2008 12:45,casa1,dispositivo123456,setOff
+07/08/2008 12:45,casa1,dispositivo123456,setOff
+08/08/2008 12:45

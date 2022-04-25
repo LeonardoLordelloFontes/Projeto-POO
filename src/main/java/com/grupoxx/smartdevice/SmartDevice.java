@@ -158,16 +158,16 @@ public abstract class SmartDevice implements Serializable {
 
         StringBuilder sb = new StringBuilder("Código de Fábrica: ");
 
-        sb.append(this.factoryCode).append("\n")
-                .append("\n\t Custo de Instalação: ").append(this.installationCost)
-                .append("\n\t Estado: ").append( this.state == State.ON ? "Ligado":"Desligado")
-                .append("\n\t Custo de Energia: ").append(this.energyConsumption);
+        sb.append(this.factoryCode)
+                .append("\n\t\tCusto de Instalação: ").append(this.installationCost)
+                .append("\n\t\tEstado: ").append( this.state == State.ON ? "Ligado":"Desligado")
+                .append("\n\t\tCusto de Energia: ").append(this.energyConsumption);
 
         return sb.toString();
     }
 
     public void switchConnection(LocalDateTime acessDay, State state) {
-        long daysBetween = 0;
+        long daysBetween = 1;
         if (lastStateChange != null)
             daysBetween = DAYS.between(this.lastStateChange, acessDay);
         if(Math.abs(daysBetween) >= 1) {

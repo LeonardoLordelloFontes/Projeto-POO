@@ -114,11 +114,11 @@ public class SmartDeviceSpeaker extends SmartDevice implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder(super.toString());
 
-        sb.append("\n\t TIPO: SmartSpeaker.")
-                .append("\n\t Marca: ").append(this.brand)
-                .append("\n\t Volume Atual: ").append(this.volume)
-                .append("\n\t Volume Máximo: ").append(this.volumeMax)
-                .append("\n\t Estação Rádio: ").append(this.radio);
+        sb.append("\n\t\tTIPO: SmartSpeaker.")
+                .append("\n\t\tMarca: ").append(this.brand)
+                .append("\n\t\tVolume Atual: ").append(this.volume)
+                .append("\n\t\tVolume Máximo: ").append(this.volumeMax)
+                .append("\n\t\tEstação Rádio: ").append(this.radio);
 
         return sb.toString();
     }

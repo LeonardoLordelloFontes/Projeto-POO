@@ -38,11 +38,17 @@ public class Simulation {
             double totalCost = 0;
             for (String room : houses.findAllRoomsFromSmartHouse(smartHouse.getAddress())) {
                 for (SmartDevice smartDevice : houses.findSmartDevicesByRoom(smartHouse.getAddress(), room).findAllSmartDevices()) {
-                    EnergySupplier energySupplier = energySuppliers.findEnergySupplierByName(smartHouse.getEnergySupplier());
-                    totalCost += energySupplier.deviceEnergyCostPerSecond(
-                            energySupplier.getFormula(),
-                            smartDevice.energyConsumptionPerDay(),
-                            houses.findNumberOfDevicesSmartHouse(smartHouse.getAddress())) * simulationPeriod;
+                    if (smartDevice.getState().equals(SmartDevice.State.ON)) {
+                        EnergySupplier energySupplier = energySuppliers.findEnergySupplierByName(smartHouse.getEnergySupplier());
+                        totalCost += energySupplier.deviceEnergyCostPerSecond(
+                                energySupplier.getFormula(),
+                                smartDevice.energyConsumptionPerDay(),
+                                houses.findNumberOfDevicesSmartHouse(smartHouse.getAddress())) * simulationPeriod;
+                        if (totalCost < 0) {
+                            System.out.println("Existe uma fórmula inválida no programa");
+                            System.exit(1);
+                        }
+                    }
                 }
             }
             Invoicer invoicer = new Invoicer(smartHouse.getOwner(), smartHouse.getEnergySupplier(), totalCost, smartHouse.getAddress());

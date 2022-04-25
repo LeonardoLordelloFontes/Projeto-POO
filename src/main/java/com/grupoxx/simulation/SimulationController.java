@@ -48,28 +48,29 @@ public class SimulationController {
                 String line = scanner.nextLine();
                 String[] data = line.split(",");
                 LocalDateTime end = LocalDateTime.parse(data[0], dateTimeFormatter);
-                if (data.length == 1) {
-                    new Simulation(mainController, invoicers, start, end);
-                }
-                else if (data[1].startsWith("casa")) {
-                    if (data[2].startsWith("dispositivo")) {
-                        String factoryCode = data[2].substring(11);
-                        if (data[3].equals("setOn")) mainController.getFactory().getSmartDeviceRepository()
-                                .findSmartDeviceByFactoryCode(factoryCode).switchConnection(end, SmartDevice.State.ON);
-                        else if (data[3].equals("setOff")) mainController.getFactory().getSmartDeviceRepository()
-                                .findSmartDeviceByFactoryCode(factoryCode).switchConnection(end, SmartDevice.State.OFF);
-                    } else if (data[2].startsWith("fornecedor")) {
-                        mainController.getSmartHouseRepository().
-                                updateEnergySupplier(mainController.getEnergySupplierRepository(),
-                                        data[1].substring(4),
-                                        data[2].substring(10));
-                    }
-                } else if (data[1].startsWith("fornecedor")) {
-                    mainController.getEnergySupplierRepository()
-                            .updateEnergySupplierFormula(data[1].substring(10), data[2]);
-                }
                 new Simulation(mainController, invoicers, start, end);
-                start = end;
+                if (data.length != 1) {
+                    if (data[1].startsWith("casa")) {
+                        if (data[2].startsWith("dispositivo")) {
+                            String factoryCode = data[2].substring(11);
+                            if (data[3].equals("setOn")) mainController.getFactory().getSmartDeviceRepository()
+                                    .findSmartDeviceByFactoryCode(factoryCode).switchConnection(end, SmartDevice.State.ON);
+                            else if (data[3].equals("setOff")) {
+                                mainController.getFactory().getSmartDeviceRepository()
+                                        .findSmartDeviceByFactoryCode(factoryCode).switchConnection(end, SmartDevice.State.OFF);
+                            }
+                        } else if (data[2].startsWith("fornecedor")) {
+                            mainController.getSmartHouseRepository().
+                                    updateEnergySupplier(mainController.getEnergySupplierRepository(),
+                                            data[1].substring(4),
+                                            data[2].substring(10));
+                        }
+                    } else if (data[1].startsWith("fornecedor")) {
+                        mainController.getEnergySupplierRepository()
+                                .updateEnergySupplierFormula(data[1].substring(10), data[2]);
+                    }
+                    start = end;
+                }
             }
             for (SmartHouse house : mainController.getSmartHouseRepository().findAllSmartHouses()) {
                 double totalCost = 0;
@@ -77,6 +78,7 @@ public class SimulationController {
                         .filter(invoicer -> invoicer.getHouseAddress().equals(house.getAddress())).toList();
                 for (Invoicer invoicer : houseInvoicers) {
                     totalCost += invoicer.getTotalCost();
+                    System.out.println(totalCost);
                 }
                 invoicers.removeIf(invoicer -> invoicer.getHouseAddress().equals(house.getAddress()));
                 Invoicer newInvoicer = new Invoicer(house.getOwner(), house.getEnergySupplier(), totalCost, house.getAddress());

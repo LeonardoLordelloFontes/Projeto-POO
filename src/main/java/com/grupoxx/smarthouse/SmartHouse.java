@@ -79,7 +79,7 @@ public class SmartHouse implements Serializable {
         if (this.owner != null)
             sb.append("\t").append("Proprietário: ").append(this.owner.getNome()).append("\t").append("NIF: ").append(this.owner.getNif()).append("\n");
         if (this.energySupplier != null)
-            sb.append("\t").append("Fornecedor de energia: ").append(energySupplier);
+            sb.append("\t").append("Fornecedor de energia: ").append(energySupplier).append("\n");
 
         for (var entry : smartDevices.entrySet()) {
             sb.append("\t").append(entry.getKey()).append("\n");

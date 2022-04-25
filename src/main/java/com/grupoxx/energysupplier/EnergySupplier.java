@@ -4,6 +4,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.io.Serializable;
+import java.util.Locale;
 
 public class EnergySupplier implements Serializable {
     private String name;
@@ -51,11 +52,11 @@ public class EnergySupplier implements Serializable {
         ScriptEngineManager factory = new ScriptEngineManager();
         ScriptEngine engine = factory.getEngineByName("nashorn");
         try {
-            engine.eval("ValorBase = " + String.valueOf(BASE_COST));
-            engine.eval("Imposto = " + String.valueOf(TAX));
-            engine.eval("ConsumoDispositivo = " + String.valueOf(energyConsumption));
-            engine.eval("numeroDispositivos = " + String.valueOf(numberOfDevices));
-            return (double) engine.eval(formula);
+            engine.eval("valorbase = " + String.valueOf(BASE_COST));
+            engine.eval("imposto = " + String.valueOf(TAX));
+            engine.eval("consumodispositivo = " + String.valueOf(energyConsumption));
+            engine.eval("numerodispositivos = " + String.valueOf(numberOfDevices));
+            return (double) engine.eval(formula.toLowerCase(Locale.ROOT));
         } catch (ScriptException e) {
             return -1;
         }
@@ -70,7 +71,7 @@ public class EnergySupplier implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Energy Supplier: ");
-        sb.append(this.name).append("\n").append("Total Cost").append(this.formula);
+        sb.append(this.name).append("\n").append("Total Cost: ").append(this.formula).append("\n");
         return sb.toString();
     }
     @Override

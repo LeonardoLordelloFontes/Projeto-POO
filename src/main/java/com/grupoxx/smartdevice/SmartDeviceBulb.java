@@ -101,11 +101,10 @@ public class SmartDeviceBulb extends SmartDevice implements Serializable {
 
         double val = -1;
 
-        switch (this.tone){
-            case Neutral: val = 25;
-            case Cold: val = 10;
-            case Warm: val = 50;
-
+        switch (this.tone) {
+            case Neutral -> val = 25;
+            case Cold -> val = 10;
+            case Warm -> val = 50;
         }
 
         return this.getEnergyConsumption() + val;
@@ -124,9 +123,9 @@ public class SmartDeviceBulb extends SmartDevice implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString());
 
-        sb.append("\n\t TIPO: SmartBulb")
-                .append("\n\t Tonalidade: ").append(this.tone)
-                .append("\n\t A sua dimenção é ").append(this.dimension);
+        sb.append("\n\t\tTIPO: SmartBulb")
+                .append("\n\t\tTonalidade: ").append(this.tone)
+                .append("\n\t\tA sua dimenção é ").append(this.dimension);
 
         return sb.toString();
     }
