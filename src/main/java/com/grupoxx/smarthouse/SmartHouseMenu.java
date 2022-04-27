@@ -277,15 +277,30 @@ public class SmartHouseMenu {
         return optionsValidation(7);
     }
 
+    public int updateSmartDevicesState() {
+        String sb = """
+                -----------Dispostivos  a Ligar ou Desligar-----------
+                
+                1. SmartDevicesBuld
+                2. SmartDeviceSpeaker
+                3. SmartDeviceCamera
+                4. Todos os dispositivos
+                5. Volar
+                
+                Sua opção (Selecionar Número):\s""";
+        System.out.print(sb);
+        return optionsValidation(5);
+    }
+
     public int selectBulbToneMenu() {
         String sb = """
-                -----------Tonalidade da lampada-----------
+                -----------Tonalidade da lampada/as-----------
                 
                 1. Neutral
                 2. Warm
                 3. Cold
                 
-                Ligar a lâmpada na tonalidade (Selecione o Número):\s""";
+                Ligar a/as lâmpada/s na tonalidade (Selecione o Número):\s""";
         System.out.print(sb);
         return optionsValidation(3);
     }

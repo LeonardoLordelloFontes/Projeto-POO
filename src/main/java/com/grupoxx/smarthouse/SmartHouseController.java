@@ -4,15 +4,14 @@ import com.grupoxx.energysupplier.EnergySupplierRepository;
 import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
 import com.grupoxx.factory.Factory;
 import com.grupoxx.main.MainController;
-import com.grupoxx.smartdevice.SmartDevice;
-import com.grupoxx.smartdevice.SmartDeviceBulb;
-import com.grupoxx.smartdevice.SmartDeviceRepository;
+import com.grupoxx.smartdevice.*;
 import com.grupoxx.smarthouse.exception.HouseAddressAlreadyExists;
 import com.grupoxx.smarthouse.exception.HouseNotFound;
 import com.grupoxx.smarthouse.exception.RoomAlreadyExists;
 import com.grupoxx.smarthouse.exception.RoomNotFound;
 
 import java.io.Serializable;
+import java.util.function.Predicate;
 
 public class SmartHouseController {
     private final MainController mainController;
@@ -200,13 +199,15 @@ public class SmartHouseController {
             case -1 -> updateSmartDevicesController(address, room);
             case 1 -> addSmartDeviceController(address, room);
             case 2 -> removeSmartDeviceController(address, room);
-            case 3 -> connectAllRoomSmartDevicesController(address, room);
-            case 4 -> disconnectAllRoomSmartDevicesController(address, room);
+            case 3 -> connectAllRoomSmartDevicesControllerMaster(address, room);
+            case 4 -> disconnectAllRoomSmartDevicesControllerMaster(address, room);
             case 5 -> connectSmartDeviceController(address, room);
             case 6 -> disconnectSmartDeviceController(address, room);
             case 7 -> updateSmartHouseController(address);
         }
     }
+
+
 
     private void addSmartDeviceController(String address, String room) {
         String factoryCode = menu.addDevice(factory);
@@ -228,15 +229,53 @@ public class SmartHouseController {
         }
     }
 
-    private void connectAllRoomSmartDevicesController(String address, String room) {
-        smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
-                .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.ON));
+    private void disconnectAllRoomSmartDevicesControllerMaster(String address, String room) {
+        int d = menu.updateSmartDevicesState();
+        Predicate p1 = x -> x instanceof SmartDeviceBulb;
+        Predicate p2 = x -> x instanceof SmartDeviceSpeaker;
+        Predicate p3 = x -> x instanceof SmartDeviceCamera;
+        Predicate p4 = x -> x instanceof SmartDevice;
+
+        switch (d) {
+            case 1 -> disconnectAllRoomSmartDevicesController(address, room, p1);
+            case 2 -> disconnectAllRoomSmartDevicesController(address, room, p2);
+            case 3 -> disconnectAllRoomSmartDevicesController(address, room, p3);
+            case 4 -> disconnectAllRoomSmartDevicesController(address, room, p4);
+            case 5 -> updateSmartDevicesController(address, room);
+        }
+    }
+
+    private void connectAllRoomSmartDevicesControllerMaster(String address, String room){
+        int  d = menu.updateSmartDevicesState();
+
+        Predicate p1 = x-> x instanceof SmartDeviceBulb;
+        Predicate p2 = x-> x instanceof SmartDeviceSpeaker;
+        Predicate p3 = x-> x instanceof SmartDeviceCamera;
+        Predicate p4 = x-> x instanceof SmartDevice;
+
+        switch (d) {
+            case 1 -> {
+                connectAllRoomSmartDevicesController(address, room, p1);
+                connectAllSmartBulbController(address,room);
+            }
+
+            case 2 -> connectAllRoomSmartDevicesController(address, room, p2);
+            case 3 -> connectAllRoomSmartDevicesController(address, room, p3);
+            case 4 -> connectAllRoomSmartDevicesController(address, room, p4);
+            case 5 -> updateSmartDevicesController(address, room);
+        }
+
+    }
+
+    private void connectAllRoomSmartDevicesController(String address, String room, Predicate p) {
+
+        smartHouses.findSmartDevicesByRoom(address,room).SmartDeviceState(p, SmartDevice.State.ON);
         updateSmartDevicesController(address, room);
     }
 
-    private void disconnectAllRoomSmartDevicesController(String address, String room) {
-        smartHouses.findSmartDevicesByRoom(address, room).findAllSmartDevices()
-                .forEach(smartDevice -> smartDevice.setState(SmartDevice.State.OFF));
+    private void disconnectAllRoomSmartDevicesController(String address, String room, Predicate p) {
+
+        smartHouses.findSmartDevicesByRoom(address, room).SmartDeviceState(p, SmartDevice.State.OFF);
         updateSmartDevicesController(address, room);
     }
 
@@ -254,15 +293,41 @@ public class SmartHouseController {
 
     private void connectSmartBulbController(SmartDeviceBulb smartBulb, String address, String room) {
         switch (menu.selectBulbToneMenu()) {
-            case -1: connectSmartBulbController(smartBulb, address, room);
-            case 1: smartBulb.setTone(SmartDeviceBulb.Tone.Neutral);
-                    updateSmartDevicesController(address, room);
-            case 2: smartBulb.setTone(SmartDeviceBulb.Tone.Warm);
-                    updateSmartDevicesController(address, room);
-            case 3: smartBulb.setTone(SmartDeviceBulb.Tone.Cold);
-                    updateSmartDevicesController(address, room);
+            case -1 -> connectSmartBulbController(smartBulb, address, room);
+            case 1 -> {
+                smartBulb.setTone(SmartDeviceBulb.Tone.Neutral);
+                updateSmartDevicesController(address, room);
+            }
+            case 2 -> {
+                smartBulb.setTone(SmartDeviceBulb.Tone.Warm);
+                updateSmartDevicesController(address, room);
+            }
+            case 3 -> {
+                smartBulb.setTone(SmartDeviceBulb.Tone.Cold);
+                updateSmartDevicesController(address, room);
+            }
         }
     }
+
+    private void connectAllSmartBulbController(String address, String room){
+        switch (menu.selectBulbToneMenu()) {
+            case -1 -> connectSmartDeviceController(address, room);
+            case 1 -> {
+                smartHouses.findSmartDevicesByRoom(address,room).SmartDeviceTone(SmartDeviceBulb.Tone.Neutral);
+                updateSmartDevicesController(address, room);
+            }
+            case 2 -> {
+                smartHouses.findSmartDevicesByRoom(address,room).SmartDeviceTone(SmartDeviceBulb.Tone.Warm);
+                updateSmartDevicesController(address, room);
+            }
+            case 3 -> {
+                smartHouses.findSmartDevicesByRoom(address,room).SmartDeviceTone(SmartDeviceBulb.Tone.Cold);
+                updateSmartDevicesController(address, room);
+            }
+        }
+
+    }
+
 
     private void disconnectSmartDeviceController(String address, String room) {
         SmartDeviceRepository smartDevices = smartHouses.findSmartDevicesByRoom(address, room);

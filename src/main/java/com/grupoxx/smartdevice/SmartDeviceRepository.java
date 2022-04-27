@@ -2,6 +2,7 @@ package com.grupoxx.smartdevice;
 
 import com.grupoxx.smartdevice.exception.DeviceAlreadyExist;
 import com.grupoxx.smartdevice.exception.DeviceNotFound;
+import java.util.function.Predicate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,40 +127,17 @@ public class SmartDeviceRepository implements Serializable {
         if(!resolution.equals("#")) sc.setFileSize(Integer.parseInt(fileSize));
     }
 
-    public void SmartDeviceState(String deviceToTurn, SmartDevice.State turn){
+    public void SmartDeviceState(Predicate p, SmartDevice.State turn){
 
-        if(deviceToTurn.equals("sb")){
-                for(SmartDevice sb: this.factory.values())
-                    if (sb instanceof SmartDeviceBulb) sb.setState(turn);}
+        for(SmartDevice sb: this.factory.values())
+            if  ( p.test(sb) ) sb.setState(turn);
 
-        if(deviceToTurn.equals("ss")){
-                for(SmartDevice ss: this.factory.values())
-                    if (ss instanceof SmartDeviceSpeaker) ss.setState(turn);}
-
-        if(deviceToTurn.equals("sc")){
-                for(SmartDevice sc: this.factory.values())
-                    if (sc instanceof SmartDeviceCamera) sc.setState(turn);}
-
-        else{
-            for(SmartDevice sd: this.factory.values())
-                    sd.setState(turn);}
     }
 
-
-    public void SmartDeviceTone(String tone){
-
-        if (tone.equals("N"))
-            for(SmartDevice sb: this.factory.values())
-                if (sb instanceof SmartDeviceBulb) ((SmartDeviceBulb) sb).setTone(SmartDeviceBulb.Tone.Neutral);
-
-        if(tone.equals("W") )
-            for(SmartDevice sb: this.factory.values())
-                if (sb instanceof SmartDeviceBulb) ((SmartDeviceBulb) sb).setTone(SmartDeviceBulb.Tone.Warm);
-
-        if(tone.equals("C") )
-            for(SmartDevice sb: this.factory.values())
-                if (sb instanceof SmartDeviceBulb) ((SmartDeviceBulb) sb).setTone(SmartDeviceBulb.Tone.Cold);
-
+    public void SmartDeviceTone(SmartDeviceBulb.Tone tone){
+        Predicate p = x-> x instanceof SmartDeviceBulb;
+        for(SmartDevice sb: this.factory.values())
+            if (p.test(sb)) ((SmartDeviceBulb) sb).setTone(tone);
     }
 
     public List<SmartDevice> findAllSmartDevices() {
