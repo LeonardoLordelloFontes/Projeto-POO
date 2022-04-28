@@ -19,6 +19,10 @@ public class EnergySupplierController {
         this.smartHouseRepository = mainController.getSmartHouseRepository();
         energySupplierController();
     }
+    
+    /**
+    * Controlador Principal da Classe EnergySupplier
+    */
 
     private void energySupplierController() {
         switch (menu.energySupplierMenu()) {
@@ -29,7 +33,11 @@ public class EnergySupplierController {
             case 5 -> this.mainController.mainController();
         }
     }
-
+    
+    /**
+    * Controlador para Adicionar um EnergySupplier
+    */
+    
     private void addEnergySupplierController() {
         String[] input = menu.addEnergySupplierMenu();
         if (input == null) energySupplierController();
@@ -39,6 +47,10 @@ public class EnergySupplierController {
         }
     }
 
+    /**
+    * Controlador para Remover um EnergySupplier
+    */
+    
     private void removeEnergySupplierController() {
         String input = menu.removeEnergySupplierMenu(energySupplierRepository);
         if(input == null) energySupplierController();
@@ -52,6 +64,10 @@ public class EnergySupplierController {
             }
         }
     }
+    
+    /**
+    * Controlador da seleção do EnergySupplier que vai ser Atualizado
+    */
 
     private void selectEnergySupplierToUpdate() {
         String selectedEnergySupplier = menu.selectEnergySupplierMenu(energySupplierRepository);
@@ -60,6 +76,10 @@ public class EnergySupplierController {
             updateEnergySupplierController(selectedEnergySupplier);
         }
     }
+    
+    /**
+    * Controlador da atualização dos dados de um EnergySupplier
+    */
 
     private void updateEnergySupplierController(String name) {
         switch (menu.updateEnergySupplierMenu()) {
@@ -69,7 +89,11 @@ public class EnergySupplierController {
             case 3 -> energySupplierController();
         }
     }
-
+    
+    /**
+    * Controlador da atualização do nome de um EnergySupplier
+    */
+    
     private void updateEnergySupplierNameController(String oldName) {
         String newName = menu.updateEnergySupplierNameMenu();
         if (newName == null) updateEnergySupplierController(oldName);
@@ -84,6 +108,10 @@ public class EnergySupplierController {
         }
     }
 
+    /**
+    * Controlador da atualização da formula de um EnergySupplier
+    */
+    
     private void updateEnergySupplierFormulaController(String name) {
         String newFormula = menu.updateEnergySupplierFormulaMenu();
         if (newFormula == null) updateEnergySupplierController(name);
