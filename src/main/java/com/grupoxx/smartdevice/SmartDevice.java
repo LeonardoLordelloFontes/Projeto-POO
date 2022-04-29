@@ -7,19 +7,38 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public abstract class SmartDevice implements Serializable {
 
-    /* Estado dos smart device */
+    /**
+     * Propriedades comuns a todos o SmartDevice
 
+     /**
+     * O seu estado ligado ou desligado.
+     */
     public enum State {
         ON,
         OFF,
     }
 
     private State state;
+    /**
+     * O custo de instalação.
+     */
     private double installationCost;
+    /**
+     * O seu código de fabrica único.
+     */
     private String factoryCode;
+    /**
+     * O fator energético comum defenido pela fábrica
+     */
     private double energyConsumption;
-    private LocalDateTime lastStateChange; // o dia em que o usuario alterou pela ultima vez o seu estado
+    /**
+     * Finalmente o dia em que o usuario alterou pela ultima vez o seu estado
+     */
+    private LocalDateTime lastStateChange;
 
+    /**
+     * Diversos construtores de SmartDevice
+     */
     public SmartDevice(){
 
         this.state = State.OFF;
@@ -104,46 +123,75 @@ public abstract class SmartDevice implements Serializable {
 
     }
 
+    /**
+     * @return estado de um dispositivo
+     */
     public State getState() {
         return this.state;
     }
 
+    /**
+     * @param state de um SmartDevice
+     */
     public void setState(State state) {
         this.state = state;
     }
-
+    /**
+     * @return o custo de instalação de um dispositivo
+     */
     public double getInstallationCost() {
         return this.installationCost;
     }
 
+    /**
+     * @param installationCost de um dispositivo
+     */
     public void setInstallationCost(double installationCost) {
         this.installationCost = installationCost;
     }
-
+    /**
+     * @return o código de fábrica de um dispositivo
+     */
     public String getFactoryCode() {
         return this.factoryCode;
     }
 
+    /**
+     * @param factoryCode de um dispositivo
+     */
     public void setFactoryCode(String factoryCode) {
         this.factoryCode = factoryCode;
     }
-
+    /**
+     * @return o fator energético comum de um dispositivo
+     */
     public double getEnergyConsumption() {
         return this.energyConsumption;
     }
 
+    /**
+     * @param energyConsumption de um dispositivo
+     */
     public void setEnergyConsumption(double energyConsumption) {
         this.energyConsumption = energyConsumption;
     }
-
+    /**
+     * @return o ultimo dia em que o estado de um dispositivo foi alterado
+     */
     public LocalDateTime getLastStateChange() {
         return lastStateChange;
     }
 
+    /**
+     * @param lastStateChange de um dispositivo
+     */
     public void setLastStateChange(LocalDateTime lastStateChange) {
         this.lastStateChange = lastStateChange;
     }
 
+    /**
+     * @return se dois dispositivos são iguais
+     */
     public boolean equals(Object o) {
 
         if (this == o) return (true);
@@ -154,6 +202,10 @@ public abstract class SmartDevice implements Serializable {
         return this.factoryCode.equals(sd.getFactoryCode());
     }
 
+    /**
+     *
+     * @return a versão de uma dispositivo em string
+     */
     public String toString(){
 
         StringBuilder sb = new StringBuilder("Código de Fábrica: ");
@@ -166,6 +218,9 @@ public abstract class SmartDevice implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * Metodo que apenas mudo o estado de um dispositivo se tiver passado pelo menos um dia
+     */
     public void switchConnection(LocalDateTime acessDay, State state) {
         long daysBetween = 1;
         if (lastStateChange != null)
@@ -174,9 +229,17 @@ public abstract class SmartDevice implements Serializable {
             this.setState(state);
             this.setLastStateChange(acessDay);
         }
-    }// o acessDay é o dia em que o usuario quer mudar o estado dos aparelhos se for pelo menos um dia a cima do ultimo dia em que lhe foi alterado o estado ele permite a alteração.
+    }
 
+    /**
+     * Contrato onde alguma das suas subclasses não absestrata tem de seguir
+     * @return um clone de um dispositivo
+     */
     public abstract SmartDevice clone();
 
+    /**
+     *  Contrato onde alguma das suas subclasses não absestrata tem de seguir
+     * @return a energia gasta por dia por um dispositivo especifico depois de lhe ser aplicada a formula de gasto diário
+     */
     public abstract double energyConsumptionPerDay();
 }
