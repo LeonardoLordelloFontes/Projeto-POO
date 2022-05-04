@@ -30,14 +30,18 @@ public class MainController implements Serializable {
         this.smartHouseRepository = new SmartHouseRepository();
         mainController();
     }
-
+    
     public MainController(MainController mainController) {
         this.factory = mainController.getFactory();
         this.energySupplierRepository = mainController.getEnergySupplierRepository();
         this.smartHouseRepository = mainController.getSmartHouseRepository();
         mainController();
     }
-
+    
+    /*
+    * Controlador Do Menu Principal do Projeto
+    */
+    
     public void mainController() {
         int choice = mainMenu();
         switch (choice) {
@@ -63,15 +67,25 @@ public class MainController implements Serializable {
                 System.exit(0);
         }
     }
-
+    
+    /* 
+    * @return EnergySupplierRepository
+    */
+    
     public EnergySupplierRepository getEnergySupplierRepository() {
         return energySupplierRepository;
     }
-
+    
+    /* 
+    * @return Factory
+    */
+    
     public Factory getFactory() {
         return factory;
     }
-
+    /* 
+    * @return SmartHouseRepository
+    */
     public SmartHouseRepository getSmartHouseRepository() {
         return smartHouseRepository;
     }

@@ -8,7 +8,11 @@ import java.util.Scanner;
 
 
 public class EnergySupplierMenu {
-
+    
+    /*
+    ** Função que verifica se a opção selecionada de uma determinado menu é aceite
+    */
+    
     private int optionsValidation(int options) {
         Scanner scanner = new Scanner(System.in);
         String s = "Opção inválida, digite um valor inteiro entre 1 e " + String.valueOf(options);
@@ -25,6 +29,10 @@ public class EnergySupplierMenu {
         }
     }
 
+    /*
+    ** Menu Principal dos Energy Suppliers
+    */
+    
     public int energySupplierMenu() {
         System.out.print("""
                 -----------Fornecedor de Energia-----------
@@ -38,7 +46,11 @@ public class EnergySupplierMenu {
                 Sua Opção (Selecionar Número):\s""");
         return optionsValidation(5);
     }
-
+    
+    /* 
+    ** Menu para Adicionar um Energy Supplier
+    */
+                         
     public String[] addEnergySupplierMenu() {
         System.out.println(("-----------Adicionar um Fornecedor de Energia-----------\n\n"));
         String[] input = new String[2];
@@ -50,7 +62,11 @@ public class EnergySupplierMenu {
         if (input[1].equals("*")) return null;
         return input;
     }
-
+    
+    /*
+    ** Menu para Remover um EnergySupplier
+    */
+                         
     public String removeEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
@@ -66,7 +82,11 @@ public class EnergySupplierMenu {
         if (input.equals("*")) return null;
         return input;
     }
-
+                         
+    /*
+    ** Menu para Selecionar um determinado EnergySupplier 
+    */
+    
     public String selectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
@@ -86,10 +106,14 @@ public class EnergySupplierMenu {
         if (input.equals("*")) return null;
         return input;
     }
-
+    
+    /*
+    ** Menu de atualização de um EnergySupplier (Podemos mudar Nome e Formula)
+    */
+                         
     public int updateEnergySupplierMenu() {
         System.out.print( """
-                -----------Atualiazar Fornecedor de Energia-----------
+                -----------Atualizar Fornecedor de Energia-----------
                 1. Nome
                 2. Fórmula
                 3. Voltar
@@ -97,7 +121,11 @@ public class EnergySupplierMenu {
                 Sua opção (Selecione um número):\s""");
         return optionsValidation(3);
     }
-
+                         
+    /* 
+    ** Menu de atualização do Nome de um EnergySupplier 
+    */
+                         
     public String updateEnergySupplierNameMenu() {
         System.out.print("Insira o novo nome do fornecedor de energia (para cancelar digite *): ");
         Scanner scanner = new Scanner(System.in);
@@ -106,6 +134,10 @@ public class EnergySupplierMenu {
         return input;
     }
 
+    /* 
+    ** Menu de atualização da Formula de um EnergySupplier 
+    */
+                         
     public String updateEnergySupplierFormulaMenu() {
         String sb = """
                 
@@ -125,7 +157,11 @@ public class EnergySupplierMenu {
         if (input.equals("*")) return null;
         return input;
     }
-
+                         
+    /* 
+    **Apresenta todos os EnergySuppliers Existentes
+    */
+                         
     public void listSmartHouses(List<EnergySupplier> energySuppliers) {
         if (energySuppliers.size() == 0) System.out.println("Não há nenhum fornecedor de energia");
         StringBuilder sb = new StringBuilder();

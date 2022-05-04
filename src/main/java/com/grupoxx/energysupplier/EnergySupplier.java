@@ -29,25 +29,54 @@ public class EnergySupplier implements Serializable {
         this.name = Es.getName();
         this.formula = Es.getFormula();
     }
-
+    
+    /*
+    **@return getBaseCost do EnergySupplier
+    */
+    
     public double getBasecost() {
         return BASE_COST;
     }
-
+    
+    /*
+    **@return name de um EnergySupplier
+    */
     public String getName() {
         return name;
     }
+    
+    /*
+    **@param name de um EnergySupplier
+    */
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
+    /*
+    **@return Tax de um EnergySupplier
+    */
+    
     public double getTax() {
         return TAX;
     }
+    
+    /* 
+    **@return formula de EnergySupplier 
+    */
 
     public String getFormula() {return formula;}
+    
+    /* 
+    **@param formula de EnergySupplier 
+    */
+    
     public void setFormula(String formula) {this.formula = formula;}
-
+    
+    /*
+    **Funções que servem para calcular o custo do consumo diario e por segundo, respetivamente, de um determinado device 
+    */
+    
     public double deviceEnergyCostPerDay(String formula, double energyConsumption, int numberOfDevices) {
         ScriptEngineManager factory = new ScriptEngineManager();
         ScriptEngine engine = factory.getEngineByName("nashorn");
