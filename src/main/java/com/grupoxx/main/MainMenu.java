@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class MainMenu {
+    
+    /*
+    * Menu Principal do Projeto
+    */
+    
     public static int mainMenu() {
         String sb = """
                 -----------Menu Principal-----------
