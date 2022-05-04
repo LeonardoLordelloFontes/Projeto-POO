@@ -8,10 +8,21 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class FactoryMenu {
+        /**
+         * Constantes dos menus
+         *
+         */
+        private final String KEEP = "#";
+        private final String[] ERROR = {"-1"};
+        private final String[] BACK = {"*"};
 
-        private static final String[] ERROR = {"-1"};
-
-        private static final String[] BACK = {"*"};
+    /**
+     * Metodo que valida uma opeção numérica
+     *
+     * @param option número escrito
+     * @param optionNumber o número de opeção máxima
+     * @return a opeção se for válida e -1 se a opeção for invalida
+     */
 
         private int isValidOption(int option, int optionNumber ){
             try {
@@ -26,6 +37,12 @@ public class FactoryMenu {
             }
         }
 
+    /**
+     * Metodo que valida o input dado pelo cliente é convertivel para double
+     *
+     * @param strNum input dado
+     * @return true se for convertivel para double e false se não for.
+     */
         private boolean isValidDouble(String strNum) {
 
             boolean validacion = true;
@@ -41,7 +58,12 @@ public class FactoryMenu {
             if (!validacion) System.out.println("Opção inválida, digite um valor double não negativo!!");
             return validacion;
         }
-
+     /**
+      * * Metodo que valida o input dado pelo cliente é convertivel para integer
+     *
+     * @param strNum input dado
+     * @return true se for convertivel para integer e false se não for.
+     */
         private static boolean isValidInteger(String strNum) {
 
             boolean validacion = true;
@@ -58,7 +80,11 @@ public class FactoryMenu {
             return validacion;
         }
 
-        public int MenuTipoDispositivoOperacoes() {
+    /**
+     * Menu das operações dos dispositivos
+     * @return o numero da opeção se for válida ou -1 se não for
+     */
+    public int MenuTipoDispositivoOperacoes() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
             sb.append("1. Adicionar Dispositivo \n");
             sb.append("2. Remover Dispositivo \n");
@@ -72,6 +98,10 @@ public class FactoryMenu {
             return isValidOption(option,5);
         }
 
+        /**
+         * Menu das operações de adicionar dispositivos
+         * @return o numero da opeção se for válida ou -1 se não for
+         */
         public int MenuTipoDispositivoAdd() {
             StringBuilder sb = new StringBuilder("-----------Tipo de Dispositivos-----------\n\n");
             sb.append("1. Adicionar  SmartBulb \n");
@@ -85,6 +115,10 @@ public class FactoryMenu {
             return isValidOption(option,4);
         }
 
+    /**
+     * Menu de adicionar dispositivos geral
+     * @return as componentes do dispositivo a ser criado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
         public String[] MenuDiviceAdd(){
             String[] input = new String[3];
             Scanner scanner = new Scanner(System.in);
@@ -109,7 +143,10 @@ public class FactoryMenu {
             return input;
         }
 
-
+    /**
+     * Menu de adicionar lampâmdas
+     * @return as componentes do dispositivo a ser criado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
         public String[] MenuSmartBulbAdd() {
             String[] input = new String[4];
             Scanner scanner = new Scanner(System.in);
@@ -128,6 +165,10 @@ public class FactoryMenu {
             return input;
         }
 
+    /**
+     * Menu de adicionar colunas
+     * @return as componentes do dispositivo a ser criado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
         public  String[] MenuSmartSpeakerAdd() {
             String [] input = new String[5];
             Scanner scanner = new Scanner(System.in);
@@ -149,6 +190,11 @@ public class FactoryMenu {
 
             return input;
         }
+
+    /**
+     * Menu de adicionar camaras
+     * @return as componentes do dispositivo a ser criado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
         public String[] MenuSmartCamaraAdd() {
             String [] input = new String[5];
             Scanner scanner = new Scanner(System.in);
@@ -172,6 +218,10 @@ public class FactoryMenu {
             return input;
         }
 
+    /**
+     * Menu de remoção de dispositivos da fábrica
+     * @return o dispositivo a ser removido ou this.BACK se for para ir para trás
+     */
         public String MenuTipoDispositivoRemove(){
             String input = "*";
             Scanner scanner = new Scanner(System.in);
@@ -185,16 +235,19 @@ public class FactoryMenu {
             return input;
         }
 
-
+    /**
+     * Menu de atualização de dispositivos da fábrica geral
+     * @return as componentes do dispositivo a ser alterado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
     public String[] MenuDiviceUpdate(){
 
         String [] input = new String[4];
         Scanner scanner = new Scanner(System.in);
         String answer = "*";
 
-        input[1] = "#";
-        input[2] = "#";
-        input[3] = "#";
+        input[1] = this.KEEP;
+        input[2] = this.KEEP;
+        input[3] = this.KEEP;
 
         System.out.print("Intruduza código de fabrica do dispositivo que pretende alterar ou o simbolo [*] em qualquer local de escrita para voltar ao menu anterior: ");
         input[0] = scanner.next();
@@ -231,14 +284,17 @@ public class FactoryMenu {
 
         return input;
     }
-
+    /**
+     * Menu de atualização de lampâmdas da fábrica
+     * @return as componentes do dispositivo a ser alterado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
         public String[] MenuSmartBulbUpdate() {
             String input[] = new String[2];
             String answer = "*";
             Scanner scanner = new Scanner(System.in);
 
-            input[0] = "#";
-            input[1] = "#";
+            input[0] = this.KEEP;
+            input[1] = this.KEEP;
 
             System.out.print("Deseja alterar a Dimensão(cm)?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
@@ -267,15 +323,19 @@ public class FactoryMenu {
 
             return input;
         }
+    /**
+     * Menu de atualização de coluna da fábrica
+     * @return as componentes do dispositivo a ser alterado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
         public String[] MenuSmartSpeakerUpdate() {
             String []input = new String[4];
             String answer = "*";
             Scanner scanner = new Scanner(System.in);
 
-            input[0] = "#";
-            input[1] = "#";
-            input[2] = "#";
-            input[3] = "#";
+            input[0] = this.KEEP;
+            input[1] = this.KEEP;
+            input[2] = this.KEEP;
+            input[3] = this.KEEP;
 
             System.out.print("Deseja alterar a Marca?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
@@ -322,14 +382,19 @@ public class FactoryMenu {
             return input;
         }
 
+    /**
+     * Menu de atualização de camara da fábrica
+     * @return as componentes do dispositivo a ser alterado ou this.BACK se for para ir para trás ou this.ERROR se o input do cliente for invalido
+     */
+
         public String[] MenuSmartCamaraUpdate() {
 
             String input[] = new String[2];
             String answer = "N";
             Scanner scanner = new Scanner(System.in);
 
-            input[0] ="#";
-            input[1] ="#";
+            input[0] = this.KEEP;
+            input[1] = this.KEEP;
 
             System.out.print("Deseja alterar a resolução:?[Y ou N]: ");
             answer = scanner.next().toUpperCase(Locale.ROOT);
@@ -355,7 +420,11 @@ public class FactoryMenu {
 
         }
 
-        public void MenuListagem( List<SmartDevice> listaDosTrue){
+    /**
+     * Menu que lista todos os dispositivos que se encontram na fábrica
+     * @param listaDosTrue é lista todos os dispositivos que se encontram na fábrica
+     */
+    public void MenuListagem( List<SmartDevice> listaDosTrue){
 
             if(listaDosTrue.isEmpty()) System.out.println("Não foram criados dispositivos!!");
 
@@ -365,5 +434,6 @@ public class FactoryMenu {
             }
 
         }
+
 
 }

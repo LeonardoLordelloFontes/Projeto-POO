@@ -138,21 +138,21 @@ public class SmartDeviceRepository implements Serializable {
      * @param tone da lâmpada a atualizar
      * @throws DeviceNotFound se a lâmpada não existir
      */
-    public void SmartDeviceBulbUpdade(String oldFactoryCode, String newFactoryCode, String energyConsumption, String installationCost, String dimension, String tone)throws DeviceNotFound {
+    public void SmartDeviceBulbUpdade(String oldFactoryCode, String newFactoryCode, String energyConsumption, String installationCost, String dimension, String tone, String keep)throws DeviceNotFound {
         //Partindo do principio que os input são válidos
 
         SmartDeviceBulb sb = (SmartDeviceBulb) this.factory.get(oldFactoryCode);
         if(sb == null) throw new DeviceNotFound("O SmartBulb de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
-        if(!newFactoryCode.equals("#")){
+        if(!newFactoryCode.equals(keep)){
             sb.setFactoryCode(newFactoryCode);
             this.factory.put(newFactoryCode,sb);
             this.factory.remove(oldFactoryCode);
         }
-        if(!energyConsumption.equals("#")) sb.setEnergyConsumption( Double.parseDouble(energyConsumption) );
-        if(!installationCost.equals("#")) sb.setInstallationCost( Double.parseDouble(installationCost) );
-        if(!dimension.equals("#")) sb.setDimension(Double.parseDouble (dimension) );
-        if(!tone.equals("#")){
+        if(!energyConsumption.equals(keep)) sb.setEnergyConsumption( Double.parseDouble(energyConsumption) );
+        if(!installationCost.equals(keep)) sb.setInstallationCost( Double.parseDouble(installationCost) );
+        if(!dimension.equals(keep)) sb.setDimension(Double.parseDouble (dimension) );
+        if(!tone.equals(keep)){
 
                 if (tone.equals("1")) sb.setTone(SmartDeviceBulb.Tone.Neutral);
 
@@ -177,22 +177,22 @@ public class SmartDeviceRepository implements Serializable {
      * @param radioStation da coluna a atualizar
      * @throws DeviceNotFound se a coluna não existir
      */
-    public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax, String volume, String radioStation)throws DeviceNotFound {
+    public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax, String volume, String radioStation,String keep)throws DeviceNotFound {
 
         SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.factory.get(oldFactoryCode);
         if(ss == null) throw new DeviceNotFound("O SmartSpeaker de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
-        if(!newFactoryCode.equals("#")){
+        if(!newFactoryCode.equals(keep)){
             ss.setFactoryCode(newFactoryCode);
             this.factory.put(newFactoryCode,ss);
             this.factory.remove(oldFactoryCode);
         }
-        if(!energyConsumption.equals("#")) ss.setEnergyConsumption( Double.parseDouble(energyConsumption) );
-        if(!installationCost.equals("#")) ss.setInstallationCost( Double.parseDouble(installationCost) );
-        if (!brand.equals("#")) ss.setBrand(brand);
-        if (!volumeMax.equals("#")) ss.setVolumeMax(Integer.parseInt(volumeMax));
-        if (!volume.equals("#")) ss.setVolume(Integer.parseInt(volume));
-        if (!radioStation.equals("#")) ss.setRadio(radioStation);
+        if(!energyConsumption.equals(keep)) ss.setEnergyConsumption( Double.parseDouble(energyConsumption) );
+        if(!installationCost.equals(keep)) ss.setInstallationCost( Double.parseDouble(installationCost) );
+        if (!brand.equals(keep)) ss.setBrand(brand);
+        if (!volumeMax.equals(keep)) ss.setVolumeMax(Integer.parseInt(volumeMax));
+        if (!volume.equals(keep)) ss.setVolume(Integer.parseInt(volume));
+        if (!radioStation.equals(keep)) ss.setRadio(radioStation);
 
     }
 
@@ -208,22 +208,29 @@ public class SmartDeviceRepository implements Serializable {
      * @param fileSize da camara a atualizar
      * @throws DeviceNotFound se a camara não existir
      */
-    public void SmartDeviceCameraUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String resolution ,String fileSize)throws DeviceNotFound {
+    public void SmartDeviceCameraUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String resolution ,String fileSize, String keep)throws DeviceNotFound {
 
         SmartDeviceCamera sc = (SmartDeviceCamera) this.factory.get(oldFactoryCode);
         if(sc == null) throw new DeviceNotFound("O SmartCamera de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
-        if(!newFactoryCode.equals("#")){
+        if(!newFactoryCode.equals(keep)){
             sc.setFactoryCode(newFactoryCode);
             this.factory.put(newFactoryCode,sc);
             this.factory.remove(oldFactoryCode);
         }
-        if(!energyConsumption.equals("#")) sc.setEnergyConsumption( Double.parseDouble(energyConsumption) );
-        if(!installationCost.equals("#")) sc.setInstallationCost( Double.parseDouble(installationCost) );
-        if(!resolution.equals("#")) sc.setResolution(Integer.parseInt(resolution));
-        if(!resolution.equals("#")) sc.setFileSize(Integer.parseInt(fileSize));
+        if(!energyConsumption.equals(keep)) sc.setEnergyConsumption( Double.parseDouble(energyConsumption) );
+        if(!installationCost.equals(keep)) sc.setInstallationCost( Double.parseDouble(installationCost) );
+        if(!resolution.equals(keep)) sc.setResolution(Integer.parseInt(resolution));
+        if(!resolution.equals(keep)) sc.setFileSize(Integer.parseInt(fileSize));
     }
 
+    /**
+     * Metodo da casa
+     * Metodo que liga e desliga todos os dispositivos
+     * @param p é o predicado que verifica se é para ligar ou desligar
+     * @param turn é o estado que os divixe têm de ser alterados
+     *
+     */
     public void SmartDeviceState(Predicate p, SmartDevice.State turn){
 
         for(SmartDevice sb: this.factory.values())
@@ -231,16 +238,32 @@ public class SmartDeviceRepository implements Serializable {
 
     }
 
+    /**
+     * Metodo da casa
+     * Metodo que seleciona a tonalidade de todos os dispositivos
+     * @param tone é a tonalidade que as lampâdas devem ser alteradas
+     *
+     */
     public void SmartDeviceTone(SmartDeviceBulb.Tone tone){
         Predicate p = x-> x instanceof SmartDeviceBulb;
         for(SmartDevice sb: this.factory.values())
             if (p.test(sb)) ((SmartDeviceBulb) sb).setTone(tone);
     }
 
+    /**
+     * Metodo da casa e fabrica
+     *
+     * @return uma a lista dos dispositivos que estão na fábrica
+     */
     public List<SmartDevice> findAllSmartDevices() {
 
         return new ArrayList<>(factory.values());
     }
 
+    /**
+     * Metodo da casa e fabrica
+     *
+     * @return um repositório de dos dispositivos
+     */
     public Map<String, SmartDevice> getFactory() { return factory;}
 }

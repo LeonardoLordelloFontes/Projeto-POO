@@ -12,11 +12,14 @@ public class FactoryController {
     private final FactoryMenu menu;
 
     public FactoryController(MainController mainController){
+
         this.mainController = mainController;
         this.repository = mainController.getFactory().getSmartDeviceRepository();
         this.menu = new FactoryMenu();
+
         smartDeviceController();
     }
+
 
     private void smartDeviceController(){
         switch (menu.MenuTipoDispositivoOperacoes()) {
@@ -41,6 +44,7 @@ public class FactoryController {
 
     private void addSmartBulbController() {
         String[] components = menu.MenuSmartBulbAdd();
+
         switch (components[0]) {
             case "*" -> addSmartDeviceController();
             case "-1" -> addSmartBulbController();
@@ -130,11 +134,18 @@ public class FactoryController {
             case "-1" -> updateSmartDeviceController();
             default -> {
                 SmartDevice sd = this.repository.findSmartDeviceByFactoryCode(components[0]);
-                if (sd instanceof SmartDeviceBulb) updateSmartBulbController(components);
-                if (sd instanceof SmartDeviceSpeaker) updateSmartSpeakerController(components);
-                if (sd instanceof SmartDeviceCamera) updateSmartCameraController(components);
+
+                updateSmartDeviceControllerAux(sd,components);
             }
         }
+    }
+
+    private void updateSmartDeviceControllerAux(SmartDevice sd, String[] components){
+
+        if (sd instanceof SmartDeviceBulb) updateSmartBulbController(components);
+        if (sd instanceof SmartDeviceSpeaker) updateSmartSpeakerController(components);
+        if (sd instanceof SmartDeviceCamera) updateSmartCameraController(components);
+
     }
 
     private void updateSmartBulbController(String[] components) {
@@ -150,7 +161,8 @@ public class FactoryController {
                             components[2],
                             components[3],
                             components1[0],
-                            components1[1]);
+                            components1[1],
+                            "#");
 
                     this.mainController.getFactory().updateDevice(components[0], components[1]);
                     updateSmartDeviceController();
@@ -178,7 +190,8 @@ public class FactoryController {
                             components1[0],
                             components1[1],
                             components1[2],
-                            components1[3]);
+                            components1[3],
+                            "#");
 
                     this.mainController.getFactory().updateDevice(components[0], components[1]);
                     updateSmartDeviceController();
@@ -203,7 +216,8 @@ public class FactoryController {
                             components[2],
                             components[3],
                             components1[0],
-                            components1[1]);
+                            components1[1],
+                            "#");
 
                     this.mainController.getFactory().updateDevice(components[0], components[1]);
                     updateSmartDeviceController();
