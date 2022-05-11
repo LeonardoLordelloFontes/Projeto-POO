@@ -6,6 +6,7 @@ import com.grupo11.energysupplier.EnergySupplierRepository;
 import com.grupo11.factory.FactoryRepository;
 import com.grupo11.factory.FactoryController;
 import com.grupo11.simulation.SimulationController;
+import com.grupo11.simulation.SimulationMenu;
 import com.grupo11.smarthouse.SmartHouseController;
 import com.grupo11.smarthouse.SmartHouseRepository;
 
@@ -46,11 +47,14 @@ public class MainController implements Serializable {
                 FactoryController factoryController = new FactoryController(community);
                 factoryController.runFactoryController();
             }
-            /*
             case 4 -> {
-                new SimulationController(this, true);
-            }*/
-            case 5 -> new SimulationController(this, false);
+                SimulationController simulationController = new SimulationController(community);
+                simulationController.runManualSimulationController();
+            }
+            case 5 -> {
+                SimulationController simulationController = new SimulationController(community);
+                simulationController.runAutoSimulationController();
+            }
             // case 6 -> new StateController(this);
             case 7 -> System.exit(0);
         }
