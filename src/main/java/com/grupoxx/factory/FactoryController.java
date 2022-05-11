@@ -20,7 +20,6 @@ public class FactoryController {
         smartDeviceController();
     }
 
-
     private void smartDeviceController(){
         switch (menu.MenuTipoDispositivoOperacoes()) {
             case 1 -> addSmartDeviceController();
