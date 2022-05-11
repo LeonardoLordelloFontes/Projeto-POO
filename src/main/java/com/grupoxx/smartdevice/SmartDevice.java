@@ -32,12 +32,12 @@ public abstract class SmartDevice implements Serializable {
      */
     private double energyConsumption;
     /**
-     * Finalmente o dia em que o usuario alterou pela ultima vez o seu estado
+     * O dia em que o usuario alterou pela ultima vez o seu estado
      */
     private LocalDateTime lastStateChange;
 
     /**
-     * Diversos construtores de SmartDevice
+     * Construtores de SmartDevice
      */
     public SmartDevice(){
 
@@ -47,7 +47,9 @@ public abstract class SmartDevice implements Serializable {
         this.energyConsumption = 0;
         this.lastStateChange = null;
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(String factoryCode) {
         this.state = State.OFF;
         this.installationCost = 0;
@@ -55,7 +57,9 @@ public abstract class SmartDevice implements Serializable {
         this.energyConsumption = 0;
         this.lastStateChange = null;
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(String factoryCode, double installationCost,double energyConsumption) {
         this.state = State.OFF;
         this.installationCost = installationCost;
@@ -63,7 +67,9 @@ public abstract class SmartDevice implements Serializable {
         this.energyConsumption = energyConsumption;
         this.lastStateChange = null;
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(State state){
 
         this.state = state;
@@ -73,7 +79,9 @@ public abstract class SmartDevice implements Serializable {
         this.lastStateChange = null;
 
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(State state, double instalation_price){
 
         this.state = state;
@@ -82,7 +90,9 @@ public abstract class SmartDevice implements Serializable {
         this.energyConsumption = 0;
         this.lastStateChange = null;
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(State state, double instalation_price, String factory_code){
 
         this.state = state;
@@ -92,7 +102,9 @@ public abstract class SmartDevice implements Serializable {
         this.lastStateChange = null;
 
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(State state, double instalation_price, String factory_code, double energetic_cost){
 
         this.state = state;
@@ -102,7 +114,9 @@ public abstract class SmartDevice implements Serializable {
         this.lastStateChange = null;
 
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(State state, double instalation_price, String factory_code, double energetic_cost, LocalDateTime day){
 
         this.state = state;
@@ -112,7 +126,9 @@ public abstract class SmartDevice implements Serializable {
         this.lastStateChange = day;
 
     }
-
+    /**
+     * Construtor de SmartDevice
+     */
     public SmartDevice(SmartDevice sd){
 
         this.state = sd.getState();
@@ -232,13 +248,13 @@ public abstract class SmartDevice implements Serializable {
     }
 
     /**
-     * Contrato onde alguma das suas subclasses não absestrata tem de seguir
+     * Contrato onde alguma das suas subclasses não absestratas têm de seguir
      * @return um clone de um dispositivo
      */
     public abstract SmartDevice clone();
 
     /**
-     *  Contrato onde alguma das suas subclasses não absestrata tem de seguir
+     *  Contrato onde alguma das suas subclasses não absestratas têm de seguir
      * @return a energia gasta por dia por um dispositivo especifico depois de lhe ser aplicada a formula de gasto diário
      */
     public abstract double energyConsumptionPerDay();

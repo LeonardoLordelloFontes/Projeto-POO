@@ -4,13 +4,13 @@ import com.grupoxx.main.MainController;
 
 import java.io.*;
 
-public class State {
+public class StateRepository {
     private MainController mainController;
 
-    public State() {
+    public StateRepository() {
     }
 
-    public State(MainController mainController) {
+    public StateRepository(MainController mainController) {
         this.mainController = mainController;
     }
 

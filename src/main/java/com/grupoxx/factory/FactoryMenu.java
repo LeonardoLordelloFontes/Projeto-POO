@@ -32,7 +32,7 @@ public class FactoryMenu {
                 }
                 return option;
             } catch (InputMismatchException e) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e 5");
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e"+optionNumber);
                 return -1;
             }
         }
@@ -41,42 +41,46 @@ public class FactoryMenu {
      * Metodo que valida o input dado pelo cliente é convertivel para double
      *
      * @param strNum input dado
+     * @param propreti propriedade do dispositivo que o cliente intoduziu
      * @return true se for convertivel para double e false se não for.
      */
-        private boolean isValidDouble(String strNum) {
+        private boolean isValidDouble(String strNum,String propreti) {
 
             boolean validacion = true;
             if (strNum == null) validacion  = false;
             else {
                 try {
                     double d = Double.parseDouble(strNum);
+                    if(d <= 0 ) validacion = false;
                 } catch (NumberFormatException nfe) {
                     validacion = false;
                 }
                 if (validacion && Double.parseDouble(strNum) < 0) validacion = false;
             }
-            if (!validacion) System.out.println("Opção inválida, digite um valor double não negativo!!");
+            if (!validacion) System.out.println("Opção inválida de"+ propreti +"digite um valor double não negativo!!");
             return validacion;
         }
      /**
       * * Metodo que valida o input dado pelo cliente é convertivel para integer
      *
      * @param strNum input dado
+     * @param propreti propriedade do dispositivo que o cliente intoduziu
      * @return true se for convertivel para integer e false se não for.
      */
-        private static boolean isValidInteger(String strNum) {
+        private static boolean isValidInteger(String strNum, String propreti) {
 
             boolean validacion = true;
             if (strNum == null) validacion  = false;
             else {
                 try {
                     int d = Integer.parseInt(strNum);
+                    if(d <= 0 ) validacion = false;
                 } catch (NumberFormatException nfe) {
                     validacion = false;
                 }
                 if (validacion && Integer.parseInt(strNum) < 0) validacion = false;
             }
-            if (!validacion) System.out.println("Opção inválida, digite um valor double não negativo!!");
+            if (!validacion) System.out.println("Opção inválida de" +propreti+ "digite um valor double não negativo!!");
             return validacion;
         }
 
@@ -133,12 +137,12 @@ public class FactoryMenu {
             System.out.print("Custo de Instalação: ");
             input[1] = scanner.next();
             if (input[1].equals("*")) return this.BACK;
-            if( !isValidDouble(input[1]) ) return this.ERROR;
+            if( !isValidDouble(input[1], "Custo de Instalação") ) return this.ERROR;
 
-            System.out.print("Quantidade de energia diária gasta: ");
+            System.out.print("Quantidade de energia diária estática: ");
             input[2] = scanner.next();
             if (input[2].equals("*")) return this.BACK;
-            if( !isValidDouble(input[2]) ) return this.ERROR;
+            if( !isValidDouble(input[2],"Quantidade de energia diária estática") ) return this.ERROR;
 
             return input;
         }
@@ -160,7 +164,7 @@ public class FactoryMenu {
             System.out.print("Dimensão(cm): ");
             input[3] = scanner.next();
             if (input[3].equals("*")) return this.BACK;
-            if( !isValidDouble(input[1]) ) return this.ERROR;
+            if( !isValidDouble(input[1],"Dimensão") ) return this.ERROR;
 
             return input;
         }
@@ -186,7 +190,7 @@ public class FactoryMenu {
             System.out.print("Volume Máximo: ");
             input[4] = scanner.next();
             if (input[4].equals("*")) return this.BACK;
-            if (!isValidInteger(input[4]) ) return this.ERROR;
+            if (!isValidInteger(input[4],"Volume Máximo")) return this.ERROR;
 
             return input;
         }
@@ -208,12 +212,12 @@ public class FactoryMenu {
             System.out.print("Resolução (pixeis): ");
             input[3] = scanner.next();
             if (input[3].equals("*")) return this.BACK;
-            if (!isValidInteger(input[3]) ) return this.ERROR;
+            if (!isValidInteger(input[3],"Resolução") ) return this.ERROR;
 
             System.out.print("Armazenamento (bytes): ");
             input[4] = scanner.next();
             if (input[4].equals("*")) return this.BACK;
-            if (!isValidInteger(input[4]) ) return this.ERROR;
+            if (!isValidInteger(input[4],"Armazenamento") ) return this.ERROR;
 
             return input;
         }
@@ -269,7 +273,7 @@ public class FactoryMenu {
             System.out.print(" Nova Quantidade de energia diária estatica : ");
             input[2] = scanner.next();
             if (input[2].equals("*")) return this.BACK;
-            if ( !isValidDouble(input[2]) ) return this.ERROR;
+            if ( !isValidDouble(input[2],"Quantidade de energia diária estatica") ) return this.ERROR;
         }
 
         System.out.print("Deseja alterar o custo de instalação?[Y ou N]: ");
@@ -279,7 +283,7 @@ public class FactoryMenu {
             System.out.print(" Novo Custo de instalação : ");
             input[3] = scanner.next();
             if (input[3].equals("*")) return this.BACK;
-            if ( !isValidDouble(input[3]) ) return this.ERROR;
+            if ( !isValidDouble(input[3],"Custo de instalação") ) return this.ERROR;
         }
 
         return input;
@@ -302,7 +306,7 @@ public class FactoryMenu {
                 System.out.print("Nova Dimensão(cm) : ");
                 input[0] = scanner.next();
                 if (input[1].equals("*")) return this.BACK;
-                if ( !isValidDouble(input[0]) ) return this.ERROR;
+                if ( !isValidDouble(input[0],"Dimensão") ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar a Tonalidade ?[Y ou N]: ");
@@ -318,7 +322,7 @@ public class FactoryMenu {
                 input[1] = scanner.next();
 
                 if (input[1].equals("*")) return this.BACK;
-                if ( !isValidInteger(input[1]) &&  Integer.parseInt(input[1]) < 4 && Integer.parseInt(input[1]) > 0) return this.ERROR;
+                if ( !isValidInteger(input[1], "Tonalidade") &&  Integer.parseInt(input[1]) < 4 && Integer.parseInt(input[1]) > 0) return this.ERROR;
             }
 
             return input;
@@ -355,7 +359,7 @@ public class FactoryMenu {
                 System.out.print(" Novo Volume Máximo : ");
                 input[1] = scanner.next();
                 if (input[1].equals("*")) return this.BACK;
-                if ( !isValidInteger(input[1]) ) return this.ERROR;
+                if ( !isValidInteger(input[1],"Volume Máximo") ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar o volume atual?[Y ou N]: ");
@@ -366,7 +370,7 @@ public class FactoryMenu {
                 System.out.print(" Novo volume atual: ");
                 input[2] = scanner.next();
                 if (input[2].equals("*")) return this.BACK;
-                if ( !isValidInteger(input[2]) ) return this.ERROR;
+                if ( !isValidInteger(input[2],"volume") ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar a estação de rádio?[Y ou N]: ");
@@ -403,7 +407,7 @@ public class FactoryMenu {
                 System.out.print(" Nova Resolução (pixeis): ");
                 input[0] = scanner.next();
                 if (input[0].equals("*")) return this.BACK;
-                if ( !isValidInteger(input[0]) ) return this.ERROR;
+                if ( !isValidInteger(input[0], "Resolução") ) return this.ERROR;
             }
 
             System.out.print("Deseja alterar o armazenamento:?[Y ou N]: ");
@@ -413,7 +417,7 @@ public class FactoryMenu {
                 System.out.print(" Novo Armazenamento (bytes): ");
                 input[1] = scanner.next();
                 if (input[1].equals("*")) return this.BACK;
-                if ( !isValidInteger(input[1]) ) return this.ERROR;
+                if ( !isValidInteger(input[1],"Armazenamento") ) return this.ERROR;
             }
 
             return input;

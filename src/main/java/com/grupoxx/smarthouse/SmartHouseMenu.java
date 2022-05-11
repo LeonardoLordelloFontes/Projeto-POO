@@ -2,11 +2,10 @@ package com.grupoxx.smarthouse;
 
 import com.grupoxx.energysupplier.EnergySupplierMenu;
 import com.grupoxx.energysupplier.EnergySupplierRepository;
-import com.grupoxx.factory.Factory;
+import com.grupoxx.factory.FactoryRepository;
 import com.grupoxx.smartdevice.SmartDevice;
 import com.grupoxx.smartdevice.SmartDeviceRepository;
 
-import java.io.Serializable;
 import java.util.*;
 
 public class SmartHouseMenu {
@@ -172,7 +171,7 @@ public class SmartHouseMenu {
      *         ou caso não tenha nenhum dispositivo disponível para adicionar
      */
 
-    public String addDevice(Factory factory) {
+    public String addDevice(FactoryRepository factory) {
         List<SmartDevice> availableDevices = factory.getSmartDeviceRepository().findAllSmartDevices().stream().
                 filter(device -> factory.isDeviceAvailable(device.getFactoryCode())).toList();
         if (availableDevices.size() == 0) {

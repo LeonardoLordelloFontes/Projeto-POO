@@ -27,7 +27,7 @@ public class StateController {
         String filePath = menu.saveStateMenu();
         if (filePath == null) stateController();
         else {
-            State state = new State(mainController);
+            StateRepository state = new StateRepository(mainController);
             try {
                 state.saveState(filePath);
                 stateController();
@@ -42,7 +42,7 @@ public class StateController {
         String filePath = menu.loadStateMenu();
         if (filePath == null) stateController();
         else {
-            State state = new State();
+            StateRepository state = new StateRepository();
             try {
                 new MainController(state.loadState(filePath));
             } catch (IOException e) {

@@ -13,13 +13,13 @@ public class SmartDeviceRepository implements Serializable {
     /**
      * Local onde vamos depositar dispositivos
      */
-    private Map<String,SmartDevice> factory = new HashMap<>();
+    private Map<String,SmartDevice> storage = new HashMap<>();
 
     /**
      * Construtor de SmartDeviceRepository
      */
     public SmartDeviceRepository() {
-        this.factory = new HashMap<>();
+        this.storage = new HashMap<>();
     }
 
     /**
@@ -31,7 +31,7 @@ public class SmartDeviceRepository implements Serializable {
      * @throws DeviceNotFound se um dispositivo não existir
      */
     public SmartDevice findSmartDeviceByFactoryCode (String factoryCode) throws DeviceNotFound {
-        SmartDevice sd = this.factory.get(factoryCode);
+        SmartDevice sd = this.storage.get(factoryCode);
         if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
         return sd;
     }
@@ -45,10 +45,10 @@ public class SmartDeviceRepository implements Serializable {
      * @throws DeviceAlreadyExist se o dispositivo já existir
      */
     public void addSmartDevice(String factoryCode, SmartDevice smartDevice) throws DeviceAlreadyExist {
-        if(this.factory.get(factoryCode) != null)
+        if(this.storage.get(factoryCode) != null)
             throw new DeviceAlreadyExist("O dispositivo de código de fábrica "+factoryCode+"já existe!!");
 
-        factory.put(factoryCode, smartDevice);
+        storage.put(factoryCode, smartDevice);
 
     }
 
@@ -63,11 +63,11 @@ public class SmartDeviceRepository implements Serializable {
      * @throws DeviceAlreadyExist se a lâmpada já existir
      */
     public void SmartDeviceBulbAdd(String factoryCode,  double installationCost, double energyConsumption, double dimension ) throws DeviceAlreadyExist{
-        if(this.factory.get(factoryCode) != null)
+        if(this.storage.get(factoryCode) != null)
             throw new DeviceAlreadyExist("O  SmartBulb de código de fábrica "+factoryCode+"já existe!!");
 
         SmartDeviceBulb sb = new SmartDeviceBulb(factoryCode, dimension, installationCost, energyConsumption);
-        this.factory.put(factoryCode, sb);
+        this.storage.put(factoryCode, sb);
 
     }
 
@@ -83,11 +83,11 @@ public class SmartDeviceRepository implements Serializable {
      * @throws DeviceAlreadyExist se a coluna já existir
      */
     public void SmartDeviceSpeakerAdd(String factoryCode,double installationCost, double energyConsumption,String brand, int volumeMax)throws DeviceAlreadyExist{
-        if(this.factory.get(factoryCode) != null)
+        if(this.storage.get(factoryCode) != null)
             throw new DeviceAlreadyExist("O  SmartSpeaker de código de fábrica "+factoryCode+"já existe!!");
 
         SmartDeviceSpeaker ss = new SmartDeviceSpeaker(factoryCode, installationCost, energyConsumption, brand, volumeMax);
-        this.factory.put(factoryCode, ss);
+        this.storage.put(factoryCode, ss);
 
     }
 
@@ -103,11 +103,11 @@ public class SmartDeviceRepository implements Serializable {
      * @throws DeviceAlreadyExist se a camara já existir
      */
     public void SmartDeviceCameraAdd(String factoryCode,double installationCost, double energyConsumption,int resolution ,int fileSize)throws DeviceAlreadyExist{
-        if(this.factory.get(factoryCode) != null)
+        if(this.storage.get(factoryCode) != null)
             throw new DeviceAlreadyExist("O  SmartCamera de código de fábrica "+factoryCode+"já existe!!");
 
         SmartDeviceCamera sc = new SmartDeviceCamera(factoryCode, installationCost, energyConsumption,resolution,fileSize);
-        this.factory.put(factoryCode, sc);
+        this.storage.put(factoryCode, sc);
 
 
     }
@@ -120,10 +120,10 @@ public class SmartDeviceRepository implements Serializable {
      * @throws DeviceNotFound se o dispositivo não existir
      */
     public void SmartDeviceRemove(String factoryCode) throws DeviceNotFound {
-        SmartDevice sd = this.factory.get(factoryCode);
+        SmartDevice sd = this.storage.get(factoryCode);
         if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
 
-        this.factory.remove(factoryCode);
+        this.storage.remove(factoryCode);
     }
 
     /**
@@ -141,13 +141,13 @@ public class SmartDeviceRepository implements Serializable {
     public void SmartDeviceBulbUpdade(String oldFactoryCode, String newFactoryCode, String energyConsumption, String installationCost, String dimension, String tone, String keep)throws DeviceNotFound {
         //Partindo do principio que os input são válidos
 
-        SmartDeviceBulb sb = (SmartDeviceBulb) this.factory.get(oldFactoryCode);
+        SmartDeviceBulb sb = (SmartDeviceBulb) this.storage.get(oldFactoryCode);
         if(sb == null) throw new DeviceNotFound("O SmartBulb de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
         if(!newFactoryCode.equals(keep)){
             sb.setFactoryCode(newFactoryCode);
-            this.factory.put(newFactoryCode,sb);
-            this.factory.remove(oldFactoryCode);
+            this.storage.put(newFactoryCode,sb);
+            this.storage.remove(oldFactoryCode);
         }
         if(!energyConsumption.equals(keep)) sb.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals(keep)) sb.setInstallationCost( Double.parseDouble(installationCost) );
@@ -179,13 +179,13 @@ public class SmartDeviceRepository implements Serializable {
      */
     public void SmartDeviceSpeakerUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String brand, String volumeMax, String volume, String radioStation,String keep)throws DeviceNotFound {
 
-        SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.factory.get(oldFactoryCode);
+        SmartDeviceSpeaker ss = (SmartDeviceSpeaker) this.storage.get(oldFactoryCode);
         if(ss == null) throw new DeviceNotFound("O SmartSpeaker de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
         if(!newFactoryCode.equals(keep)){
             ss.setFactoryCode(newFactoryCode);
-            this.factory.put(newFactoryCode,ss);
-            this.factory.remove(oldFactoryCode);
+            this.storage.put(newFactoryCode,ss);
+            this.storage.remove(oldFactoryCode);
         }
         if(!energyConsumption.equals(keep)) ss.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals(keep)) ss.setInstallationCost( Double.parseDouble(installationCost) );
@@ -210,13 +210,13 @@ public class SmartDeviceRepository implements Serializable {
      */
     public void SmartDeviceCameraUpdate(String oldFactoryCode, String newFactoryCode,String energyConsumption,String installationCost,String resolution ,String fileSize, String keep)throws DeviceNotFound {
 
-        SmartDeviceCamera sc = (SmartDeviceCamera) this.factory.get(oldFactoryCode);
+        SmartDeviceCamera sc = (SmartDeviceCamera) this.storage.get(oldFactoryCode);
         if(sc == null) throw new DeviceNotFound("O SmartCamera de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
         if(!newFactoryCode.equals(keep)){
             sc.setFactoryCode(newFactoryCode);
-            this.factory.put(newFactoryCode,sc);
-            this.factory.remove(oldFactoryCode);
+            this.storage.put(newFactoryCode,sc);
+            this.storage.remove(oldFactoryCode);
         }
         if(!energyConsumption.equals(keep)) sc.setEnergyConsumption( Double.parseDouble(energyConsumption) );
         if(!installationCost.equals(keep)) sc.setInstallationCost( Double.parseDouble(installationCost) );
@@ -233,7 +233,7 @@ public class SmartDeviceRepository implements Serializable {
      */
     public void SmartDeviceState(Predicate p, SmartDevice.State turn){
 
-        for(SmartDevice sb: this.factory.values())
+        for(SmartDevice sb: this.storage.values())
             if  ( p.test(sb) ) sb.setState(turn);
 
     }
@@ -246,7 +246,7 @@ public class SmartDeviceRepository implements Serializable {
      */
     public void SmartDeviceTone(SmartDeviceBulb.Tone tone){
         Predicate p = x-> x instanceof SmartDeviceBulb;
-        for(SmartDevice sb: this.factory.values())
+        for(SmartDevice sb: this.storage.values())
             if (p.test(sb)) ((SmartDeviceBulb) sb).setTone(tone);
     }
 
@@ -257,7 +257,7 @@ public class SmartDeviceRepository implements Serializable {
      */
     public List<SmartDevice> findAllSmartDevices() {
 
-        return new ArrayList<>(factory.values());
+        return new ArrayList<>(storage.values());
     }
 
     /**
@@ -265,5 +265,5 @@ public class SmartDeviceRepository implements Serializable {
      *
      * @return um repositório de dos dispositivos
      */
-    public Map<String, SmartDevice> getFactory() { return factory;}
+    public Map<String, SmartDevice> getStorage() { return storage;}
 }

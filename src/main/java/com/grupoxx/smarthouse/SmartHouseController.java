@@ -2,7 +2,7 @@ package com.grupoxx.smarthouse;
 
 import com.grupoxx.energysupplier.EnergySupplierRepository;
 import com.grupoxx.energysupplier.exception.EnergySupplierNotFound;
-import com.grupoxx.factory.Factory;
+import com.grupoxx.factory.FactoryRepository;
 import com.grupoxx.main.MainController;
 import com.grupoxx.smartdevice.*;
 import com.grupoxx.smarthouse.exception.HouseAddressAlreadyExists;
@@ -10,14 +10,13 @@ import com.grupoxx.smarthouse.exception.HouseNotFound;
 import com.grupoxx.smarthouse.exception.RoomAlreadyExists;
 import com.grupoxx.smarthouse.exception.RoomNotFound;
 
-import java.io.Serializable;
 import java.util.function.Predicate;
 
 public class SmartHouseController {
     private final MainController mainController;
     private final SmartHouseMenu menu;
     private final SmartHouseRepository smartHouses;
-    private final Factory factory;
+    private final FactoryRepository factory;
     private final EnergySupplierRepository energySuppliers;
 
     public SmartHouseController(MainController mainController) {

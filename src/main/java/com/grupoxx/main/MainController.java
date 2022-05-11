@@ -2,30 +2,23 @@ package com.grupoxx.main;
 
 import com.grupoxx.energysupplier.EnergySupplierController;
 import com.grupoxx.energysupplier.EnergySupplierRepository;
-import com.grupoxx.factory.Factory;
+import com.grupoxx.factory.FactoryRepository;
 import com.grupoxx.factory.FactoryController;
-import com.grupoxx.simulation.Invoicer;
 import com.grupoxx.simulation.SimulationController;
-import com.grupoxx.smarthouse.SmartHouse;
 import com.grupoxx.smarthouse.SmartHouseController;
 import com.grupoxx.smarthouse.SmartHouseRepository;
-import com.grupoxx.state.State;
 import com.grupoxx.state.StateController;
 
-import javax.swing.text.html.InlineView;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.grupoxx.main.MainMenu.mainMenu;
 
 public class MainController implements Serializable {
-    private Factory factory;
+    private FactoryRepository factory;
     private EnergySupplierRepository energySupplierRepository;
     private SmartHouseRepository smartHouseRepository;
     public MainController() {
-        this.factory = new Factory();
+        this.factory = new FactoryRepository();
         this.energySupplierRepository = new EnergySupplierRepository();
         this.smartHouseRepository = new SmartHouseRepository();
         mainController();
@@ -80,7 +73,7 @@ public class MainController implements Serializable {
     * @return Factory
     */
     
-    public Factory getFactory() {
+    public FactoryRepository getFactory() {
         return factory;
     }
     /* 
