@@ -4,7 +4,9 @@ import com.grupo11.energysupplier.EnergySupplierRepository;
 import com.grupo11.factory.FactoryRepository;
 import com.grupo11.smarthouse.SmartHouseRepository;
 
-public class Community {
+import java.io.Serializable;
+
+public class Community implements Serializable {
 
     private FactoryRepository factory;
     private EnergySupplierRepository energySuppliers;

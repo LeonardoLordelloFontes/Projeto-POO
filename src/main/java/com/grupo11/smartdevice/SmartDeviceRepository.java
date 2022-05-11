@@ -213,7 +213,7 @@ public class SmartDeviceRepository implements Serializable {
         SmartDeviceCamera sc = (SmartDeviceCamera) this.storage.get(oldFactoryCode);
         if(sc == null) throw new DeviceNotFound("O SmartCamera de código de fábrica "+oldFactoryCode+ "não foi encontrado!!");
 
-        if(!newFactoryCode.equals(keep)){
+        if(!newFactoryCode.equals(keep)) {
             sc.setFactoryCode(newFactoryCode);
             this.storage.put(newFactoryCode,sc);
             this.storage.remove(oldFactoryCode);
@@ -231,11 +231,10 @@ public class SmartDeviceRepository implements Serializable {
      * @param turn é o estado que os divixe têm de ser alterados
      *
      */
-    public void SmartDeviceState(Predicate p, SmartDevice.State turn){
 
+    public void SmartDeviceState(Predicate<SmartDevice> p, SmartDevice.State turn) {
         for(SmartDevice sb: this.storage.values())
-            if  ( p.test(sb) ) sb.setState(turn);
-
+            if  (p.test(sb)) sb.setState(turn);
     }
 
     /**
@@ -245,7 +244,7 @@ public class SmartDeviceRepository implements Serializable {
      *
      */
     public void SmartDeviceTone(SmartDeviceBulb.Tone tone){
-        Predicate p = x-> x instanceof SmartDeviceBulb;
+        Predicate<SmartDevice> p = x-> x instanceof SmartDeviceBulb;
         for(SmartDevice sb: this.storage.values())
             if (p.test(sb)) ((SmartDeviceBulb) sb).setTone(tone);
     }
@@ -255,8 +254,8 @@ public class SmartDeviceRepository implements Serializable {
      *
      * @return uma a lista dos dispositivos que estão na fábrica
      */
-    public List<SmartDevice> findAllSmartDevices() {
 
+    public List<SmartDevice> findAllSmartDevices() {
         return new ArrayList<>(storage.values());
     }
 
@@ -265,5 +264,6 @@ public class SmartDeviceRepository implements Serializable {
      *
      * @return um repositório de dos dispositivos
      */
+
     public Map<String, SmartDevice> getStorage() { return storage;}
 }

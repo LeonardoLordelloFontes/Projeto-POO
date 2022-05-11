@@ -33,8 +33,9 @@ public class SimulationController {
         if (dates == null) runManualSimulationController();
         else {
             ManualSimulation manualSimulation = new ManualSimulation(community, invoicers, dates[0], dates[1]);
-            // new DataStatusController(community, invoicers);
             manualSimulation.runManualSimulation();
+            DataStatusController dataStatusController = new DataStatusController(community, invoicers);
+            dataStatusController.runDataStatusController();
         }
     }
 
@@ -43,6 +44,8 @@ public class SimulationController {
         try {
             AutomaticSimulation automaticSimulation = new AutomaticSimulation(community, invoicers);
             automaticSimulation.runAutomaticSimulation(filePath);
+            DataStatusController dataStatusController = new DataStatusController(community, invoicers);
+            dataStatusController.runDataStatusController();
         }
         catch (FileNotFoundException e) {
             System.out.print("Arquivo não encontrado! Digite um caminho válido");

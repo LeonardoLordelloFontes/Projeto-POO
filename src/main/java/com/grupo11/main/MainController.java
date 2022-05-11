@@ -6,6 +6,7 @@ import com.grupo11.factory.FactoryController;
 import com.grupo11.simulation.SimulationController;
 import com.grupo11.simulation.SimulationMenu;
 import com.grupo11.smarthouse.SmartHouseController;
+import com.grupo11.state.StateController;
 
 import java.io.Serializable;
 
@@ -52,7 +53,10 @@ public class MainController implements Serializable {
                 SimulationController simulationController = new SimulationController(community);
                 simulationController.runAutoSimulationController();
             }
-            // case 6 -> new StateController(this);
+            case 6 -> {
+                StateController stateController = new StateController(community);
+                stateController.runStateController();
+            }
             case 7 -> System.exit(0);
         }
     }

@@ -40,7 +40,6 @@ public class AutomaticSimulation {
             start = lastChange;
         }
         filterInvoicers();
-        // DataStatusController dataStatusController = new DataStatusController(community, invoicers);
     }
 
     private void mainOptions(String[] data, LocalDateTime lastChange) {

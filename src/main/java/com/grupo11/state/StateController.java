@@ -1,16 +1,22 @@
 package com.grupo11.state;
 
+import com.grupo11.Main;
+import com.grupo11.community.Community;
 import com.grupo11.main.MainController;
+import com.grupo11.simulation.ManualSimulation;
+
+import java.io.IOException;
 
 public class StateController {
-    private MainController mainController;
+    private Community community;
     private StateMenu menu;
 
-    /*
-
-    public StateController(MainController mainController) {
-        this.mainController = mainController;
+    public StateController(Community community) {
+        this.community = community;
         this.menu = new StateMenu();
+    }
+
+    public void runStateController() {
         stateController();
     }
 
@@ -19,7 +25,10 @@ public class StateController {
             case -1 -> stateController();
             case 1 -> saveStateController();
             case 2 -> loadStateController();
-            case 3 -> this.mainController.mainController();
+            case 3 -> {
+                MainController mainController = new MainController(community);
+                mainController.runMainController();
+            }
         }
     }
 
@@ -27,7 +36,7 @@ public class StateController {
         String filePath = menu.saveStateMenu();
         if (filePath == null) stateController();
         else {
-            StateRepository state = new StateRepository(mainController);
+            State state = new State(community);
             try {
                 state.saveState(filePath);
                 stateController();
@@ -42,16 +51,18 @@ public class StateController {
         String filePath = menu.loadStateMenu();
         if (filePath == null) stateController();
         else {
-            StateRepository state = new StateRepository();
+            State state = new State();
             try {
-                new MainController(state.loadState(filePath));
+                MainController mainController = new MainController(state.loadState(filePath));
+                mainController.runMainController();
             } catch (IOException e) {
                 System.out.println("Não foi possível salvar, verifique que o caminho que inseriu é válido!");
                 loadStateController();
             } catch (ClassNotFoundException e) {
                 System.out.println("A classe não foi encontrada");
-                mainController.mainController();
+                MainController mainController = new MainController(community);
+                mainController.runMainController();
             }
         }
-    }*/
+    }
 }

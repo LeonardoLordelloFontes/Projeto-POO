@@ -17,6 +17,9 @@ public class DataStatusController {
         this.menu = new DataStatusMenu();
         this.dataStatus = new DataStatusRepository(faturas);
         this.community = community;
+    }
+
+    public void runDataStatusController() {
         dataStatusController();
     }
 

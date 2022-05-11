@@ -1,18 +1,13 @@
 package com.grupo11.smarthouse;
 
-import com.grupo11.Main;
 import com.grupo11.community.Community;
-import com.grupo11.energysupplier.EnergySupplierRepository;
 import com.grupo11.energysupplier.exception.EnergySupplierNotFound;
-import com.grupo11.factory.FactoryRepository;
 import com.grupo11.main.MainController;
 import com.grupo11.smartdevice.*;
 import com.grupo11.smarthouse.exception.HouseAddressAlreadyExists;
 import com.grupo11.smarthouse.exception.HouseNotFound;
 import com.grupo11.smarthouse.exception.RoomAlreadyExists;
 import com.grupo11.smarthouse.exception.RoomNotFound;
-
-import java.util.PropertyResourceBundle;
 import java.util.function.Predicate;
 
 public class SmartHouseController {
@@ -212,8 +207,6 @@ public class SmartHouseController {
             case 7 -> updateSmartHouseController(address);
         }
     }
-
-
 
     private void addSmartDeviceController(String address, String room) {
         String factoryCode = menu.addDevice(community.getFactory());
