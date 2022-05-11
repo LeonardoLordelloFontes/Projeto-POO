@@ -87,10 +87,22 @@ public class FactoryRepository implements Serializable {
         this.available.put(factoryCode, available);
     }
 
+    /**
+     * Metodo que diz se um divice está disponivel ou não
+     *
+     * @param factoryCode o código de fábrica do dispositivo
+     * @return é true se o dispositivo estiver disponivel e false quando não estiver disponivel
+     * @throws DeviceNotFound se o dispositivo não existe
+     */
     public boolean isDeviceAvailable(String factoryCode)throws DeviceNotFound {
         return available.get(factoryCode);
     }
 
+    /**
+     * Metodo que dá uma lista de todos os SmartDevice disponiveis (available == true)
+     *
+     * @return uma lista de todos os SmartDevice disponiveis
+     */
     public List<SmartDevice> onlyDeviceAvailable (){
        return this.smartDeviceRepository.findAllSmartDevices().stream().filter(x-> this.available.get(x.getFactoryCode())).collect(Collectors.toList());
     }

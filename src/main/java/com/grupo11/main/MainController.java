@@ -2,13 +2,10 @@ package com.grupo11.main;
 
 import com.grupo11.community.Community;
 import com.grupo11.energysupplier.EnergySupplierController;
-import com.grupo11.energysupplier.EnergySupplierRepository;
-import com.grupo11.factory.FactoryRepository;
 import com.grupo11.factory.FactoryController;
 import com.grupo11.simulation.SimulationController;
 import com.grupo11.simulation.SimulationMenu;
 import com.grupo11.smarthouse.SmartHouseController;
-import com.grupo11.smarthouse.SmartHouseRepository;
 
 import java.io.Serializable;
 

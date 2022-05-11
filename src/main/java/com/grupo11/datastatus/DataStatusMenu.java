@@ -7,8 +7,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DataStatusMenu {
+    /**
+     * Constante de ir para trás
+     */
     private static final String BACK = "*";
 
+    /**
+     * Metodo que valida uma opeção numérica
+     *
+     * @param option número escrito
+     * @param optionNumber o número de opeção máxima
+     * @return a opeção se for válida e -1 se a opeção for invalida
+     */
     private int isValidOption(int option, int optionNumber) {
         try {
             if (option < 1 || option > optionNumber) {
@@ -22,6 +32,11 @@ public class DataStatusMenu {
         }
     }
 
+    /**
+     * Menu de estatistica
+     *
+     * @return a opeção que o usuario escolher
+     */
     public int MenuEstatistica() {
         StringBuilder sb = new StringBuilder("-----------Estatistica-----------\n\n");
         sb.append("1. Qual é a casa que mais gastou no período da simulação\n");
@@ -36,6 +51,11 @@ public class DataStatusMenu {
         return isValidOption(option, 5);
     }
 
+    /**
+     * Menu de listagem de faturas
+     *
+     * @return  a opeção do Comercializador
+     */
     public String MenuListaFaturasDoComercializador() {
         String input = "*";
         Scanner scanner = new Scanner(System.in);
@@ -49,7 +69,12 @@ public class DataStatusMenu {
         return input;
     }
 
-
+    /**
+     * Menu de resultados
+     *
+     * @param res resultado do calculo
+     * @param r escolha do tipo de calculo
+     */
     public void MenuResultados(String res, int r) {
 
         switch (r) {
@@ -61,6 +86,11 @@ public class DataStatusMenu {
 
     }
 
+    /**
+     * Menu de listagem dos maiores consumidores
+     *
+     * @param listaDosMaioresConsumidores lista dos maiores consumidores
+     */
     public void MenuListagemDosMaioresConsumidores(List<String> listaDosMaioresConsumidores) {
 
         if (listaDosMaioresConsumidores.isEmpty()) System.out.println("Não extistem comsumidores!!");
@@ -71,6 +101,10 @@ public class DataStatusMenu {
 
     }
 
+    /**
+     *
+     * @param listaDasFaturas
+     */
     public void MenuListagemDasFaturas(List<Invoicer> listaDasFaturas) {
 
         if (listaDasFaturas.isEmpty()) System.out.println("Não extistem comsumidores!!");
