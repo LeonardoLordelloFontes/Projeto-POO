@@ -1,17 +1,16 @@
 package com.grupo11.state;
 
-import com.grupo11.community.Community;
-import com.grupo11.main.MainController;
+import com.grupo11.main.MainModel;
 
 import java.io.*;
 
-public class State {
-    private Community community;
+public class StateRepository {
+    private MainModel community;
 
-    public State() {
+    public StateRepository() {
     }
 
-    public State(Community community) {
+    public StateRepository(MainModel community) {
         this.community = community;
     }
 
@@ -23,10 +22,10 @@ public class State {
         fileOutputStream.close();
     }
 
-    public Community loadState(String filePath) throws IOException, ClassNotFoundException {
+    public MainModel loadState(String filePath) throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(filePath);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        Community communityState = (Community) objectInputStream.readObject();
+        MainModel communityState = (MainModel) objectInputStream.readObject();
         objectInputStream.close();
         fileInputStream.close();
         return communityState;

@@ -1,6 +1,6 @@
 package com.grupo11.simulation;
 
-import com.grupo11.community.Community;
+import com.grupo11.main.MainModel;
 import com.grupo11.energysupplier.EnergySupplier;
 import com.grupo11.smartdevice.SmartDevice;
 import com.grupo11.smarthouse.SmartHouse;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ManualSimulation {
 
-    private Community community;
+    private MainModel community;
     private LocalDateTime start;
     private LocalDateTime end;
     private List<Invoicer> invoicers;
@@ -20,7 +20,7 @@ public class ManualSimulation {
     private ManualSimulation() {
     }
 
-    public ManualSimulation(Community community, List<Invoicer> invoicers, LocalDateTime start, LocalDateTime end) {
+    public ManualSimulation(MainModel community, List<Invoicer> invoicers, LocalDateTime start, LocalDateTime end) {
         this.community = community;
         this.invoicers = invoicers;
         this.start = start;

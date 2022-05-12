@@ -1,6 +1,6 @@
 package com.grupo11.smarthouse;
 
-import com.grupo11.community.Community;
+import com.grupo11.main.MainModel;
 import com.grupo11.energysupplier.exception.EnergySupplierNotFound;
 import com.grupo11.main.MainController;
 import com.grupo11.smartdevice.*;
@@ -12,13 +12,13 @@ import java.util.function.Predicate;
 
 public class SmartHouseController {
 
-    private Community community;
+    private MainModel community;
     private SmartHouseMenu menu;
 
     private SmartHouseController() {
     }
 
-    public SmartHouseController(Community community) {
+    public SmartHouseController(MainModel community) {
         this.community = community;
         this.menu = new SmartHouseMenu();
     }

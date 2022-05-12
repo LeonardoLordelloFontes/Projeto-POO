@@ -2,7 +2,7 @@ package com.grupo11.smarthouse;
 
 import com.grupo11.energysupplier.EnergySupplierMenu;
 import com.grupo11.energysupplier.EnergySupplierRepository;
-import com.grupo11.factory.FactoryRepository;
+import com.grupo11.factory.FactoryModel;
 import com.grupo11.smartdevice.SmartDevice;
 import com.grupo11.smartdevice.SmartDeviceRepository;
 
@@ -171,7 +171,7 @@ public class SmartHouseMenu {
      *         ou caso não tenha nenhum dispositivo disponível para adicionar
      */
 
-    public String addDevice(FactoryRepository factory) {
+    public String addDevice(FactoryModel factory) {
         List<SmartDevice> availableDevices = factory.getSmartDeviceRepository().findAllSmartDevices().stream().
                 filter(device -> factory.isDeviceAvailable(device.getFactoryCode())).toList();
         if (availableDevices.size() == 0) {

@@ -2,7 +2,7 @@ package com.grupo11.main;
 
 import java.util.Scanner;
 
-public class MainMenu {
+public class MainView {
     
     /*
     * Menu Principal do Projeto

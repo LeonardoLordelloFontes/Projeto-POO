@@ -1,28 +1,23 @@
 package com.grupo11.simulation;
 
-import com.grupo11.community.Community;
+import com.grupo11.main.MainModel;
 import com.grupo11.datastatus.DataStatusController;
-import com.grupo11.smartdevice.SmartDevice;
-import com.grupo11.smarthouse.SmartHouse;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class SimulationController {
 
-    private Community community;
+    private MainModel community;
     private SimulationMenu menu;
     private List<Invoicer> invoicers;
 
     private SimulationController() {
     }
 
-    public SimulationController(Community community) {
+    public SimulationController(MainModel community) {
         this.community = community;
         this.menu = new SimulationMenu();
         this.invoicers = new ArrayList<>();

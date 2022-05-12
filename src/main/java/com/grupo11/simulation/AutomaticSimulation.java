@@ -1,7 +1,6 @@
 package com.grupo11.simulation;
 
-import com.grupo11.community.Community;
-import com.grupo11.datastatus.DataStatusController;
+import com.grupo11.main.MainModel;
 import com.grupo11.smartdevice.SmartDevice;
 import com.grupo11.smarthouse.SmartHouse;
 
@@ -11,16 +10,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class AutomaticSimulation {
-    private Community community;
+    private MainModel community;
     private List<Invoicer> invoicers;
 
     private AutomaticSimulation() {
     }
 
-    public AutomaticSimulation(Community community, List<Invoicer> invoicers) {
+    public AutomaticSimulation(MainModel community, List<Invoicer> invoicers) {
         this.community = community;
         this.invoicers = invoicers;
     }

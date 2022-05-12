@@ -1,6 +1,6 @@
 package com.grupo11.factory;
 
-import com.grupo11.community.Community;
+import com.grupo11.main.MainModel;
 import com.grupo11.main.MainController;
 import com.grupo11.smartdevice.*;
 import com.grupo11.smartdevice.exception.DeviceAlreadyExist;
@@ -11,11 +11,11 @@ public class FactoryController {
     /**
      * O "armazem" de todos os repositórios
      */
-    private Community community;
+    private MainModel community;
     /**
      * Menus de fábrica
      */
-    private FactoryMenu menu;
+    private FactoryView menu;
 
     private FactoryController() {
     }
@@ -25,9 +25,9 @@ public class FactoryController {
      *
      * @param community
      */
-    public FactoryController(Community community) {
+    public FactoryController(MainModel community) {
         this.community = community;
-        this.menu = new FactoryMenu();
+        this.menu = new FactoryView();
     }
 
     /**

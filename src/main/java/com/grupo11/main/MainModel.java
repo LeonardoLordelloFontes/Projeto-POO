@@ -1,18 +1,18 @@
-package com.grupo11.community;
+package com.grupo11.main;
 
 import com.grupo11.energysupplier.EnergySupplierRepository;
-import com.grupo11.factory.FactoryRepository;
+import com.grupo11.factory.FactoryModel;
 import com.grupo11.smarthouse.SmartHouseRepository;
 
 import java.io.Serializable;
 
-public class Community implements Serializable {
+public class MainModel implements Serializable {
 
-    private FactoryRepository factory;
+    private FactoryModel factory;
     private EnergySupplierRepository energySuppliers;
     private SmartHouseRepository smartHouses;
 
-    private Community() {
+    private MainModel() {
     }
 
     /**
@@ -22,7 +22,7 @@ public class Community implements Serializable {
      * @param energySuppliers o model energySuppliers
      * @param smartHouses o model smartHouses
      */
-    public Community(FactoryRepository factory,
+    public MainModel(FactoryModel factory,
                      EnergySupplierRepository energySuppliers,
                      SmartHouseRepository smartHouses) {
         this.factory = factory;
@@ -35,7 +35,7 @@ public class Community implements Serializable {
      *
      * @return o apontador para o model FactoryRepository
      */
-    public FactoryRepository getFactory() {
+    public FactoryModel getFactory() {
         return factory;
     }
 

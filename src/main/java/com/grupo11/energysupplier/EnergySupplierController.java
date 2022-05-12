@@ -1,22 +1,20 @@
 package com.grupo11.energysupplier;
 
 
-import com.grupo11.community.Community;
+import com.grupo11.main.MainModel;
 import com.grupo11.energysupplier.exception.EnergySupplierAlreadyExists;
 import com.grupo11.energysupplier.exception.EnergySupplierNotFound;
-import com.grupo11.factory.FactoryRepository;
 import com.grupo11.main.MainController;
-import com.grupo11.smarthouse.SmartHouseRepository;
 
 public class EnergySupplierController {
 
-    private Community community;
+    private MainModel community;
     private EnergySupplierMenu menu;
 
     private EnergySupplierController() {
     }
 
-    public EnergySupplierController (Community community) {
+    public EnergySupplierController (MainModel community) {
         this.community = community;
         this.menu = new EnergySupplierMenu();
     }

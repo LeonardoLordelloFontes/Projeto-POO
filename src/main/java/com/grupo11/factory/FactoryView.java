@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class FactoryMenu {
+public class FactoryView {
         /**
          * Constantes dos menus
          *

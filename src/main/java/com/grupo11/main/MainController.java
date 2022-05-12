@@ -1,24 +1,22 @@
 package com.grupo11.main;
 
-import com.grupo11.community.Community;
 import com.grupo11.energysupplier.EnergySupplierController;
 import com.grupo11.factory.FactoryController;
 import com.grupo11.simulation.SimulationController;
-import com.grupo11.simulation.SimulationMenu;
 import com.grupo11.smarthouse.SmartHouseController;
 import com.grupo11.state.StateController;
 
 import java.io.Serializable;
 
-import static com.grupo11.main.MainMenu.mainMenu;
+import static com.grupo11.main.MainView.mainMenu;
 
 public class MainController implements Serializable {
-    private Community community;
+    private MainModel community;
 
     private MainController() {
     }
 
-    public MainController(Community community) {
+    public MainController(MainModel community) {
         this.community = community;
     }
 

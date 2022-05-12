@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FactoryRepository implements Serializable {
+public class FactoryModel implements Serializable {
     /**
      * Armazem de todos os dispositivos criados, quer estejam numa casa ou não
      */
@@ -28,7 +28,7 @@ public class FactoryRepository implements Serializable {
     /**
      * Construtor de fabricas
      */
-    public FactoryRepository() {
+    public FactoryModel() {
         this.smartDeviceRepository = new SmartDeviceRepository();
         this.available = new HashMap<>();
         this.address = "FACTORY ADDRESS";

@@ -1,17 +1,15 @@
 package com.grupo11.state;
 
-import com.grupo11.Main;
-import com.grupo11.community.Community;
+import com.grupo11.main.MainModel;
 import com.grupo11.main.MainController;
-import com.grupo11.simulation.ManualSimulation;
 
 import java.io.IOException;
 
 public class StateController {
-    private Community community;
+    private MainModel community;
     private StateMenu menu;
 
-    public StateController(Community community) {
+    public StateController(MainModel community) {
         this.community = community;
         this.menu = new StateMenu();
     }
@@ -36,7 +34,7 @@ public class StateController {
         String filePath = menu.saveStateMenu();
         if (filePath == null) stateController();
         else {
-            State state = new State(community);
+            StateRepository state = new StateRepository(community);
             try {
                 state.saveState(filePath);
                 stateController();
@@ -51,7 +49,7 @@ public class StateController {
         String filePath = menu.loadStateMenu();
         if (filePath == null) stateController();
         else {
-            State state = new State();
+            StateRepository state = new StateRepository();
             try {
                 MainController mainController = new MainController(state.loadState(filePath));
                 mainController.runMainController();
