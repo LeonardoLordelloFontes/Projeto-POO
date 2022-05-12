@@ -4,13 +4,13 @@ import com.grupo11.main.MainModel;
 
 import java.io.*;
 
-public class StateRepository {
+public class StateModel {
     private MainModel community;
 
-    public StateRepository() {
+    public StateModel() {
     }
 
-    public StateRepository(MainModel community) {
+    public StateModel(MainModel community) {
         this.community = community;
     }
 

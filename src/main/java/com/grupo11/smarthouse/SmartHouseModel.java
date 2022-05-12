@@ -1,7 +1,7 @@
 package com.grupo11.smarthouse;
-import com.grupo11.energysupplier.EnergySupplierRepository;
+import com.grupo11.energysupplier.EnergySupplierModel;
 import com.grupo11.energysupplier.exception.EnergySupplierNotFound;
-import com.grupo11.smartdevice.SmartDeviceRepository;
+import com.grupo11.smartdevice.SmartDeviceModel;
 import com.grupo11.smarthouse.exception.*;
 
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import java.util.Map;
  * Permite adicionar, remover e obter casas, bem como atualizar dados de uma casa
  */
 
-public class SmartHouseRepository implements Serializable {
+public class SmartHouseModel implements Serializable {
 
     /**
      * Estrutura de dados responsável pelo armazenamento das casas
@@ -29,7 +29,7 @@ public class SmartHouseRepository implements Serializable {
      * Construtor que cria a estrutura de dados responsável pelo armazenamento das casas
      */
 
-    public SmartHouseRepository() {
+    public SmartHouseModel() {
         this.smartHouses = new HashMap<>();
     }
 
@@ -58,10 +58,10 @@ public class SmartHouseRepository implements Serializable {
      * @throws RoomNotFound caso o nome da divisão passado por argumento não existir na casa
      */
 
-    public SmartDeviceRepository findSmartDevicesByRoom(String address, String room) throws HouseNotFound, RoomNotFound {
+    public SmartDeviceModel findSmartDevicesByRoom(String address, String room) throws HouseNotFound, RoomNotFound {
         if (smartHouses.get(address) == null)
             throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");
-        SmartDeviceRepository smartDeviceRepository = smartHouses.get(address).getSmartDevices().get(room);
+        SmartDeviceModel smartDeviceRepository = smartHouses.get(address).getSmartDevices().get(room);
         if (smartDeviceRepository == null)
             throw new RoomNotFound("A divisão com o nome " + room + " não foi encontrada");
         return smartDeviceRepository;
@@ -95,7 +95,7 @@ public class SmartHouseRepository implements Serializable {
             throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");
         if (smartHouses.get(address).getSmartDevices().get(room) != null)
             throw new RoomAlreadyExists("A divisão " + room + " já existe nesta casa");
-        smartHouses.get(address).getSmartDevices().put(room, new SmartDeviceRepository());
+        smartHouses.get(address).getSmartDevices().put(room, new SmartDeviceModel());
     }
 
     /**
@@ -157,7 +157,7 @@ public class SmartHouseRepository implements Serializable {
      *                                fornecedores de energia
      */
 
-    public void updateEnergySupplier(EnergySupplierRepository energySupplierRepository,
+    public void updateEnergySupplier(EnergySupplierModel energySupplierRepository,
                                      String address,
                                      String newEnergySupplier) throws HouseNotFound, EnergySupplierNotFound {
         if (smartHouses.get(address) == null)

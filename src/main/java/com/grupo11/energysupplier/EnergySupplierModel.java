@@ -2,7 +2,7 @@ package com.grupo11.energysupplier;
 
 import com.grupo11.energysupplier.exception.EnergySupplierAlreadyExists;
 import com.grupo11.energysupplier.exception.EnergySupplierNotFound;
-import com.grupo11.smarthouse.SmartHouseRepository;
+import com.grupo11.smarthouse.SmartHouseModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EnergySupplierRepository implements Serializable {
+public class EnergySupplierModel implements Serializable {
     private final Map<String, EnergySupplier> energySuppliers; // Nome do energySupplier -> EnergySupplier
-    public EnergySupplierRepository() {
+    public EnergySupplierModel() {
         this.energySuppliers = new HashMap<>();
     }
     
@@ -42,7 +42,7 @@ public class EnergySupplierRepository implements Serializable {
    ** Atualizar o nome de um EnergySupplier já existente
    */
     
-   public void updateEnergySupplierName(SmartHouseRepository smartHouses, String oldName, String newName) throws EnergySupplierNotFound {
+   public void updateEnergySupplierName(SmartHouseModel smartHouses, String oldName, String newName) throws EnergySupplierNotFound {
         if (energySuppliers.get(oldName) == null)
             throw new EnergySupplierNotFound("O Fornecedor de energia " + oldName + " não existe");
         EnergySupplier energySupplier = findEnergySupplierByName(oldName);
@@ -66,7 +66,7 @@ public class EnergySupplierRepository implements Serializable {
    ** Remover um EnergySupplier
    */
     
-   public void removeEnergySupplier(SmartHouseRepository smartHouses, String name) throws EnergySupplierNotFound {
+   public void removeEnergySupplier(SmartHouseModel smartHouses, String name) throws EnergySupplierNotFound {
         if (energySuppliers.get(name) == null)
             throw new EnergySupplierNotFound("O Fornecedor de energia " + name + " não existe");
         energySuppliers.remove(name);

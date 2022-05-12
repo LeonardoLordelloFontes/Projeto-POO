@@ -11,7 +11,7 @@ import java.util.List;
 public class SimulationController {
 
     private MainModel community;
-    private SimulationMenu menu;
+    private SimulationView menu;
     private List<Invoicer> invoicers;
 
     private SimulationController() {
@@ -19,7 +19,7 @@ public class SimulationController {
 
     public SimulationController(MainModel community) {
         this.community = community;
-        this.menu = new SimulationMenu();
+        this.menu = new SimulationView();
         this.invoicers = new ArrayList<>();
     }
 

@@ -4,7 +4,7 @@ import com.grupo11.main.MainModel;
 import com.grupo11.energysupplier.EnergySupplier;
 import com.grupo11.smartdevice.SmartDevice;
 import com.grupo11.smarthouse.SmartHouse;
-import com.grupo11.smarthouse.SmartHouseRepository;
+import com.grupo11.smarthouse.SmartHouseModel;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -28,7 +28,7 @@ public class ManualSimulation {
     }
 
     public void runManualSimulation() {
-        SmartHouseRepository houses = community.getSmartHouses();
+        SmartHouseModel houses = community.getSmartHouses();
         long simulationPeriod = ChronoUnit.SECONDS.between(start, end);
         for (SmartHouse smartHouse : houses.findAllSmartHouses()) {
             double totalCost = 0;

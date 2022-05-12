@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class SimulationMenu {
+public class SimulationView {
     public LocalDateTime[] manualSimulationMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Insira a data e hora de início no formato (dd/mm/aaaa hora:minutos): ");

@@ -1,7 +1,7 @@
 package com.grupo11.factory;
 
 import com.grupo11.smartdevice.SmartDevice;
-import com.grupo11.smartdevice.SmartDeviceRepository;
+import com.grupo11.smartdevice.SmartDeviceModel;
 import com.grupo11.smartdevice.exception.DeviceAlreadyExist;
 import com.grupo11.smartdevice.exception.DeviceNotFound;
 
@@ -15,7 +15,7 @@ public class FactoryModel implements Serializable {
     /**
      * Armazem de todos os dispositivos criados, quer estejam numa casa ou não
      */
-    private SmartDeviceRepository smartDeviceRepository;
+    private SmartDeviceModel smartDeviceRepository;
     /**
      * Mapa que indiqua se um dispositivo (pelo seu código de fábrica ) está disponivel(true se sim false se não) para ser adicionado por uma casa
      */
@@ -29,7 +29,7 @@ public class FactoryModel implements Serializable {
      * Construtor de fabricas
      */
     public FactoryModel() {
-        this.smartDeviceRepository = new SmartDeviceRepository();
+        this.smartDeviceRepository = new SmartDeviceModel();
         this.available = new HashMap<>();
         this.address = "FACTORY ADDRESS";
     }
@@ -40,11 +40,11 @@ public class FactoryModel implements Serializable {
      *
      * @return o apontador de o smartDeviceRepository da fabrica
      */
-    public SmartDeviceRepository getSmartDeviceRepository() {
+    public SmartDeviceModel getSmartDeviceRepository() {
         return this.smartDeviceRepository;
     }
 
-    public void setSmartDeviceRepository(SmartDeviceRepository smartDeviceRepository) {
+    public void setSmartDeviceRepository(SmartDeviceModel smartDeviceRepository) {
         this.smartDeviceRepository = smartDeviceRepository;
     }
 

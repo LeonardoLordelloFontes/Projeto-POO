@@ -1,6 +1,6 @@
 package com.grupo11.smarthouse;
 
-import com.grupo11.smartdevice.SmartDeviceRepository;
+import com.grupo11.smartdevice.SmartDeviceModel;
 
 import java.io.Serializable;
 import java.util.*;
@@ -9,7 +9,7 @@ public class SmartHouse implements Serializable {
     private Owner owner;
     private String address;
     private String energySupplier;
-    private final Map<String, SmartDeviceRepository> smartDevices; // Room -> Repositório de Smart Devices
+    private final Map<String, SmartDeviceModel> smartDevices; // Room -> Repositório de Smart Devices
 
     public SmartHouse() {
         this.owner = new Owner();
@@ -55,7 +55,7 @@ public class SmartHouse implements Serializable {
         return energySupplier;
     }
 
-    public Map<String, SmartDeviceRepository> getSmartDevices() {
+    public Map<String, SmartDeviceModel> getSmartDevices() {
         return smartDevices;
     }
 

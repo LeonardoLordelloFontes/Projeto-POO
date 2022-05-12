@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SmartDeviceRepository implements Serializable {
+public class SmartDeviceModel implements Serializable {
     /**
      * Local onde vamos depositar dispositivos
      */
@@ -18,7 +18,7 @@ public class SmartDeviceRepository implements Serializable {
     /**
      * Construtor de SmartDeviceRepository
      */
-    public SmartDeviceRepository() {
+    public SmartDeviceModel() {
         this.storage = new HashMap<>();
     }
 

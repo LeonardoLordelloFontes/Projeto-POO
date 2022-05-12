@@ -9,14 +9,14 @@ import com.grupo11.main.MainController;
 public class EnergySupplierController {
 
     private MainModel community;
-    private EnergySupplierMenu menu;
+    private EnergySupplierView menu;
 
     private EnergySupplierController() {
     }
 
     public EnergySupplierController (MainModel community) {
         this.community = community;
-        this.menu = new EnergySupplierMenu();
+        this.menu = new EnergySupplierView();
     }
 
     public void runEnergySupllierController() {

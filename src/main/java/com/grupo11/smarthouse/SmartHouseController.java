@@ -13,14 +13,14 @@ import java.util.function.Predicate;
 public class SmartHouseController {
 
     private MainModel community;
-    private SmartHouseMenu menu;
+    private SmartHouseView menu;
 
     private SmartHouseController() {
     }
 
     public SmartHouseController(MainModel community) {
         this.community = community;
-        this.menu = new SmartHouseMenu();
+        this.menu = new SmartHouseView();
     }
 
     public void runSmartHouseController() {
@@ -271,7 +271,7 @@ public class SmartHouseController {
     }
 
     private void connectSmartDeviceController(String address, String room) {
-        SmartDeviceRepository smartDevices = community.getSmartHouses().findSmartDevicesByRoom(address, room);
+        SmartDeviceModel smartDevices = community.getSmartHouses().findSmartDevicesByRoom(address, room);
         String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
         if (factoryCode == null) updateSmartDevicesController(address, room);
         else {
@@ -320,7 +320,7 @@ public class SmartHouseController {
     }
 
     private void disconnectSmartDeviceController(String address, String room) {
-        SmartDeviceRepository smartDevices = community.getSmartHouses().findSmartDevicesByRoom(address, room);
+        SmartDeviceModel smartDevices = community.getSmartHouses().findSmartDevicesByRoom(address, room);
         String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
         if (factoryCode == null) updateSmartDevicesController(address, room);
         else {

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class EnergySupplierMenu {
+public class EnergySupplierView {
     
     /*
     ** Função que verifica se a opção selecionada de uma determinado menu é aceite
@@ -65,7 +65,7 @@ public class EnergySupplierMenu {
     ** Menu para Remover um EnergySupplier
     */
                          
-    public String removeEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
+    public String removeEnergySupplierMenu(EnergySupplierModel energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
             System.out.println("Lista de Fornecedores de Energia vazia");
@@ -85,7 +85,7 @@ public class EnergySupplierMenu {
     ** Menu para Selecionar um determinado EnergySupplier 
     */
     
-    public String selectEnergySupplierMenu(EnergySupplierRepository energySupplierRepository) {
+    public String selectEnergySupplierMenu(EnergySupplierModel energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
         if (energySuppliers.size() == 0) {
             System.out.println("Não há fornecedores de energia disponíveis");

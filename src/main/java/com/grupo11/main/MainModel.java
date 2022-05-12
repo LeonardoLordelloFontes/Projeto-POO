@@ -1,16 +1,16 @@
 package com.grupo11.main;
 
-import com.grupo11.energysupplier.EnergySupplierRepository;
+import com.grupo11.energysupplier.EnergySupplierModel;
 import com.grupo11.factory.FactoryModel;
-import com.grupo11.smarthouse.SmartHouseRepository;
+import com.grupo11.smarthouse.SmartHouseModel;
 
 import java.io.Serializable;
 
 public class MainModel implements Serializable {
 
     private FactoryModel factory;
-    private EnergySupplierRepository energySuppliers;
-    private SmartHouseRepository smartHouses;
+    private EnergySupplierModel energySuppliers;
+    private SmartHouseModel smartHouses;
 
     private MainModel() {
     }
@@ -23,8 +23,8 @@ public class MainModel implements Serializable {
      * @param smartHouses o model smartHouses
      */
     public MainModel(FactoryModel factory,
-                     EnergySupplierRepository energySuppliers,
-                     SmartHouseRepository smartHouses) {
+                     EnergySupplierModel energySuppliers,
+                     SmartHouseModel smartHouses) {
         this.factory = factory;
         this.energySuppliers = energySuppliers;
         this.smartHouses = smartHouses;
@@ -44,7 +44,7 @@ public class MainModel implements Serializable {
      *
      * @return o apontador para o model EnergySuppliers
      */
-    public EnergySupplierRepository getEnergySuppliers() {
+    public EnergySupplierModel getEnergySuppliers() {
         return energySuppliers;
     }
 
@@ -53,7 +53,7 @@ public class MainModel implements Serializable {
      *
      * @return o apontador para o model SmartHouses
      */
-    public SmartHouseRepository getSmartHouses() {
+    public SmartHouseModel getSmartHouses() {
         return smartHouses;
     }
 

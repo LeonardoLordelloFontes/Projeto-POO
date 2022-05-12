@@ -3,7 +3,7 @@ package com.grupo11.state;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class StateMenu {
+public class StateView {
     public int stateMenu() {
         System.out.print( """
                 -----------Estado-----------

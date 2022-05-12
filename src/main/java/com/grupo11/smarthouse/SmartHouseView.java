@@ -1,14 +1,14 @@
 package com.grupo11.smarthouse;
 
-import com.grupo11.energysupplier.EnergySupplierMenu;
-import com.grupo11.energysupplier.EnergySupplierRepository;
+import com.grupo11.energysupplier.EnergySupplierView;
+import com.grupo11.energysupplier.EnergySupplierModel;
 import com.grupo11.factory.FactoryModel;
 import com.grupo11.smartdevice.SmartDevice;
-import com.grupo11.smartdevice.SmartDeviceRepository;
+import com.grupo11.smartdevice.SmartDeviceModel;
 
 import java.util.*;
 
-public class SmartHouseMenu {
+public class SmartHouseView {
 
     private int optionsValidation(int options) {
         Scanner scanner = new Scanner(System.in);
@@ -78,7 +78,7 @@ public class SmartHouseMenu {
      * @param smartHouseRepository o repositório de casas onde queremos remover uma casa
      * @return o endereço da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
      */
-    public String removeSmartHouse(SmartHouseRepository smartHouseRepository) {
+    public String removeSmartHouse(SmartHouseModel smartHouseRepository) {
         System.out.print("-----------Remover Casa-----------\n\n");
         return selectSmartHouse(smartHouseRepository);
     }
@@ -90,7 +90,7 @@ public class SmartHouseMenu {
      * @return o endereço da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
      */
 
-    public String selectSmartHouse(SmartHouseRepository smartHouseRepository) {
+    public String selectSmartHouse(SmartHouseModel smartHouseRepository) {
         List<SmartHouse> smartHouses = smartHouseRepository.findAllSmartHouses();
         if (smartHouses.size() == 0) {
             System.out.println("Não há nenhuma casa");
@@ -146,7 +146,7 @@ public class SmartHouseMenu {
      * @return o nome da divisão da casa inserido pelo usuário, ou null, caso o deseje cancelar a operação
      */
 
-    public String removeRoom(SmartHouseRepository smartHouseRepository, String address) {
+    public String removeRoom(SmartHouseModel smartHouseRepository, String address) {
         List<String> rooms = smartHouseRepository.findAllRoomsFromSmartHouse(address);
         if (rooms.size() == 0) {
             System.out.println("Não há nenhuma divisão nesta casa");
@@ -200,7 +200,7 @@ public class SmartHouseMenu {
      * @return o código de fábrica inserido pelo usuário, ou null, casa o usuário deseje cancelar a operação
      *         ou caso não tenha nenhum dispositivo disponível para remover
      */
-    public String removeSmartDeviceMenu(SmartDeviceRepository smartDeviceRepository) {
+    public String removeSmartDeviceMenu(SmartDeviceModel smartDeviceRepository) {
         List<SmartDevice> smartDevices = smartDeviceRepository.findAllSmartDevices();
         if (smartDevices.size() == 0) {
             System.out.println("Não há nenhum dispositivo nesta divisão");
@@ -239,7 +239,7 @@ public class SmartHouseMenu {
         return optionsValidation(7);
     }
 
-    public String selectRoom(SmartHouseRepository smartHouseRepository, String address) {
+    public String selectRoom(SmartHouseModel smartHouseRepository, String address) {
         List<String> rooms = smartHouseRepository.findAllRoomsFromSmartHouse(address);
         if (rooms.size() == 0) {
             System.out.println("A casa precisa ter divisões para gerenciar dispositivos");
@@ -343,8 +343,8 @@ public class SmartHouseMenu {
      *         a operação
      */
 
-    public String updateEnergySupplierMenu(EnergySupplierRepository energySupplierRepository, String oldEnergySupplier) {
-        EnergySupplierMenu menu = new EnergySupplierMenu();
+    public String updateEnergySupplierMenu(EnergySupplierModel energySupplierRepository, String oldEnergySupplier) {
+        EnergySupplierView menu = new EnergySupplierView();
         String selectedEnergySupplier = menu.selectEnergySupplierMenu(energySupplierRepository);
         if (selectedEnergySupplier == null || selectedEnergySupplier.equals("*")) return null;
         if (selectedEnergySupplier.equals(oldEnergySupplier)) {

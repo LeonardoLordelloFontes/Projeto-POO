@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class StateController {
     private MainModel community;
-    private StateMenu menu;
+    private StateView menu;
 
     public StateController(MainModel community) {
         this.community = community;
-        this.menu = new StateMenu();
+        this.menu = new StateView();
     }
 
     public void runStateController() {
@@ -34,7 +34,7 @@ public class StateController {
         String filePath = menu.saveStateMenu();
         if (filePath == null) stateController();
         else {
-            StateRepository state = new StateRepository(community);
+            StateModel state = new StateModel(community);
             try {
                 state.saveState(filePath);
                 stateController();
@@ -49,7 +49,7 @@ public class StateController {
         String filePath = menu.loadStateMenu();
         if (filePath == null) stateController();
         else {
-            StateRepository state = new StateRepository();
+            StateModel state = new StateModel();
             try {
                 MainController mainController = new MainController(state.loadState(filePath));
                 mainController.runMainController();
