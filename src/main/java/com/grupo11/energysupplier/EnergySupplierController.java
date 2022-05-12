@@ -48,8 +48,13 @@ public class EnergySupplierController {
         String[] input = menu.addEnergySupplierMenu();
         if (input == null) energySupplierController();
         else {
-            this.community.getEnergySuppliers().addEnergySupplier(input[0], input[1]);
-            energySupplierController();
+            try {
+                this.community.getEnergySuppliers().addEnergySupplier(input[0], input[1]);
+                energySupplierController();
+            } catch(EnergySupplierAlreadyExists e){
+                System.out.println(e.getMessage());
+                energySupplierController();
+            }
         }
     }
 
@@ -79,7 +84,12 @@ public class EnergySupplierController {
         String selectedEnergySupplier = menu.selectEnergySupplierMenu(community.getEnergySuppliers());
         if (selectedEnergySupplier == null) energySupplierController();
         else {
-            updateEnergySupplierController(selectedEnergySupplier);
+            try {
+                updateEnergySupplierController(selectedEnergySupplier);
+            } catch (EnergySupplierNotFound e) {
+                System.out.println(e.getMessage());
+                energySupplierController();
+            }
         }
     }
     
