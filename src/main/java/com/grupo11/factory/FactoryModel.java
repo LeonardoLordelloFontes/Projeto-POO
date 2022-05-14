@@ -55,7 +55,7 @@ public class FactoryModel implements Serializable {
      * @param NewFactoryCode o novo código de fábrica do dispositivo
      * @throws DeviceNotFound se o smartDevice não existir
      */
-    public void updateDevice(String OldFactoryCode,String NewFactoryCode)throws DeviceNotFound {
+    public void updateDevice(String OldFactoryCode,String NewFactoryCode) throws DeviceNotFound {
         if (this.available.get(OldFactoryCode) == null)
             throw new DeviceNotFound("O dispositivo de código de fábrica " + OldFactoryCode + " não foi encontrado!!");
 

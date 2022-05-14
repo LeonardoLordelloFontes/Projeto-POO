@@ -32,7 +32,7 @@ public class SmartDeviceCamera extends SmartDevice implements Serializable {
     /**
      * Construtor de SmartDeviceCamera
      */
-    public SmartDeviceCamera(String factoryCode){
+    public SmartDeviceCamera(String factoryCode) {
         super(factoryCode);
         this.fileSize = 0;
         this.resolution = 0;
@@ -40,7 +40,7 @@ public class SmartDeviceCamera extends SmartDevice implements Serializable {
     /**
      * Construtor de SmartDeviceCamera
      */
-    public SmartDeviceCamera(int fileSize){
+    public SmartDeviceCamera(int fileSize) {
         super();
         this.fileSize = fileSize;
         this.resolution = 0;
@@ -48,11 +48,18 @@ public class SmartDeviceCamera extends SmartDevice implements Serializable {
     /**
      * Construtor de SmartDeviceCamera
      */
-    public SmartDeviceCamera (int fileSize, int resulosion){
+    public SmartDeviceCamera (int fileSize, int resolution) {
         super();
         this.fileSize = fileSize;
-        this.resolution = resulosion;
+        this.resolution = resolution;
     }
+
+    public SmartDeviceCamera (String factoryCode, State state, double installationCost, double energyConsumption, int fileSize, int resolution) {
+        super(state, installationCost, factoryCode, energyConsumption);
+        this.fileSize = fileSize;
+        this.resolution = resolution;
+    }
+
     /**
      * Construtor de SmartDeviceCamera
      */

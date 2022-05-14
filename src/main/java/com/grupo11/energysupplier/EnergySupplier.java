@@ -12,15 +12,12 @@ public class EnergySupplier implements Serializable {
     private final static double TAX = 0.05;
     private String formula;
 
-    public EnergySupplier() {
-        this.name = null;
-        this.formula = null;
+    private EnergySupplier() {
     }
 
-    public EnergySupplier(String name,String totalcost) {
+    public EnergySupplier(String name, String formula) {
         this.name = name;
-        this.formula = totalcost;
-
+        this.formula = formula;
     }
 
     public EnergySupplier(EnergySupplier Es) {

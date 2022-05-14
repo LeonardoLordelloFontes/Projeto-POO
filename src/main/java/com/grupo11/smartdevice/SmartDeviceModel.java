@@ -32,7 +32,7 @@ public class SmartDeviceModel implements Serializable {
      */
     public SmartDevice findSmartDeviceByFactoryCode (String factoryCode) throws DeviceNotFound {
         SmartDevice sd = this.storage.get(factoryCode);
-        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
         return sd;
     }
 
@@ -46,10 +46,9 @@ public class SmartDeviceModel implements Serializable {
      */
     public void addSmartDevice(String factoryCode, SmartDevice smartDevice) throws DeviceAlreadyExist {
         if(this.storage.get(factoryCode) != null)
-            throw new DeviceAlreadyExist("O dispositivo de código de fábrica "+factoryCode+"já existe!!");
+            throw new DeviceAlreadyExist("O dispositivo de código de fábrica "+factoryCode+" já existe!!");
 
         storage.put(factoryCode, smartDevice);
-
     }
 
     /**

@@ -46,13 +46,21 @@ public class SmartDeviceSpeaker extends SmartDevice implements Serializable {
     /**
      * Construtor de SmartDeviceSpeaker
      */
-    public SmartDeviceSpeaker(String factoryCode,double instalacionCost, double energyConsumption,String brand ,int volumeMax){
+    public SmartDeviceSpeaker(String factoryCode,double instalacionCost, double energyConsumption,String brand, int volumeMax) {
         super(factoryCode,instalacionCost,energyConsumption);
         this.brand = brand;
         this.volume = 0;
         this.radio = "Nada";
         this.volumeMax = volumeMax;
     }
+    public SmartDeviceSpeaker(String factoryCode, String radio, String brand, double instalacionCost, double energyConsumption, int volumeMax, int volume) {
+        super(factoryCode,instalacionCost,energyConsumption);
+        this.brand = brand;
+        this.volume = volume;
+        this.radio = radio;
+        this.volumeMax = volumeMax;
+    }
+
 
     /**
      * Construtor de SmartDeviceSpeaker
@@ -79,7 +87,7 @@ public class SmartDeviceSpeaker extends SmartDevice implements Serializable {
     /**
      * Construtor de SmartDeviceSpeaker
      */
-    public SmartDeviceSpeaker(String brand, int volume,int volumeMax,String radio){
+    public SmartDeviceSpeaker(String brand, int volume, int volumeMax, String radio) {
         super();
         this.brand = brand;
         this.volume = volume;
@@ -90,7 +98,7 @@ public class SmartDeviceSpeaker extends SmartDevice implements Serializable {
     /**
      * Construtor de SmartDeviceSpeaker
      */
-    public SmartDeviceSpeaker(SmartDeviceSpeaker ss){
+    public SmartDeviceSpeaker(SmartDeviceSpeaker ss) {
         super(ss);
         this.brand = ss.getBrand();
         this.volume = ss.getVolume();
