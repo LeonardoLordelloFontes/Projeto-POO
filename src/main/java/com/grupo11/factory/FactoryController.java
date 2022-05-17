@@ -1,5 +1,6 @@
 package com.grupo11.factory;
 
+import com.grupo11.factory.exception.DeviceNotInFactory;
 import com.grupo11.main.MainModel;
 import com.grupo11.main.MainController;
 import com.grupo11.smartdevice.*;
@@ -160,7 +161,7 @@ public class FactoryController {
                 this.community.getFactory().deleteDevice(component);
                 removeSmartDeviceController();
             }
-           catch (DeviceNotFound e){System.out.println(e.getMessage()); removeSmartDeviceController();}
+           catch (DeviceNotFound | DeviceNotInFactory e){System.out.println(e.getMessage()); removeSmartDeviceController();}
         }
     }
 
@@ -174,9 +175,12 @@ public class FactoryController {
             case "*" -> smartDeviceController();
             case "-1" -> updateSmartDeviceController();
             default -> {
-                SmartDevice sd = this.community.getFactory().getSmartDeviceRepository().findSmartDeviceByFactoryCode(components[0]);
+                try {
+                    SmartDevice sd = this.community.getFactory().getSmartDeviceRepository().findSmartDeviceByFactoryCode(components[0]);
+                    updateSmartDeviceControllerAux(sd,components);
+                }
+                catch (DeviceNotFound e) {System.out.println(e.getMessage()); updateSmartDeviceController();}
 
-                updateSmartDeviceControllerAux(sd,components);
             }
         }
     }
@@ -210,10 +214,8 @@ public class FactoryController {
 
                     this.community.getFactory().updateDevice(components[0], components[1]);
                     updateSmartDeviceController();
-                } catch (DeviceNotFound e) {
-                    System.out.println(e.getMessage());
-                    updateSmartBulbController(components);
-                }
+                } catch (DeviceNotFound | DeviceNotInFactory e) {System.out.println(e.getMessage()); updateSmartDeviceController();}
+
             }
         }
     }
@@ -243,10 +245,9 @@ public class FactoryController {
 
                     this.community.getFactory().updateDevice(components[0], components[1]);
                     updateSmartDeviceController();
-                } catch (DeviceNotFound e) {
-                    System.out.println(e.getMessage());
-                    updateSmartSpeakerController(components);
                 }
+                catch (DeviceNotFound | DeviceNotInFactory e) {System.out.println(e.getMessage()); updateSmartDeviceController();}
+
             }
         }
     }
@@ -262,6 +263,7 @@ public class FactoryController {
             case "*" -> updateSmartDeviceController();
             case "-1" -> updateSmartCameraController(components);
             default -> {
+
                 try {
                     this.community.getFactory().getSmartDeviceRepository().SmartDeviceCameraUpdate(
                             components[0],
@@ -274,10 +276,8 @@ public class FactoryController {
 
                     this.community.getFactory().updateDevice(components[0], components[1]);
                     updateSmartDeviceController();
-                } catch (DeviceNotFound e) {
-                    System.out.println(e.getMessage());
-                    updateSmartCameraController(components);
-                }
+                } catch (DeviceNotFound | DeviceNotInFactory e) {System.out.println(e.getMessage()); updateSmartDeviceController();}
+
             }
         }
     }

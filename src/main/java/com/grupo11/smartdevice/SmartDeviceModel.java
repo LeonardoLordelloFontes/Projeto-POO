@@ -1,5 +1,6 @@
 package com.grupo11.smartdevice;
 
+import com.grupo11.factory.exception.DeviceNotInFactory;
 import com.grupo11.smartdevice.exception.DeviceAlreadyExist;
 import com.grupo11.smartdevice.exception.DeviceNotFound;
 import java.util.function.Predicate;
@@ -118,7 +119,7 @@ public class SmartDeviceModel implements Serializable {
      * @param factoryCode do dispositivo a remover
      * @throws DeviceNotFound se o dispositivo não existir
      */
-    public void SmartDeviceRemove(String factoryCode) throws DeviceNotFound {
+    public void SmartDeviceRemove(String factoryCode) throws DeviceNotFound{
         SmartDevice sd = this.storage.get(factoryCode);
         if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
 

@@ -1,5 +1,6 @@
 package com.grupo11.factory;
 
+import com.grupo11.factory.exception.DeviceNotInFactory;
 import com.grupo11.smartdevice.SmartDevice;
 import com.grupo11.smartdevice.SmartDeviceModel;
 import com.grupo11.smartdevice.exception.DeviceAlreadyExist;
@@ -54,10 +55,15 @@ public class FactoryModel implements Serializable {
      * @param OldFactoryCode o código de fábrica antigo do dispositivo
      * @param NewFactoryCode o novo código de fábrica do dispositivo
      * @throws DeviceNotFound se o smartDevice não existir
+     * @throws DeviceNotInFactory se o smartDevice não existir na fabrica
      */
-    public void updateDevice(String OldFactoryCode,String NewFactoryCode) throws DeviceNotFound {
+    public void updateDevice(String OldFactoryCode,String NewFactoryCode) throws DeviceNotFound,DeviceNotInFactory {
         if (this.available.get(OldFactoryCode) == null)
             throw new DeviceNotFound("O dispositivo de código de fábrica " + OldFactoryCode + " não foi encontrado!!");
+
+        if (this.available.get(OldFactoryCode) == false)
+            throw  new DeviceNotInFactory( "O dispositivo de código de fábrica " + OldFactoryCode +" está numa casa" );
+
 
         if (!NewFactoryCode.equals("#")) {
             this.available.remove(OldFactoryCode);
@@ -70,9 +76,12 @@ public class FactoryModel implements Serializable {
      *
      * @param factoryCode o código de fábrica do dispovitivo a apagar
      * @throws DeviceNotFound se o dispositivo não existir
+     * @throws DeviceNotInFactory se o dispositivo não existir na fabrica
      */
-    public void deleteDevice(String factoryCode)throws DeviceNotFound {
+    public void deleteDevice(String factoryCode)throws DeviceNotFound, DeviceNotInFactory {
         if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
+        if (this.available.get(factoryCode) == false) throw new DeviceNotInFactory("O dispositivo de código de fábrica "+factoryCode+ "encontra-se numa casa");
+
         this.available.remove(factoryCode);
     }
 
