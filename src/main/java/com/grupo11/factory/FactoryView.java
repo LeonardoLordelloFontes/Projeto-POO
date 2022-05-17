@@ -32,7 +32,7 @@ public class FactoryView {
                 }
                 return option;
             } catch (InputMismatchException e) {
-                System.out.println("Opção inválida, digite um valor inteiro entre 1 e"+optionNumber);
+                System.out.println("Opção inválida, digite um valor inteiro entre 1 e "+optionNumber);
                 return -1;
             }
         }
@@ -57,7 +57,7 @@ public class FactoryView {
                 }
                 if (validacion && Double.parseDouble(strNum) < 0) validacion = false;
             }
-            if (!validacion) System.out.println("Opção inválida de"+ propreti +"digite um valor double não negativo!!");
+            if (!validacion) System.out.println("Opção inválida de "+ propreti +", digite um valor double não negativo!!");
             return validacion;
         }
      /**
@@ -80,7 +80,7 @@ public class FactoryView {
                 }
                 if (validacion && Integer.parseInt(strNum) < 0) validacion = false;
             }
-            if (!validacion) System.out.println("Opção inválida de" +propreti+ "digite um valor double não negativo!!");
+            if (!validacion) System.out.println("Opção inválida de " +propreti+ ", digite um valor integer não negativo!!");
             return validacion;
         }
 

@@ -121,7 +121,7 @@ public class SmartDeviceModel implements Serializable {
      */
     public void SmartDeviceRemove(String factoryCode) throws DeviceNotFound{
         SmartDevice sd = this.storage.get(factoryCode);
-        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ "não foi encontrado!!");
+        if(sd == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
 
         this.storage.remove(factoryCode);
     }

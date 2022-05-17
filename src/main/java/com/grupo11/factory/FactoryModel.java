@@ -80,7 +80,7 @@ public class FactoryModel implements Serializable {
      */
     public void deleteDevice(String factoryCode)throws DeviceNotFound, DeviceNotInFactory {
         if (this.available.get(factoryCode) == null) throw new DeviceNotFound("O dispositivo de código de fábrica "+factoryCode+ " não foi encontrado!!");
-        if (this.available.get(factoryCode) == false) throw new DeviceNotInFactory("O dispositivo de código de fábrica "+factoryCode+ "encontra-se numa casa");
+        if (this.available.get(factoryCode) == false) throw new DeviceNotInFactory("O dispositivo de código de fábrica "+factoryCode+ " encontra-se numa casa");
 
         this.available.remove(factoryCode);
     }
