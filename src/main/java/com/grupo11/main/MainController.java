@@ -2,6 +2,7 @@ package com.grupo11.main;
 
 import com.grupo11.energysupplier.EnergySupplierController;
 import com.grupo11.factory.FactoryController;
+import com.grupo11.simulation.ParseLogs;
 import com.grupo11.simulation.SimulationController;
 import com.grupo11.smarthouse.SmartHouseController;
 import com.grupo11.state.StateController;
@@ -52,10 +53,14 @@ public class MainController implements Serializable {
                 simulationController.runAutoSimulationController();
             }
             case 6 -> {
+                SimulationController simulationController = new SimulationController(community);
+                simulationController.loadLogsController();
+            }
+            case 7 -> {
                 StateController stateController = new StateController(community);
                 stateController.runStateController();
             }
-            case 7 -> System.exit(0);
+            case 8 -> System.exit(0);
         }
     }
 }

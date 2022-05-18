@@ -17,8 +17,9 @@ public class MainView {
                 3. Dispositivos
                 4. Iniciar Simulação Manual
                 5. Iniciar Simulação Automática
-                6. Estado do programa
-                7. Sair
+                6. Carregar logs
+                7. Estado do programa
+                8. Sair
 
                 Sua Opção (Selecionar Número):\s""";
         System.out.print(sb);

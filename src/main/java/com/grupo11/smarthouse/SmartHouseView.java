@@ -280,7 +280,7 @@ public class SmartHouseView {
         String sb = """
                 -----------Dispostivos  a Ligar ou Desligar-----------
                 
-                1. SmartDevicesBuld
+                1. SmartDevicesBulb
                 2. SmartDeviceSpeaker
                 3. SmartDeviceCamera
                 4. Todos os dispositivos

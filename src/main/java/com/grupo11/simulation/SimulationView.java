@@ -34,4 +34,10 @@ public class SimulationView {
         System.out.print("Digite o caminho do arquivo de simulação automática: ");
         return scanner.next();
     }
+
+    public String loadLogsMenu() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o caminho do arquivo de log: ");
+        return scanner.next();
+    }
 }
