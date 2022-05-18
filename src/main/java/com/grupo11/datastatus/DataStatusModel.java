@@ -6,6 +6,7 @@ import com.grupo11.simulation.Invoicer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DataStatusModel {
@@ -73,11 +74,9 @@ public class DataStatusModel {
      */
 
     public String MostProfit() {
-        double maxProfit = 0;
+        double maxProfit = -1;
         String supplier = "";
-        List<String> energySupplierNames = new ArrayList<>();
-
-        energySupplierNames = this.invoicers.stream().map(Invoicer::getEnergySupplier).collect(Collectors.toList());
+        Set<String> energySupplierNames = this.invoicers.stream().map(Invoicer::getEnergySupplier).collect(Collectors.toSet());
 
         for (String s : energySupplierNames) {
 

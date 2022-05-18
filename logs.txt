@@ -1,17 +1,17 @@
-Fornecedor:EDP Comercial,1
-Fornecedor:Galp Energia,1
-Fornecedor:Iberdrola,1
-Fornecedor:Endesa,1
-Fornecedor:Gold Energy,1
-Fornecedor:Coopernico,1
-Fornecedor:Enat,1
-Fornecedor:YIce,1
-Fornecedor:MEO Energia,1
-Fornecedor:Muon,1
-Fornecedor:Luzboa,1
-Fornecedor:Energia Simples,1
-Fornecedor:SU Electricidade,1
-Fornecedor:EDA,1
+Fornecedor:EDP Comercial,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.9
+Fornecedor:Galp Energia,PrecoDiaPorDispositivo = numeroDispositivos > 10 ? (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.9 : (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.75
+Fornecedor:Iberdrola,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.85
+Fornecedor:Endesa,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.80
+Fornecedor:Gold Energy,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.95
+Fornecedor:Coopernico,PrecoDiaPorDispositivo = numeroDispositivos > 15 ? (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.95 : (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.70
+Fornecedor:Enat,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.85
+Fornecedor:YIce,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.86
+Fornecedor:MEO Energia,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.87
+Fornecedor:Muon,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.88
+Fornecedor:Luzboa,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.79
+Fornecedor:Energia Simples,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.76
+Fornecedor:SU Electricidade,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.70
+Fornecedor:EDA,PrecoDiaPorDispositivo = numeroDispositivos > 5 ? (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.98 : (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.60
 Casa:Vicente de Carvalho Castro,365597405,Iberdrola
 Divisao:Sala de Jantar
 SmartBulb:Warm,11,4.57

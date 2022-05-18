@@ -5,6 +5,7 @@ import com.grupo11.simulation.Invoicer;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class DataStatusView {
 
@@ -64,14 +65,18 @@ public class DataStatusView {
     public String menuListSupplierInvoicers() {
         String input = "*";
         Scanner scanner = new Scanner(System.in);
-        System.out.print("----------- Lista Faturas Do Comercializador -----------\n\n");
-
         System.out.print("Intruduza o nome do comercializador de energia que pretende listar as faturas ou o simbolo[*] para voltar ao menu anterior: ");
-        input = scanner.next();
+        input = scanner.nextLine();
 
         if (input.equals("*")) return BACK;
 
         return input;
+    }
+
+    public void listAllEnergySuppliers(Set<String> energySuppliers) {
+        StringBuilder sb = new StringBuilder("----------- Lista Faturas Do Comercializador -----------\n\n");
+        energySuppliers.forEach(es -> sb.append(es).append("\n"));
+        System.out.println(sb);
     }
 
     /**
