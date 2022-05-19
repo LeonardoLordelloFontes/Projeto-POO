@@ -1,6 +1,5 @@
 package com.grupo11.smartdevice;
 
-import com.grupo11.factory.exception.DeviceNotInFactory;
 import com.grupo11.smartdevice.exception.DeviceAlreadyExist;
 import com.grupo11.smartdevice.exception.DeviceNotFound;
 import java.util.function.Predicate;
@@ -232,7 +231,7 @@ public class SmartDeviceModel implements Serializable {
      *
      */
 
-    public void SmartDeviceState(Predicate<SmartDevice> p, SmartDevice.State turn) {
+    public void smartDeviceState(Predicate<SmartDevice> p, SmartDevice.State turn) {
         for(SmartDevice sb: this.storage.values())
             if  (p.test(sb)) sb.setState(turn);
     }
@@ -243,7 +242,7 @@ public class SmartDeviceModel implements Serializable {
      * @param tone é a tonalidade que as lampâdas devem ser alteradas
      *
      */
-    public void SmartDeviceTone(SmartDeviceBulb.Tone tone){
+    public void smartDeviceTone(SmartDeviceBulb.Tone tone){
         Predicate<SmartDevice> p = x-> x instanceof SmartDeviceBulb;
         for(SmartDevice sb: this.storage.values())
             if (p.test(sb)) ((SmartDeviceBulb) sb).setTone(tone);

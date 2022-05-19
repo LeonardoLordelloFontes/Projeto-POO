@@ -225,6 +225,7 @@ public class SmartHouseController {
         else {
             community.getFactory().setDeviceAvailability(factoryCode, true);
             community.getSmartHouses().findSmartDevicesByRoom(address, room).SmartDeviceRemove(factoryCode);
+            updateSmartDevicesController(address, room);
         }
     }
 
@@ -261,12 +262,15 @@ public class SmartHouseController {
     }
 
     private void connectAllRoomSmartDevicesController(String address, String room, Predicate<SmartDevice> p) {
-        community.getSmartHouses().findSmartDevicesByRoom(address,room).SmartDeviceState(p, SmartDevice.State.ON);
+        if (community.getSmartHouses().findSmartDevicesByRoom(address, room).findAllSmartDevices().stream().anyMatch(x -> x instanceof SmartDeviceBulb)) {
+            connectAllSmartBulbController(address, room);
+        }
+        community.getSmartHouses().findSmartDevicesByRoom(address,room).smartDeviceState(p, SmartDevice.State.ON);
         updateSmartDevicesController(address, room);
     }
 
     private void disconnectAllRoomSmartDevicesController(String address, String room, Predicate<SmartDevice> p) {
-        community.getSmartHouses().findSmartDevicesByRoom(address, room).SmartDeviceState(p, SmartDevice.State.OFF);
+        community.getSmartHouses().findSmartDevicesByRoom(address, room).smartDeviceState(p, SmartDevice.State.OFF);
         updateSmartDevicesController(address, room);
     }
 
@@ -300,23 +304,19 @@ public class SmartHouseController {
         }
     }
 
-    private void connectAllSmartBulbController(String address, String room){
+    private void connectAllSmartBulbController(String address, String room) {
         switch (menu.selectBulbToneMenu()) {
             case -1 -> connectSmartDeviceController(address, room);
             case 1 -> {
-                community.getSmartHouses().findSmartDevicesByRoom(address,room).SmartDeviceTone(SmartDeviceBulb.Tone.Neutral);
-                updateSmartDevicesController(address, room);
+                community.getSmartHouses().findSmartDevicesByRoom(address,room).smartDeviceTone(SmartDeviceBulb.Tone.Neutral);
             }
             case 2 -> {
-                community.getSmartHouses().findSmartDevicesByRoom(address,room).SmartDeviceTone(SmartDeviceBulb.Tone.Warm);
-                updateSmartDevicesController(address, room);
+                community.getSmartHouses().findSmartDevicesByRoom(address,room).smartDeviceTone(SmartDeviceBulb.Tone.Warm);
             }
             case 3 -> {
-                community.getSmartHouses().findSmartDevicesByRoom(address,room).SmartDeviceTone(SmartDeviceBulb.Tone.Cold);
-                updateSmartDevicesController(address, room);
+                community.getSmartHouses().findSmartDevicesByRoom(address,room).smartDeviceTone(SmartDeviceBulb.Tone.Cold);
             }
         }
-
     }
 
     private void disconnectSmartDeviceController(String address, String room) {

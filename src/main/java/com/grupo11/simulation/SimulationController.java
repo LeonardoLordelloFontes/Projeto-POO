@@ -1,5 +1,6 @@
 package com.grupo11.simulation;
 
+import com.grupo11.main.MainController;
 import com.grupo11.main.MainModel;
 import com.grupo11.datastatus.DataStatusController;
 
@@ -48,5 +49,16 @@ public class SimulationController {
         }
     }
 
-
+    public void loadLogsController() {
+        String filePath = menu.loadLogsMenu();
+        ParseLogs logs = new ParseLogs(community);
+        try {
+            logs.parseLogs(filePath);
+            MainController mainController = new MainController(community);
+            mainController.runMainController();
+        } catch (FileNotFoundException e) {
+            System.out.print("Arquivo não encontrado! Digite um caminho válido");
+            loadLogsController();
+        }
+    }
 }

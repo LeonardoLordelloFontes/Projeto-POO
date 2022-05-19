@@ -5,6 +5,8 @@ import com.grupo11.main.MainModel;
 import com.grupo11.simulation.Invoicer;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 public class DataStatusController {
 
     private MainModel community;
@@ -27,12 +29,15 @@ public class DataStatusController {
             case 2 -> MostProfitController();
             case 3 -> invoicerSupplierController();
             case 4 -> BiggestSpentListController();
-            case 5 ->{ MainController mainController = new MainController(community); mainController.runMainController();}
+            case 5 -> {
+                MainController mainController = new MainController(community);
+                mainController.runMainController();
+            }
             case -1-> dataStatusController();
         }
     }
 
-    private  void  BiggestSpentController(){
+    private void BiggestSpentController(){
         String res = this.dataStatus.BiggestSpent();
         this.menu.menuResults(res,1);
         dataStatusController();
@@ -44,7 +49,8 @@ public class DataStatusController {
         dataStatusController();
     }
 
-    private void invoicerSupplierController(){
+    private void invoicerSupplierController() {
+        menu.listAllEnergySuppliers(this.dataStatus.getInvoicers().stream().map(Invoicer::getEnergySupplier).collect(Collectors.toSet()));
         String nome = menu.menuListSupplierInvoicers();
 
         if(nome.equals("*")) dataStatusController();
@@ -60,8 +66,7 @@ public class DataStatusController {
         }
     }
 
-    private void BiggestSpentListController(){
-
+    private void BiggestSpentListController() {
         List<String> casas = this.dataStatus.BiggestSpentList();
         this.menu.menuListLargestConsumers(casas);
         dataStatusController();
