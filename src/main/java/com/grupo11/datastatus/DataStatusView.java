@@ -109,8 +109,9 @@ public class DataStatusView {
     }
 
     /**
+     * Menu de listagem das faturas
      *
-     * @param invoicers
+     * @param invoicers Lista das faturas
      */
 
     public void menuListAllInvoicers(List<Invoicer> invoicers) {
