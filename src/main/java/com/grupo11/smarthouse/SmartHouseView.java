@@ -11,6 +11,13 @@ import java.util.*;
 
 public class SmartHouseView {
 
+    /**
+     * método auxiliar para receber e validar o input do utilizador
+     *
+     * @param options o número de opções do menu
+     * @return a opção do utilizador, ou -1, caso a opção seja inválida
+     */
+
     private int optionsValidation(int options) {
         Scanner scanner = new Scanner(System.in);
         String s = "Opção inválida, digite um valor inteiro entre 1 e " + options;
@@ -54,6 +61,7 @@ public class SmartHouseView {
      *
      * @return o endereço da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
      */
+
     public String addSmartHouse() {
         System.out.print("-----------Criar Casa-----------\n\n");
         return updateAddress();
@@ -79,6 +87,7 @@ public class SmartHouseView {
      * @param smartHouseRepository o repositório de casas onde queremos remover uma casa
      * @return o endereço da casa inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação
      */
+
     public String removeSmartHouse(SmartHouseModel smartHouseRepository) {
         System.out.print("-----------Remover Casa-----------\n\n");
         return selectSmartHouse(smartHouseRepository);
@@ -203,6 +212,7 @@ public class SmartHouseView {
      * @return o código de fábrica inserido pelo usuário, ou null, casa o usuário deseje cancelar a operação
      *         ou caso não tenha nenhum dispositivo disponível para remover
      */
+
     public String removeSmartDeviceMenu(SmartDeviceModel smartDeviceRepository) {
         List<SmartDevice> smartDevices = smartDeviceRepository.findAllSmartDevices();
         if (smartDevices.size() == 0) {
@@ -242,6 +252,14 @@ public class SmartHouseView {
         return optionsValidation(7);
     }
 
+    /**
+     * Menu para selecionar a divisão da casa
+     *
+     * @param smartHouseRepository o repositório de smartHouses
+     * @param address o endereço da casa
+     * @return a divisão da casa que o utilizador digitou, ou null, caso seja inválido
+     */
+
     public String selectRoom(SmartHouseModel smartHouseRepository, String address) {
         List<String> rooms = smartHouseRepository.findAllRoomsFromSmartHouse(address);
         if (rooms.size() == 0) {
@@ -262,6 +280,12 @@ public class SmartHouseView {
         return input;
     }
 
+    /**
+     * Menu com opções gerais em relação aos dispositivos em uma casa
+     *
+     * @return a opção correspondente a decisão de alteração de algum dispositivo em uma casa
+     */
+
     public int updateSmartDevices() {
         String sb = """
                 -----------Dispostivos-----------
@@ -279,6 +303,12 @@ public class SmartHouseView {
         return optionsValidation(7);
     }
 
+    /**
+     * Menu para seleção do tipo de dispositivo que desejamos alterar o estado (ligar/desligar)
+     *
+     * @return a opção correspondente ao tipo de dispositivo que o utilizar deseja ligar/desligar, ou, a opção de voltar
+     */
+
     public int updateSmartDevicesState() {
         String sb = """
                 -----------Dispostivos  a Ligar ou Desligar-----------
@@ -293,6 +323,12 @@ public class SmartHouseView {
         System.out.print(sb);
         return optionsValidation(5);
     }
+
+    /**
+     * Menu de seleção da tonalidade da smartBulb
+     *
+     * @return A opção correspondente a tonalidade que o utilizador deseja
+     */
 
     public int selectBulbToneMenu() {
         String sb = """
@@ -312,6 +348,7 @@ public class SmartHouseView {
      *
      * @return O endereço inserido pelo usuário, ou null, caso o usuário deseje cancelar a operação de escrita
      */
+
     public String updateAddress() {
         System.out.print("Endereço (para cancelar digite *): ");
         Scanner scanner = new Scanner(System.in);

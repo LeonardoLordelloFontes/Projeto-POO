@@ -67,6 +67,7 @@ public class SmartHouseController {
      * Controlador da opção que permite adicionar mais dados a casa na sua criação
      * @param address o endereço da casa criada
      */
+
     private void addMoreInformationSmartHouseController(String address) {
         String input = menu.addMoreInformationSmartHouse();
         switch (input) {
@@ -208,6 +209,13 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     * Controlador da adição de um dispositivo a uma divisão de uma casa
+     *
+     * @param address o endereço da casa
+     * @param room a divisão da casa
+     */
+
     private void addSmartDeviceController(String address, String room) {
         String factoryCode = menu.addDevice(community.getFactory());
         if (factoryCode == null) updateSmartDevicesController(address, room);
@@ -219,6 +227,13 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     * Controlador da remoção de um dispositivo que pertence a uma divisão de uma casa
+     *
+     * @param address endereço da casa
+     * @param room divisão da casa
+     */
+
     private void removeSmartDeviceController(String address, String room) {
         String factoryCode = menu.removeSmartDeviceMenu(community.getSmartHouses().findSmartDevicesByRoom(address, room));
         if (factoryCode == null) updateSmartDevicesController(address, room);
@@ -228,6 +243,12 @@ public class SmartHouseController {
             updateSmartDevicesController(address, room);
         }
     }
+
+    /**
+     * método auxiliar para selecionar o tipo de dispositivo
+     *
+     * @return o predicado correspondente a opção escolhida
+     */
 
     private Predicate<SmartDevice> selectSmartDevicesState() {
         int d = menu.updateSmartDevicesState();
@@ -245,6 +266,13 @@ public class SmartHouseController {
         return selected;
     }
 
+    /**
+     * Controlador principal de desligar dispositivos
+     *
+     * @param address o endereço da casa onde está o dispositivo
+     * @param room o nome da divisão da casa onde está o dispositivo
+     */
+
     private void disconnectAllRoomSmartDevicesControllerMaster(String address, String room) {
         Predicate<SmartDevice> p = selectSmartDevicesState();
         if (p == null) updateSmartDevicesController(address, room);
@@ -252,6 +280,13 @@ public class SmartHouseController {
             disconnectAllRoomSmartDevicesController(address, room, p);
         }
     }
+
+    /**
+     * Controlador principal de ligar dispositivos
+     *
+     * @param address o endereço da casa onde está o dispositivo
+     * @param room o nome da divisão da casa onde está o dispositivo
+     */
 
     private void connectAllRoomSmartDevicesControllerMaster(String address, String room) {
         Predicate<SmartDevice> p = selectSmartDevicesState();
@@ -261,6 +296,14 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     * Controlador para ligar todos os dispositivos de uma divisão
+     *
+     * @param address endereço da casa
+     * @param room nome da divisão da casa
+     * @param p o predicado correspondente ao tipo de dispositivo
+     */
+
     private void connectAllRoomSmartDevicesController(String address, String room, Predicate<SmartDevice> p) {
         if (community.getSmartHouses().findSmartDevicesByRoom(address, room).findAllSmartDevices().stream().anyMatch(x -> x instanceof SmartDeviceBulb)) {
             connectAllSmartBulbController(address, room);
@@ -269,10 +312,25 @@ public class SmartHouseController {
         updateSmartDevicesController(address, room);
     }
 
+    /**
+     * Controlador para desligar todos os dispositivos de uma divisão
+     *
+     * @param address endereço da casa
+     * @param room nome da divisão da casa
+     * @param p o predicado correspondente ao tipo de dispositivo
+     */
+
     private void disconnectAllRoomSmartDevicesController(String address, String room, Predicate<SmartDevice> p) {
         community.getSmartHouses().findSmartDevicesByRoom(address, room).smartDeviceState(p, SmartDevice.State.OFF);
         updateSmartDevicesController(address, room);
     }
+
+    /**
+     * Controlador para ligar um dispositivo específico
+     *
+     * @param address endereço da casa
+     * @param room a divisão onde o dispositivo se encontra
+     */
 
     private void connectSmartDeviceController(String address, String room) {
         SmartDeviceModel smartDevices = community.getSmartHouses().findSmartDevicesByRoom(address, room);
@@ -285,6 +343,31 @@ public class SmartHouseController {
             else updateSmartDevicesController(address, room);
         }
     }
+
+    /**
+     * Controlador para desligar um dispositivo específico
+     *
+     * @param address endereço da casa
+     * @param room a divisão onde o dispositivo se encontra
+     */
+
+    private void disconnectSmartDeviceController(String address, String room) {
+        SmartDeviceModel smartDevices = community.getSmartHouses().findSmartDevicesByRoom(address, room);
+        String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
+        if (factoryCode == null) updateSmartDevicesController(address, room);
+        else {
+            smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.OFF);
+            updateSmartDevicesController(address, room);
+        }
+    }
+
+    /**
+     * Controlador para ligar um dispositivo específico do tipo SmartDeviceBulb numa tonalidade específica
+     *
+     * @param smartBulb o dispositivo que desejamos ligar
+     * @param address o endereço da casa
+     * @param room o nome da divisão da casa onde o dispostivo se encontra
+     */
 
     private void connectSmartBulbController(SmartDeviceBulb smartBulb, String address, String room) {
         switch (menu.selectBulbToneMenu()) {
@@ -304,6 +387,13 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     * Controlador para ligar todos os dispositivos do tipo SmartDeviceBulb numa tonalidade específica
+     *
+     * @param address o endereço da casa
+     * @param room o nome da divisão da casa onde o dispostivo se encontra
+     */
+
     private void connectAllSmartBulbController(String address, String room) {
         switch (menu.selectBulbToneMenu()) {
             case -1 -> connectSmartDeviceController(address, room);
@@ -319,15 +409,11 @@ public class SmartHouseController {
         }
     }
 
-    private void disconnectSmartDeviceController(String address, String room) {
-        SmartDeviceModel smartDevices = community.getSmartHouses().findSmartDevicesByRoom(address, room);
-        String factoryCode = menu.removeSmartDeviceMenu(smartDevices);
-        if (factoryCode == null) updateSmartDevicesController(address, room);
-        else {
-            smartDevices.findSmartDeviceByFactoryCode(factoryCode).setState(SmartDevice.State.OFF);
-            updateSmartDevicesController(address, room);
-        }
-    }
+    /**
+     * Controlador para alterar o endereço de uma cas
+     *
+     * @param oldAddress o endereço da casa que deseja alterar
+     */
 
     private void updateAddressController(String oldAddress) {
         String newAddress = menu.updateAddress();
@@ -343,6 +429,12 @@ public class SmartHouseController {
         }
     }
 
+    /**
+     * Controlador para atualizar o fornecedor de energia de uma casa
+     *
+     * @param address o endereço da casa
+     */
+
     private void updateEnergySupplierController(String address) {
         String newEnergySupplier = menu.updateEnergySupplierMenu(community.getEnergySuppliers(), community.getSmartHouses().findHouseByAddress(address).getEnergySupplier());
         if (newEnergySupplier == null) updateSmartHouseController(address);
@@ -356,6 +448,12 @@ public class SmartHouseController {
             }
         }
     }
+
+    /**
+     * Controlador para atualizar o proprietário de uma casa
+     *
+     * @param address o endereço da casa
+     */
 
     private void updateOwnerController(String address) {
         String[] newOwner = menu.updateOwner();
