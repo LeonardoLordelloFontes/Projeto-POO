@@ -1,11 +1,13 @@
 com.grupo11
+com.grupo11.datastatus
 com.grupo11.energysupplier
 com.grupo11.energysupplier.exception
-com.grupo11.datastatus
 com.grupo11.factory
+com.grupo11.factory.exception
 com.grupo11.main
-com.grupo11.menu
 com.grupo11.simulation
 com.grupo11.smartdevice
+com.grupo11.smartdevice.exception
 com.grupo11.smarthouse
 com.grupo11.smarthouse.exception
+com.grupo11.state

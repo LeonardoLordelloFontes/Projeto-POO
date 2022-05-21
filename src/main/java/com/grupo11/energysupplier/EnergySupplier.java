@@ -71,7 +71,7 @@ public class EnergySupplier implements Serializable {
     public void setFormula(String formula) {this.formula = formula;}
     
     /**
-     *Funções que servem para calcular o custo do consumo diario e por segundo, respetivamente, de um determinado device 
+     * Calcula o consumo diário de um determinado dispositivo
      */
     
     public double deviceEnergyCostPerDay(String formula, double energyConsumption, int numberOfDevices) {
@@ -87,6 +87,15 @@ public class EnergySupplier implements Serializable {
             return -1;
         }
     }
+
+    /**
+     * Calcula o consumo por segundo de um determinado dispositivo
+     *
+     * @param formula
+     * @param energyConsumption
+     * @param numberOfDevices
+     * @return devolve o consumo por segundo, ou -1, caso a formula seja inválida
+     */
 
     public double deviceEnergyCostPerSecond(String formula, double energyConsumption, int numberOfDevices) {
         double cost = deviceEnergyCostPerDay(formula, energyConsumption, numberOfDevices);
