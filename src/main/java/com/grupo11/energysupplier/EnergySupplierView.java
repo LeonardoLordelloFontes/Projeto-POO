@@ -29,9 +29,9 @@ public class EnergySupplierView {
         }
     }
 
-    /*
-    ** Menu Principal dos Energy Suppliers
-    */
+    /**
+     * Menu Principal dos Energy Suppliers
+     */
     
     public int energySupplierMenu() {
         System.out.print("""
@@ -47,9 +47,9 @@ public class EnergySupplierView {
         return optionsValidation(5);
     }
     
-    /* 
-    ** Menu para Adicionar um Energy Supplier
-    */
+    /** 
+     * Menu para Adicionar um Energy Supplier
+     */
                          
     public String[] addEnergySupplierMenu() {
         System.out.println(("-----------Adicionar um Fornecedor de Energia-----------\n\n"));
@@ -63,9 +63,9 @@ public class EnergySupplierView {
         return input;
     }
     
-    /*
-    ** Menu para Remover um EnergySupplier
-    */
+    /**
+     * Menu para Remover um EnergySupplier
+     */
                          
     public String removeEnergySupplierMenu(EnergySupplierModel energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
@@ -83,9 +83,9 @@ public class EnergySupplierView {
         return input;
     }
                          
-    /*
-    ** Menu para Selecionar um determinado EnergySupplier 
-    */
+    /**
+     * Menu para Selecionar um determinado EnergySupplier 
+     */
     
     public String selectEnergySupplierMenu(EnergySupplierModel energySupplierRepository) {
         List<EnergySupplier> energySuppliers = energySupplierRepository.findAllEnergySuppliers();
@@ -109,9 +109,9 @@ public class EnergySupplierView {
         return input;
     }
     
-    /*
-    ** Menu de atualização de um EnergySupplier (Podemos mudar Nome e Formula)
-    */
+    /**
+     * Menu de atualização de um EnergySupplier (Podemos mudar Nome e Formula)
+     */
                          
     public int updateEnergySupplierMenu() {
         System.out.print( """
@@ -124,9 +124,9 @@ public class EnergySupplierView {
         return optionsValidation(3);
     }
                          
-    /* 
-    ** Menu de atualização do Nome de um EnergySupplier 
-    */
+    /** 
+     * Menu de atualização do Nome de um EnergySupplier 
+     */
                          
     public String updateEnergySupplierNameMenu() {
         System.out.print("Insira o novo nome do fornecedor de energia (para cancelar digite *): ");
@@ -136,8 +136,8 @@ public class EnergySupplierView {
         return input;
     }
 
-    /* 
-    ** Menu de atualização da Formula de um EnergySupplier 
+    /** 
+    * Menu de atualização da Formula de um EnergySupplier 
     */
                          
     public String updateEnergySupplierFormulaMenu() {
@@ -160,9 +160,9 @@ public class EnergySupplierView {
         return input;
     }
                          
-    /* 
-    **Apresenta todos os EnergySuppliers Existentes
-    */
+    /** 
+     *Apresenta todos os EnergySuppliers Existentes
+     */
                          
     public void listSmartHouses(List<EnergySupplier> energySuppliers) {
         if (energySuppliers.size() == 0) System.out.println("Não há nenhum fornecedor de energia");
