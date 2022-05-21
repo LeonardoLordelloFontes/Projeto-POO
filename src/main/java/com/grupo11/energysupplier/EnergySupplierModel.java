@@ -17,8 +17,8 @@ public class EnergySupplierModel implements Serializable {
     }
     
    /**
-   * Encontrar um EnergySupplier atraves do seu nome 
-   */
+    * Encontrar um EnergySupplier atraves do seu nome 
+    */
     
    public EnergySupplier findEnergySupplierByName(String name) throws EnergySupplierNotFound {
         EnergySupplier energySupplier = energySuppliers.get(name);
@@ -28,8 +28,8 @@ public class EnergySupplierModel implements Serializable {
     }
    
    /**
-   * Adicionar um EnergySupplier novo
-   */
+    * Adicionar um EnergySupplier novo
+    */
     
    public void addEnergySupplier(String name, String formula) throws EnergySupplierAlreadyExists {
        if (energySuppliers.get(name) != null)
@@ -39,8 +39,8 @@ public class EnergySupplierModel implements Serializable {
    }
    
    /** 
-   * Atualizar o nome de um EnergySupplier já existente
-   */
+    * Atualizar o nome de um EnergySupplier já existente
+    */
     
    public void updateEnergySupplierName(SmartHouseModel smartHouses, String oldName, String newName) throws EnergySupplierNotFound {
         if (energySuppliers.get(oldName) == null)
@@ -53,8 +53,8 @@ public class EnergySupplierModel implements Serializable {
    }
    
    /**
-   * Atualizar a formula de um EnergySupplier já existente
-   */
+    * Atualizar a formula de um EnergySupplier já existente
+    */
     
    public void updateEnergySupplierFormula(String name, String newFormula) throws EnergySupplierNotFound {
         if (energySuppliers.get(name) == null)
@@ -63,8 +63,8 @@ public class EnergySupplierModel implements Serializable {
     }
    
    /**
-   * Remover um EnergySupplier
-   */
+    * Remover um EnergySupplier
+    */
     
    public void removeEnergySupplier(SmartHouseModel smartHouses, String name) throws EnergySupplierNotFound {
         if (energySuppliers.get(name) == null)
@@ -73,8 +73,8 @@ public class EnergySupplierModel implements Serializable {
         smartHouses.findSmartHousesByEnergySupplier(name).forEach(smartHouse -> smartHouse.setEnergySupplier(null));
     }
     /** 
-    * Obter todos os EnergySuppliers Existentes
-    */
+     * Obter todos os EnergySuppliers Existentes
+     */
     public List<EnergySupplier> findAllEnergySuppliers() {
         return new ArrayList<>(energySuppliers.values());
     }
