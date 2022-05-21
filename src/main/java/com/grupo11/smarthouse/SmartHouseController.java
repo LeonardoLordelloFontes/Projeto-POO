@@ -23,6 +23,10 @@ public class SmartHouseController {
         this.menu = new SmartHouseView();
     }
 
+    /**
+     * método para iniciar o controlador principal da classe SmartHouseController
+     */
+
     public void runSmartHouseController() {
         smartHouseController();
     }

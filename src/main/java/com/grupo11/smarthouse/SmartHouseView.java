@@ -35,7 +35,7 @@ public class SmartHouseView {
     }
 
     /**
-     * Menu principal da classe SmartHouseMenu.
+     * Menu principal da classe SmartHouseView.
      * Oferece opções genéricas que serão mais tarde tratadas por menus específicos
      *
      * @return a opção selecionado pelo usuário, ou -1, caso a opção seja inválida

@@ -1,5 +1,0 @@
-04/08/2008 12:45
-05/08/2008 12:45,casa1,dispositivo123456,setOff
-06/08/2008 12:45,casa1,dispositivo123456,setOff
-07/08/2008 12:45,casa1,dispositivo123456,setOff
-08/08/2008 12:45

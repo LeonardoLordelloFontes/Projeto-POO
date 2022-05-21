@@ -6,17 +6,25 @@ import com.grupo11.main.MainController;
 import java.io.IOException;
 
 public class StateController {
-    private MainModel community;
-    private StateView menu;
+    private final MainModel community;
+    private final StateView menu;
 
     public StateController(MainModel community) {
         this.community = community;
         this.menu = new StateView();
     }
 
+    /**
+     * método para iniciar o controlador principal da classe StateController
+     */
+
     public void runStateController() {
         stateController();
     }
+
+    /**
+     * Controlador principal da classe StateController
+     */
 
     private void stateController() {
         switch (menu.stateMenu()) {
@@ -29,6 +37,10 @@ public class StateController {
             }
         }
     }
+
+    /**
+     * Controlador para salvar o estado de um objeto MainModel
+     */
 
     private void saveStateController() {
         String filePath = menu.saveStateMenu();
@@ -44,6 +56,10 @@ public class StateController {
             }
         }
     }
+
+    /**
+     * Controlador para carregar o estado de um objeto MainModel
+     */
 
     private void loadStateController() {
         String filePath = menu.loadStateMenu();
