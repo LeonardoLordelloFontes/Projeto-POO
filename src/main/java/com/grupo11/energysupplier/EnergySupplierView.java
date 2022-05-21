@@ -1,5 +1,7 @@
 package com.grupo11.energysupplier;
 
+import com.grupo11.energysupplier.exception.EnergySupplierNotFound;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -97,7 +99,9 @@ public class EnergySupplierView {
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        if (energySupplierRepository.getEnergySuppliers().get(input) == null) {
+        try {
+            energySupplierRepository.findEnergySupplierByName(input);
+        } catch (EnergySupplierNotFound e) {
             System.out.println("Opção inválida, selecione uma opção da lista!");
             return null;
         }

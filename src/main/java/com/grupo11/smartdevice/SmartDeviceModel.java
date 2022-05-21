@@ -257,12 +257,4 @@ public class SmartDeviceModel implements Serializable {
     public List<SmartDevice> findAllSmartDevices() {
         return new ArrayList<>(storage.values());
     }
-
-    /**
-     * Metodo da casa e fabrica
-     *
-     * @return um repositório de dos dispositivos
-     */
-
-    public Map<String, SmartDevice> getStorage() { return storage;}
 }

@@ -5,6 +5,7 @@ import com.grupo11.energysupplier.EnergySupplierModel;
 import com.grupo11.factory.FactoryModel;
 import com.grupo11.smartdevice.SmartDevice;
 import com.grupo11.smartdevice.SmartDeviceModel;
+import com.grupo11.smarthouse.exception.HouseNotFound;
 
 import java.util.*;
 
@@ -102,7 +103,9 @@ public class SmartHouseView {
         System.out.print(sb);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        if (smartHouseRepository.getSmartHouses().get(input) == null) {
+        try {
+            smartHouseRepository.findHouseByAddress(input);
+        } catch (HouseNotFound e) {
             System.out.println("Opção inválida, selecione uma opção da lista!");
             return null;
         }

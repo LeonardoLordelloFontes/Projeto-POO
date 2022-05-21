@@ -162,8 +162,11 @@ public class SmartHouseModel implements Serializable {
                                      String newEnergySupplier) throws HouseNotFound, EnergySupplierNotFound {
         if (smartHouses.get(address) == null)
             throw new HouseNotFound("A casa com o endereço " + address + " não foi encontrada");
-        if (energySupplierRepository.getEnergySuppliers().get(newEnergySupplier) == null)
+        try {
+            energySupplierRepository.findEnergySupplierByName(newEnergySupplier);
+        } catch (EnergySupplierNotFound e) {
             throw new EnergySupplierNotFound("O fonecedor de energia " + newEnergySupplier + " não foi encontrado");
+        }
         smartHouses.get(address).setEnergySupplier(newEnergySupplier);
     }
 
@@ -227,9 +230,5 @@ public class SmartHouseModel implements Serializable {
     public int findNumberOfDevicesSmartHouse(String address) {
         return smartHouses.get(address).getSmartDevices().values().
                 stream().mapToInt(smartDeviceRepository -> smartDeviceRepository.findAllSmartDevices().size()).sum();
-    }
-
-    public Map<String, SmartHouse> getSmartHouses() {
-        return smartHouses;
     }
 }

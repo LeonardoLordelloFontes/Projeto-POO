@@ -78,8 +78,4 @@ public class EnergySupplierModel implements Serializable {
     public List<EnergySupplier> findAllEnergySuppliers() {
         return new ArrayList<>(energySuppliers.values());
     }
-    
-    public Map<String, EnergySupplier> getEnergySuppliers() {
-        return energySuppliers;
-    }
 }

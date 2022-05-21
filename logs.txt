@@ -1,4 +1,4 @@
-Fornecedor:EDP Comercial,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.9
+Fornecedor:EDP Comercial,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 +Imposto)) * 0.9
 Fornecedor:Galp Energia,PrecoDiaPorDispositivo = numeroDispositivos > 10 ? (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.9 : (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.75
 Fornecedor:Iberdrola,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.85
 Fornecedor:Endesa,PrecoDiaPorDispositivo = (ValorBase * ConsumoDispositivo * (1 + Imposto)) * 0.80
