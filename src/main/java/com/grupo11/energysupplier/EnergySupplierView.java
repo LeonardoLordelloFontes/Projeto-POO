@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class EnergySupplierView {
     
-    /*
-    ** Função que verifica se a opção selecionada de uma determinado menu é aceite
+    /**
+    * Função que verifica se a opção selecionada de uma determinado menu é aceite
     */
     
     private int optionsValidation(int options) {

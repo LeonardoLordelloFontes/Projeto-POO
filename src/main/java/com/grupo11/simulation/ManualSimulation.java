@@ -27,6 +27,10 @@ public class ManualSimulation {
         this.end = end;
     }
 
+    /**
+     * Inicia a simulação manual que vai gerar as faturas
+     */
+
     public void runManualSimulation() {
         SmartHouseModel houses = community.getSmartHouses();
         long simulationPeriod = ChronoUnit.SECONDS.between(start, end);
@@ -41,6 +45,15 @@ public class ManualSimulation {
             invoicers.add(invoicer);
         }
     }
+
+    /**
+     * calcula o custo de um dispositivo específico durante um período de simulação
+     *
+     * @param smartHouse o endereço da casa onde está o dispositivo
+     * @param smartDevice o dispositivo
+     * @param simulationPeriod o período da simulação em segundos
+     * @return o custo do dispositivo
+     */
 
     private double getSmartDeviceCost(SmartHouse smartHouse, SmartDevice smartDevice, long simulationPeriod) {
         double totalCost = 0;

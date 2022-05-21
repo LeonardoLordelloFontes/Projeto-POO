@@ -23,6 +23,13 @@ public class AutomaticSimulation {
         this.invoicers = invoicers;
     }
 
+    /**
+     * Inicia a simulação automática
+     *
+     * @param filePath o caminho do arquivo da simulação automática
+     * @throws FileNotFoundException
+     */
+
     public void runAutomaticSimulation(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
@@ -40,6 +47,13 @@ public class AutomaticSimulation {
         filterInvoicers();
     }
 
+    /**
+     * Analisa o segundo elemento de uma linha separada por vírgulas e redireciona conforme o que aparece
+     *
+     * @param data a linha que está a ser analisada
+     * @param lastChange a data da ultima mudança que ocorreu durante a simulação automática
+     */
+
     private void mainOptions(String[] data, LocalDateTime lastChange) {
         if (data[1].startsWith("casa:")) {
             houseOptions(data, lastChange);
@@ -48,6 +62,14 @@ public class AutomaticSimulation {
             energySupplierOptions(data);
         }
     }
+
+    /**
+     * Analisa o terceiro elemento de uma linha separada por vírgulas considerando que a decisão do segundo elemento
+     * foi uma casa
+     *
+     * @param data a linha
+     * @param lastChange a data da ultima mudança que ocorreu durante a simulação automática
+     */
 
     private void houseOptions(String[] data, LocalDateTime lastChange) {
         if (data[2].startsWith("dispositivo:")) {
@@ -60,6 +82,15 @@ public class AutomaticSimulation {
         }
     }
 
+    /**
+     * Analisa o terceiro elemento de uma linha separada por vírgulas considerando que a decisão do segundo elemento
+     * foi um dispositivo
+     *
+     * @param data a linha
+     * @param factoryCode o código de fábrica do dispositivo
+     * @param lastChange a data da ultima mudança que ocorreu durante a simulação automática
+     */
+
     private void deviceOptions(String[] data, String factoryCode, LocalDateTime lastChange) {
         if (data[3].equals("setOn")) {
             community.getFactory().getSmartDeviceRepository()
@@ -71,11 +102,22 @@ public class AutomaticSimulation {
         }
     }
 
+    /**
+     * Analisa o terceiro elemento de uma linha separada por vírgulas considerando que a decisão do segundo elemento
+     * foi um fornecedor de energia
+     *
+     * @param data a linha
+     */
+
     private void energySupplierOptions(String[] data) {
         if (data[2].equals("alteraValorDesconto")) {
             community.getEnergySuppliers().updateEnergySupplierFormula(data[1].substring(11), data[3]);
         }
     }
+
+    /**
+     * Remove e Soma todas as faturas que têm o mesmo endereço de casa e guarda a informação numa nova fatura
+     */
 
     private void filterInvoicers() {
         for (SmartHouse house : community.getSmartHouses().findAllSmartHouses()) {

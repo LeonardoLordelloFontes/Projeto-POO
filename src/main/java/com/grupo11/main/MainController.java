@@ -24,11 +24,11 @@ public class MainController implements Serializable {
     public void runMainController() {
         mainController();
     }
-    
-    /*
-    * Controlador Do Menu Principal do Projeto
-    */
-    
+
+    /**
+     * Controlador Do Menu Principal do Projeto
+     */
+
     public void mainController() {
         int choice = mainMenu();
         switch (choice) {

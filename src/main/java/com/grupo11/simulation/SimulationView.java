@@ -6,6 +6,14 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class SimulationView {
+
+    /**
+     * Menu da simulação manual
+     *
+     * @return um array com 2 elementos, na primeira posição é a data de inicio da simulação e na segunda
+     *         e a data do fim da mesma, ou null, caso o formato esteja inválido
+     */
+
     public LocalDateTime[] manualSimulationMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Insira a data e hora de início no formato (dd/mm/aaaa hora:minutos): ");
@@ -29,11 +37,23 @@ public class SimulationView {
         }
     }
 
+    /**
+     * Menu da simulação automática
+     *
+     * @return o caminho do arquivo da simulação automática
+     */
+
     public String autoSimulationMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite o caminho do arquivo de simulação automática: ");
         return scanner.next();
     }
+
+    /**
+     * Menu para carregar os logs
+     *
+     * @return o caminho do arquivo de logs
+     */
 
     public String loadLogsMenu() {
         Scanner scanner = new Scanner(System.in);

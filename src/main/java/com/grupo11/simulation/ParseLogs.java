@@ -27,6 +27,13 @@ public class ParseLogs {
         this.community = community;
     }
 
+    /**
+     * faz a leitura do arquivo de logs e consoante aquilo que está escrito adiciona as entidades ao programa
+     *
+     * @param filePath o caminho do arquivo de logs
+     * @throws FileNotFoundException
+     */
+
     public void parseLogs(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
@@ -64,6 +71,14 @@ public class ParseLogs {
         }
     }
 
+    /**
+     * Analisa uma linha que corresponde a uma casa
+     *
+     * @param data a linha
+     * @param address o endereço da suposta casa
+     * @return o endereço da casa, ou null, caso não seja válido o input
+     */
+
     private String parseHouse(String data, String address) {
         String[] houseData = data.split(",");
         try {
@@ -78,6 +93,14 @@ public class ParseLogs {
         return address;
     }
 
+    /**
+     * Analisa uma linha que corresponde uma divisão
+     *
+     * @param houseAddress o endereço da casa
+     * @param room a divisão da casa
+     * @return a divisão da casa, ou null, caso não seja válido o input
+     */
+
     private String parseRoom(String houseAddress, String room) {
         try {
             community.getSmartHouses().addRoomToHouse(houseAddress, room);
@@ -88,6 +111,12 @@ public class ParseLogs {
         return room;
     }
 
+    /**
+     * Analisa uma linha correspondente a um fornecedor de Energia
+     *
+     * @param data a linha
+     */
+
     private void parseSupplier(String data) {
         String[] supplierData = data.split(",");
         try {
@@ -96,6 +125,15 @@ public class ParseLogs {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Analisa uma linha correspondente a um dispositivo do tipo SmartDeviceBulb
+     *
+     * @param address o endereço da casa onde vamos adicionar o dispositivo
+     * @param room a divisão da casa onde vamos adicionar o dispositivo
+     * @param factoryCode o código de fábrica do dispositivo
+     * @param data a linha
+     */
 
     private void parseSmartBulb(String address, String room, String factoryCode, String data) {
         String[] bulbData = data.split(",");
@@ -116,6 +154,15 @@ public class ParseLogs {
         }
     }
 
+    /**
+     * Analisa uma linha correspondente a um dispositivo do tipo SmartDeviceSpeaker
+     *
+     * @param address o endereço da casa onde vamos adicionar o dispositivo
+     * @param room a divisão da casa onde vamos adicionar o dispositivo
+     * @param factoryCode o código de fábrica do dispositivo
+     * @param data a linha
+     */
+
     private void parseSmartSpeaker(String address, String room, String factoryCode, String data) {
         String[] speakerData = data.split(",");
         SmartDeviceSpeaker smartSpeaker = new SmartDeviceSpeaker(factoryCode, speakerData[1], speakerData[2],
@@ -128,6 +175,15 @@ public class ParseLogs {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Analisa uma linha correspondente a um dispositivo do tipo SmartDeviceCamera
+     *
+     * @param address o endereço da casa onde vamos adicionar o dispositivo
+     * @param room a divisão da casa onde vamos adicionar o dispositivo
+     * @param factoryCode o código de fábrica do dispositivo
+     * @param data a linha
+     */
 
     private void parseSmartCamera(String address, String room, String factoryCode, String data) {
         String[] cameraData = data.split(",");

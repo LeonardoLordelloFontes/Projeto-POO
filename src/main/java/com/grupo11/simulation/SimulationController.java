@@ -24,6 +24,10 @@ public class SimulationController {
         this.invoicers = new ArrayList<>();
     }
 
+    /**
+     * Controlador da simulação manual
+     */
+
     public void runManualSimulationController() {
         LocalDateTime[] dates = menu.manualSimulationMenu();
         if (dates == null) runManualSimulationController();
@@ -34,6 +38,10 @@ public class SimulationController {
             dataStatusController.runDataStatusController();
         }
     }
+
+    /**
+     * Controlador da simulação manual
+     */
 
     public void runAutoSimulationController() {
         String filePath = menu.autoSimulationMenu();
@@ -48,6 +56,10 @@ public class SimulationController {
             runAutoSimulationController();
         }
     }
+
+    /**
+     * Controlador de carregar os logs
+     */
 
     public void loadLogsController() {
         String filePath = menu.loadLogsMenu();
