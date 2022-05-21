@@ -28,7 +28,7 @@ public class EnergySupplier implements Serializable {
     }
     
     /**
-    *@return getBaseCost do EnergySupplier
+    * @return getBaseCost do EnergySupplier
     */
     
     public double getBasecost() {
@@ -36,14 +36,14 @@ public class EnergySupplier implements Serializable {
     }
     
     /**
-    *@return name de um EnergySupplier
+    * @return name de um EnergySupplier
     */
     public String getName() {
         return name;
     }
     
     /**
-    *@param name de um EnergySupplier
+    * @param name de um EnergySupplier
     */
     
     public void setName(String name) {
@@ -51,7 +51,7 @@ public class EnergySupplier implements Serializable {
     }
     
     /**
-    *@return Tax de um EnergySupplier
+    * @return Tax de um EnergySupplier
     */
     
     public double getTax() {
@@ -59,13 +59,13 @@ public class EnergySupplier implements Serializable {
     }
     
     /**
-    *@return formula de EnergySupplier 
+    * @return formula de EnergySupplier 
     */
 
     public String getFormula() {return formula;}
     
     /** 
-    *@param formula de EnergySupplier 
+    * @param formula de EnergySupplier 
     */
     
     public void setFormula(String formula) {this.formula = formula;}
